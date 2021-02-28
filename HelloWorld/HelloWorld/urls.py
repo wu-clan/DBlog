@@ -21,10 +21,17 @@ from django.conf.urls import url
 #     url(r'^$', views.hello),
 # ]
 
-from django.urls import path
-
-from . import views
+# from django.urls import path
+#
+# from . import views
+#
+# urlpatterns = [
+#     path('', views.runoob),
+# ]
+from django.contrib import admin
+from django.urls import include, path
 
 urlpatterns = [
-    path('nb/', views.runoob),
+    path('polls/', include('polls.urls')),
+    path('admin/', admin.site.urls)
 ]
