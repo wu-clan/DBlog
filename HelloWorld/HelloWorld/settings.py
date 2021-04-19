@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'simpleui',
+    'simpleui',  # 后台管理UI
     'polls',
     'django.contrib.admin',  # 后台管理
     'django.contrib.auth',  # 身份认证
