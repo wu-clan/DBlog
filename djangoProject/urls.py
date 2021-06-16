@@ -13,9 +13,21 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.urls import path, include
 from django.contrib import admin
-from django.urls import path
+from django.views import static
+
+from blog import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
+    path('', views.index, name='index'),
+
+    path(r'static/<path:path>', static.serve, {'document_root': settings.STATIC_ROOT},),  # 处理静态文件
 ]
+
+
+handler404 = views.page_not_found_error
+handler500 = views.page_error
