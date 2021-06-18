@@ -3,5 +3,5 @@
 __author__ = 'xiaowu'
 
 sites = [
-    {"url": "null", "name": "null", "desc": "null"},
+    {"url": "https://my.oschina.net/chulan", "name": "OSCHINA", "desc": "chulan"},
 ]

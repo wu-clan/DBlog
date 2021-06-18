@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.urls import path, include
 from django.contrib import admin
-from django.views import static
+from django.views.static import serve
 
 from blog import views
 
@@ -25,7 +25,8 @@ urlpatterns = [
     path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
     path('', views.index, name='index'),
 
-    path(r'static/<path:path>', static.serve, {'document_root': settings.STATIC_ROOT},),  # 处理静态文件
+    path(r'static/<path:path>', serve, {'document_root': settings.STATIC_ROOT},),  # 处理静态文件
+    path(r'media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT},),  # 处理图片
 ]
 
 

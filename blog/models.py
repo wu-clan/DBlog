@@ -18,14 +18,14 @@ class Tag(models.Model):
 
 class Article(models.Model):
     title = models.CharField(max_length=200, verbose_name='文章标题')  # 博客标题
-    category = models.ForeignKey('Category',  on_delete=models.CASCADE)
-    date_time = models.DateField(auto_now_add=True, verbose_name='创建时间')  # 博客日期
-    content = models.TextField(blank=True, null=True)  # 文章正文
-    digest = models.TextField(blank=True, null=True)  # 文章摘要
+    category = models.ForeignKey('Category',  verbose_name='文章类型', on_delete=models.CASCADE)
+    date_time = models.DateField(auto_now_add=True, verbose_name='创建时间')
+    content = models.TextField(blank=True, null=True, verbose_name='文章正文')
+    digest = models.TextField(blank=True, null=True, verbose_name='文章摘要')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='作者', on_delete=models.CASCADE)
-    view = models.BigIntegerField(default=0, verbose_name='阅读数量')  # 阅读数
-    comment = models.BigIntegerField(default=0, verbose_name='评论数')  # 评论数
-    picture = models.CharField(max_length=200, verbose_name='url')  # 标题图片地址
+    view = models.BigIntegerField(default=0, verbose_name='阅读数')
+    comment = models.BigIntegerField(default=0, verbose_name='评论数')
+    picture = models.ImageField(upload_to='media' ,max_length=200, verbose_name='url(标题图)')  # 标题图片地址
     tag = models.ManyToManyField(Tag)  # 标签
 
     class Meta:
@@ -76,3 +76,8 @@ class Comment(models.Model):
     user_name = models.CharField('评论用户', max_length=25)
     url = models.CharField('链接', max_length=100)
     comment = models.CharField('评论内容', max_length=500)
+
+    class Meta:
+        ordering = ['create_time']
+        verbose_name = '评论'
+        verbose_name_plural = verbose_name

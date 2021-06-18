@@ -3,24 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="aaad5603-95d3-4be7-9f3d-faa529adbce0" name="默认变更列表" comment="blog system for secondary development.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangoProject/blogroll.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangoProject/blogroll.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/djangoProject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangoProject/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/upload/Article/20151027223049329.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/upload/Article/20151031043822.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/upload/Article/20151122225540180.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/upload/Article/20151179957593.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/upload/Article/2016110221135307.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/upload/Article/201612125156754.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/upload/Article/201612219920733.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/upload/Article/2016219171445519.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/upload/Article/2016220122735603.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/upload/Article/201651122145632.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/upload/Article/Thumbs.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/upload/Article/lb.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/upload/Article/muban.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/blog/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/blog/right.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/right.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangoProject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangoProject/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +52,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -113,7 +100,11 @@
       <workItem from="1623895405243" duration="198000" />
       <workItem from="1623923326174" duration="33000" />
       <workItem from="1623923385013" duration="572000" />
-      <workItem from="1623982673351" duration="10253000" />
+      <workItem from="1623982673351" duration="10281000" />
+      <workItem from="1624004372351" duration="1415000" />
+      <workItem from="1624005822195" duration="12000" />
+      <workItem from="1624005853382" duration="1009000" />
+      <workItem from="1624007729481" duration="3220000" />
     </task>
     <task id="LOCAL-00001" summary="blog system for secondary development.">
       <created>1623838349857</created>
@@ -122,7 +113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623838349857</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update img rules">
+      <created>1624003942616</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1624003942616</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,6 +140,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="blog system for secondary development." />
-    <option name="LAST_COMMIT_MESSAGE" value="blog system for secondary development." />
+    <MESSAGE value="update img rules" />
+    <option name="LAST_COMMIT_MESSAGE" value="update img rules" />
   </component>
 </project>
