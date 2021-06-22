@@ -29,7 +29,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-	'simpleui',  #第三方后台主题
+	'simpleui',  # 第三方后台主题
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -58,12 +58,17 @@ TEMPLATES = [
 		,
 		'APP_DIRS': True,
 		'OPTIONS': {
+			# 用于模板自动调用到静态文件，而不需要再load
+			'builtins': [
+				'django.templatetags.static',
+			],
 			'context_processors': [
 				'django.template.context_processors.debug',
 				'django.template.context_processors.request',
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
 				'blog.context_processors.sidebar',
+				'django.template.context_processors.media',  # 用于templates中直接引用
 			],
 		},
 	},
@@ -120,16 +125,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+	BASE_DIR / 'static',
+)
+
+# 收集所有静态文件：python manage.py collectstatic
+# STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = '/media/'
-
-# STATICFILES_DIRS = (
-# 	BASE_DIR / 'static',
-# )
-
-STATIC_ROOT = BASE_DIR / 'static'
-
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / 'static/media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

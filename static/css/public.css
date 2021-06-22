@@ -2,7 +2,7 @@ body{font-size:14px;font-size:100%;font-family:'Microsoft YaHei';line-height:24p
 a{color:inherit;text-decoration:none;}
 img{border:none;}
 ul,dl,dt,dd,p{padding:0;margin:0;list-style:none;}
-h1,h2,h3,h4,h5{padding:10px 0;margin:0;text-indent:5px;margin-bottom:15px;}
+h1,h2,h3,h4,h5{padding:10px 0;margin:0;text-indent:5px;margin-bottom:0px;}
 input,button,select{outline:none!important}
 
 body{
@@ -91,7 +91,7 @@ header .mynav{width:60%;float:right;height:100%;position:relative;}
 
 
 
- #tianqi{height:20px;max-width:270px;}
+ #tianqi{max-height:90px;max-width:270px;}
 .mynav >ul{}
 .mynav >ul >li{text-align:center;width:12.5%;font-size:16px;color:inherit;height:100%;float:left;position:relative;}
 
@@ -244,7 +244,7 @@ header .mynav{width:60%;float:right;height:100%;position:relative;}
 .article-push >ul> li:hover{background:#f9fffc;}
 
 .search{margin-top:20px;margin-bottom:10px;}
-.search form{width:95%;margin:auto;padding-bottom:10px;}
+.search form{width:95%;margin:auto;padding-bottom:0px;}
 .search-index{overflow:hidden;padding:10px 0;height:2em;}
 .search-index input{font-size:12px;color:#333;height:100%;width:80%;float:left;}
 .search-index i{height:100%;width:20%;background:rgba(255,255,255,0.8);padding:0;margin:0;text-align:center;font-size:16px;line-height:2em;}

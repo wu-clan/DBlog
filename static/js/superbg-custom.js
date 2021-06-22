@@ -24,7 +24,6 @@ jQuery(function($){
                                  {image : '/static/images/bgimg/bg1.jpg'},
                                  {image : '/static/images/bgimg/bg2.jpg'},
                                  {image : '/static/images/bgimg/bg3.jpg'},
-								 {image : '/static/images/bgimg/bg4.jpg'}
                              ]
 
     });

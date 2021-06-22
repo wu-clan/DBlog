@@ -85,7 +85,16 @@ def archive(request):
 
 
 def message(request):
+    """
+    留言
+    """
     return render(request, 'blog/message_board.html', {"source_id": "message"})
+
+def about(request):
+    """
+    关于
+    """
+    return render(request, 'blog/about.html', {"about": "aboutme"})
 
 
 @csrf_exempt

@@ -7,7 +7,7 @@
                 <li {% if blog.view > 1000 %} id="tuijian" {% elif article.view > 500 %} id="Hot" {% endif %}>
             {% endif %}
         <div class="arcimg">
-            <img src="{{ blog.picture }}"
+            <img src="/static/media/{{ blog.picture }}"
                  alt="{{ blog.title }}" title="{{ blog.title }}"/>
         </div>
         <div class="arc-right">
