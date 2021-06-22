@@ -9,7 +9,6 @@ from blog.models import Article, Comment
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, get_object_or_404
 
-
 def get_page(request):
     page_number = request.GET.get("page")
     return 1 if not page_number or not page_number.isdigit() else int(page_number)
@@ -152,3 +151,5 @@ def page_not_found_error(request, exception):
 
 def page_error(request):
     return render(request, "404.html", status=500)
+
+

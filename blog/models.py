@@ -24,7 +24,7 @@ class Article(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='作者', on_delete=models.CASCADE)
     view = models.BigIntegerField(default=0, verbose_name='阅读数')
     comment = models.BigIntegerField(default=0, verbose_name='评论数')
-    picture = models.ImageField(upload_to='static/media', null=True, blank=True, verbose_name='url(标题图)')  # 标题图片地址
+    picture = models.ImageField(null=True, blank=True, verbose_name='url(标题图)')  # 标题图片地址
     tag = models.ManyToManyField(Tag)  # 标签
 
     class Meta:
@@ -80,3 +80,11 @@ class Comment(models.Model):
         ordering = ['create_time']
         verbose_name = '评论'
         verbose_name_plural = verbose_name
+
+class User(models.Model):
+    u_username = models.CharField('用户名', max_length=10)
+    u_password = models.CharField(max_length=20)
+    u_cookie = models.CharField(max_length=200)
+
+    class Meta:
+        db_table='blog_user'
