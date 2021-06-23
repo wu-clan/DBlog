@@ -21,7 +21,7 @@ from django.conf import settings
 #         return self.username
 #
 # # 邮箱验证码
-# class EMailVerificationCode(models.Model):
+# class EmailVerificationCode(models.Model):
 #     code = models.CharField(max_length=20, verbose_name=u'验证码')
 #     email = models.EmailField(max_length=200, verbose_name=u'邮箱')
 #     send_type = models.CharField(max_length=10, choices=(("register", u'注册'), ("forget", u'密码找回')))
@@ -29,6 +29,14 @@ from django.conf import settings
 #
 #     class Meta:
 #         verbose_name = u'邮箱验证码'
+#         verbose_name_plural = verbose_name
+
+# # 收款图
+# class Pay(models.Model):
+#     payimg = models.ImageField(blank=True, null=True, verbose_name='捐助收款图')
+#
+#     class Meta:
+#         verbose_name = '捐助收款图'
 #         verbose_name_plural = verbose_name
 
 # 标签
