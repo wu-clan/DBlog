@@ -2,10 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>首页</title>
+    <link rel="icon" href="../static/image/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/reset.css">
+    <script src="../static/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="../static/js/vue-2.5.16.js"></script>
 </head>
 <body>
-    <a href="/blog/logout/"><span>退出</span></a>
-
+<div id="app">
+<div v-if="username" class="login_btn fl">
+    欢迎您：<em>[[ username ]]</em>
+    <span>|</span>
+    <a href="login_out/">退出</a>
+</div>
+<div v-else class="login_btn fl">
+    <a href="login/">登录</a>
+    <span>|</span>
+    <a href="register/">注册</a>
+</div>
+    <br>
+<div class="index_la">欢迎来到首页</div>
+</div>
+<script type="text/javascript" src="/static/js/common.js"></script>
+<script type="text/javascript" src="../static/js/index.js"></script>
 </body>
 </html>
