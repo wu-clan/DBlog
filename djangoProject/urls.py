@@ -25,7 +25,7 @@ urlpatterns = [
     path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
     path('', views.index, name='index'),
 
-    # path(r'^static/<path:path>', serve, {'document_root': settings.STATIC_ROOT}, name='online_static'),  # 处理静态文件(用于上线环境)
+    path(r'^static/<path:path>', serve, {'document_root': settings.STATIC_ROOT}, name='online_static'),  # 处理静态文件(用于上线环境)
     path(r'^media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT},),  # 处理图片文件
 ]
 
