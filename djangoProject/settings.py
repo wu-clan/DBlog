@@ -126,7 +126,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # 收集所有静态文件：python manage.py collectstatic
-STATIC_ROOT = BASE_DIR / 'online_static'
+# STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = (
 	BASE_DIR / 'static',
 )
