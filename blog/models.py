@@ -60,7 +60,7 @@ class Article(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='作者', on_delete=models.CASCADE)
     view = models.BigIntegerField(default=0, verbose_name='阅读数')
     comment = models.BigIntegerField(default=0, verbose_name='评论数')
-    picture = models.ImageField(null=True, blank=True, verbose_name='url(标题图)')  # 标题图片地址
+    picture = models.ImageField(verbose_name='url(标题图)')  # 标题图片地址
     tag = models.ManyToManyField(Tag)  # 标签
 
     class Meta:

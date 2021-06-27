@@ -1,11 +1,30 @@
 <footer>
     <!--底部导航-->
     <div class="foot-nav">
-        <div class="copy-right"><span>CopyRight &#169; 2021-2022 Design by xiaowu</span></div>
+        <p class="copy-right"><span>CopyRight &#169; 2021-2022 Design by xiaowu</span>
+
+        <div id="toTop">Back to Top</div>
+
+        <p id="runtimeSpan"></p>
+        <script type="text/javascript">
+            function showRuntime() {
+                window.setTimeout("showRuntime()", 1000);
+                var rantime = '2021/6/26 00:00:00:000'
+                var startTime = new Date(rantime);
+                var nowTime = new Date();
+                var timestamp = (nowTime.getTime() - startTime.getTime());
+                var oneDayMilliseconds = 24 * 60 * 60 * 1000;
+                var totalDaysTmp = timestamp / oneDayMilliseconds;
+                var totalDays = Math.floor(totalDaysTmp);
+                var yuHoursTmp = (totalDaysTmp - totalDays) * 24;
+                var yuHours = Math.floor(yuHoursTmp);
+                var yuMinutesTmp = (yuHoursTmp - yuHours) * 60;
+                var yuMinutes = Math.floor((yuHoursTmp - yuHours) * 60);
+                var yuSeconds = Math.floor((yuMinutesTmp - yuMinutes) * 60);
+                runtimeSpan.innerHTML = "本站已运行: " + totalDays + "天" + yuHours + "小时" + yuMinutes + "分" + yuSeconds + "秒";
+            }
+
+            showRuntime();
+        </script>
     </div>
-    <div id="toTop">Back to Top</div>
-    <script>
-    </script>
-
-
 </footer>
