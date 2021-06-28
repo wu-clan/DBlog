@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-__author__ = 'xiaowu'
 
 import importlib
 from djangoProject import blogroll
@@ -28,7 +27,6 @@ def sidebar(request):
         'tag_list': tag_list,
         'comment_list': comment,
         'blogroll': blogroll.sites
-
     }
 
 

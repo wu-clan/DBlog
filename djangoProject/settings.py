@@ -68,7 +68,7 @@ TEMPLATES = [
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
 				'blog.context_processors.sidebar',
-				'django.template.context_processors.media',  # 用于templates中直接引用
+				'django.template.context_processors.media',  # 用于templates中可直接引用
 			],
 		},
 	},

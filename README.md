@@ -1,14 +1,14 @@
-## Django搭建博客 (二次开发)
-![py35](https://img.shields.io/badge/Python-3.8-red.svg) 
-![Django2.2](https://img.shields.io/badge/Django-3.2.4-green.svg)
-[![](https://img.shields.io/badge/Powered%20by-2186656812@qq.com-blue.svg)](http://www.spiderpy.cn/blog/)
+## Django博客系统
+![](https://img.shields.io/badge/Python-3.8-red.svg) 
+![](https://img.shields.io/badge/Django-3.2.4-green.svg)
+![](https://img.shields.io/badge/Powered%20by-2186656812@qq.com-blue.svg)
 
 使用Django快速搭建博客
 ### 要求
 * Python: 3.8
 * Django: 3.2.4
 
-### 示例博客：正在路上......
+### 示例博客：http://www.xwboy.top/
 
 ### 特点
 
