@@ -54,14 +54,18 @@ http://ip:port/admin
 # 执行 python manage.py migrate auth 后，再新建用户即可
 ```
 
-### 附录
+## 搭建Linux服务端
 ```python
-搭建 linux 服务端：django + mysql + uwsgi + nginx
+示例环境: Ubuntu-20.04 
+python==3.8
+django==3.2.4
+mysql==8
+uwsgi==2.0.19.1
+nginx==1.18.0
 # 详细步骤自行百度哟，源码中给出了相关文件提供参考
-# nginx_conf：  nginx 配置文件
+# nginx_conf： nginx 配置文件
 # uwsgi.ini： uwsgi.ini 配置文件
 # uwsgi.py,uwsgi.sh  开机自启动服务脚本
-参考文件依赖版本：uwsgi-2.0.19.1  nginx-1.18.0
 ```
 
 
