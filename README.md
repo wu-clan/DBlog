@@ -48,6 +48,21 @@ python manage.py createsuperuser
 # 按照提示输入用户名、邮箱、密码即可
 # 登录后台 编辑类型、标签、发布文章等
 http://ip:port/admin
+
+# 注：创建用户如果遇到以下报错：
+# django.db.utils.IntegrityError: (1048, "Column 'last_login' cannot be null")
+# 执行 python manage.py migrate auth 后，再新建用户即可
 ```
+
+### 附录
+```python
+搭建 linux 服务端：django + mysql + uwsgi + nginx
+# 详细步骤自行百度哟，源码中给出了相关文件提供参考
+# nginx_conf：  nginx 配置文件
+# uwsgi.ini： uwsgi.ini 配置文件
+# uwsgi.py,uwsgi.sh  开机自启动服务脚本
+参考文件依赖版本：uwsgi-2.0.19.1  nginx-1.18.0
+```
+
 
 浏览器中打开<http://127.0.0.1:8000/>即可访问
