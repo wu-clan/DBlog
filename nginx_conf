@@ -22,9 +22,9 @@ server {
 	listen 443 ssl;
 
 	ssl_certificate /etc/nginx/cloudflare.pem;
-        ssl_certificate_key /etc/nginx/cloudflare.key;
-        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
-        ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
+    ssl_certificate_key /etc/nginx/cloudflare.key;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
 	ssl_prefer_server_ciphers on;
 
 	root /home/DBlog/djangoProject;
