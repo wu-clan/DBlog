@@ -21,8 +21,8 @@
 server {
 	listen 443 ssl;
 
-	ssl_certificate /etc/nginx/cloudflare.pem;
-    ssl_certificate_key /etc/nginx/cloudflare.key;
+	ssl_certificate /etc/nginx/cloudflare.pem;  # nginx的SSL证书文件
+    ssl_certificate_key /etc/nginx/cloudflare.key;  # 证书 key 文件
     ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
 	ssl_prefer_server_ciphers on;
@@ -32,7 +32,7 @@ server {
 	# Add index.php to the list if you are using PHP
 	index index.html index.htm index.nginx-debian.html;
 
-	server_name www.xwboy.top xwboy.top;
+	server_name 域名;
 
 	location / {
 		uwsgi_pass 127.0.0.1:8001;
@@ -55,6 +55,6 @@ server {
 
 server {
 	listen 80;
-	server_name www.xwboy.top xwboy.top;
+	server_name 域名;
 	rewrite ^(.*)$ https://$host$1 permanent;
 }
