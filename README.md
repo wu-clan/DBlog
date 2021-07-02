@@ -57,17 +57,17 @@ http://ip:port/admin
 
 ## 搭建Linux服务端
 ```python
-示例环境: Ubuntu-20.04，nginx-1.18.0，uwsgi，mysql-8，python-3.8;
+示例环境: Ubuntu-20.04, nginx-1.18.0, uwsgi, mysql-8, python-3.8;
 # 源码中给出了相关文件提供参考
 # nginx_conf： nginx 配置文件
 # uwsgi.ini： uwsgi.ini 配置文件
 # uwsgi.py,uwsgi.sh  开机自启动服务脚本
 环境准备:
-1，在目录 /home 下执行上文中的 下载 命令
-2，apt-get 安装 uwsgi, nginx, mysql
-3，将 nginx_conf 中的内容替换到 /etc/nginx/sites-enabled/default
-4，将 uwsgi.sh 复制到 /etc/init.d/ 中，执行 chmod 755 uwsgi.sh 赋予权限
-5. 修改 default(nginx配置文件)，填写 server_name 为自己域名
+1, 在目录 /home 下执行上文中的 下载 命令
+2, apt-get 安装 uwsgi, nginx, mysql
+3, 将 nginx_conf 中的内容替换到 /etc/nginx/sites-enabled/default
+4, 将 uwsgi.sh 复制到 /etc/init.d/ 中, 执行 chmod 755 uwsgi.sh 赋予权限
+5, 修改 default(nginx配置文件), 填写 server_name 为自己域名
 
 # 环境准备过程中遇到的问题请自行百度！
 ```
