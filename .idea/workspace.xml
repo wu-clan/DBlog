@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aaad5603-95d3-4be7-9f3d-faa529adbce0" name="默认变更列表" comment="blog system for secondary development.">
+    <list default="true" id="aaad5603-95d3-4be7-9f3d-faa529adbce0" name="默认变更列表" comment="update nginx_conf">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/djangoProject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangoProject/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangoProject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangoProject/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/public.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/public.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/bgimg/bg2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/bgimg/bg2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/bgimg/bg3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/bgimg/bg3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/bgimg/bg4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/z.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/z.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/skin_1.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/skin_1.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/skin_3.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/skin_3.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/bgimg/bg0.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/bg0.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/bgimg/bg1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/bg1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/bgimg/bg2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/bg2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/bgimg/bg3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/bg3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/bgimg/blueprint.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/blueprint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/bgimg/mob-bg2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/mob-bg2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/bgimg/nav.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/nav.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/bgimg/nopic.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/nopic.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/bgimg/repeat.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/repeat.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/bgimg/topbg1.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/topbg1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/icon/备案.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/superbg-custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/superbg-custom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/blog/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/about.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/blog/component/blog_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/component/blog_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/blog/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/blog/right.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/right.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/blog/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/footer.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,19 +64,23 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/images/login" />
     <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Git_project\DBlog\static\images\login" />
+      <recent name="D:\Git_project\DBlog\static\css" />
       <recent name="D:\Git_project\DBlog\static\images" />
       <recent name="D:\Git_project\DBlog\static\images\aboutme" />
       <recent name="D:\Git_project\DBlog" />
-      <recent name="D:\Git_project\DBlog\blog" />
-      <recent name="D:\Git_project\DBlog\djangoProject" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Git_project\DBlog\static" />
+      <recent name="D:\Git_project\DBlog\static\images\footer" />
+      <recent name="D:\Git_project\DBlog" />
+      <recent name="D:\Git_project\DBlog\static\images" />
+      <recent name="D:\Git_project\DBlog\static\images\carousel" />
+      <recent name="D:\Git_project\DBlog\static\js" />
     </key>
   </component>
   <component name="RunManager">
@@ -120,7 +126,21 @@
       <workItem from="1624005822195" duration="12000" />
       <workItem from="1624005853382" duration="1009000" />
       <workItem from="1624007729481" duration="3289000" />
-      <workItem from="1624330735452" duration="17592000" />
+      <workItem from="1624330735452" duration="17727000" />
+      <workItem from="1624432875961" duration="9126000" />
+      <workItem from="1624499725578" duration="12595000" />
+      <workItem from="1624586597206" duration="1717000" />
+      <workItem from="1624598457821" duration="4094000" />
+      <workItem from="1624846262859" duration="906000" />
+      <workItem from="1624849944073" duration="23000" />
+      <workItem from="1624851195225" duration="8902000" />
+      <workItem from="1624932260380" duration="562000" />
+      <workItem from="1624960247334" duration="416000" />
+      <workItem from="1625127062419" duration="237000" />
+      <workItem from="1625128262325" duration="12000" />
+      <workItem from="1625211267421" duration="2331000" />
+      <workItem from="1625214507041" duration="66000" />
+      <workItem from="1625479325099" duration="1677000" />
     </task>
     <task id="LOCAL-00001" summary="blog system for secondary development.">
       <created>1623838349857</created>
@@ -143,7 +163,63 @@
       <option name="project" value="LOCAL" />
       <updated>1624011735808</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add about.html">
+      <created>1624357584670</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1624357584670</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update icons">
+      <created>1624444188818</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1624444188818</updated>
+    </task>
+    <task id="LOCAL-00006" summary="ubuntu run version">
+      <created>1624617378987</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1624617378987</updated>
+    </task>
+    <task id="LOCAL-00007" summary="update 404 and footer.html.">
+      <created>1624875856191</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1624875856191</updated>
+    </task>
+    <task id="LOCAL-00008" summary="add nginx_conf file,fix your nginx_conf questions.">
+      <created>1624960565108</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1624960565108</updated>
+    </task>
+    <task id="LOCAL-00009" summary="update nginx_conf">
+      <created>1625127221040</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1625127221040</updated>
+    </task>
+    <task id="LOCAL-00010" summary="update README.md for linux_version">
+      <created>1625213594193</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1625213594193</updated>
+    </task>
+    <task id="LOCAL-00011" summary="update README.md">
+      <created>1625214563306</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1625214563306</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,6 +241,14 @@
     <MESSAGE value="blog system for secondary development." />
     <MESSAGE value="update img rules" />
     <MESSAGE value="add upload img" />
-    <option name="LAST_COMMIT_MESSAGE" value="add upload img" />
+    <MESSAGE value="add about.html" />
+    <MESSAGE value="update icons" />
+    <MESSAGE value="ubuntu run version" />
+    <MESSAGE value="update 404 and footer.html." />
+    <MESSAGE value="add nginx_conf file,fix your nginx_conf questions." />
+    <MESSAGE value="update nginx_conf" />
+    <MESSAGE value="update README.md for linux_version" />
+    <MESSAGE value="update README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="update README.md" />
   </component>
 </project>

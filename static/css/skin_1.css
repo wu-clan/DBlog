@@ -1,5 +1,5 @@
 body {
-    background: #e9ecd7 url(/static/images/bgimg/bg0.jpg);
+    background: #e9ecd7 url(/static/images/backgroundimg/bg0.jpg);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 100% 100%
@@ -135,7 +135,7 @@ audio, canvas, video {
 
 @media screen and (min-width: 320px) and (max-width: 1023px) {
     body {
-        background: url(/static/images/bgimg/mob-bg2.jpg) no-repeat;
+        background: url(/static/images/backgroundimg/mob-bg2.jpg) no-repeat;
         background-attachment: fixed;
         background-repeat: no-repeat;
         background-size: 100%

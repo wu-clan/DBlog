@@ -37,7 +37,7 @@ input, button, select {
 }
 
 body {
-    background: #e9ecd7 url(../images/bgimg/bg0.jpg);
+    background: #e9ecd7 url(../images/backgroundimg/bg0.jpg);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -212,7 +212,7 @@ header {
     background: rgba(255, 255, 255, 0.85);
     box-shadow: 0 0 5px #13c5f8;
     position: fixed;
-    z-index: 10; /*url(../images/bgimg/topbg1.png)repeat-x;background-size: 100% 100%;*/
+    z-index: 10; /*url(../images/backgroundimg/topbg1.png)repeat-x;background-size: 100% 100%;*/
 }
 
 header .top {
@@ -309,12 +309,12 @@ header .mynav {
 
 .mynav > ul > li > a:hover {
     background: #13c5f8;
-    color: #fff; /*url(../images/bgimg/nav.png)no-repeat;*/
+    color: #fff; /*url(../images/backgroundimg/nav.png)no-repeat;*/
     font-size: 20px;
 }
 
 .mynav > .nav-active {
-    background: #13c5f8; /*url(../images/bgimg/nav.png)no-repeat;*/
+    background: #13c5f8; /*url(../images/backgroundimg/nav.png)no-repeat;*/
 }
 
 .mynav > .nav-active a {
@@ -1815,7 +1815,7 @@ footer {
 
 @media screen and (min-width: 320px) and (max-width: 1023px) {
     body {
-        background: url(../images/bgimg/mob-bg2.jpg) no-repeat;
+        background: url(../images/backgroundimg/mob-bg2.jpg) no-repeat;
         background-attachment: fixed;
         background-repeat: no-repeat;
         background-size: 100%;
