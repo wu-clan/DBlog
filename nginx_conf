@@ -24,7 +24,7 @@ server {
 	ssl_certificate /etc/nginx/cloudflare.pem;  # nginx的SSL证书文件
     ssl_certificate_key /etc/nginx/cloudflare.key;  # 证书 key 文件
     ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 	ssl_prefer_server_ciphers on;
 
 	root /home/DBlog/djangoProject;
@@ -46,11 +46,6 @@ server {
 	location /media {
                 alias /home/DBlog/static/media;
         }
-
-	error_page 404 /404.html;
-	location /404.html {
-		root /home/DBlog/templates;
-	}
 }
 
 server {
