@@ -212,7 +212,8 @@ header {
     background: rgba(255, 255, 255, 0.85);
     box-shadow: 0 0 5px #13c5f8;
     position: fixed;
-    z-index: 10; /*url(../images/backgroundimg/topbg1.png)repeat-x;background-size: 100% 100%;*/
+    z-index: 10;
+    url(../images/backgroundimg/topbg1.png)repeat-x;background-size: 100% 100%;
 }
 
 header .top {

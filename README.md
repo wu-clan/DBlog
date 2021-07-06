@@ -77,5 +77,7 @@ http://ip:port/admin
 同上，需要将 pip 改为 pip3，python 改为 python3 即可
 ```
 
-
 浏览器中打开<http://127.0.0.1:8000/>即可访问
+
+### Theme
+☞ [jhao104](https://github.com/jhao104/django-blog)
