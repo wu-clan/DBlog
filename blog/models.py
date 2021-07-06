@@ -72,6 +72,15 @@ class Article(models.Model):
         source_url = settings.HOST + '/blog/detail/{id}'.format(id=self.pk)
         return source_url  # 给网易云跟帖使用
 
+    def content_validity(self):
+        """
+        狗太正文字数显示控制
+        """
+        if len(str(self.content)) > 60:  # 字数自己设置
+            return '{}……'.format(str(self.content)[0:40])  # 超出部分以省略号代替。
+        else:
+            return str(self.content)
+
     def viewed(self):
         """
         增加阅读数

@@ -13,7 +13,7 @@ class ArticleAdmin(admin.ModelAdmin):
         'title',
         'category',
         'date_time',
-        'content',
+        'content_validity',
         'digest',
         'author',
         'view',
