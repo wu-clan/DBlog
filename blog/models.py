@@ -39,6 +39,7 @@ from django.conf import settings
 #         verbose_name = '捐助收款图'
 #         verbose_name_plural = verbose_name
 
+
 # 标签
 class Tag(models.Model):
     tag_name = models.CharField('标签名称', max_length=30, )
@@ -49,6 +50,7 @@ class Tag(models.Model):
     class Meta:
         verbose_name = '标签'
         verbose_name_plural = verbose_name
+
 
 # 文章
 class Article(models.Model):
@@ -77,7 +79,7 @@ class Article(models.Model):
         狗太正文字数显示控制
         """
         if len(str(self.content)) > 20:  # 字数自己设置
-            return '{}……'.format(str(self.content)[0:40])  # 超出部分以省略号代替。
+            return '{}……'.format(str(self.content)[0:20])  # 超出部分以省略号代替。
         else:
             return str(self.content)
 
@@ -100,6 +102,7 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
+
 # 文章类型
 class Category(models.Model):
     name = models.CharField('文章类型', max_length=30)
@@ -114,6 +117,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 # 评论
 class Comment(models.Model):
     title = models.CharField("标题", max_length=100)
@@ -127,3 +131,6 @@ class Comment(models.Model):
         ordering = ['create_time']
         verbose_name = '评论'
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.title
