@@ -5,21 +5,14 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/djangoProject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangoProject/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/public.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/public.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/skin_1.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/skin_1.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/skin_3.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/skin_3.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/bgimg/bg0.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/bg0.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/bgimg/bg1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/bg1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/bgimg/bg2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/bg2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/bgimg/bg3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/bg3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/bgimg/blueprint.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/blueprint.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/bgimg/mob-bg2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/mob-bg2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/bgimg/nav.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/nav.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/bgimg/nopic.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/nopic.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/bgimg/repeat.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/repeat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/bgimg/topbg1.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/backgroundimg/topbg1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/icon/备案.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/superbg-custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/superbg-custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/blog/blogroll.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/blogroll.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/blog/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/blog/right.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/right.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/login/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/logout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/login/logout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/login/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/sitemap.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,11 +69,11 @@
       <recent name="D:\Git_project\DBlog" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Git_project\DBlog\templates\blog\login" />
       <recent name="D:\Git_project\DBlog\static\images\footer" />
       <recent name="D:\Git_project\DBlog" />
       <recent name="D:\Git_project\DBlog\static\images" />
       <recent name="D:\Git_project\DBlog\static\images\carousel" />
-      <recent name="D:\Git_project\DBlog\static\js" />
     </key>
   </component>
   <component name="RunManager">
@@ -141,6 +134,7 @@
       <workItem from="1625211267421" duration="2331000" />
       <workItem from="1625214507041" duration="66000" />
       <workItem from="1625479325099" duration="1677000" />
+      <workItem from="1625646419286" duration="5666000" />
     </task>
     <task id="LOCAL-00001" summary="blog system for secondary development.">
       <created>1623838349857</created>
