@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-v%!69-+jqak^*4b+y5uz_udp-l^#ii$6w)qrm&khj2anfc25z&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -126,10 +126,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # 收集所有静态文件：python manage.py collectstatic
-STATIC_ROOT = BASE_DIR / 'static'
-# STATICFILES_DIRS = (
-# 	BASE_DIR / 'static',
-# )
+# STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = (
+	BASE_DIR / 'static',
+)
 
 
 MEDIA_URL = '/media/'

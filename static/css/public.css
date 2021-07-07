@@ -512,7 +512,7 @@ header .mynav {
 
 
 .mysection {
-    width: 65%;
+    width: 67%;
     float: left;
 }
 
@@ -641,9 +641,43 @@ header .mynav {
     margin: 0 2.5%;
 }
 
+.for-me .headportrait {
+    margin: auto;
+    margin-left: -165px;
+    margin-top: -50px;
+    transform: scale(0.5);
+    border-radius: 50%;
+    /*transition: All 0.4s ease-in-out;*/
+    /*-webkit-transition: All 0.4s ease-in-out;*/
+    /*-moz-transition: All 0.4s ease-in-out;*/
+    /*-o-transition: All 0.4s ease-in-out;*/
+}
+
+/*.for-me .headportrait:hover {*/
+/*    transform: scale(0.51);*/
+/*    -webkit-transform: scale(0.51);*/
+/*    -moz-transform: scale(0.51);*/
+/*    -o-transform: scale(0.51);*/
+/*    -ms-transform: scale(0.51);*/
+/*}*/
+
 .xiangguan {
-    width: 100%;
+    width: 90%;
     overflow: hidden;
+    margin: auto;
+}
+
+.xiangguan .for-me {
+    width: 120%;
+    height: 205px;
+    margin: auto;
+}
+
+.xiangguan .for-me .text {
+    color: #0C0C0C;
+    margin-inline: 10px;
+    margin-block: 10px;
+    margin-block-end: auto;
 }
 
 .xiangguan div {
@@ -654,8 +688,12 @@ header .mynav {
     width: 25%;
     text-align: center;
     margin-bottom: 20px;
-    padding-top: 10px;
     color: #fff;
+}
+
+.notransition{
+    transition: none !important;
+    -webkit-transition: none !important;
 }
 
 .xiangguan div a {

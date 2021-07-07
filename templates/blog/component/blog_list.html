@@ -28,7 +28,7 @@
                         <a title="标签: {{ tag.tag_name }}" href="{% url "blog:tag" tag.tag_name %}"><i class="el-tag"></i>{{ tag.tag_name }}</a>&nbsp;
                     </li>
                 {% endfor %}
-                <li><a href="{% url "blog:list" %}}" title="查看分类"><i
+                <li><a href="{% url "blog:list" %}" title="查看分类"><i
                         class="el-th-list"></i>{{ blog.category }}</a></li>
             </ul>
         </div>
