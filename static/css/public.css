@@ -684,7 +684,7 @@ header .mynav {
     display: block;
     font-size: 14px;
     float: left;
-    overflow: hidden;
+    /*overflow: hidden;*/
     width: 25%;
     text-align: center;
     margin-bottom: 20px;
