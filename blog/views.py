@@ -9,6 +9,7 @@ from blog.models import Article, Comment
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, get_object_or_404
 
+
 def get_page(request):
     page_number = request.GET.get("page")
     return 1 if not page_number or not page_number.isdigit() else int(page_number)
@@ -88,6 +89,7 @@ def message(request):
     留言
     """
     return render(request, 'blog/message_board.html', {"source_id": "message"})
+
 
 def about(request):
     """

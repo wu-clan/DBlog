@@ -3,7 +3,37 @@ from django.contrib import admin
 # Register your models here.
 
 
-from blog.models import Tag, Article, Category,Comment
+from blog.models import Tag, Article, Category, Comment, Pay, Conf
+
+
+@admin.register(Conf)
+class ConfAdmin(admin.ModelAdmin):
+    list_display = (
+        'home_title',
+        'carousel_announcement',
+        'title',
+        'chinese_description',
+        'english_description',
+        'avatar_hyperlink',
+        'record_number',
+    )
+    fieldsets = (
+        ('作者信息', {
+            'fields': (
+                'website_designer',
+                'design_author_hyperlink',
+                'receiving_email_address',
+            )
+        }),
+    )
+
+
+@admin.register(Pay)
+class PayAdmin(admin.ModelAdmin):
+    list_display = (
+        'payvximg',
+        'payaliimg',
+    )
 
 
 @admin.register(Article)
@@ -23,6 +53,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_filter = ('category', 'author')
     filter_horizontal = ('tag',)
 
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
@@ -35,6 +66,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     pass
+
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
