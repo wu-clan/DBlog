@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
 	'simpleui',  # 第三方后台主题
+	'import_export',  # 后台导入导出模板
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',

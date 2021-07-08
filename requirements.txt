@@ -3,3 +3,4 @@ pymysql
 Django==3.2.4
 django-simpleui
 Pillow
+import_export

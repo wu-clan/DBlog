@@ -38,13 +38,10 @@ class Conf(models.Model):
     """
     home_title = models.CharField(max_length=64, verbose_name='主页站点', default="Xwboy.top")
     carousel_announcement = models.CharField(max_length=30, verbose_name='头部轮播公告', default='热烈欢迎浏览本站')
-    title = models.CharField(max_length=8, verbose_name='关注我_标题', default='热烈欢迎浏览本站')
-    chinese_description = models.CharField(max_length=30, verbose_name='关注我_中文描述',
-                                           default='永不放弃坚持就是这么酷！要相信光')
-    english_description = models.CharField(max_length=100, verbose_name='关注我_英文描述',
-                                           default='Never give up persistence is so cool！Believe in the light！！！')
-    avatar_hyperlink = models.CharField(max_length=200, verbose_name='关注我_头像超链接',
-                                           default='https://avatars.githubusercontent.com/u/52145145?v=4')
+    title = models.CharField(max_length=8, verbose_name='关注我_标题', default="CL' WU")
+    chinese_description = models.CharField(max_length=30, verbose_name='关注我_中文描述', default='永不放弃坚持就是这么酷！要相信光')
+    english_description = models.CharField(max_length=100, verbose_name='关注我_英文描述', default='Never give up persistence is so cool！Believe in the light！！！')
+    avatar_hyperlink = models.CharField(max_length=200, verbose_name='关注我_头像超链接', default='https://avatars.githubusercontent.com/u/52145145?v=4')
     website_designer = models.CharField(max_length=20, verbose_name='网站作者/about名称', default='xiaowu')
     design_author_hyperlink = models.CharField(max_length=200, verbose_name='设计作者超链接', default='http://www.xwboy.top')
     receiving_email_address = models.CharField(max_length=50, verbose_name='收件邮箱地址', default='2186656812@qq.com')
@@ -62,12 +59,15 @@ class Pay(models.Model):
     """
     收款图
     """
-    payvximg = models.ImageField(blank=True, null=True, verbose_name='微信捐助收款图')
+    payvximg = models.ImageField(verbose_name='微信捐助收款图')
     payaliimg = models.ImageField(verbose_name="支付宝捐助收款图")
 
     class Meta:
         verbose_name = '捐助收款图'
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.payvximg
 
 
 class Tag(models.Model):
@@ -76,12 +76,12 @@ class Tag(models.Model):
     """
     tag_name = models.CharField('标签名称', max_length=30, )
 
-    def __str__(self):
-        return self.tag_name
-
     class Meta:
         verbose_name = '标签'
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.tag_name
 
 
 class Article(models.Model):
@@ -110,10 +110,10 @@ class Article(models.Model):
 
     def content_validity(self):
         """
-        狗太正文字数显示控制
+        正文字数显示控制
         """
-        if len(str(self.content)) > 20:  # 字数自己设置
-            return '{}……'.format(str(self.content)[0:20])  # 超出部分以省略号代替。
+        if len(str(self.content)) > 40:  # 字数自己设置
+            return '{}……'.format(str(self.content)[0:40])  # 超出部分以省略号代替。
         else:
             return str(self.content)
 

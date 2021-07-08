@@ -2,12 +2,12 @@ from django.contrib import admin
 
 # Register your models here.
 
-
+from import_export.admin import ImportExportModelAdmin
 from blog.models import Tag, Article, Category, Comment, Pay, Conf
 
 
 @admin.register(Conf)
-class ConfAdmin(admin.ModelAdmin):
+class ConfAdmin(ImportExportModelAdmin):
     list_display = (
         'home_title',
         'carousel_announcement',
@@ -16,13 +16,17 @@ class ConfAdmin(admin.ModelAdmin):
         'english_description',
         'avatar_hyperlink',
         'record_number',
+        'website_designer',
+        'design_author_hyperlink',
+        'receiving_email_address'
     )
+
     fieldsets = (
         ('作者信息', {
             'fields': (
                 'website_designer',
                 'design_author_hyperlink',
-                'receiving_email_address',
+                'receiving_email_address'
             )
         }),
     )
@@ -32,7 +36,7 @@ class ConfAdmin(admin.ModelAdmin):
 class PayAdmin(admin.ModelAdmin):
     list_display = (
         'payvximg',
-        'payaliimg',
+        'payaliimg'
     )
 
 
