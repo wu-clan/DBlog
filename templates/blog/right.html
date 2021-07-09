@@ -1,5 +1,4 @@
 <aside class="myaside">
-
     <!--关注我-->
     <div class="focus-me bg-color animation-div">
         <h4 class="index-title"><i class="el-heart"></i>关注我
@@ -7,15 +6,20 @@
         </h4>
         <div class="xiangguan">
             <div class="for-me">
-                {% for set in conf %}
-                    <div class="text">
+                <div class="text">
+                    {% if conf_list %}
+                        {% for settings in conf_list %}
+                            <h2 id="cn">{{ settings.title }}</h2>
+                        {% endfor %}
+                    {% else %}
+                        <h2 id="cn">CL' WU</h2>
+                    {% endif %}
+                    {% for desc in conf_list %}
                         <span id="typed"></span>
-                        <h2 id="cn">{{ set.title }}</h2>
-                        {#                    <p id="typed">Never give up persistence is so cool！Believe in the light！！！</p>#}
                         <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
                         <script>
                             var typed = new Typed("#typed", {
-                                strings: ['{{ set.chinese_description }}', '{{ set.english_description }}'],
+                                strings: ['{{ desc.chinese_description }}', '{{ desc.english_description }}'],
                                 startDelay: 300,
                                 typeSpeed: 100,
                                 loop: true,
@@ -23,8 +27,8 @@
                                 showCursor: true
                             });
                         </script>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
                 <a class="notransition" href="{% url "blog:about" %}" data-pjax-state="">
                     <img class="headportrait" src="https://avatars.githubusercontent.com/u/52145145?v=4">
                 </a>
@@ -120,6 +124,7 @@
     </div>
 
     <!--文章排行tab-->
+    <!--评论模块-->
     <div class="mytab bg-color animation-div">
         <div class="tab-btn"><a class="hd-btn tab-active" href="javascript:;"><i class="el-comment-alt"></i>最新评论</a><a
                 class="ph-btn" href="javascript:;"><i class="el-signal"></i>文章排行</a></div>
@@ -137,7 +142,7 @@
 
 
         </ul>
-        <!--文章排行-->
+        <!--文章排行模块-->
         <ul class="paihang-ul">
             {% for blog in blog_top %}
                 <li>
@@ -167,10 +172,10 @@
     <!--友情链接-->
     <div class="side-link animation-div">
         <h4 class="index-title"><i class="el-paper-clip"></i>友情链接
-            <small>Links -> </small>
+            <small>Links -></small>
             <a style="float: none !important;"
                href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=2186656812@qq.com">
-                <i class="el-envelope"></i>
+                <small><i class="el el-envelope"></i>申请</small>
             </a>
         </h4>
         <ul>
@@ -181,36 +186,39 @@
     </div>
 
     <!--支持server-->
-    <div class="side-link animation-div">
-        <h4 class="index-title"><i class="el el-thumbs-up"></i>支持一下
-            <small>(WeChatPay / AliPay)
-                <a href="{{ img.payaliimg }}">
-                    <img src="/static/images/icon/zhifu.png"
-                         style="margin-top: -2.5px; display: block; transform: scale(0.55) translateX(-6px) translateY(-6px); margin-bottom: -10px;">
-                </a>
-            </small>
-        </h4>
-        <table>
-            <tr>
-                <td>
-                    <a href="/static/media/{{ payvximg }}">
-                        <img width="380px" height="410px"
-                             src="/static/media/<p>{{ imglist.payvximg }}</p>">
-                        {#                        <img src="/static/images/pay/vx.jpg"#}
-                        {#                             style="transform: scale(0.57); width: 100%; margin-top: -52px; margin-left: -30px">#}
+    {% for payimg in payimg_list %}
+        <div class="side-link animation-div">
+            <h4 class="index-title"><i class="el el-thumbs-up"></i>支持一下
+                <small>(WeChatPay / AliPay)
+                    <a href="/static/media/{{ payaliimg }}">
+                        <img src="/static/images/icon/zhifu.png"
+                             style="margin-top: -2.5px; display: block; transform: scale(0.55) translateX(-6px) translateY(-6px); margin-bottom: -10px;">
                     </a>
-                </td>
-                <td>
-                    <a href="/static/media/{{ imglist.payaliimg }}">
-                        <img width="380px" height="410px"
-                             src="/static/media/{{ imglist.payaliimg }}">
-                        {#                        <img src="/static/images/pay/zfb.png"#}
-                        {#                             style="transform: scale(1.2); width: 100%; margin-top: -50px; margin-left: -30px">#}
-                    </a>
-                </td>
-            </tr>
-        </table>
-    </div>
+                </small>
+            </h4>
+            <table>
+                <tr>
+                    <td>
+                        <a href="/static/media/{{ payimg.payvximg }}">
+                            <img style="width: 135px; height: 150px; margin-top: 6px; margin-left: 30px"
+                                 src="/static/media/{{ payimg.payvximg }}">
+                            {#                        <img src="/static/images/pay/vx.jpg"#}
+                            {#                             style="transform: scale(0.57); width: 100%; margin-top: -52px; margin-left: -30px">#}
+                        </a>
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        <a href="/static/media/{{ payimg.payaliimg }}">
+                            <img style="width: 135px; height: 150px; margin-top: 6px"
+                                 src="/static/media/{{ payimg.payaliimg }}">
+                            {#                        <img src="/static/images/pay/zfb.png"#}
+                            {#                             style="transform: scale(1.2); width: 100%; margin-top: -50px; margin-left: -30px">#}
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    {% endfor %}
 </aside>
 
 <script>

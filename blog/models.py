@@ -30,6 +30,7 @@ from django.conf import settings
 #     class Meta:
 #         verbose_name = u'邮箱验证码'
 #         verbose_name_plural = verbose_name
+from django.utils.html import format_html
 from mdeditor.fields import MDTextField
 
 
