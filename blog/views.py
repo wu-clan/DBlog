@@ -5,9 +5,43 @@ import json
 from django.http import JsonResponse
 
 from djangoProject.util import PageInfo
-from blog.models import Article, Comment
+from blog.models import Article, Comment, Conf, Pay
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, get_object_or_404
+
+
+def web_conf(request):
+    """
+    网站配置
+    """
+    conf_list = Conf.objects.all()
+
+    return render(request, 'blog/right.html', {
+        'conf': conf_list,
+        # 'HOME_TITLE': conf_list.home_title,
+        # 'CAROUSEL_ANNOUNCEMENT': conf_list.carousel_announcement,
+        # 'ANNOUNCEMENT': conf_list.announcement,
+        # 'TITLE': conf_list.title,
+        # 'CHINESE_DESC': conf_list.chinese_description,
+        # 'ENGLISH_DESC': conf_list.english_description,
+        # 'AVATAR_LINK': conf_list.avatar_hyperlink,
+        # 'WEBSITE_DESIGNER': conf_list.website_designer,
+        # 'DESIGN_AUTHOR_LINK': conf_list.design_author_hyperlink,
+        # 'RECEIVING_EMAIL_ADDRESS': conf_list.receiving_email_address,
+        # 'RECORD_NUMBER': conf_list.record_number,
+    })
+
+
+def pay(request):
+    """
+    捐助收款图
+    """
+    imglist = Pay.objects.all()
+
+    return render(request, 'blog/right.html', {
+        # 'payimg': imglist
+        locals()
+    })
 
 
 def get_page(request):

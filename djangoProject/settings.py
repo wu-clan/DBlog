@@ -30,13 +30,15 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
 	'simpleui',  # 第三方后台主题
-	'import_export',  # 后台导入导出模板
+	'import_export',  # 后台导入导出模块
+	'mdeditor',  # 后台markdown编写文章模块
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	# 注册模块
 	'blog.apps.BlogConfig'
 ]
 

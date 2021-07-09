@@ -1399,6 +1399,13 @@ header .mynav {
     margin-right: 10px;
 }
 
+
+
+.side-link h4 a .email_send {
+    float: none !important;
+}
+
+
 footer {
     width: 100%;
     background: rgba(0, 67, 94, 0.95);

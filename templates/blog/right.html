@@ -7,10 +7,24 @@
         </h4>
         <div class="xiangguan">
             <div class="for-me">
-                <div class="text">
-                    <h2>CL' WU</h2>
-                    <p>Never give up persistence is so cool！Believe in the light！！！</p>
-                </div>
+                {% for set in conf %}
+                    <div class="text">
+                        <span id="typed"></span>
+                        <h2 id="cn">{{ set.title }}</h2>
+                        {#                    <p id="typed">Never give up persistence is so cool！Believe in the light！！！</p>#}
+                        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
+                        <script>
+                            var typed = new Typed("#typed", {
+                                strings: ['{{ set.chinese_description }}', '{{ set.english_description }}'],
+                                startDelay: 300,
+                                typeSpeed: 100,
+                                loop: true,
+                                backSpeed: 50,
+                                showCursor: true
+                            });
+                        </script>
+                    </div>
+                {% endfor %}
                 <a class="notransition" href="{% url "blog:about" %}" data-pjax-state="">
                     <img class="headportrait" src="https://avatars.githubusercontent.com/u/52145145?v=4">
                 </a>
@@ -153,13 +167,11 @@
     <!--友情链接-->
     <div class="side-link animation-div">
         <h4 class="index-title"><i class="el-paper-clip"></i>友情链接
-            <small>Links</small>
-            <span></span>
-            <small>
-                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=2186656812@qq.com">
-                    <i class="el-envelope" style="float: left"></i>
-                </a>
-            </small>
+            <small>Links -> </small>
+            <a style="float: none !important;"
+               href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=2186656812@qq.com">
+                <i class="el-envelope"></i>
+            </a>
         </h4>
         <ul>
             {% for blog in blogroll %}
@@ -172,7 +184,7 @@
     <div class="side-link animation-div">
         <h4 class="index-title"><i class="el el-thumbs-up"></i>支持一下
             <small>(WeChatPay / AliPay)
-                <a href="/static/images/pay/zfb.png">
+                <a href="{{ img.payaliimg }}">
                     <img src="/static/images/icon/zhifu.png"
                          style="margin-top: -2.5px; display: block; transform: scale(0.55) translateX(-6px) translateY(-6px); margin-bottom: -10px;">
                 </a>
@@ -181,15 +193,19 @@
         <table>
             <tr>
                 <td>
-                    <a href="/static/images/pay/vx.jpg">
-                        <img src="/static/images/pay/vx.jpg"
-                             style="transform: scale(0.57); width: 100%; margin-top: -52px; margin-left: -30px">
+                    <a href="/static/media/{{ payvximg }}">
+                        <img width="380px" height="410px"
+                             src="/static/media/<p>{{ imglist.payvximg }}</p>">
+                        {#                        <img src="/static/images/pay/vx.jpg"#}
+                        {#                             style="transform: scale(0.57); width: 100%; margin-top: -52px; margin-left: -30px">#}
                     </a>
                 </td>
                 <td>
-                    <a href="/static/images/pay/zfb.png">
-                        <img src="/static/images/pay/zfb.png"
-                             style="transform: scale(1.2); width: 100%; margin-top: -50px; margin-left: -30px">
+                    <a href="/static/media/{{ imglist.payaliimg }}">
+                        <img width="380px" height="410px"
+                             src="/static/media/{{ imglist.payaliimg }}">
+                        {#                        <img src="/static/images/pay/zfb.png"#}
+                        {#                             style="transform: scale(1.2); width: 100%; margin-top: -50px; margin-left: -30px">#}
                     </a>
                 </td>
             </tr>

@@ -30,14 +30,16 @@ from django.conf import settings
 #     class Meta:
 #         verbose_name = u'邮箱验证码'
 #         verbose_name_plural = verbose_name
+from mdeditor.fields import MDTextField
 
 
 class Conf(models.Model):
     """
-    配置信息
+    网站配置信息
     """
     home_title = models.CharField(max_length=64, verbose_name='主页站点', default="Xwboy.top")
     carousel_announcement = models.CharField(max_length=30, verbose_name='头部轮播公告', default='热烈欢迎浏览本站')
+    announcement = models.CharField(max_length=200, verbose_name='右侧公告', default='暂无公告...')
     title = models.CharField(max_length=8, verbose_name='关注我_标题', default="CL' WU")
     chinese_description = models.CharField(max_length=30, verbose_name='关注我_中文描述', default='永不放弃坚持就是这么酷！要相信光')
     english_description = models.CharField(max_length=100, verbose_name='关注我_英文描述', default='Never give up persistence is so cool！Believe in the light！！！')
@@ -66,9 +68,6 @@ class Pay(models.Model):
         verbose_name = '捐助收款图'
         verbose_name_plural = verbose_name
 
-    def __str__(self):
-        return self.payvximg
-
 
 class Tag(models.Model):
     """
@@ -91,7 +90,7 @@ class Article(models.Model):
     title = models.CharField(max_length=200, verbose_name='文章标题')  # 博客标题
     category = models.ForeignKey('Category',  verbose_name='文章类型', on_delete=models.CASCADE)
     date_time = models.DateField(auto_now_add=True, verbose_name='创建时间')
-    content = models.TextField(blank=True, null=True, verbose_name='文章正文')
+    content = MDTextField(blank=True, null=True, verbose_name='文章正文')
     digest = models.TextField(blank=True, null=True, verbose_name='文章摘要')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='作者', on_delete=models.CASCADE)
     view = models.BigIntegerField(default=0, verbose_name='阅读数')
