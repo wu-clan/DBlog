@@ -1013,7 +1013,7 @@ header .mynav {
 
 .search {
     margin-top: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .search form {
@@ -1024,7 +1024,7 @@ header .mynav {
 
 .search-index {
     overflow: hidden;
-    padding: 10px 0;
+    padding-top: 10px;
     height: 2em;
 }
 
@@ -1154,9 +1154,8 @@ header .mynav {
     opacity: 0.6;
 }
 
-
 .mytab {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .tab-btn {
@@ -1353,7 +1352,7 @@ header .mynav {
 
 
 .side-link {
-    margin-top: 30px;
+    margin-top: 25px;
     width: 100%;
 }
 
@@ -1705,9 +1704,14 @@ footer {
     margin-bottom: 5px;
 }
 
+.main_news {
+    position: relative;
+    margin-inside: 10px;
+}
+
 .clos-new {
     overflow: hidden;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
 }
 
 .clos-new ul {

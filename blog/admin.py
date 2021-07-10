@@ -9,40 +9,41 @@ from blog.models import Tag, Article, Category, Comment, Pay, Conf
 @admin.register(Conf)
 class ConfAdmin(ImportExportModelAdmin):
     list_display = (
-        'home_title',
-        'record_number',
-        'carousel_announcement',
-        'announcement',
-        'website_designer',
-        'design_author_hyperlink',
-        'receiving_email_address',
-        'title',
+        'main_website',
+        'website_number',
+        'head_announcement',
+        'main_announcement',
+        'name',
         'chinese_description',
         'english_description',
-        'avatar_hyperlink',
+        'avatar_link',
+        'website_author',
+        'website_author_link',
+        'email',
     )
     fieldsets = (
         ('网站配置信息', {
             'fields': (
-                'home_title',
-                'record_number',
+                'main_website',
+                'website_number',
             )
         }),
         ('公告', {
             'fields': (
-                'carousel_announcement',
-                'announcement',
+                'head_announcement',
+                'main_announcement',
             )
         }),
         ('作者信息', {
             'fields': (
-                'website_designer',
-                'design_author_hyperlink',
-                'receiving_email_address',
-                'title',
+                'name',
                 'chinese_description',
                 'english_description',
-                'avatar_hyperlink',
+                'avatar_link',
+                'website_author',
+                'website_author_link',
+                'email',
+                'git',
             )
         }),
     )

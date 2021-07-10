@@ -34,8 +34,7 @@ def sidebar(request):
         'comment_list': comment,
         'blogroll': blogroll.sites,
         'conf_list': conf_list,
-        'payimg_list': payimg
-
+        'payimg_list': payimg,
     }
 
 

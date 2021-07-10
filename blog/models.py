@@ -38,32 +38,33 @@ class Conf(models.Model):
     """
     网站配置信息
     """
-    home_title = models.CharField(max_length=64, verbose_name='主页站点', default="Xwboy.top")
-    carousel_announcement = models.CharField(max_length=30, verbose_name='头部轮播公告', default='热烈欢迎浏览本站')
-    announcement = models.CharField(max_length=200, verbose_name='右侧公告', default='暂无公告...')
-    title = models.CharField(max_length=8, verbose_name='关注我_标题', default="CL' WU")
+    main_website = models.CharField(max_length=64, verbose_name='主网站', default="Xwboy.top")
+    head_announcement = models.CharField(max_length=30, verbose_name='头部轮播公告', default='热烈欢迎浏览本站')
+    main_announcement = models.TextField(max_length=200, verbose_name='右侧公告', default='')
+    name = models.CharField(max_length=8, verbose_name='关注我_名称', default="CL' WU")
     chinese_description = models.CharField(max_length=30, verbose_name='关注我_中文描述', default='永不放弃坚持就是这么酷！要相信光')
-    english_description = models.CharField(max_length=100, verbose_name='关注我_英文描述', default='Never give up persistence is so cool！Believe in the light！！！')
-    avatar_hyperlink = models.CharField(max_length=200, verbose_name='关注我_头像超链接', default='https://avatars.githubusercontent.com/u/52145145?v=4')
-    website_designer = models.CharField(max_length=20, verbose_name='网站作者/about名称', default='xiaowu')
-    design_author_hyperlink = models.CharField(max_length=200, verbose_name='设计作者超链接', default='http://www.xwboy.top')
-    receiving_email_address = models.CharField(max_length=50, verbose_name='收件邮箱地址', default='2186656812@qq.com')
-    record_number = models.CharField(max_length=100, verbose_name='备案号', default='豫ICP备 2021019092号-1')
+    english_description = models.TextField(max_length=100, verbose_name='关注我_英文描述', default='Never give up persistence is so cool！Believe in the light！！！')
+    avatar_link = models.CharField(max_length=200, verbose_name='关注我_头像超链接', default='https://avatars.githubusercontent.com/u/52145145?v=4')
+    website_author = models.CharField(max_length=20, verbose_name='网站作者', default='xiaowu')
+    website_author_link = models.CharField(max_length=200, verbose_name='网站作者超链接', default='http://www.xwboy.top')
+    email = models.CharField(max_length=50, verbose_name='收件邮箱', default='2186656812@qq.com')
+    website_number = models.CharField(max_length=100, verbose_name='备案号', default='豫ICP备 2021019092号-1')
+    git = models.CharField(max_length=100, verbose_name='git链接', default='https://gitee.com/wu_cl')
 
     class Meta:
         verbose_name = '网站配置'
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.home_title
+        return self.main_website
 
 
 class Pay(models.Model):
     """
     收款图
     """
-    payvximg = models.ImageField(verbose_name='微信捐助收款图')
-    payaliimg = models.ImageField(verbose_name="支付宝捐助收款图")
+    payvximg = models.ImageField(blank=True, null=True, verbose_name='微信捐助收款图')
+    payaliimg = models.ImageField(blank=True, null=True, verbose_name="支付宝捐助收款图")
 
     class Meta:
         verbose_name = '捐助收款图'
@@ -96,7 +97,7 @@ class Article(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='作者', on_delete=models.CASCADE)
     view = models.BigIntegerField(default=0, verbose_name='阅读数')
     comment = models.BigIntegerField(default=0, verbose_name='评论数')
-    picture = models.ImageField(verbose_name='url(标题图)')  # 标题图片地址
+    picture = models.ImageField(blank=True, null=True, verbose_name='url(标题图)')  # 标题图片地址
     tag = models.ManyToManyField(Tag)  # 标签
 
     class Meta:
@@ -106,7 +107,7 @@ class Article(models.Model):
 
     def sourceUrl(self):
         source_url = settings.HOST + '/blog/detail/{id}'.format(id=self.pk)
-        return source_url  # 给网易云跟帖使用
+        return source_url
 
     def content_validity(self):
         """
