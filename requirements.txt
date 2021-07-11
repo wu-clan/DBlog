@@ -1,7 +1,7 @@
-markdown
-pymysql
+pymysql~=1.0.2
 Django==3.2.4
 django-simpleui
 Pillow
 django-import-export
 django-mdeditor
+markdown~=3.3.4

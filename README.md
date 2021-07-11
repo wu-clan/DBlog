@@ -13,13 +13,12 @@
 
 ### 特点
 
-* markdown 渲染，代码高亮
+* markdown渲染，后台markdown编辑文章，代码高亮
 * 第三方社会化评论系统支持(畅言)
 * 三种皮肤自由切换
 * 阅读排行榜/最新评论
 * 多目标源博文分享
-* 博文归档
-* 友情链接
+* 博文统计图
 
 ### 下载
 ```
@@ -58,23 +57,24 @@ http://ip:port/admin
 ## 搭建Linux服务端
 ```python
 示例环境: Ubuntu-20.04, nginx-1.18.0, uwsgi, mysql-8, python-3.8;
-# 源码中给出了相关文件提供参考
-# nginx_conf： nginx 配置文件
-# uwsgi.ini： uwsgi.ini 配置文件
-# uwsgi.py,uwsgi.sh  开机自启动服务脚本
-环境准备:
-1, 在目录 /home 下执行上文中的 下载 命令
-2, apt-get 安装 uwsgi, nginx, mysql
-3, 将 nginx_conf 中的内容替换到 /etc/nginx/sites-enabled/default
-4, 将 uwsgi.sh 复制到 /etc/init.d/ 中, 执行 chmod 755 uwsgi.sh 赋予权限
-5, 修改 default(nginx配置文件), 填写 server_name 为自己域名
 
-# 环境准备过程中遇到的问题请自行百度！
+# 在linux文件夹中给出了相关文件的提供参考
+# nginx_conf： nginx 配置文件
+# uwsgi.py： 开机自启动服务脚本
+# uwsgi.sh:  用于调用自启动服务脚本的shell脚本
+
+环境准备:
+1, 在目录 /home 下执行上文中的下载命令将项目下载到本地
+2, apt-get 安装 uwsgi, nginx, mysql
+3, 将 nginx_conf 中的内容替换到 /etc/nginx/sites-enabled/default, 并根据自己的网站设置进行修改
+4, 将 uwsgi.sh 复制到 /etc/init.d/ 中, 执行 chmod 755 uwsgi.sh 赋予权限
+
+# 环境准备过程中遇到的问题请自行百度啦
 ```
 
 ### 安装，使用
 ```
-同上，需要将 pip 改为 pip3，python 改为 python3 即可
+同上，注意需要将 pip 改为 pip3，python 改为 python3 再执行命令
 ```
 
 浏览器中打开<http://127.0.0.1:8000/>即可访问
