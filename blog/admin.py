@@ -20,12 +20,16 @@ class ConfAdmin(ImportExportModelAdmin):
         'website_author',
         'website_author_link',
         'email',
+        'website_logo',
+        'carousel',
     )
     fieldsets = (
         ('网站配置信息', {
             'fields': (
                 'main_website',
                 'website_number',
+                'website_logo',
+                'carousel',
             )
         }),
         ('公告', {

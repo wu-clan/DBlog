@@ -38,18 +38,20 @@ class Conf(models.Model):
     """
     网站配置信息
     """
-    main_website = models.CharField(max_length=64, verbose_name='主网站', default="Xwboy.top")
+    main_website = models.CharField(max_length=64, verbose_name='主网站', default="xwboy.top")
     head_announcement = models.CharField(max_length=30, verbose_name='头部轮播公告', default='热烈欢迎浏览本站')
-    main_announcement = models.TextField(max_length=200, verbose_name='右侧公告', default='')
+    main_announcement = models.TextField(max_length=300, verbose_name='右侧公告', default='')
     name = models.CharField(max_length=8, verbose_name='关注我_名称', default="CL' WU")
     chinese_description = models.CharField(max_length=30, verbose_name='关注我_中文描述', default='永不放弃坚持就是这么酷！要相信光')
     english_description = models.TextField(max_length=100, verbose_name='关注我_英文描述', default='Never give up persistence is so cool！Believe in the light！！！')
-    avatar_link = models.CharField(max_length=200, verbose_name='关注我_头像超链接', default='https://avatars.githubusercontent.com/u/52145145?v=4')
+    avatar_link = models.CharField(max_length=150, verbose_name='关注我_头像超链接', default='https://avatars.githubusercontent.com/u/52145145?v=4')
     website_author = models.CharField(max_length=20, verbose_name='网站作者', default='xiaowu')
-    website_author_link = models.CharField(max_length=200, verbose_name='网站作者超链接', default='http://www.xwboy.top')
+    website_author_link = models.CharField(max_length=200, verbose_name='网站作者链接', default='http://www.xwboy.top')
     email = models.CharField(max_length=50, verbose_name='收件邮箱', default='2186656812@qq.com')
     website_number = models.CharField(max_length=100, verbose_name='备案号', default='豫ICP备 2021019092号-1')
     git = models.CharField(max_length=100, verbose_name='git链接', default='https://gitee.com/wu_cl')
+    website_logo = models.ImageField(blank=True, null=True, verbose_name='网站logo', default='')
+    carousel = models.ImageField(blank=True, null=True, verbose_name='轮播图', default='')
 
     class Meta:
         verbose_name = '网站配置'
@@ -164,7 +166,7 @@ class Comment(models.Model):
     create_time = models.DateTimeField('评论时间', auto_now=True)
     user_name = models.CharField('评论用户', max_length=25)
     url = models.CharField('链接', max_length=100)
-    comment = models.CharField('评论内容', max_length=500)
+    comment = models.TextField('评论内容', max_length=500)
 
     class Meta:
         ordering = ['create_time']

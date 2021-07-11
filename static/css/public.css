@@ -1389,8 +1389,8 @@ header .mynav {
     border-radius: 0;
     -webkit-border-radius: 0;
     box-shadow: 3px 3px 5px #ccc;
-    text-shadow: 0 0px 3px #000;
-    color: #fff;
+/*     text-shadow: 0 0px 3px #fff; */
+    color: #3299bb;
 }
 
 .side-link h4 a {
