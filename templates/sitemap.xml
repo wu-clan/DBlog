@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+       http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+>
+
+<url>
+ <loc>https://www.xwboy.top/blog/message</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://www.xwboy.top/blog/tag/centos7</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://www.xwboy.top/blog/list</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://www.xwboy.top/blog/tag/selenium</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://www.xwboy.top/blog/category/python3</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://www.xwboy.top/</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://www.xwboy.top/blog/archive</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://www.xwboy.top/blog/tag/centos8</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://www.xwboy.top/blog/tag/%E7%88%AC%E8%99%AB</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://www.xwboy.top/blog/tag/springboot</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://www.xwboy.top/blog/tag/git</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://github.com/jhao104/django-blog</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://beian.miit.gov.cn</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>javascript:;</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://www.xwboy.top/blog/tag/ubuntu20.4</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=2186656812@qq.com</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://www.xwboy.top/blog/detail/</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://gitee.com/wu_cl</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://www.xwboy.top/blog</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://my.oschina.net/chulan</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://www.xwboy.top/blog/about</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+<url>
+ <loc>https://www.xwboy.top/blog/tag/python3</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-07-11</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+
+</urlset>
