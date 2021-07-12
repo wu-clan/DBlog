@@ -10,32 +10,21 @@
         <div class="swiper-container">
             <ul class="slides swiper-wrapper">
                 {#轮播图设置#}
-                <li class="swiper-slide">
-                    <a href="#" title="There is always one for you">
-                        <img src="/static/images/carousel/z.jpg"
-                             alt="There is always one for you"/>
-                    </a>
-                    <!-- Add Pagination -->
-                    <div class="swiper-pagination"></div>
-                    <span class="silde-title">总有一个适合你</span>
-                </li>
-
-                <li class="swiper-slide">
-                    <a href="#" title="Life is short, use python">
-                        <img src="/static/images/carousel/python.jpg"
-                             alt="Life is short, use python"/>
-                    </a>
-                    <!-- Add Pagination -->
-                    <div class="swiper-pagination"></div>
-                    <span class="silde-title">life is short, use python</span>
-                </li>
+                {% for carousels in carousel_list %}
+                    <li class="swiper-slide">
+                        <a href="#" title="{{ carousels.img_link_title }}">
+                            <img src="/static/media/{{ carousels.carousel }}"
+                                 alt="{{ carousels.img_alt }}"/>
+                        </a>
+                        <div class="swiper-pagination"></div>
+                        <span class="silde-title">{{ carousels.carousel_title }}</span>
+                    </li>
+                {% endfor %}
             </ul>
-
             <!-- Add Arrows -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
-
 
         <div class="arclist">
             <h4 class="index-title homeh4"><a href=""><i class="el el-idea"></i>最新文章

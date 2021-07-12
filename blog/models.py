@@ -34,6 +34,23 @@ from django.utils.html import format_html
 from mdeditor.fields import MDTextField
 
 
+class Carousel(models.Model):
+    """
+    首页轮播图配置
+    """
+    carousel = models.ImageField(verbose_name='轮播图')
+    carousel_title = models.TextField(max_length=100, verbose_name='轮播图左下标题')
+    img_link_title = models.TextField(max_length=100, verbose_name='图片标题')
+    img_alt = models.TextField(max_length=100, verbose_name='轮播图alt')
+
+    class Meta:
+        verbose_name = '首页轮播图配置'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.carousel_title
+
+
 class Conf(models.Model):
     """
     网站配置信息
@@ -51,7 +68,6 @@ class Conf(models.Model):
     website_number = models.CharField(max_length=100, verbose_name='备案号', default='豫ICP备 2021019092号-1')
     git = models.CharField(max_length=100, verbose_name='git链接', default='https://gitee.com/wu_cl')
     website_logo = models.ImageField(blank=True, null=True, verbose_name='网站logo', default='')
-    carousel = models.ImageField(blank=True, null=True, verbose_name='轮播图', default='')
 
     class Meta:
         verbose_name = '网站配置'

@@ -3,11 +3,27 @@ from django.contrib import admin
 # Register your models here.
 
 from import_export.admin import ImportExportModelAdmin
-from blog.models import Tag, Article, Category, Comment, Pay, Conf
+from blog.models import Carousel, Tag, Article, Category, Comment, Pay, Conf
+
+
+@admin.register(Carousel)
+class CarouselAdmin(admin.ModelAdmin):
+    """
+    首页轮播图配置
+    """
+    list_display = (
+        'carousel',
+        'carousel_title',
+        'img_link_title',
+        'img_alt'
+    )
 
 
 @admin.register(Conf)
 class ConfAdmin(ImportExportModelAdmin):
+    """
+    网站配置信息
+    """
     list_display = (
         'main_website',
         'website_number',
@@ -16,26 +32,21 @@ class ConfAdmin(ImportExportModelAdmin):
         'name',
         'chinese_description',
         'english_description',
-        'avatar_link',
-        'website_author',
-        'website_author_link',
         'email',
-        'website_logo',
-        'carousel',
+        'website_logo'
     )
     fieldsets = (
         ('网站配置信息', {
             'fields': (
                 'main_website',
                 'website_number',
-                'website_logo',
-                'carousel',
+                'website_logo'
             )
         }),
         ('公告', {
             'fields': (
                 'head_announcement',
-                'main_announcement',
+                'main_announcement'
             )
         }),
         ('作者信息', {
@@ -47,7 +58,7 @@ class ConfAdmin(ImportExportModelAdmin):
                 'website_author',
                 'website_author_link',
                 'email',
-                'git',
+                'git'
             )
         }),
     )
@@ -55,6 +66,9 @@ class ConfAdmin(ImportExportModelAdmin):
 
 @admin.register(Pay)
 class PayAdmin(admin.ModelAdmin):
+    """
+    收款图
+    """
     list_display = (
         'payvximg',
         'payaliimg'
@@ -63,6 +77,9 @@ class PayAdmin(admin.ModelAdmin):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
+    """
+    文章
+    """
     date_hierarchy = 'date_time'
     list_display = (
         'title',
@@ -81,6 +98,9 @@ class ArticleAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+    """
+    文章类型
+    """
     list_display = (
         'name',
         'created_time',
@@ -90,11 +110,17 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
+    """
+    标签
+    """
     pass
 
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
+    """
+    评论
+    """
     list_display = (
         'title',
         'source_id',

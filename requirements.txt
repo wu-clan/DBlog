@@ -1,7 +1,8 @@
 pymysql~=1.0.2
 Django==3.2.4
-django-simpleui
-Pillow
-django-import-export
-django-mdeditor
+django-simpleui==2021.6.2
+Pillow==8.2.0
+django-import-export==2.5.0
+django-mdeditor==0.1.18
 markdown~=3.3.4
+django-modeladmin-reorder==0.3.1

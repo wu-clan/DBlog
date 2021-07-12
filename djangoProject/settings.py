@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 	'simpleui',  # 第三方后台主题
 	'import_export',  # 后台导入导出模块
 	'mdeditor',  # 后台markdown编写文章模块
+	'admin_reorder',  # 应用程序和模型的自定义排序组件...(更多:https://github.com/mishbahr/django-modeladmin-reorder)
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -50,6 +51,8 @@ MIDDLEWARE = [
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	# 应用程序和模型的自定义排序组件...((更多:https://github.com/mishbahr/django-modeladmin-reorder))
+	'admin_reorder.middleware.ModelAdminReorder',
 ]
 
 ROOT_URLCONF = 'djangoProject.urls'
@@ -142,3 +145,16 @@ MEDIA_ROOT = BASE_DIR / 'static/media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# 排序后台指定app导航栏
+ADMIN_REORDER = (
+	# Reorder app models
+	{'app': 'blog', 'models': (
+		'blog.Carousel',
+		'blog.Article',
+		'blog.Category',
+		'blog.Tag',
+		'blog.Comment',
+		'blog.Conf',
+		'blog.Pay'
+	)},
+)

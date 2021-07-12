@@ -2,7 +2,7 @@
 
 import importlib
 from djangoProject import blogroll
-from blog.models import Category, Article, Conf, Pay, Tag, Comment
+from blog.models import Carousel, Category, Article, Conf, Pay, Tag, Comment
 
 
 def sidebar(request):
@@ -27,6 +27,9 @@ def sidebar(request):
     # 网站配置
     conf_list = Conf.objects.all()
 
+    # 轮播图
+    carousels = Carousel.objects.all()
+
     return {
         'category_list': category_list,
         'blog_top': blog_top,
@@ -35,6 +38,7 @@ def sidebar(request):
         'blogroll': blogroll.sites,
         'conf_list': conf_list,
         'payimg_list': payimg,
+        'carousel_list': carousels
     }
 
 
