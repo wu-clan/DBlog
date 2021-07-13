@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import os
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
@@ -30,15 +32,33 @@ from django.conf import settings
 #     class Meta:
 #         verbose_name = u'邮箱验证码'
 #         verbose_name_plural = verbose_name
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 from django.utils.html import format_html
 from mdeditor.fields import MDTextField
+
+
+class Friend(models.Model):
+    """
+    友链
+    """
+    url = models.CharField(max_length=200, verbose_name='友链链接', default='https://my.oschina.net/chulan')
+    title = models.CharField(max_length=100, verbose_name='超链接title', default='OSCHINA')
+    name = models.CharField(max_length=20, verbose_name='友链名称', default='chulan')
+
+    class Meta:
+        verbose_name = '友链'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.url
 
 
 class Carousel(models.Model):
     """
     首页轮播图配置
     """
-    carousel = models.ImageField(verbose_name='轮播图')
+    carousel = models.ImageField(upload_to='carousel', verbose_name='轮播图')
     carousel_title = models.TextField(max_length=100, verbose_name='轮播图左下标题')
     img_link_title = models.TextField(max_length=100, verbose_name='图片标题')
     img_alt = models.TextField(max_length=100, verbose_name='轮播图alt')
@@ -51,13 +71,26 @@ class Carousel(models.Model):
         return self.carousel_title
 
 
+class Announcement(models.Model):
+    """
+    公告
+    """
+    head_announcement = models.CharField(max_length=30, verbose_name='头部轮播公告', default='热烈欢迎浏览本站')
+    main_announcement = models.TextField(max_length=300, verbose_name='右侧公告', default='')
+
+    class Meta:
+        verbose_name = '公告'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.head_announcement
+
+
 class Conf(models.Model):
     """
     网站配置信息
     """
     main_website = models.CharField(max_length=64, verbose_name='主网站', default="xwboy.top")
-    head_announcement = models.CharField(max_length=30, verbose_name='头部轮播公告', default='热烈欢迎浏览本站')
-    main_announcement = models.TextField(max_length=300, verbose_name='右侧公告', default='')
     name = models.CharField(max_length=8, verbose_name='关注我_名称', default="CL' WU")
     chinese_description = models.CharField(max_length=30, verbose_name='关注我_中文描述', default='永不放弃坚持就是这么酷！要相信光')
     english_description = models.TextField(max_length=100, verbose_name='关注我_英文描述', default='Never give up persistence is so cool！Believe in the light！！！')
@@ -67,7 +100,7 @@ class Conf(models.Model):
     email = models.CharField(max_length=50, verbose_name='收件邮箱', default='2186656812@qq.com')
     website_number = models.CharField(max_length=100, verbose_name='备案号', default='豫ICP备 2021019092号-1')
     git = models.CharField(max_length=100, verbose_name='git链接', default='https://gitee.com/wu_cl')
-    website_logo = models.ImageField(blank=True, null=True, verbose_name='网站logo', default='')
+    website_logo = models.ImageField(upload_to='logo', blank=True, null=True, verbose_name='网站logo', default='')
 
     class Meta:
         verbose_name = '网站配置'
@@ -81,8 +114,7 @@ class Pay(models.Model):
     """
     收款图
     """
-    payvximg = models.ImageField(blank=True, null=True, verbose_name='微信捐助收款图')
-    payaliimg = models.ImageField(blank=True, null=True, verbose_name="支付宝捐助收款图")
+    payimg = models.ImageField(upload_to='pay', blank=True, null=True, verbose_name='捐助收款图')
 
     class Meta:
         verbose_name = '捐助收款图'
@@ -115,7 +147,7 @@ class Article(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='作者', on_delete=models.CASCADE)
     view = models.BigIntegerField(default=0, verbose_name='阅读数')
     comment = models.BigIntegerField(default=0, verbose_name='评论数')
-    picture = models.ImageField(blank=True, null=True, verbose_name='url(标题图)')  # 标题图片地址
+    picture = models.ImageField(upload_to='article_picture', blank=True, null=True, verbose_name='url(标题图)')  # 标题图片地址
     tag = models.ManyToManyField(Tag)  # 标签
 
     class Meta:
@@ -191,3 +223,14 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.title
+
+
+#  添加监听器,删除数据时同步删除上传的数据
+@receiver(post_delete, sender={Article, Carousel, Conf, Pay})
+def delete_upload_files(sender, instance, **kwargs):
+    files = getattr(instance, 'photo')
+    if not files:
+        return
+    fname = os.path.join(settings.MEDIA_ROOT, str(files))
+    if os.path.isfile(fname):
+        os.remove(fname)

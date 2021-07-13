@@ -5,6 +5,7 @@
             <small>Follow</small>
         </h4>
         <div class="xiangguan">
+            {#自我介绍#}
             <div class="for-me">
                 <div class="text">
                     {% for setting in conf_list %}
@@ -27,10 +28,14 @@
                         </script>
                     {% endfor %}
                 </div>
-                <a class="notransition" href="{% url "blog:about" %}" data-pjax-state="">
-                    <img class="headportrait" src="https://avatars.githubusercontent.com/u/52145145?v=4">
-                </a>
+                {% for conf in conf_list %}
+                    <a class="notransition" href="{% url "blog:about" %}" data-pjax-state="">
+                        <img class="headportrait" src="{{ conf.avatar_link }}">
+                    </a>
+                {% endfor %}
+
             </div>
+
             {% for mes in conf_list %}
                 <div>
                     <a href="{{ mes.git }}" target="_blank">
@@ -44,7 +49,7 @@
                     <span style="margin: -5%; margin-left: 1px">Gitee</span>
                 </div>
                 <div>
-                    <a class="benbo" href="{{ mes.git }}" target="_blank">
+                    <a class="benbo" href="{{ mes.git }}/DBlog" target="_blank">
                         <i class="el-download-alt"></i>
                     </a>
                     <span>博客源码</span>
@@ -103,8 +108,8 @@
         <h4 class="index-title"><i class="el el-bullhorn"></i>公告
             <small>Announcement</small>
         </h4>
-        {% if conf_list %}
-            {% for news in conf_list %}
+        {% if announcement_list %}
+            {% for news in announcement_list %}
                 <p style="text-indent:30px; text-align:justify; padding:0 46px 20px 46px; font-size: 14px;">
                     {{ news.main_announcement }}
                 </p>
@@ -151,11 +156,10 @@
                 <li>
                     <div class="sd-name">
                         <span><i class="el-book"></i>{{ comment.title }}</span>
-{#                        <a class="blue-text" href="{{ comment.url }}"#}
-{#                           title="{{ comment.comment }}">{{ comment.comment }}</a>#}
-                          <a class="blue-text" href="http://www.xwboy.top/blog/message"
-                             title="{{ comment.comment }}">{{ comment.comment }}</a>
-                        <span style="text-align: right; margin-left: 50px">— &nbsp;<i class="el-user"></i>{{ comment.user_name }}</span>
+                        <a class="blue-text" href="http://www.xwboy.top/blog/message"
+                           title="{{ comment.comment }}">{{ comment.comment }}</a>
+                        <span style="text-align: right; margin-left: 50px">— &nbsp;<i
+                                class="el-user"></i>{{ comment.user_name }}</span>
                     </div>
                 </li>
             {% endfor %}
@@ -196,42 +200,35 @@
             </a>
         </h4>
         <ul>
-            {% for blog in blogroll %}
-                <li><a href="{{ blog.url }}" target="_blank" title="{{ blog.desc }}">{{ blog.name }}</a></li>
+            {% for friend in friends %}
+                <li><a href="{{ friend.url }}" target="_blank" title="{{ friend.title }}">{{ friend.name }}</a></li>
             {% endfor %}
         </ul>
     </div>
 
     <!--支持server-->
-    {% for payimg in payimg_list %}
-        <div class="side-link animation-div">
-            <h4 class="index-title"><i class="el el-thumbs-up"></i>支持一下
-                <small>(WeChatPay / AliPay)
-                    <a href="/static/media/{{ payimg.payaliimg }}">
-                        <img src="/static/images/icon/zhifu.png"
-                             style="margin-top: -2.5px; display: block; transform: scale(0.55) translateX(-6px) translateY(-6px); margin-bottom: -10px;">
-                    </a>
-                </small>
-            </h4>
-            <table>
-                <tr>
+    <div class="side-link animation-div">
+        <h4 class="index-title"><i class="el el-thumbs-up"></i>支持一下
+            <small>(WeChatPay / AliPay)
+                <a href="#">
+                    <img src="/static/images/icon/zhifu.png"
+                         style="margin-top: -2.5px; display: block; transform: scale(0.55) translateX(-6px) translateY(-6px); margin-bottom: -10px;">
+                </a>
+            </small>
+        </h4>
+        <table>
+            <tr>
+                {% for payimg in payimg_list %}
                     <td>
-                        <a href="/static/media/{{ payimg.payvximg }}">
+                        <a href="/media/{{ payimg.payimg }}">
                             <img style="width: 135px; height: 150px; margin-top: 8px; margin-left: 30px"
-                                 src="/static/media/{{ payimg.payvximg }}">
+                                 src="/media/{{ payimg.payimg }}">
                         </a>
                     </td>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                    <td>
-                        <a href="/static/media/{{ payimg.payaliimg }}">
-                            <img style="width: 135px; height: 150px; margin-top: 8px"
-                                 src="/static/media/{{ payimg.payaliimg }}">
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    {% endfor %}
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
 </aside>
 
 <script>

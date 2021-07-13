@@ -2,14 +2,21 @@
     <div class="top">
         <!--头像左边部分-->
         <div class="top-left">
-            <div class="logo"><a href="{% url "blog:index" %}"><img src="/static/images/b.gif" alt=""/></a></div>
+            <div class="logo">
+                <a href="{% url "blog:index" %}">
+                    {% for conf in conf_list %}
+                        <img src="/media/{{ conf.website_logo }}" alt=""/>
+                    {% endfor %}
+                </a>
+            </div>
 
             <!--滚动消息-->
             <div class="web-xiaoxi">
                 <i class="el-speaker"></i>
                 <ul class="mulitline">
-                    <li>开放的二次开发ing</li>
-                    <li>follow me by gitee</li>
+                    {% for announcement in announcement_list %}
+                        <li>{{ announcement_list.head_announcement }}
+                    {% endfor %}
                 </ul>
             </div>
             <!--END 消息 -->

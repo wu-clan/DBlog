@@ -150,11 +150,12 @@ ADMIN_REORDER = (
 	# Reorder app models
 	{'app': 'blog', 'models': (
 		'blog.Carousel',
+		'blog.Conf',
 		'blog.Article',
 		'blog.Category',
 		'blog.Tag',
 		'blog.Comment',
-		'blog.Conf',
-		'blog.Pay'
+		'blog.Pay',
+		'blog.Friend',
 	)},
 )

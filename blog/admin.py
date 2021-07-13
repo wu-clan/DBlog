@@ -3,7 +3,19 @@ from django.contrib import admin
 # Register your models here.
 
 from import_export.admin import ImportExportModelAdmin
-from blog.models import Carousel, Tag, Article, Category, Comment, Pay, Conf
+from blog.models import Announcement, Carousel, Friend, Tag, Article, Category, Comment, Pay, Conf
+
+
+@admin.register(Friend)
+class FriendAdmin(admin.ModelAdmin):
+    """
+    友链
+    """
+    list_display = (
+        'url',
+        'title',
+        'name'
+    )
 
 
 @admin.register(Carousel)
@@ -16,6 +28,17 @@ class CarouselAdmin(admin.ModelAdmin):
         'carousel_title',
         'img_link_title',
         'img_alt'
+    )
+
+
+@admin.register(Announcement)
+class AnnouncementAdmin(admin.ModelAdmin):
+    """
+    公告
+    """
+    list_display = (
+        'head_announcement',
+        'main_announcement'
     )
 
 
@@ -43,12 +66,6 @@ class ConfAdmin(ImportExportModelAdmin):
                 'website_logo'
             )
         }),
-        ('公告', {
-            'fields': (
-                'head_announcement',
-                'main_announcement'
-            )
-        }),
         ('作者信息', {
             'fields': (
                 'name',
@@ -70,8 +87,7 @@ class PayAdmin(admin.ModelAdmin):
     收款图
     """
     list_display = (
-        'payvximg',
-        'payaliimg'
+        'payimg',
     )
 
 

@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import importlib
-from djangoProject import blogroll
-from blog.models import Carousel, Category, Article, Conf, Pay, Tag, Comment
+
+from blog.models import Announcement, Carousel, Category, Article, Conf, Friend, Pay, Tag, Comment
 
 
 def sidebar(request):
@@ -19,26 +18,30 @@ def sidebar(request):
     comment = Comment.objects.all().order_by('-create_time')[0:6]
 
     # 友链
-    importlib.reload(blogroll)
+    friends = Friend.objects.all()
 
     # 捐助首款图
-    payimg = Pay.objects.all()
+    payimg = Pay.objects.all().order_by('-payimg')[0:2]
 
     # 网站配置
-    conf_list = Conf.objects.all()
+    conf_list = Conf.objects.all()[0:1]
 
     # 轮播图
-    carousels = Carousel.objects.all()
+    carousel = Carousel.objects.all()
+
+    # 公告
+    announcement = Announcement.objects.all()
 
     return {
         'category_list': category_list,
         'blog_top': blog_top,
         'tag_list': tag_list,
         'comment_list': comment,
-        'blogroll': blogroll.sites,
+        'friends': friends,
         'conf_list': conf_list,
         'payimg_list': payimg,
-        'carousel_list': carousels
+        'carousel_list': carousel,
+        'announcement_list': announcement
     }
 
 
