@@ -1,8 +1,8 @@
 $(document).ready(function () {
     $("section").addClass("mysection")
+
     //动画加载
     $("body").show();
-
     $(".jiazai").remove();
     $(".top-left ,.homeh4,.mysection").css({"animation": "fuzuo 1s", "-webkit-animation": "fuzuo 1s"});
     $(".swiper-container,.myaside").css({"-webkit-animation": "suoxiao 0.8s", "animation": "suoxiao 0.8s"})
@@ -20,6 +20,7 @@ $(document).ready(function () {
             "animation-duration": s / 7 + 1 + "s"
         });
     }
+
     for (var a = 0; a <= arclen; a++) {
 
         $(".arclist ul>li").eq(a).css({
@@ -45,28 +46,22 @@ $(document).ready(function () {
     }
 
     //当前连接高亮
-
     $('nav li a').each(function () {
         if ($($(this))[0].href == String(window.location))
             $(this).parent("li").addClass('nav-active');
     });
 
     //菜单下拉
-
-
     $(".mob-drop").click(function () {
         $(".mob-dropmenu").slideToggle();
 
     });
 
     //手机菜单下拉
-
-
     var mb = $(".mobile-nav")
     var mli = $(".mob-ulnav>li")
     var mlen = mli.length;
     var mindex = mli.index();
-
 
     mb.find(".el-lines").click(function () {
         $(this).hide();
@@ -82,7 +77,6 @@ $(document).ready(function () {
         }
         $(".mob-menu").show().css({"-webkit-animation": "zuo 0.8s", "animation": "zuo 0.8s"})
     });
-
 
     mb.find(".el-remove").click(function () {
         $(this).hide();
@@ -105,14 +99,13 @@ $(document).ready(function () {
 
     //相册动画
 
+
     //滑动效果
     $(".drop").mouseenter(function () {
 
         $(".drop-nav").css({"-webkit-animation": "zuo1 0.8s", "animation": "zuo1 0.8s"}).show();
 
     });
-
-
     $(".drop").mouseleave(function () {
         $(".drop-nav").css({"-webkit-animation": "zuo2 0.8s", "animation": "zuo2 0.8s"});
         setTimeout(function () {
@@ -121,14 +114,14 @@ $(document).ready(function () {
 
     });
 
-//TAB切换
+    //TAB切换
     $(".mytab a").click(function () {
         var index = $(this).index();
         $(this).addClass("tab-active").siblings().removeClass("tab-active");
         $(this).parents(".mytab").find("ul").eq(index).show().siblings('ul').hide();
 
     });
-//滚动
+
     //文字滚动
     $(function () {
 
@@ -149,11 +142,8 @@ $(document).ready(function () {
         if ($(".mulitline li").length <= 1)//小于等于1条时，不滚动
         {
             clearInterval(_moving);
-
         }
-
     });
-
 
     //邮箱弹窗
     $(".mail-btn").click(function (e) {
@@ -168,6 +158,7 @@ $(document).ready(function () {
         });
         e.stopPropagation();
     });
+
     //返回顶部
     $(function () {
         $(window).scroll(function () {
@@ -182,7 +173,8 @@ $(document).ready(function () {
             $('body,html').animate({scrollTop: 0}, 800);
         });
     });
-//表单下拉
+
+    //表单下拉
     $(".form-btn a").click(function () {
         $(".form-zd").slideToggle();
     });
@@ -201,15 +193,12 @@ $(document).ready(function () {
         $(".arc-bdfx").hide();
         $(".mail-dy").hide();
         $(".side-bdfx").hide();
-
-
     });
 
     //图片查看器
     $(".mail-dy").click(function (e) {
         e.stopPropagation();
     });
-
 
 });//END Document ready
 

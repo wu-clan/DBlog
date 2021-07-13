@@ -145,11 +145,12 @@ MEDIA_ROOT = BASE_DIR / 'static/media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# 排序后台指定app导航栏
+# 排序后台app导航栏
 ADMIN_REORDER = (
 	# Reorder app models
 	{'app': 'blog', 'models': (
 		'blog.Carousel',
+		'blog.Announcement',
 		'blog.Conf',
 		'blog.Article',
 		'blog.Category',

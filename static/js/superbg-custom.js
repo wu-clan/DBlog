@@ -19,7 +19,7 @@ jQuery(function($){
 
         // Components
         slide_links        : 'blank',    // Individual links for each slide (Options: false, 'num', 'name', 'blank')
-        slides             : [    // Slideshow Images
+        slides             : [    // 背景幻灯片播放
 								 {image : '/static/images/backgroundimg/bg0.jpg'},
                                  {image : '/static/images/backgroundimg/bg1.jpg'},
                                  {image : '/static/images/backgroundimg/bg2.jpg'},

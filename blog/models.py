@@ -226,7 +226,7 @@ class Comment(models.Model):
 
 
 #  添加监听器,删除数据时同步删除上传的数据
-@receiver(post_delete, sender={Article, Carousel, Conf, Pay})
+@receiver(post_delete, sender=(Article, Carousel, Conf, Pay))
 def delete_upload_files(sender, instance, **kwargs):
     files = getattr(instance, 'photo')
     if not files:

@@ -15,7 +15,7 @@
                 <i class="el-speaker"></i>
                 <ul class="mulitline">
                     {% for announcement in announcement_list %}
-                        <li>{{ announcement_list.head_announcement }}
+                        <li>{{ announcement.head_announcement }}</li>
                     {% endfor %}
                 </ul>
             </div>
@@ -81,15 +81,20 @@
         <div class="skin-btn">
             <a href="javascript:void(0);" class="skin-btn-open">换<br>肤</a>
         </div>
-
         <div class="skin-content">
             <h1>选择风格<span class="skin-close">关闭</span></h1>
-            <div class="skin-content-list">
-                <div class="skin-list"><a href="#" onclick="setActiveStyleSheet('qingxin'); return false;" class="btn1">清新</a>
+            <aside class="skin-content-list">
+                <div class="skin-list">
+                    <a href="#" onclick="setActiveStyleSheet('qingxin'); return false;" class="btn1">清新</a>
                 </div>
-                <div class="skin-list"><a href="#" onclick="setActiveStyleSheet('jianyue'); return false;" class="btn2">简约</a>
+                <div class="skin-list">
+                    <a href="#" onclick="setActiveStyleSheet('jianyue'); return false;" class="btn2">简约</a>
                 </div>
-                <div class="skin-list"><a href="#" onclick="setActiveStyleSheet('qingshuang'); return false;" class="btn3">清爽</a>
+                <div class="skin-list">
+                    <a href="#" onclick="setActiveStyleSheet('qingshuang'); return false;" class="btn3">清爽</a>
+                </div>
+                <div class="skin-list">
+                    <a href="#" onclick="setActiveStyleSheet('anhei'); return false;" class="btn4">暗黑</a>
                 </div>
             </div>
         </div>

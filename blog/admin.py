@@ -50,8 +50,6 @@ class ConfAdmin(ImportExportModelAdmin):
     list_display = (
         'main_website',
         'website_number',
-        'head_announcement',
-        'main_announcement',
         'name',
         'chinese_description',
         'english_description',
