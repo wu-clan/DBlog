@@ -16,6 +16,8 @@
                 <ul class="mulitline">
                     {% for announcement in announcement_list %}
                         <li>{{ announcement.head_announcement }}</li>
+                    {% empty %}
+                        <li>热烈欢迎浏览本站</li>
                     {% endfor %}
                 </ul>
             </div>

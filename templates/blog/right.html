@@ -115,6 +115,10 @@
                     {{ news.main_announcement }}
                 </p>
             {% endfor %}
+        {% else %}
+            <p class="annou" style="color:rgb(188 188 188)">
+                暂无公告......
+            </p>
         {% endif %}
     </div>
 
@@ -208,9 +212,9 @@
 
     <!--支持server-->
     <div class="side-link animation-div">
-        <h4 class="index-title"><i class="el el-thumbs-up"></i>支持一下
+        <h4 class="index-title"><i class="el el-thumbs-up"></i>咖啡续命
             <small>(WeChatPay / AliPay)
-                <a href="#">
+                <a>
                     <img src="/static/images/icon/zhifu.png"
                          style="margin-top: -2.5px; display: block; transform: scale(0.55) translateX(-6px) translateY(-6px); margin-bottom: -10px;">
                 </a>
