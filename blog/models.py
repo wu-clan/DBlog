@@ -33,7 +33,7 @@ from django.conf import settings
 #         verbose_name = u'邮箱验证码'
 #         verbose_name_plural = verbose_name
 
-from django.db.models.signals import post_delete, pre_delete
+from django.db.models.signals import post_delete, post_init, post_save, pre_delete
 from django.dispatch import receiver
 from django.utils.html import format_html
 from mdeditor.fields import MDTextField
@@ -72,8 +72,18 @@ class Carousel(models.Model):
         return self.carousel_title
 
 @receiver(pre_delete, sender=Carousel)
-def delete(sender, instance, **kwargs):
+def delete_upload_files(sender, instance, **kwargs):
     instance.carousel.delete(False)
+
+
+@receiver(post_init, sender=Carousel)
+def file_path(sender, instance, **kwargs):
+    instance._current_file = instance.carousel
+@receiver(post_save, sender= Carousel)
+def delete_old_image(sender, instance, **kwargs):
+    if hasattr(instance, '_current_file'):
+        if instance._current_file != instance.carousel.path:
+            instance._current_file.delete(save=False)
 
 
 class Announcement(models.Model):
@@ -115,8 +125,17 @@ class Conf(models.Model):
         return self.main_website
 
 @receiver(pre_delete, sender=Conf)
-def delete(sender, instance, **kwargs):
+def delete_upload_files(sender, instance, **kwargs):
     instance.website_logo.delete(False)
+
+@receiver(post_init, sender=Conf)
+def file_path(sender, instance, **kwargs):
+    instance._current_file = instance.website_logo
+@receiver(post_save, sender= Conf)
+def delete_old_image(sender, instance, **kwargs):
+    if hasattr(instance, '_current_file'):
+        if instance._current_file != instance.website_logo.path:
+            instance._current_file.delete(save=False)
 
 
 class Pay(models.Model):
@@ -130,8 +149,17 @@ class Pay(models.Model):
         verbose_name_plural = verbose_name
 
 @receiver(pre_delete, sender=Pay)
-def delete(sender, instance, **kwargs):
+def delete_upload_files(sender, instance, **kwargs):
     instance.payimg.delete(False)
+
+@receiver(post_init, sender=Pay)
+def file_path(sender, instance, **kwargs):
+    instance._current_file = instance.payimg
+@receiver(post_save, sender= Pay)
+def delete_old_image(sender, instance, **kwargs):
+    if hasattr(instance, '_current_file'):
+        if instance._current_file != instance.payimg.path:
+            instance._current_file.delete(save=False)
 
 
 class Tag(models.Model):
@@ -200,14 +228,31 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
-# 同步删除文件需要放在最后
+# 需要放在最后
+# 同步删除上传文件
 @receiver(pre_delete, sender=Article)
-def delete(sender, instance, **kwargs):
+def delete_upload_files(sender, instance, **kwargs):
     """
     sender: 模型类名
-    instance.字段名.delete(False)
+    instance.字段名
     """
     instance.picture.delete(False)
+
+# 同步修改文件
+@receiver(post_init, sender=Article)
+def file_path(sender, instance, **kwargs):
+    """
+    instance.字段名
+    """
+    instance._current_file = instance.picture
+@receiver(post_save, sender= Article)
+def delete_old_image(sender, instance, **kwargs):
+    """
+    instance.字段名.path
+    """
+    if hasattr(instance, '_current_file'):
+        if instance._current_file != instance.picture.path:
+            instance._current_file.delete(save=False)
 
 
 class Category(models.Model):
