@@ -59,9 +59,9 @@ class Carousel(models.Model):
     首页轮播图配置
     """
     carousel = models.ImageField(upload_to='carousel', verbose_name='轮播图')
-    carousel_title = models.TextField(max_length=100, verbose_name='轮播图左下标题')
-    img_link_title = models.TextField(max_length=100, verbose_name='图片标题')
-    img_alt = models.TextField(max_length=100, verbose_name='轮播图alt')
+    carousel_title = models.TextField(blank=True, null=True, max_length=100, verbose_name='轮播图左下标题')
+    img_link_title = models.TextField(blank=True, null=True, max_length=100, verbose_name='图片标题')
+    img_alt = models.TextField(blank=True, null=True, max_length=100, verbose_name='轮播图alt')
 
     class Meta:
         verbose_name = '首页轮播图配置'
@@ -76,7 +76,7 @@ class Announcement(models.Model):
     公告
     """
     head_announcement = models.CharField(max_length=30, verbose_name='头部轮播公告', default='热烈欢迎浏览本站')
-    main_announcement = models.TextField(max_length=300, verbose_name='右侧公告', default='')
+    main_announcement = models.TextField(blank=True, null=True, max_length=300, verbose_name='右侧公告', default='暂无公告......')
 
     class Meta:
         verbose_name = '公告'

@@ -31,8 +31,8 @@ body:after {
     z-index: -1
 }
 
-i {
-    color: #555
+.web-xiaoxi i {
+    color: honeydew;
 }
 
 input, textarea {
@@ -54,9 +54,28 @@ input:focus, textarea:focus {
     color: #09b597
 }
 
+.BlogAnchor > p {
+    color: whitesmoke;
+}
+
+.paihang-ul li a {
+    color: #FFFFFF !important;
+}
+
+.layui-text h1, .layui-text h2, .layui-text h3 {
+    color: #FFFFFF;
+}
+
+.layui-card-header {
+    color: #FFFFFF;
+}
+
+.annou {
+    color: rgb(199 199 199) !important;
+}
+
 .bg-color {
-    background: rgba(255, 255, 255, .5)
-    /*background: rgba(255, 255, 255, 0)*/
+    background: rgba(255, 255, 255, 0)
 }
 
 .index-title {
@@ -70,13 +89,13 @@ input:focus, textarea:focus {
 }
 
 header {
-    background: rgba(255, 255, 255, .8) repeat-x;
+    background: rgb(0 0 0 / 86%) !important;
     box-shadow: 3px 3px 5px #ccc;
     background-size: 100% 100%
 }
 
 .top nav > ul > li > a {
-    color: #555
+    color: whitesmoke;
 }
 
 .mynav > ul > li > a:hover {
@@ -100,12 +119,13 @@ header {
     color: #555
 }
 
-.drop-nav li a {
-    color: #555 !important
+.arclist > ul > li, .comment-area > ul > li, .post-line, .shuos-area {
+    border-bottom: 1px solid #ddd;
+    background: rgba(255, 255, 255, 0) !important;
 }
 
-.arclist > ul > li, .comment-area > ul > li, .post-line, .shuos-area {
-    border-bottom: 1px solid #ddd
+.pagination ul > .active > a, .pagination ul > .active > span {
+    color: black;
 }
 
 #New {
@@ -113,11 +133,7 @@ header {
 }
 
 #Hot {
-     background: rgba(255, 255, 255, 0) url(../images/icon/new.gif) no-repeat 98% 8px !important;
-}
-
-header {
-    background: rgba(255, 255, 255, 0) !important;
+     background: rgba(255, 255, 255, 0) url(../images/icon/hot.gif) no-repeat 98% 8px !important;
 }
 
 .arc-title {
@@ -159,6 +175,10 @@ header {
     border: 1px solid #ccc
 }
 
+.pagination ul > li > a, .pagination ul > li > span {
+    background-color: rgb(255 255 255 / 90%);
+}
+
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
     display: block
 }
@@ -177,4 +197,79 @@ div#tooltip p {
 
 div#tooltip p:after {
     border-bottom: 8px solid rgba(0, 0, 0, .8)
+}
+
+span {
+    color: #FFF;
+}
+
+i {
+    color: #FFFFFF;
+}
+
+.side-bdfx i {
+    color: white !important;
+}
+
+li > a {
+    color: #FFFFFF;
+}
+
+ul > li {
+    color: #FFFFFF;
+}
+
+.side-link ul li a {
+    display: inline-block;
+    padding: 1px 10px;
+    margin: 0 5px 10px 5px;
+    color: #FFFFFF;
+    font-size: 12px;
+    background: none;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+
+.skin-close {
+    color: black !important;
+}
+
+.tab-btn a {
+    color: white;
+}
+
+.cn {
+    color: #FFFFFF;
+}
+
+.xiangguan div span {
+    color: rgb(188 188 188) !important;
+}
+
+.side-bdfx {
+    background: rgb(255 255 255 / 30%) !important;
+}
+
+.mail-dy {
+    background: rgb(255 255 255 / 30%) !important;
+}
+
+.weather {
+    color: #FFFFFF !important;
+}
+
+.drop-nav li:hover {
+    background: #09b597 !important;
+    font-size: 16px;
+}
+
+.drop-nav li a {
+    color: #000 !important;
+}
+
+.aboutme {
+    color: #fff;
 }

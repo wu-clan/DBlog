@@ -34,7 +34,9 @@
                     <div class="drop-nav orange-text">
                         <ul>
                             {% for category in category_list %}
-                                <li><a href="{% url "blog:category" name=category.name %}">{{ category.name }}</a></li>
+                                <li>
+                                    <a href="{% url "blog:category" name=category.name %}">{{ category.name }}</a>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>

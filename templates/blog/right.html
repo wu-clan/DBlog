@@ -9,9 +9,9 @@
             <div class="for-me">
                 <div class="text">
                     {% for setting in conf_list %}
-                        <h2 id="cn">{{ setting.name }}</h2>
+                        <h2 class="cn">{{ setting.name }}</h2>
                     {% empty %}
-                        <h2 id="cn">CL' WU</h2>
+                        <h2 class="cn">CL' WU</h2>
                     {% endfor %}
                     {% for desc in conf_list %}
                         <span id="typed"></span>
@@ -38,7 +38,7 @@
 
             {% for mes in conf_list %}
                 <div>
-                    <a href="{{ mes.git }}" target="_blank">
+                    <a class="git" href="{{ mes.git }}" target="_blank">
                         <svg t="1624505053877" class="icon" viewBox="0 0 1024 1024" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" p-id="3350" width="50" height="50.5"
                              style="transform: scale(1.14)">
@@ -111,14 +111,10 @@
         </h4>
         {% if announcement_list %}
             {% for news in announcement_list %}
-                <p style="text-indent:30px; text-align:justify; padding:0 46px 20px 46px; font-size: 14px;">
+                <p class="annou">
                     {{ news.main_announcement }}
                 </p>
             {% endfor %}
-        {% else %}
-            <p style="text-indent:30px; text-align:justify; padding:0 46px 20px 46px; font-size: 14px; color:#bcbcbc;">
-                暂无公告......
-            </p>
         {% endif %}
     </div>
 
@@ -157,10 +153,13 @@
                 <li>
                     <div class="sd-name">
                         <span><i class="el-book"></i>{{ comment.title }}</span>
-                        <a class="blue-text" href="http://www.xwboy.top/blog/message"
-                           title="{{ comment.comment }}">{{ comment.comment }}</a>
-                        <span style="text-align: right; margin-left: 50px">— &nbsp;<i
-                                class="el-user"></i>{{ comment.user_name }}</span>
+                        <a class="blue-text" href="http://www.xwboy.top/blog/message" title="{{ comment.comment }}">
+                            {{ comment.comment }}
+                        </a>
+                        <span style="text-align: right; margin-left: 50px">— &nbsp;
+                            <i class="el-user"></i>
+                            {{ comment.user_name }}
+                        </span>
                     </div>
                 </li>
             {% endfor %}

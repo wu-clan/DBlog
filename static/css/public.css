@@ -163,6 +163,13 @@ div#tooltip p:after {
     font-size: 12px;
 }
 
+.annou {
+    text-indent:30px;
+    text-align:justify;
+    padding:0 46px 20px 46px;
+    font-size: 14px;
+}
+
 .lable {
     display: inline-block;
     background: #ff4200;
@@ -732,8 +739,8 @@ header .mynav {
     padding: 0;
 }
 
-.xiangguan .githbu {
-    background: #5B5B5B;
+.xiangguan .git {
+    background: #fff;
 }
 
 .xiangguan .side-fx {
@@ -1390,7 +1397,7 @@ header .mynav {
     -webkit-border-radius: 0;
     box-shadow: 3px 3px 5px #ccc;
 /*     text-shadow: 0 0px 3px #fff; */
-    color: #3299bb;
+    color: #09b597;
 }
 
 .side-link h4 a {
