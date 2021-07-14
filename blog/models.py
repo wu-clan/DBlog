@@ -32,7 +32,8 @@ from django.conf import settings
 #     class Meta:
 #         verbose_name = u'邮箱验证码'
 #         verbose_name_plural = verbose_name
-from django.db.models.signals import post_delete
+
+from django.db.models.signals import post_delete, pre_delete
 from django.dispatch import receiver
 from django.utils.html import format_html
 from mdeditor.fields import MDTextField
@@ -69,6 +70,10 @@ class Carousel(models.Model):
 
     def __str__(self):
         return self.carousel_title
+
+@receiver(pre_delete, sender=Carousel)
+def delete(sender, instance, **kwargs):
+    instance.carousel.delete(False)
 
 
 class Announcement(models.Model):
@@ -109,6 +114,10 @@ class Conf(models.Model):
     def __str__(self):
         return self.main_website
 
+@receiver(pre_delete, sender=Conf)
+def delete(sender, instance, **kwargs):
+    instance.website_logo.delete(False)
+
 
 class Pay(models.Model):
     """
@@ -119,6 +128,10 @@ class Pay(models.Model):
     class Meta:
         verbose_name = '捐助收款图'
         verbose_name_plural = verbose_name
+
+@receiver(pre_delete, sender=Pay)
+def delete(sender, instance, **kwargs):
+    instance.payimg.delete(False)
 
 
 class Tag(models.Model):
@@ -187,6 +200,15 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
+# 同步删除文件需要放在最后
+@receiver(pre_delete, sender=Article)
+def delete(sender, instance, **kwargs):
+    """
+    sender: 模型类名
+    instance.字段名.delete(False)
+    """
+    instance.picture.delete(False)
+
 
 class Category(models.Model):
     """
@@ -223,14 +245,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.title
-
-
-#  添加监听器,删除数据时同步删除上传的数据
-@receiver(post_delete, sender=(Article, Carousel, Conf, Pay))
-def delete_upload_files(sender, instance, **kwargs):
-    files = getattr(instance, 'photo')
-    if not files:
-        return
-    fname = os.path.join(settings.MEDIA_ROOT, str(files))
-    if os.path.isfile(fname):
-        os.remove(fname)
