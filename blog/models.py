@@ -75,12 +75,18 @@ class Carousel(models.Model):
 def delete_upload_files(sender, instance, **kwargs):
     instance.carousel.delete(False)
 
-
+# 同步修改文件
 @receiver(post_init, sender=Carousel)
 def file_path(sender, instance, **kwargs):
+    """
+    instance.字段名
+    """
     instance._current_file = instance.carousel
 @receiver(post_save, sender= Carousel)
 def delete_old_image(sender, instance, **kwargs):
+    """
+    instance.字段名.path
+    """
     if hasattr(instance, '_current_file'):
         if instance._current_file != instance.carousel.path:
             instance._current_file.delete(save=False)
@@ -115,7 +121,7 @@ class Conf(models.Model):
     email = models.CharField(max_length=50, verbose_name='收件邮箱', default='2186656812@qq.com')
     website_number = models.CharField(max_length=100, verbose_name='备案号', default='豫ICP备 2021019092号-1')
     git = models.CharField(max_length=100, verbose_name='git链接', default='https://gitee.com/wu_cl')
-    website_logo = models.ImageField(upload_to='logo', blank=True, null=True, verbose_name='网站logo', default='')
+    website_logo = models.ImageField(upload_to='logo', verbose_name='网站logo', default='')
 
     class Meta:
         verbose_name = '网站配置'
@@ -127,15 +133,6 @@ class Conf(models.Model):
 @receiver(pre_delete, sender=Conf)
 def delete_upload_files(sender, instance, **kwargs):
     instance.website_logo.delete(False)
-
-@receiver(post_init, sender=Conf)
-def file_path(sender, instance, **kwargs):
-    instance._current_file = instance.website_logo
-@receiver(post_save, sender= Conf)
-def delete_old_image(sender, instance, **kwargs):
-    if hasattr(instance, '_current_file'):
-        if instance._current_file != instance.website_logo.path:
-            instance._current_file.delete(save=False)
 
 
 class Pay(models.Model):
@@ -151,15 +148,6 @@ class Pay(models.Model):
 @receiver(pre_delete, sender=Pay)
 def delete_upload_files(sender, instance, **kwargs):
     instance.payimg.delete(False)
-
-@receiver(post_init, sender=Pay)
-def file_path(sender, instance, **kwargs):
-    instance._current_file = instance.payimg
-@receiver(post_save, sender= Pay)
-def delete_old_image(sender, instance, **kwargs):
-    if hasattr(instance, '_current_file'):
-        if instance._current_file != instance.payimg.path:
-            instance._current_file.delete(save=False)
 
 
 class Tag(models.Model):
@@ -225,6 +213,11 @@ class Article(models.Model):
         self.comment += 1
         self.save(update_fields=['comment'])
 
+    @property
+    def image_url(self):
+        if self.picture and hasattr(self.picture, 'url'):
+            return self.picture.url
+
     def __str__(self):
         return self.title
 
@@ -237,22 +230,6 @@ def delete_upload_files(sender, instance, **kwargs):
     instance.字段名
     """
     instance.picture.delete(False)
-
-# 同步修改文件
-@receiver(post_init, sender=Article)
-def file_path(sender, instance, **kwargs):
-    """
-    instance.字段名
-    """
-    instance._current_file = instance.picture
-@receiver(post_save, sender= Article)
-def delete_old_image(sender, instance, **kwargs):
-    """
-    instance.字段名.path
-    """
-    if hasattr(instance, '_current_file'):
-        if instance._current_file != instance.picture.path:
-            instance._current_file.delete(save=False)
 
 
 class Category(models.Model):
