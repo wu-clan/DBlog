@@ -263,6 +263,15 @@ class Category(models.Model):
     created_time = models.DateTimeField('创建时间', auto_now_add=True)
     last_mod_time = models.DateTimeField('修改时间', auto_now=True)
 
+    @staticmethod
+    def fetch_all_category():
+        """
+        获取所有的分类
+        :return:
+        """
+        all_category = Category.objects.all()
+        return all_category
+
     class Meta:
         ordering = ['name']
         verbose_name = "文章类型"

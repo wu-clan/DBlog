@@ -73,8 +73,10 @@ TEMPLATES = [
 				'django.template.context_processors.request',
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
+				# 上下文处理器
 				'blog.context_processors.sidebar',
-				'django.template.context_processors.media',  # 用于templates中可直接引用
+				# 用于在templates中直接调用{{ MEDIA_URL/文件名 }}拼接文件地址
+				'django.template.context_processors.media',
 			],
 		},
 	},

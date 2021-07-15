@@ -1,0 +1,182 @@
+<style type="text/css">
+    #posts-chart,
+    #categories-chart,
+    #tags-chart {
+        width: 100%;
+        height: 300px;
+        margin: 0.5rem auto;
+        padding: 0.5rem;
+    }
+</style>
+
+<div class="row">
+    <div class="chart col s12 m6 l4 aos-init aos-animate" data-aos="zoom-in-up">
+        <div id="posts-chart" _echarts_instance_="ec_1583763816723"
+             style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;">
+            <div style="position: relative; overflow: hidden; width: 341px; height: 286px; padding: 0px; margin: 0px; border-width: 0px;">
+                <canvas data-zr-dom-id="zr_0" width="682" height="572"
+                        style="position: absolute; left: 0px; top: 0px; width: 341px; height: 286px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
+            </div>
+            <div></div>
+        </div>
+    </div>
+
+    <div class="chart col s12 m6 l4 aos-init aos-animate" data-aos="zoom-in-up">
+        <div id="categories-chart" _echarts_instance_="ec_1583763816724"
+             style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;">
+            <div style="position: relative; overflow: hidden; width: 341px; height: 286px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
+                <canvas data-zr-dom-id="zr_0" width="682" height="572"
+                        style="position: absolute; left: 0px; top: 0px; width: 341px; height: 286px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
+            </div>
+            <div></div>
+        </div>
+    </div>
+
+    <div class="chart col s12 m6 l4 aos-init aos-animate" data-aos="zoom-in-up">
+        <div id="tags-chart" _echarts_instance_="ec_1583763816725"
+             style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;">
+            <div style="position: relative; overflow: hidden; width: 341px; height: 286px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
+                <canvas data-zr-dom-id="zr_0" width="682" height="572"
+                        style="position: absolute; left: 0px; top: 0px; width: 341px; height: 286px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
+            </div>
+            <div style="position: absolute; display: none; border-style: solid; white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s, top 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s; background-color: rgba(50, 50, 50, 0.7); border-width: 0px; border-color: rgb(51, 51, 51); border-radius: 4px; color: rgb(255, 255, 255); font: 14px / 21px sans-serif; padding: 5px; left: 136px; top: 240px; pointer-events: none;">
+                <span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#82d3f4;"></span>Hackintosh:
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/static/js/echarts.min.js"></script>
+<script>
+    let postsChart = echarts.init(document.getElementById('posts-chart'));
+    let categoriesChart = echarts.init(document.getElementById('categories-chart'));
+    let tagsChart = echarts.init(document.getElementById('tags-chart'));
+
+
+    let postsOption = {
+        title: {
+            text: '文章发布统计图',
+            top: -5,
+            x: 'center'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        xAxis: {
+            type: 'category',
+            data: {{ date_list | safe }}
+        },
+        yAxis: {
+            type: 'value',
+        },
+        series: [
+            {
+                name: '文章篇数',
+                type: 'line',
+                color: ['#6772e5'],
+                data: {{ value_list |safe }},
+                markPoint: {
+                    symbolSize: 45,
+                    color: ['#fa755a', '#3ecf8e', '#82d3f4'],
+                    data: [{
+                        type: 'max',
+                        itemStyle: {color: ['#3ecf8e']},
+                        name: '最大值'
+                    }, {
+                        type: 'min',
+                        itemStyle: {color: ['#fa755a']},
+                        name: '最小值'
+                    }]
+                },
+                markLine: {
+                    itemStyle: {color: ['#ab47bc']},
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+
+
+    let categoriesOption = {
+        title: {
+            text: '文章分类统计图',
+            top: -4,
+            x: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        series: [
+            {
+                name: '分类',
+                type: 'pie',
+                radius: '50%',
+                color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
+                data: [{% for category in categories %}{"name": "{{ category.name }}","value":
+                        {{ category.article_set.all | length  }}},{% endfor %}],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+
+    let tagsOption = {
+        title: {
+            text: 'TOP10 标签统计图',
+            top: -5,
+            x: 'center'
+        },
+        tooltip: {},
+        xAxis: [
+            {
+                type: 'category',
+                data: {{ top10_tags | safe }}
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                type: 'bar',
+                color: ['#82d3f4'],
+                barWidth: 18,
+                data: {{ top10_tags_values | safe }},
+                markPoint: {
+                    symbolSize: 45,
+                    data: [{
+                        type: 'max',
+                        itemStyle: {color: ['#3ecf8e']},
+                        name: '最大值'
+                    }, {
+                        type: 'min',
+                        itemStyle: {color: ['#fa755a']},
+                        name: '最小值'
+                    }],
+                },
+                markLine: {
+                    itemStyle: {color: ['#ab47bc']},
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+
+    // render the charts
+    postsChart.setOption(postsOption);
+    categoriesChart.setOption(categoriesOption);
+    tagsChart.setOption(tagsOption);
+</script>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="">
+<html lang="zh-CN">
 <head>
 
     {% block title %}
@@ -9,12 +9,13 @@
 
     {% block meta %}
         <meta charset="UTF-8">
-        <meta name="keywords" content="django博客,python,django,xiaowu的博客"/>
+        <meta name="keywords" content="djangoblog,python,django,blog,个人博客,"/>
         <meta name="description" content="xiaowu的博客,个人二次开发网站，IT技术分享，记录IT生活，提供技术分享和作品分享的个人网站"/>
     {% endblock %}
 
     <meta name="author" content="xiaowu"/>
     <meta name="baidu-site-verification" content="2HhDg1sekr"/>
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="google-site-verification" content="gpXH5Aw-1dy2I5NHeRnNFS_P-PSA_d5TOJHn5bBPvSI"/>
 
     <!--CSS-->
@@ -43,6 +44,17 @@
     <!--[if lte IE 8]>
     <script>window.location.href = 'http://cdn.dmeng.net/upgrade-your-browser.html?referrer=' + location.href;</script>
     <![endif]-->
+
+    {# 百度统计 #}
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?42164aea15bef2b7bb53d4139820cac5";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 
 </head>
 

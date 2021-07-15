@@ -5,7 +5,7 @@ import json
 from django.http import JsonResponse
 
 from djangoProject.util import PageInfo
-from blog.models import Article, Comment, Conf, Pay
+from blog.models import Article, Category, Comment, Conf, Pay, Tag
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, get_object_or_404
 
@@ -95,7 +95,66 @@ def about(request):
     """
     关于
     """
-    return render(request, 'blog/about.html')
+    articles = Article.objects.filter(category=True).all().order_by('-date_time')
+    categories = Category.fetch_all_category()
+
+    if not articles or not categories:
+        # 没有文章或者分类的情况
+        return render(request, 'blog/about.html', {
+            'articles': None,
+            'categories': None,
+        })
+
+    all_date = articles.values('date_time')
+
+    # 计算最近一年的时间list作为坐标横轴 注意时间为 例如[2019-5] 里面不是2019-05
+    latest_date = all_date[0]['date_time']
+    end_year = latest_date.strftime("%Y")
+    end_month = latest_date.strftime("%m")
+    date_list = []
+    for i in range(int(end_month), 13):
+        date = str(int(end_year) - 1) + '-' + str(i)
+        date_list.append(date)
+
+    for j in range(1, int(end_month) + 1):
+        date = end_year + '-' + str(j)
+        date_list.append(date)
+
+    #
+    value_list = []
+    all_date_list = []
+    for i in all_date:
+        # 这里直接格式化 去掉月份前面的0 使用%#m
+        all_date_list.append(i['date_time'].strftime('%Y-%#m'))
+
+    for i in date_list:
+        value_list.append(all_date_list.count(i))
+    temp_list = []  # 临时集合
+    tags_list = []  # 存放每个标签对应的文章数
+    tags = Tag.objects.all()
+    for tag in tags:
+        temp_list.append(tag.tag_name)
+        temp_list.append(len(tag.article_set.all()))
+        tags_list.append(temp_list)
+        temp_list = []
+
+    tags_list.sort(key=lambda x: x[1], reverse=True)  # 根据文章数排序
+
+    top10_tags = []
+    top10_tags_values = []
+    for i in tags_list[:10]:
+        top10_tags.append(i[0])
+        top10_tags_values.append(i[1])
+
+    return render(request, 'blog/about.html', {
+        'articles': articles,
+        'categories': categories,
+        'tags': tags,
+        'date_list': date_list,
+        'value_list': value_list,
+        'top10_tags': top10_tags,
+        'top10_tags_values': top10_tags_values
+    })
 
 
 @csrf_exempt
