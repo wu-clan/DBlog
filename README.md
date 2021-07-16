@@ -10,10 +10,8 @@
 * Django: 3.2.4
 
 ### 示例博客：http://www.xwboy.top/ 
-ps:（暂未实时更新为最新状态......）
 
 ### 特点
-
 
 * markdown渲染，后台markdown编辑文章，代码高亮(update)
 * 第三方社会化评论系统支持(畅言)
