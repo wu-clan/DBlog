@@ -47,11 +47,11 @@ server {
             alias /home/DBlog/static/media;
     }
 
-    location /media {
+    location /robots.txt {
             alias /home/DBlog/static/robots.txt;
     }
 
-    location /media {
+    location /sitemap.xml {
             alias /home/DBlog/static/sitemap.xml;
     }
 }
