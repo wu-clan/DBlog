@@ -213,11 +213,6 @@ class Article(models.Model):
         self.comment += 1
         self.save(update_fields=['comment'])
 
-    @property
-    def image_url(self):
-        if self.picture and hasattr(self.picture, 'url'):
-            return self.picture.url
-
     def __str__(self):
         return self.title
 

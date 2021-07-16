@@ -41,7 +41,9 @@
                         </p>
                         <div class="AnchorContent" id="AnchorContent"></div>
                     </div>
-                    {{ blog.content|custom_markdown|safe }}
+                    <div class="text_dark">
+                        {{ blog.content|custom_markdown|safe }}
+                    </div>
                 </div>
             </div>
             <!--分享-->
