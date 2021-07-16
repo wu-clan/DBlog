@@ -18,6 +18,9 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="google-site-verification" content="gpXH5Aw-1dy2I5NHeRnNFS_P-PSA_d5TOJHn5bBPvSI"/>
 
+{#    自动将 http 请求升级为 https，如果你未使用 https，请注释掉#}
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
     <!--CSS-->
     {% block css %}{% endblock %}
     <link rel="stylesheet" href="/static/css/default.css"/>
