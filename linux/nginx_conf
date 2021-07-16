@@ -50,6 +50,10 @@ server {
     location /media {
             alias /home/DBlog/static/robots.txt;
     }
+
+    location /media {
+            alias /home/DBlog/static/sitemap.xml;
+    }
 }
 
 server {
