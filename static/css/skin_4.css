@@ -180,7 +180,7 @@ header {
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-    display: block
+    /*display: block*/
 }
 
 audio, canvas, video {
@@ -213,6 +213,14 @@ i {
 
 li > a {
     color: #FFFFFF;
+}
+
+.mob_header li a {
+    color: black !important;
+}
+
+.search-index i {
+    background: #ff6700;
 }
 
 ul > li {
