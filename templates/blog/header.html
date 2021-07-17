@@ -4,9 +4,7 @@
         <div class="top-left">
             <div class="logo">
                 <a href="{% url "blog:index" %}">
-                    {% for conf in conf_list %}
-                        <img src="/media/{{ conf.website_logo }}" alt=""/>
-                    {% endfor %}
+                    <img src="/media/{{ website_logo }}" alt=""/>
                 </a>
             </div>
 

@@ -6,3 +6,4 @@ django-import-export==2.5.0
 django-mdeditor==0.1.18
 markdown~=3.3.4
 django-modeladmin-reorder==0.3.1
+django-redis==5.0.0

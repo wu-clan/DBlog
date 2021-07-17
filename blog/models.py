@@ -4,6 +4,7 @@ import os
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
+from django.core.cache import cache  # 使用redis缓存
 
 # Create your models here.
 
@@ -33,9 +34,8 @@ from django.conf import settings
 #         verbose_name = u'邮箱验证码'
 #         verbose_name_plural = verbose_name
 
-from django.db.models.signals import post_delete, post_init, post_save, pre_delete
+from django.db.models.signals import post_init, post_save, pre_delete
 from django.dispatch import receiver
-from django.utils.html import format_html
 from mdeditor.fields import MDTextField
 
 
@@ -71,9 +71,11 @@ class Carousel(models.Model):
     def __str__(self):
         return self.carousel_title
 
+
 @receiver(pre_delete, sender=Carousel)
 def delete_upload_files(sender, instance, **kwargs):
     instance.carousel.delete(False)
+
 
 # 同步修改文件
 @receiver(post_init, sender=Carousel)
@@ -82,6 +84,8 @@ def file_path(sender, instance, **kwargs):
     instance.字段名
     """
     instance._current_file = instance.carousel
+
+
 @receiver(post_save, sender= Carousel)
 def delete_old_image(sender, instance, **kwargs):
     """
@@ -123,12 +127,26 @@ class Conf(models.Model):
     git = models.CharField(max_length=100, verbose_name='git链接', default='https://gitee.com/wu_cl')
     website_logo = models.ImageField(upload_to='logo', verbose_name='网站logo', default='')
 
+    @staticmethod
+    def fetch_all_site_info():
+        # 获取站点信息
+        site_info = cache.get(f"site_info")
+        if not site_info:
+            # 查询最后一条站点信息
+            site_info = Conf.objects.last()
+            # 保存站点信息存到缓存redis中 缓存60*2
+            if site_info:
+                # 如果查询到了站点信息就缓存
+                cache.set("site_info", site_info, 120)
+        return site_info
+
     class Meta:
         verbose_name = '网站配置'
         verbose_name_plural = verbose_name
 
     def __str__(self):
         return self.main_website
+
 
 @receiver(pre_delete, sender=Conf)
 def delete_upload_files(sender, instance, **kwargs):
@@ -144,6 +162,7 @@ class Pay(models.Model):
     class Meta:
         verbose_name = '捐助收款图'
         verbose_name_plural = verbose_name
+
 
 @receiver(pre_delete, sender=Pay)
 def delete_upload_files(sender, instance, **kwargs):
@@ -215,6 +234,7 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
 
 # 需要放在最后
 # 同步删除上传文件

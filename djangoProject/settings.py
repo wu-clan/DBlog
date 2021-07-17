@@ -26,6 +26,22 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# 排序后台app导航栏
+ADMIN_REORDER = (
+	# Reorder app models
+	{'app': 'blog', 'models': (
+		'blog.Carousel',
+		'blog.Announcement',
+		'blog.Conf',
+		'blog.Article',
+		'blog.Category',
+		'blog.Tag',
+		'blog.Comment',
+		'blog.Pay',
+		'blog.Friend',
+	)},
+)
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -75,6 +91,7 @@ TEMPLATES = [
 				'django.contrib.messages.context_processors.messages',
 				# 上下文处理器
 				'blog.context_processors.sidebar',
+				'blog.context_processors.website_conf',
 				# 用于在templates中直接调用{{ MEDIA_URL/文件名 }}拼接文件地址
 				'django.template.context_processors.media',
 			],
@@ -97,6 +114,20 @@ DATABASES = {
 		'PORT': '3306'
 	}
 }
+
+# redis配置
+CACHES = {
+	"default": {
+		"BACKEND": "django_redis.cache.RedisCache",
+		"LOCATION": "redis://""@127.0.0.1:6379/0",
+		"OPTIONS": {
+			"CLIENT_CLASS": "django_redis.client.DefaultClient",
+		}
+	}
+}
+REDIS_TIMEOUT = 7 * 24 * 60 * 60
+CUBES_REDIS_TIMEOUT = 60 * 60
+NEVER_REDIS_TIMEOUT = 365 * 24 * 60 * 60
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -147,18 +178,16 @@ MEDIA_ROOT = BASE_DIR / 'static/media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# 排序后台app导航栏
-ADMIN_REORDER = (
-	# Reorder app models
-	{'app': 'blog', 'models': (
-		'blog.Carousel',
-		'blog.Announcement',
-		'blog.Conf',
-		'blog.Article',
-		'blog.Category',
-		'blog.Tag',
-		'blog.Comment',
-		'blog.Pay',
-		'blog.Friend',
-	)},
-)
+# 网站默认配置
+# 配置优先级：数据库(两分钟缓存), 本地
+main_website = 'xwboy.top'
+name = "CL' WU"
+chinese_description = '永不放弃坚持就是这么酷！要相信光'
+english_description = 'Never give up persistence is so cool！Believe in the light'
+avatar_link = 'https://avatars.githubusercontent.com/u/52145145?v=4'
+website_author = 'xiaowu'
+website_author_link = 'http://www.xwboy.top'
+email = '2186656812@qq.com'
+website_number = '豫ICP备 2021019092号-1'
+git = 'https://gitee.com/wu_cl'
+website_logo = 'static/images/logo/DBlog.png'

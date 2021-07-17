@@ -24,16 +24,12 @@
             <br>
             <p> 此blog框架已经过原作者同意，二次开发及优化进行ing，源码已随进度逐步上传
                 <u>
-                    {% for conf in conf_list %}
-                        <a style="color: blue;" href="{{ conf.git }}">gitee</a>
-                    {% endfor %}
+                    <a style="color: blue;" href="{{ git }}">gitee</a>
                 </u>
                 ，欢迎大家关注， 一起优化，并和我一起在新知识的道路上继续前进......
             </p>
             <br>
-            {% for conf in conf_list %}
-                <p>联系方式（qq邮箱）：{{ conf.email }}</p>
-            {% endfor %}
+            <p>联系方式（qq邮箱）：{{ email }}</p>
         </div>
 
         {% include 'blog/component/statistical_chart.html' %}

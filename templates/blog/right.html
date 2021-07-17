@@ -8,65 +8,57 @@
             {#自我介绍#}
             <div class="for-me">
                 <div class="text">
-                    {% for setting in conf_list %}
-                        <h2 class="cn">{{ setting.name }}</h2>
-                    {% empty %}
-                        <h2 class="cn">CL' WU</h2>
-                    {% endfor %}
-                    {% for desc in conf_list %}
-                        <span id="typed"></span>
-                        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
-                        <script>
-                            var typed = new Typed("#typed", {
-                                strings: ['{{ desc.chinese_description }}', '{{ desc.english_description }}'],
-                                startDelay: 300,
-                                typeSpeed: 100,
-                                loop: true,
-                                backSpeed: 50,
-                                showCursor: true
-                            });
-                        </script>
-                    {% endfor %}
+                    <h2 class="cn">{{ name }}</h2>
+                    <span id="typed"></span>
+                    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
+                    <script>
+                        var typed = new Typed("#typed", {
+                            strings: ['{{ chinese_description }}', '{{ english_description }}'],
+                            startDelay: 300,
+                            typeSpeed: 100,
+                            loop: true,
+                            backSpeed: 50,
+                            showCursor: true
+                        });
+                    </script>
                 </div>
-                {% for conf in conf_list %}
-                    <a class="notransition" href="{% url "blog:about" %}" data-pjax-state="">
-                        <img class="headportrait" src="{{ conf.avatar_link }}">
-                    </a>
-                {% endfor %}
+
+                <a class="notransition" href="{% url "blog:about" %}" data-pjax-state="">
+                    <img class="headportrait" src="{{ avatar_link }}">
+                </a>
 
             </div>
 
-            {% for mes in conf_list %}
-                <div>
-                    <a class="git" href="{{ mes.git }}" target="_blank">
-                        <svg t="1624505053877" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                             xmlns="http://www.w3.org/2000/svg" p-id="3350" width="50" height="50.5"
-                             style="transform: scale(1.14)">
-                            <path d="M410.737778 75.093333C180.906667 136.533333 22.755556 370.915556 65.991111 587.093333 117.191111 838.542222 351.573333 1012.622222 583.68 969.386667c250.311111-46.648889 428.942222-285.582222 385.706667-515.413334-35.271111-193.422222-162.702222-331.093333-349.297778-380.017777-81.92-20.48-128.568889-20.48-209.351111 1.137777z m357.262222 237.795556v45.511111l-185.457778 5.688889c-230.968889 6.826667-220.728889-1.137778-216.177778 176.355555l3.413334 125.155556h134.257778c121.742222 0 136.533333-2.275556 151.324444-22.755556 9.102222-12.515556 14.791111-32.995556 13.653333-45.511111-3.413333-20.48-13.653333-23.893333-100.124444-28.444444l-96.711111-5.688889v-91.022222h295.822222l3.413333 91.022222c3.413333 106.951111-17.066667 157.013333-78.506666 190.008889-34.133333 18.204444-62.577778 20.48-232.106667 18.204444l-193.422222-3.413333-2.275556-187.733333c-3.413333-176.355556-2.275556-190.008889 22.755556-232.106667 44.373333-78.506667 76.231111-87.608889 292.408889-84.195556l187.733333 3.413334v45.511111z"
-                                  fill="#c71c22" p-id="3351"></path>
-                        </svg>
-                    </a>
-                    <span style="margin: -5%; margin-left: 1px">Gitee</span>
-                </div>
-                <div>
-                    <a class="benbo" href="{{ mes.git }}/DBlog" target="_blank">
-                        <i class="el-download-alt"></i>
-                    </a>
-                    <span>博客源码</span>
-                </div>
-                <div>
-                    <a class="side-fx">
-                        <i class="el-share-alt"></i>
-                    </a>
-                    <span>分享本博</span>
-                </div>
-                <div>
-                    <a class="mail-btn" href="javascript:;">
-                        <i class="el-envelope"></i>
-                    </a>
-                    <span>订阅我</span>
-                </div>
-            {% endfor %}
+
+            <div>
+                <a class="git" href="{{ git }}" target="_blank">
+                    <svg t="1624505053877" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                         xmlns="http://www.w3.org/2000/svg" p-id="3350" width="50" height="50.5"
+                         style="transform: scale(1.14)">
+                        <path d="M410.737778 75.093333C180.906667 136.533333 22.755556 370.915556 65.991111 587.093333 117.191111 838.542222 351.573333 1012.622222 583.68 969.386667c250.311111-46.648889 428.942222-285.582222 385.706667-515.413334-35.271111-193.422222-162.702222-331.093333-349.297778-380.017777-81.92-20.48-128.568889-20.48-209.351111 1.137777z m357.262222 237.795556v45.511111l-185.457778 5.688889c-230.968889 6.826667-220.728889-1.137778-216.177778 176.355555l3.413334 125.155556h134.257778c121.742222 0 136.533333-2.275556 151.324444-22.755556 9.102222-12.515556 14.791111-32.995556 13.653333-45.511111-3.413333-20.48-13.653333-23.893333-100.124444-28.444444l-96.711111-5.688889v-91.022222h295.822222l3.413333 91.022222c3.413333 106.951111-17.066667 157.013333-78.506666 190.008889-34.133333 18.204444-62.577778 20.48-232.106667 18.204444l-193.422222-3.413333-2.275556-187.733333c-3.413333-176.355556-2.275556-190.008889 22.755556-232.106667 44.373333-78.506667 76.231111-87.608889 292.408889-84.195556l187.733333 3.413334v45.511111z"
+                              fill="#c71c22" p-id="3351"></path>
+                    </svg>
+                </a>
+                <span style="margin: -5%; margin-left: 1px">Gitee</span>
+            </div>
+            <div>
+                <a class="benbo" href="{{ git }}/DBlog" target="_blank">
+                    <i class="el-download-alt"></i>
+                </a>
+                <span>博客源码</span>
+            </div>
+            <div>
+                <a class="side-fx">
+                    <i class="el-share-alt"></i>
+                </a>
+                <span>分享本博</span>
+            </div>
+            <div>
+                <a class="mail-btn" href="javascript:;">
+                    <i class="el-envelope"></i>
+                </a>
+                <span>订阅我</span>
+            </div>
         </div>
 
         <div class="mail-dy">
@@ -153,31 +145,31 @@
         <div class="tab-btn"><a class="hd-btn tab-active" href="javascript:;"><i class="el-comment-alt"></i>最新评论</a><a
                 class="ph-btn" href="javascript:;"><i class="el-signal"></i>文章排行</a></div>
         <ul class="hudong-ul">
-            {% for comment in comment_list %}
-                <li>
-                    <div class="sd-name">
-                        <span><i class="el-book"></i>{{ comment.title }}</span>
-                        <a class="blue-text" href="http://www.xwboy.top/blog/message" title="{{ comment.comment }}">
-                            {{ comment.comment }}
-                        </a>
-                        <span style="text-align: right; margin-left: 50px">— &nbsp;
-                            <i class="el-user"></i>
-                            {{ comment.user_name }}
-                        </span>
-                    </div>
-                </li>
-            {% endfor %}
+        {% for comment in comment_list %}
+            <li>
+                <div class="sd-name">
+                    <span><i class="el-book"></i>{{ comment.title }}</span>
+                    <a class="blue-text" href="http://www.xwboy.top/blog/message" title="{{ comment.comment }}">
+                        {{ comment.comment }}
+                    </a>
+                    <span style="text-align: right; margin-left: 50px">— &nbsp;
+                        <i class="el-user"></i>
+                        {{ comment.user_name }}
+                    </span>
+                </div>
+            </li>
+        {% endfor %}
         </ul>
         <!--文章排行模块-->
         <ul class="paihang-ul">
-            {% for blog in blog_top %}
-                <li>
-                    <span></span>
-                    <a href="{% url "blog:detail" blog.id %}" title="{{ blog.title }}">{{ blog.title }}
-                        <b><i class="el-eye-open"></i>({{ blog.view }})</b>
-                    </a>
-                </li>
-            {% endfor %}
+        {% for blog in blog_top %}
+            <li>
+                <span></span>
+                <a href="{% url "blog:detail" blog.id %}" title="{{ blog.title }}">{{ blog.title }}
+                    <b><i class="el-eye-open"></i>({{ blog.view }})</b>
+                </a>
+            </li>
+        {% endfor %}
         </ul>
     </div>
 
@@ -204,9 +196,9 @@
             </a>
         </h4>
         <ul>
-            {% for friend in friends %}
-                <li><a href="{{ friend.url }}" target="_blank" title="{{ friend.title }}">{{ friend.name }}</a></li>
-            {% endfor %}
+        {% for friend in friends %}
+            <li><a href="{{ friend.url }}" target="_blank" title="{{ friend.title }}">{{ friend.name }}</a></li>
+        {% endfor %}
         </ul>
     </div>
 
