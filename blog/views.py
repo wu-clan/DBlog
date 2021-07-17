@@ -106,12 +106,12 @@ def about(request):
     articles = Article.objects.filter(category=True).all().order_by('-date_time')
     categories = Category.fetch_all_category()
 
-    if not articles or not categories:
-        # 没有文章或者分类的情况
-        return render(request, 'blog/about.html', {
-            'articles': None,
-            'categories': None,
-        })
+    # if not articles or not categories:
+    #     # 没有文章或者分类的情况
+    #     return render(request, 'blog/about.html', {
+    #         'articles': None,
+    #         'categories': None,
+    #     })
 
     all_date = articles.values('date_time')
 
@@ -130,6 +130,7 @@ def about(request):
 
     value_list = []
     all_date_list = []
+
     for i in all_date:
         # 这里直接格式化 去掉月份前面的0 使用%#m
         all_date_list.append(i['date_time'].strftime('%Y-%#m'))
