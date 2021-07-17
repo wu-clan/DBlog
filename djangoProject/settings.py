@@ -67,6 +67,8 @@ MIDDLEWARE = [
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	# 开启gzip压缩
+	'django.middleware.gzip.GZipMiddleware',
 	# 应用程序和模型的自定义排序组件...((更多:https://github.com/mishbahr/django-modeladmin-reorder))
 	'admin_reorder.middleware.ModelAdminReorder',
 ]

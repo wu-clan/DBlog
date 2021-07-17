@@ -32,6 +32,11 @@ server {
 	# Add index.php to the list if you are using PHP
 	index index.html index.htm index.nginx-debian.html;
 
+	gzip on;
+	gzip_comp_level 2;
+	gzip_types text/plain text/css text/javascript application/javascript application/x-javascript application/xml application/x-httpd-php image/jpeg image/gif image/png;
+	gzip_vary on;
+
 	server_name 域名;
 
 	location / {
