@@ -2,10 +2,12 @@
 # Create your views here.
 
 import json
+
+from django.core.paginator import PageNotAnInteger, Paginator
 from django.http import JsonResponse
 
 from djangoProject.util import PageInfo
-from blog.models import Article, Category, Comment, Conf, Pay, Tag
+from blog.models import Article, Category, Comment, Tag
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, get_object_or_404
 
@@ -41,12 +43,18 @@ def category(request, name):
     :param name:
     :return:
     """
+    categories = Category.fetch_all_category()
+
     page_number = get_page(request)
     blog_count = Article.objects.filter(category__name=name).count()
     page_info = PageInfo(page_number, blog_count)
     _blog_list = Article.objects.filter(category__name=name)[page_info.index_start: page_info.index_end]
-    return render(request, 'blog/category.html', {"blog_list": _blog_list, "page_info": page_info,
-                                                  "category": name})
+    return render(request, 'blog/category.html', {
+        "blog_list": _blog_list,
+        "page_info": page_info,
+        "category": name,
+        'categories': categories
+      })
 
 
 def tag(request, name):
@@ -93,7 +101,7 @@ def message(request):
 
 def about(request):
     """
-    关于
+    关于（包含统计图）
     """
     articles = Article.objects.filter(category=True).all().order_by('-date_time')
     categories = Category.fetch_all_category()
@@ -120,7 +128,6 @@ def about(request):
         date = end_year + '-' + str(j)
         date_list.append(date)
 
-    #
     value_list = []
     all_date_list = []
     for i in all_date:

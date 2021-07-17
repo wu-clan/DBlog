@@ -2079,3 +2079,7 @@ footer {
         right: auto
     }
 }
+
+.category {
+    padding-top: 0 !important;
+}

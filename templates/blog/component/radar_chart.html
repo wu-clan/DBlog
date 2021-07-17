@@ -1,0 +1,53 @@
+<style type="text/css">
+    #category-radar {
+        width: 100%;
+    }
+</style>
+
+<div class="card">
+    <div class="category aos-init aos-animate" data-aos="fade-up">
+        <div id="category-radar" style="width: 871px; height: 286px">
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="{% static 'js/echarts.min.js' %}"></script>
+<script type="text/javascript">
+    let radarChart = echarts.init(document.getElementById('category-radar'));
+
+    let option = {
+        title: {
+            left: 'center',
+            text: '文章分类雷达图',
+            textStyle: {
+                fontWeight: 500,
+                fontSize: 22
+            }
+        },
+        tooltip: {},
+        radar: {
+            name: {
+                textStyle: {
+                    color: '#3C4858'
+                }
+            },
+            indicator: [{% for category in categories %}{"name": "{{ category.name }}","max": 25},{% endfor %}],
+            nameGap: 5,
+            center: ['50%', '55%'],
+            radius: '66%'
+        },
+        series: [{
+            type: 'radar',
+            color: ['#3ecf8e'],
+            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+            data: [
+                {
+                    value: [{% for category in categories %}{{ category.article_set.all | length }}, {% endfor %}],
+                    name: '文章分类数量'
+                }
+            ]
+        }]
+    };
+
+    radarChart.setOption(option);
+</script>
