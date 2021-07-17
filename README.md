@@ -67,7 +67,7 @@ http://ip:port/admin
 
 ## PS: 搭建Linux服务端
 ```python
-示例环境: Ubuntu-20.04, nginx-1.18.0, uwsgi, mysql-8, python-3.8;
+示例环境: Ubuntu-20.04, nginx-1.18.0, uwsgi, mysql-8, python-3.8, redis-server
 
 # 在linux文件夹中给出了相关文件的提供参考
 # nginx_conf： nginx 配置文件
@@ -76,11 +76,12 @@ http://ip:port/admin
 
 环境准备:
 1, 进入目录 /home , 执行上文中的下载命令将项目下载到本地
-2, apt-get 安装 uwsgi, nginx, mysql
-3, 将 nginx_conf 中的内容替换到 /etc/nginx/sites-enabled/default, 并根据自己的网站设置进行修改
-4, 将 uwsgi.sh 复制到 /etc/init.d/ 中, 执行 chmod 755 uwsgi.sh 赋予权限
+2, pip3 install uwsgi
+3, apt-get install mysql-server, redis-server (mysql,redis本地配置自行百度)
+4, 将 nginx_conf 中的内容替换到 /etc/nginx/sites-enabled/default, 并根据自己的网站设置进行修改
+5, 将 uwsgi.sh 复制到 /etc/init.d/ 中, 执行 chmod 755 uwsgi.sh 赋予权限
 
-# 如果更改配置文件的位置，需自行修改相应配置文件里的路径
+# 如果更改uwsgi配置文件的位置，记得修改配置文件里面的路径
 # 环境准备过程中遇到的问题请自行百度，并将它当作一个学习的过程
 ```
 
