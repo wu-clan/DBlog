@@ -26,22 +26,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-# 排序后台app导航栏
-ADMIN_REORDER = (
-	# Reorder app models
-	{'app': 'blog', 'models': (
-		'blog.Carousel',
-		'blog.Announcement',
-		'blog.Conf',
-		'blog.Article',
-		'blog.Category',
-		'blog.Tag',
-		'blog.Comment',
-		'blog.Pay',
-		'blog.Friend',
-	)},
-)
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -193,6 +177,37 @@ email = '2186656812@qq.com'
 website_number = '豫ICP备 2021019092号-1'
 git = 'https://gitee.com/wu_cl'
 website_logo = 'static/images/logo/DBlog.png'
+
+
+"""
+后台models自定义排序：(两种都有各自特点，详细请看各自官方文档)
+1，admin_reorder 第三方库
+2，simpleui 第三方库集成
+
+使用说明：
+如果您使用 admin_reorder 排序，仅需注释掉 SIMPLEUI_CONFIG 字段即可
+如果您使用 simpleui 排序，需要注释掉 [ADMIN_REORDER 字段 + admin_reorder app + ModelAdminReorder 中间件]
+"""
+# admin_reorder 排序后台app导航栏
+ADMIN_REORDER = (
+	# Reorder app models
+	{'app': 'blog', 'models': (
+		'blog.Carousel',
+		'blog.Announcement',
+		'blog.Conf',
+		'blog.Article',
+		'blog.Category',
+		'blog.Tag',
+		'blog.Comment',
+		'blog.Pay',
+		'blog.Friend',
+	)},
+)
+
+# simpleui 排序后台app导航栏
+# SIMPLEUI_CONFIG = {
+#
+# }
 
 # simpleui本地配置
 # SIMPLEUI_LOGO：对官方css进行了某些修改以适应后台尺寸，如果使用本源码，在 collectstatic 的时候请留意...
