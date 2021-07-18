@@ -60,8 +60,9 @@ body {
   min-width: 200px;
 }
 .logo-wrap img {
-  max-width: 30px;
-  margin-bottom: -10px;
+  max-width: 86px;
+  margin-bottom: -15px;
+  margin-left: 10px;
 }
 #home [class*=el-col-] {
   padding: 10px;

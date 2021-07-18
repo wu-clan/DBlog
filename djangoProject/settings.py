@@ -193,3 +193,6 @@ email = '2186656812@qq.com'
 website_number = '豫ICP备 2021019092号-1'
 git = 'https://gitee.com/wu_cl'
 website_logo = 'static/images/logo/DBlog.png'
+
+# simpleui配置
+SIMPLEUI_LOGO = 'http://www.xwboy.top/static/images/logo/DBlog.png' or 'http://www.xwboy.top/media/logo/DBlog.png'

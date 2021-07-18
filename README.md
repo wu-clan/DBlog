@@ -2,6 +2,7 @@
 ![](https://img.shields.io/badge/Python-3.8-red.svg) 
 ![](https://img.shields.io/badge/Django-3.2.4-green.svg)
 ![](https://img.shields.io/badge/Powered%20by-2186656812@qq.com-blue.svg)
+[![simpleui](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui)
 
 使用Django快速搭建博客
 
