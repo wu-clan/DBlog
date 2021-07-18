@@ -29,7 +29,7 @@ urlpatterns = [
     path('', views.index, name='index'),
 
     path('favicon.ico', RedirectView.as_view(url='static/images/favicon.ico')),  # 全局头图标
-    path(r'static/<path:path>', serve, {'document_root': settings.STATIC_ROOT},),  # 处理静态文件(用于上线环境)
+    path(r'static/<path:path>', serve, {'document_root': settings.STATIC_ROOT},),  # 处理静态文件
     path(r'media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT},),  # 处理图片文件
 ]
 
