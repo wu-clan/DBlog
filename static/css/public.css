@@ -1176,6 +1176,7 @@ header .mynav {
     display: inline-block;
     font-size: 13px;
     position: relative;
+    float: left;
 }
 
 .tab-btn .tab-active {
