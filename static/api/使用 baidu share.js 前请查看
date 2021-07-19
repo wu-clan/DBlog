@@ -1,0 +1,15 @@
+
+
+如果您的网站使用 http 进行访问，可将百度 share.js 的地址指向百度或本地
+
+百度源地址: http://bdimg.share.baidu.com
+
+
+如果您使用了 https 代理网站，那么会遇到很多问题
+1，百度 share.js 不支持 https
+2，配置为本地，只能在一个固定地址访问到，如果界面url发生改变，那么 share.js 的配置路径便需要根据url做出改变
+......
+以下暂时找到了一个支持 https 的百度share.js源
+但是同样的，如果他的网站挂壁了，那么你的https下的百度share.js同样会失效
+
+源地址：https://www.landiannews.com
