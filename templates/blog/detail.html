@@ -46,6 +46,7 @@
                     </div>
                 </div>
             </div>
+
             <!--分享-->
             <div class="article-fx"><a class="fx-btn img-circle" href="javascript:;">分享</a>
                 <div class="bd-fx arc-bdfx">
@@ -70,13 +71,13 @@
                     with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
                 </div>
             </div>
-            <!--END 分享-->
+
+            {# 畅言打赏组件 #}
             <div class="cyReward " style="text-align: center">
                 <div id="cyReward" role="cylabs" data-use="reward" sid="{{ blog.id }}"></div>
             </div>
 
             <hr>
-
 
             <!--标签-->
             <div class="article_tag">
@@ -91,6 +92,7 @@
                 </ul>
             </div>
 
+            {# <畅言表情包组件></畅言表情包组件> #}
             <div class="cyEmoji" style="text-align: center">
                 <div id="cyEmoji" role="cylabs" data-use="emoji" sid="{{ blog.id }}"></div>
             </div>
@@ -101,21 +103,14 @@
         {% include "blog/message.html"  with source_id=blog.id %}
 
     </div>
-
-
 {% endblock %}
 
 {% include 'blog/component/auto_push_baidu.html' %}
 
-
-
 {% block js %}
-
     <script src="/static/js/jquery.2.1.4.min.js"></script>
-
     <script src="/static/prism/clipboard.min.js"></script>
     <script src="/static/prism/prism.js" charset="utf-8"></script>
-
     <script type="text/javascript"
             src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">
@@ -123,11 +118,10 @@
             tex2jax: {inlineMath: [['$', '$']]},
             messageStyle: "none"
         });
-
-
     </script>
 
-    <script type="text/javascript" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cyt6A5N47"></script>
+    {# 畅言组件js调用 #}
+    <script type="text/javascript" charset="utf-8" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cyvvtVNGI"></script>
 
     <script>
         function GenerateContentList() {
@@ -153,8 +147,6 @@
                 $("#AnchorContent").toggle();
             });
         }
-
         GenerateContentList();
     </script>
-
 {% endblock %}
