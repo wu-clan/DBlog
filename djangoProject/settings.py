@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from django.contrib import admin
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -32,14 +34,14 @@ INSTALLED_APPS = [
 	'simpleui',  # 第三方后台主题
 	'import_export',  # 后台导入导出模块
 	'mdeditor',  # 后台markdown编写文章模块
-	'admin_reorder',  # 应用程序和模型的自定义排序组件...(更多:https://github.com/mishbahr/django-modeladmin-reorder)
+	# 'admin_reorder',  # 应用程序和模型的自定义排序组件...(更多:https://github.com/mishbahr/django-modeladmin-reorder)
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
-	# 注册模块
+	# 注册app
 	'blog.apps.BlogConfig'
 ]
 
@@ -54,7 +56,7 @@ MIDDLEWARE = [
 	# 开启gzip压缩
 	'django.middleware.gzip.GZipMiddleware',
 	# 应用程序和模型的自定义排序组件...((更多:https://github.com/mishbahr/django-modeladmin-reorder))
-	'admin_reorder.middleware.ModelAdminReorder',
+	# 'admin_reorder.middleware.ModelAdminReorder',
 ]
 
 ROOT_URLCONF = 'djangoProject.urls'
@@ -94,7 +96,7 @@ DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql',
 		'NAME': 'blog',
-		'USER': 'test',
+		'USER': 'root',
 		'PASSWORD': '123456',
 		'HOST': 'localhost',
 		'PORT': '3306'
@@ -178,15 +180,14 @@ website_number = '豫ICP备 2021019092号-1'
 git = 'https://gitee.com/wu_cl'
 website_logo = 'static/images/logo/DBlog.png'
 
-
 """
-后台models自定义排序：(两种都有各自特点，详细请看各自官方文档)
+后台models自定义排序：(两个库都还有其他用法，请自行查看官方文档)
 1，admin_reorder 第三方库
 2，simpleui 第三方库集成
 
 使用说明：
 如果您使用 admin_reorder 排序，仅需注释掉 SIMPLEUI_CONFIG 字段即可
-如果您使用 simpleui 排序，需要注释掉 [ADMIN_REORDER 字段 + admin_reorder app + ModelAdminReorder 中间件]
+如果您使用 simpleui 排序，需要注释掉 [admin_reorder app + ModelAdminReorder 中间件]
 """
 # admin_reorder 排序后台app导航栏
 ADMIN_REORDER = (
@@ -205,10 +206,73 @@ ADMIN_REORDER = (
 )
 
 # simpleui 排序后台app导航栏
-# SIMPLEUI_CONFIG = {
-#
-# }
+SIMPLEUI_CONFIG = {
+	'system_keep': True,
+	'menu_display': ['文章配置', '网站配置信息', '权限验证'],
+	'dynamic': True,
+	'menus': [{
+		'name': '文章配置',
+		'models': [{
+			'name': '文章',
+			'url': '/admin/blog/article'
+		}, {
+			'name': '文章类型',
+			'icon': 'fa fa-list',
+			'url': '/admin/blog/category'
+		}, {
+			'name': '标签',
+			'icon': 'fa fa-tags',
+			'url': '/admin/blog/tag'
+		}, {
+			'name': '评论',
+			'icon': 'fa fa-comments',
+			'url': '/admin/blog/comment'
+		}]
+	}, {
+		'name': '网站配置信息',
+		'models': [{
+			'name': '网站基本配置',
+			'url': '/admin/blog/conf'
+		}, {
+			'name': '首页轮播图配置',
+			'url': '/admin/blog/carousel/'
+		}, {
+			'name': '公告',
+			'icon': 'fas fa-bullhorn',
+			'url': '/admin/blog/announcement/'
+		}, {
+			'name': '友链',
+			'icon': 'fa fa-link',
+			'url': '/admin/blog/friend'
+		}, {
+			'name': '收款图',
+			'icon': 'fa fa-coffee',
+			'url': '/admin/blog/pay'
+		}]
+	}, {
+		'name': '权限验证',
+		'icon': 'fas fa-user-shield',
+		'models': [{
+			'name': '用户',
+			'icon': 'fa fa-user',
+			'url': 'auth/user/'
+		}, {
+			'name': '用户组',
+			'icon': 'fa fa-users',
+			'url': 'auth/group/'
+		}]
+	}]
+}
 
 # simpleui本地配置
 # SIMPLEUI_LOGO：对官方css进行了某些修改以适应后台尺寸，如果使用本源码，在 collectstatic 的时候请留意...
 SIMPLEUI_LOGO = 'http://www.xwboy.top/static/images/logo/DBlog.png' or 'http://www.xwboy.top/media/logo/DBlog.png'
+SIMPLEUI_HOME_TITLE = 'DBlog后台管理'
+SIMPLEUI_ANALYSIS = False
+SIMPLEUI_LOADING = False
+SIMPLEUI_DEFAULT_ICON = True
+SIMPLEUI_HOME_INFO = False
+
+# 后台header, title
+admin.AdminSite.site_header = SIMPLEUI_HOME_TITLE
+admin.AdminSite.site_title = SIMPLEUI_HOME_TITLE
