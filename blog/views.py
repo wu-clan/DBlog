@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 # Create your views here.
-
 import json
 
-from django.core.paginator import PageNotAnInteger, Paginator
+from datetime import datetime
 from django.http import JsonResponse
-
 from djangoProject.util import PageInfo
 from blog.models import Article, Category, Comment, Tag
 from django.views.decorators.csrf import csrf_exempt
@@ -131,9 +129,11 @@ def about(request):
     value_list = []
     all_date_list = []
 
-    for i in all_date:
-        # 这里直接格式化 去掉月份前面的0 使用%#m
-        all_date_list.append(i['date_time'].strftime('%Y-%#m'))
+    # for i in all_date:
+    #     # 这里直接格式化 去掉月份前面的0, !! window使用%#m, mac和linux使用%-m !!
+    #     all_date_list.append(i['date_time'].strftime('%Y-%?m'))
+    # 换个方法吧，调试出来的
+    all_date_list.append(date_list[-1])
 
     for i in date_list:
         value_list.append(all_date_list.count(i))
