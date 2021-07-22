@@ -99,7 +99,8 @@ DATABASES = {
 		'USER': 'root',
 		'PASSWORD': '123456',
 		'HOST': 'localhost',
-		'PORT': '3306'
+		'PORT': '3306',
+		'OPTIONS': {'charset': 'utf8mb4'}  # 字符集为utf8mb4
 	}
 }
 
