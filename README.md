@@ -42,7 +42,7 @@ git clone https://gitee.com/wu_cl/DBlog.git
 将templates/blog/component/changyan.html中js部分换成你在畅言中生成的js。
 畅言js位置: 畅言进入工作台-》安装畅言-》通用代码安装-》自适应安装代码
 
-3：python manage.py makemigrations blog
+3：python manage.py makemigrations blog (创建数据库时记得选择 utf8mb4 编码)
 4：python manage.py migrate
 5：python manage.py runserver
 ```
