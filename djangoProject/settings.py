@@ -56,7 +56,7 @@ MIDDLEWARE = [
 	# 开启gzip压缩
 	'django.middleware.gzip.GZipMiddleware',
 	# 应用程序和模型的自定义排序组件...((更多:https://github.com/mishbahr/django-modeladmin-reorder))
-	# 'admin_reorder.middleware.ModelAdminReorder',
+	'admin_reorder.middleware.ModelAdminReorder',
 ]
 
 ROOT_URLCONF = 'djangoProject.urls'
@@ -187,7 +187,7 @@ website_logo = 'static/images/logo/DBlog.png'
 
 使用说明：
 如果您使用 admin_reorder 排序，仅需注释掉 SIMPLEUI_CONFIG 字段即可
-如果您使用 simpleui 排序，需要注释掉 [admin_reorder app + ModelAdminReorder 中间件]
+如果您使用 simpleui 排序，需要注释掉 [admin_reorder app]
 """
 # admin_reorder 排序后台app导航栏
 ADMIN_REORDER = (
@@ -202,6 +202,7 @@ ADMIN_REORDER = (
 		'blog.Comment',
 		'blog.Pay',
 		'blog.Friend',
+		'blog.About'
 	)},
 )
 
@@ -235,11 +236,11 @@ SIMPLEUI_CONFIG = {
 			'url': '/admin/blog/conf'
 		}, {
 			'name': '首页轮播图配置',
-			'url': '/admin/blog/carousel/'
+			'url': '/admin/blog/carousel'
 		}, {
 			'name': '公告',
 			'icon': 'fas fa-bullhorn',
-			'url': '/admin/blog/announcement/'
+			'url': '/admin/blog/announcement'
 		}, {
 			'name': '友链',
 			'icon': 'fa fa-link',
@@ -248,6 +249,10 @@ SIMPLEUI_CONFIG = {
 			'name': '收款图',
 			'icon': 'fa fa-coffee',
 			'url': '/admin/blog/pay'
+		}, {
+			'name': "关于",
+			'icon': 'fa fa-id-card-o',
+			'url': '/admin/blog/about'
 		}]
 	}, {
 		'name': '权限验证',

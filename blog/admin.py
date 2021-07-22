@@ -3,8 +3,17 @@ from django.contrib import admin
 # Register your models here.
 
 from import_export.admin import ImportExportModelAdmin
-from blog.models import Announcement, Carousel, Friend, Tag, Article, Category, Comment, Pay, Conf
+from blog.models import About, Announcement, Carousel, Friend, Tag, Article, Category, Comment, Pay, Conf
 
+
+@admin.register(About)
+class About(admin.ModelAdmin):
+    """
+    关于
+    """
+    list_display = (
+        'contents',
+    )
 
 @admin.register(Friend)
 class FriendAdmin(admin.ModelAdmin):

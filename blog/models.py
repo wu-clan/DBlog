@@ -39,6 +39,20 @@ from django.dispatch import receiver
 from mdeditor.fields import MDTextField
 
 
+class About(models.Model):
+    """
+    关于
+    """
+    contents = MDTextField(verbose_name='内容')
+
+    class Meta:
+        verbose_name = '关于'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.contents
+
+
 class Friend(models.Model):
     """
     友链
@@ -122,7 +136,7 @@ class Conf(models.Model):
     avatar_link = models.CharField(max_length=150, verbose_name='关注我_头像超链接', default='https://avatars.githubusercontent.com/u/52145145?v=4')
     website_author = models.CharField(max_length=20, verbose_name='网站作者', default='xiaowu')
     website_author_link = models.CharField(max_length=200, verbose_name='网站作者链接', default='http://www.xwboy.top')
-    email = models.CharField(max_length=50, verbose_name='收件邮箱', default='2186656812@qq.com')
+    email = models.EmailField(max_length=50, verbose_name='收件邮箱', default='2186656812@qq.com')
     website_number = models.CharField(max_length=100, verbose_name='备案号', default='豫ICP备 2021019092号-1')
     git = models.CharField(max_length=100, verbose_name='git链接', default='https://gitee.com/wu_cl')
     website_logo = models.ImageField(upload_to='logo', verbose_name='网站logo', default='')

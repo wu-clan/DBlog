@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load custom_filter %}
 
 {% block title %}
     <title>AboutMe</title>
@@ -6,7 +7,7 @@
 
 {% block content %}
     <div class="mysection">
-        <h1 class="aboutme">FOR xiaowu:</h1>
+        <h1 class="aboutme">FOR {{ website_author }}:</h1>
         <div class="aboutme">
             <p>About The Author</p>
             <center>
@@ -16,20 +17,14 @@
                 </strong>
             </center>
             <br>
-            <p style="margin-left: 150px;"><img src="/static/images/about/about.jpg" alt="aboutme"/>
-                <br>
-                <br>
-            </p>
-            <p>p1软件测开程序员</p>
-            <br>
-            <p> 此blog框架已经过原作者同意，二次开发及优化进行ing，源码已随进度逐步上传
-                <u>
-                    <a style="color: blue;" href="{{ git }}">gitee</a>
-                </u>
-                ，欢迎大家关注， 一起优化，并和我一起在新知识的道路上继续前进......
-            </p>
+            {% for about in about %}
+                <p>{{ about.contents }}</p>
+            {% endfor %}
             <br>
             <p>联系方式（qq邮箱）：{{ email }}</p>
+        </div>
+        <div class="text_dark">
+            {{ about.contents | custom_markdown | safe }}
         </div>
 
         {% include 'blog/component/statistical_chart.html' %}
