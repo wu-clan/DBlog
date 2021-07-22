@@ -169,6 +169,8 @@ def about(request):
 def get_comment(request):
     """
     接收畅言的评论回推， post方式回推
+    记得去畅言配置回推地址 http://域名/blog/get_comment/
+    启用SSL的网站使用 https
     :param request:
     :return:
     """
