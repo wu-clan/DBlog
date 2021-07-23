@@ -15,14 +15,13 @@
                     <br>第一件事是别人要他给自己的代码写文档，
                     <br>第二件事是别人的程序没有留下文档。
                 </strong>
-                <br>
+                <br><br>
                 {% for about in about %}
                     <div class="text_dark">
                         {{ about.contents | custom_markdown | safe }}
                     </div>
                 {% endfor %}
             </center>
-            <br>
         </div>
 
         {% include 'blog/component/statistical_chart.html' %}
