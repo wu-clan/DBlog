@@ -22,7 +22,7 @@
                 <br>
                 <br>
                 {% for about in about %}
-                    <div class="about text_dark markdown-body">
+                    <div class="text_dark markdown-body">
                         {{ about.contents | custom_markdown | safe }}
                     </div>
                 {% endfor %}

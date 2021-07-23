@@ -12,6 +12,10 @@
     background: #f5f7f9;
 }
 
+.aboutme .markdown-body {
+    background: none !important;
+}
+
 .markdown-body .pl-c {
     color: #969896;
 }
