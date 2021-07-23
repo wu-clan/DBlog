@@ -2040,9 +2040,8 @@ footer {
         font-size: 12px;
     }
 
-    .aboutme p > img {
-        width: 150%;
-        margin-left: -125px;
+    .about {
+        background: none !important;
     }
 
     #category-radar {
