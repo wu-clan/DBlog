@@ -22,6 +22,7 @@ def custom_markdown(value):
                                               'markdown.extensions.extra',
                                               'markdown.extensions.fenced_code',
                                               'markdown.extensions.tables',
+                                              'markdown.extensions.toc',
                                           ],
                                           safe_mode=True,
                                           enable_attributes=False))
