@@ -252,7 +252,7 @@ SIMPLEUI_CONFIG = {
 			'url': '/admin/blog/pay'
 		}, {
 			'name': "关于",
-			'icon': 'fa fa-id-card-o',
+			'icon': 'fa fa-id-card',
 			'url': '/admin/blog/about'
 		}]
 	}, {

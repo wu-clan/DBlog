@@ -103,11 +103,11 @@ $(document).ready(function () {
     //滑动效果
     $(".drop").mouseenter(function () {
 
-        $(".drop-nav").css({"-webkit-animation": "zuo1 0.8s", "animation": "zuo1 0.8s"}).show();
+        $(".drop-nav").css({"-webkit-animation": "zuo1 0.5s", "animation": "zuo1 0.5s"}).show();
 
     });
     $(".drop").mouseleave(function () {
-        $(".drop-nav").css({"-webkit-animation": "zuo2 0.8s", "animation": "zuo2 0.8s"});
+        $(".drop-nav").css({"-webkit-animation": "zuo2 0.5s", "animation": "zuo2 0.5s"});
         setTimeout(function () {
             $(".drop-nav").hide();
         }, 500);
