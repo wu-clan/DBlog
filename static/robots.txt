@@ -1,4 +1,5 @@
 User-agent: *
+Allow: /blog
 Allow: /blog/list/
 Allow: /blog/tag/
 Allow: /blog/category/
