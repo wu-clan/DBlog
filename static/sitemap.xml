@@ -84,35 +84,7 @@
 </url>
 
 <url>
- <loc>https://github.com/jhao104/django-blog</loc>
- <priority>0.3</priority>
- <lastmod>2021-07-11</lastmod>
- <changefreq>daily</changefreq>
-</url>
-
-<url>
- <loc>https://beian.miit.gov.cn</loc>
- <priority>0.3</priority>
- <lastmod>2021-07-11</lastmod>
- <changefreq>daily</changefreq>
-</url>
-
-<url>
- <loc>javascript:;</loc>
- <priority>0.3</priority>
- <lastmod>2021-07-11</lastmod>
- <changefreq>daily</changefreq>
-</url>
-
-<url>
  <loc>https://www.xwboy.top/blog/tag/ubuntu20.4</loc>
- <priority>0.3</priority>
- <lastmod>2021-07-11</lastmod>
- <changefreq>daily</changefreq>
-</url>
-
-<url>
- <loc>https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=2186656812@qq.com</loc>
  <priority>0.3</priority>
  <lastmod>2021-07-11</lastmod>
  <changefreq>daily</changefreq>
