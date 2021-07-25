@@ -1,17 +1,17 @@
 <footer>
     <!--底部导航-->
     <div class="foot-nav">
-            <p class="copy-right">
+        <p class="copy-right">
             <span>CopyRight &#169; 2021-2022 Design by
                 <a href="{{ website_author_link }}"><strong>{{ main_website }}</strong></a>&nbsp;|&nbsp;Django&nbsp;|
             </span>Theme&nbsp;
-                <a href="https://github.com/jhao104/django-blog" target="_blank">
-                    <strong>jhao104</strong>
-                </a>&nbsp;|&nbsp;
-                <a href="https://beian.miit.gov.cn"><img src="//gw.alicdn.com/tfs/TB1jwakrbH1gK0jSZFwXXc7aXXa-20-20.png"
-                                                         style="vertical-align: -5px; margin-right: 5px">{{ website_number }}
-                </a>
-            </p>
+            <a href="https://github.com/jhao104/django-blog" target="_blank">
+                <strong>jhao104</strong>
+            </a>&nbsp;|&nbsp;
+            <a href="https://beian.miit.gov.cn"><img src="//gw.alicdn.com/tfs/TB1jwakrbH1gK0jSZFwXXc7aXXa-20-20.png"
+                                                     style="vertical-align: -5px; margin-right: 5px">{{ website_number }}
+            </a>
+        </p>
 
         <div id="toTop">Back to Top</div>
 
@@ -38,7 +38,7 @@
             showRuntime();
         </script>
 
-        <script async src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+        <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
         <script async type="text/javascript">
             var getOSAndBrowser = function () {
                 var os = navigator.platform;
@@ -117,9 +117,7 @@
                 }
                 return info
             };
-            document.write("欢迎来自 " + returnCitySN["cname"] + " 的朋友");
-            document.write(", 您的IP是: " + returnCitySN["cip"]);
-            document.write(", 您使用的是: " + getOSAndBrowser());
+            document.write("欢迎来自 " + returnCitySN["cname"] + " 的朋友" + ", 您的IP是: " + returnCitySN["cip"] + ", 您使用的是: " + getOSAndBrowser());
         </script>
     </div>
 
