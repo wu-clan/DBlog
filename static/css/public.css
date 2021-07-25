@@ -7,7 +7,7 @@ body {
     padding: 0;
     min-width: 320px;
     display: none;
-
+    font-display: swap;
 }
 
 a {

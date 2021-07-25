@@ -17,7 +17,7 @@
 
 
         <p id="runtimeSpan"></p>
-        <script type="text/javascript">
+        <script async type="text/javascript">
             function showRuntime() {
                 window.setTimeout("showRuntime()", 1000);
                 var rantime = '2021/6/26 00:00:00:000'
@@ -38,8 +38,8 @@
             showRuntime();
         </script>
 
-        <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
-        <script>
+        <script async src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+        <script async type="text/javascript">
             var getOSAndBrowser = function () {
                 var os = navigator.platform;
                 var userAgent = navigator.userAgent;

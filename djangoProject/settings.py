@@ -98,7 +98,7 @@ DATABASES = {
 		'NAME': 'blog',
 		'USER': 'root',
 		'PASSWORD': '123456',
-		'HOST': 'localhost',
+		'HOST': '127.0.0.1',
 		'PORT': '3306',
 		'OPTIONS': {'charset': 'utf8mb4'}  # 字符集为utf8mb4
 	}

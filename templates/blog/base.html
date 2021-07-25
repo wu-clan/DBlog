@@ -24,10 +24,10 @@
     <!--CSS-->
     {% block css %}{% endblock %}
     <link rel="stylesheet" type="text/css" href="/static/css/default.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/css/public.css"/>
+    <link rel="preload stylesheet" as="style" type="text/css" href="/static/css/public.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/animation.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/font-icon.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/css/skin_1.css" title="qingxin"/>
+    <link rel="preload stylesheet" as="style" type="text/css" href="/static/css/skin_1.css" title="qingxin"/>
     <link rel="stylesheet" type="text/css" href="/static/css/skin_2.css" title="jianyue"/>
     <link rel="stylesheet" type="text/css" href="/static/css/skin_3.css" title="qingshuang"/>
     <link rel="stylesheet" type="text/css" href="/static/css/skin_4.css" title="anhei"/>
@@ -40,7 +40,7 @@
     <script type="text/javascript" src="/static/js/tooltip.js"></script>
     <script type="text/javascript" src="/static/js/layer/layer.js"></script>
     <script>
-        $("html").append("<div class='jiazai'><img src='/static/images/icon/loading.gif'/><span>Loading,please wait...</span></div>")
+        $("html").append("<div class='jiazai'><img src='/static/images/icon/loading.gif' alt=''/><span>Loading,please wait...</span></div>")
     </script>
 
     <!--[if lte IE 8]>
