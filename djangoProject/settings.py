@@ -53,7 +53,7 @@ MIDDLEWARE = [
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
-	# 开启gzip压缩
+	# 网站gzip压缩中间件
 	'django.middleware.gzip.GZipMiddleware',
 	# 应用程序和模型的自定义排序组件...((更多:https://github.com/mishbahr/django-modeladmin-reorder))
 	'admin_reorder.middleware.ModelAdminReorder',
@@ -68,10 +68,6 @@ TEMPLATES = [
 		,
 		'APP_DIRS': True,
 		'OPTIONS': {
-			# 用于模板自动调用到静态文件，而不需要再load
-			'builtins': [
-				'django.templatetags.static',
-			],
 			'context_processors': [
 				'django.template.context_processors.debug',
 				'django.template.context_processors.request',
@@ -80,8 +76,12 @@ TEMPLATES = [
 				# 上下文处理器
 				'blog.context_processors.sidebar',
 				'blog.context_processors.website_conf',
-				# 用于在templates中直接调用{{ MEDIA_URL/文件名 }}拼接文件地址
+				# templates中使用 {{ MEDIA_URL }}{{ 文件名 }} 拼接文件地址
 				'django.template.context_processors.media',
+			],
+			# 用于在模板中自动调用静态文件，不需要每个页面使用 {% load static %} 加载静态文件
+			'builtins': [
+				'django.templatetags.static',
 			],
 		},
 	},
@@ -100,7 +100,7 @@ DATABASES = {
 		'PASSWORD': '123456',
 		'HOST': '127.0.0.1',
 		'PORT': '3306',
-		'OPTIONS': {'charset': 'utf8mb4'}  # 字符集为utf8mb4
+		'OPTIONS': {'charset': 'utf8mb4'}  # 字符集设置utf8mb4
 	}
 }
 
@@ -152,7 +152,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-# 收集所有静态文件：python manage.py collectstatic
+# 收集静态文件命令：python manage.py collectstatic
 STATIC_URL = '/static/'
 # STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = (
@@ -168,7 +168,7 @@ MEDIA_ROOT = BASE_DIR / 'static/media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 网站默认配置
-# 配置优先级：数据库(两分钟缓存), 本地
+# 配置使用优先级：1.数据库(两分钟redis缓存), 2.本地
 main_website = 'xwboy.top'
 name = "CL' WU"
 chinese_description = '永不放弃坚持就是这么酷！要相信光'
@@ -188,7 +188,8 @@ website_logo = 'static/images/logo/DBlog.png'
 
 使用说明：
 如果您使用 admin_reorder 排序，仅需注释掉 SIMPLEUI_CONFIG 字段即可
-如果您使用 simpleui 排序，需要注释掉 [admin_reorder app]
+如果您使用 simpleui 排序，需要注释掉app: admin_reorder
+两者只能使用其一，使用哪一个就注释掉另一个
 """
 # admin_reorder 排序后台app导航栏
 ADMIN_REORDER = (
