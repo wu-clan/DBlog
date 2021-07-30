@@ -2,7 +2,7 @@
 
 __author__ = 'xiaowu'
 
-from blog import views
+from blog import rss, views
 from django.urls import path
 
 urlpatterns = [
@@ -25,6 +25,10 @@ urlpatterns = [
     path('get_comment/', views.get_comment, name='get_comment'),
     # 关于
     path('about/', views.about, name='about'),
+    # Rss
+    path('rss/', rss.DBlogRssFeed(), name='rss'),
+    # Atom
+    path('atom/', rss.DBlogAtomFeed(), name='atom'),
     # path('login/', views.login, name='login'),
     # path('logout/', views.logout, name='logout'),
     # path('register/', views.register, name='register'),
