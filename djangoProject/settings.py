@@ -272,7 +272,7 @@ SIMPLEUI_CONFIG = {
 }
 
 # simpleui本地配置
-# SIMPLEUI_LOGO：对官方css进行了某些修改以适应后台尺寸，如果使用本源码，在 collectstatic 的时候请留意...
+# SIMPLEUI_LOGO：对官方css进行了某些修改以适应后台尺寸，使用个人logo时根据显示情况自行修改即可...
 SIMPLEUI_LOGO = 'http://www.xwboy.top/static/images/logo/DBlog.png' or 'http://www.xwboy.top/media/logo/DBlog.png'
 SIMPLEUI_HOME_TITLE = 'DBlog后台管理'
 SIMPLEUI_ANALYSIS = False
