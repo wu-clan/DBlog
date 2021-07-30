@@ -1,31 +1,34 @@
 ## Django博客系统
-![](https://img.shields.io/badge/Python-3.8-red.svg) 
-![](https://img.shields.io/badge/Django-3.2.4-green.svg)
-![](https://img.shields.io/badge/Powered%20by-2186656812@qq.com-blue.svg)
+[![python3](https://img.shields.io/badge/Python-3.8-red.svg)](https://www.python.org/downloads)
+[![Django3.2](https://img.shields.io/badge/Django-3.2.4-green.svg)](https://docs.djangoproject.com/zh-hans/3.2)
 [![simpleui](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui)
 
 使用Django快速搭建博客
 
-### 要求
+### 基本要求
 * Python: 3.8
 * Django: 3.2.4
 
 ### 示例博客：http://www.xwboy.top/ 
 
-### 特点
+### 功能点
 
-* markdown渲染，后台markdown编辑文章，代码高亮(update)
-* 第三方社会化评论系统支持(畅言)
-* 4 种皮肤自由切换
-* 阅读排行榜/最新评论
-* 多目标源博文分享
-* 博文统计图
+* markdown文章渲染，代码高亮，markdown编辑后台文章，个人信息等
+* 文章分类，归档，快捷搜索，标签集
+* 4 种皮肤（清新，清爽，简约，暗黑）自由切换
+* 最新评论 / 阅读排行榜
+* 多目标源博文分享（支持https）
+* echarts 博文统计图（发布，分类，标签）
+* 第三方社会化评论系统(畅言)
+* 支持 redis 缓存
+* 使用 gzip 压缩
+* 全站配置信息后台管理
 
-（持续更新ing......）
+（持续更新ing......rss,oauth登录,邮箱订阅）
 
-ps: 如果访问网站期间，你使用了某些墙代理网络，会失去一些网页功能 ！！！
+###### ps: 如果访问网站期间，你使用了某些墙代理网络，会失去一些网页功能 ！！！
 
-### 下载
+### 源码下载
 ```
 wget https://gitee.com/wu_cl/DBlog.git/master.zip
 or
