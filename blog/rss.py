@@ -22,11 +22,11 @@ class DBlogRssFeed(Feed):
 	def item_title(self, item):
 		return item.title
 
-	# 订阅说明
+	# 订阅摘要
 	def item_description(self, item):
-		return item.digest[:30]
+		return item.digest
 
-	# 文章订阅链接
+	# 订阅链接
 	def item_link(self, item):
 		return reverse('blog:detail', args=(item.pk,))
 
