@@ -28,6 +28,7 @@ urlpatterns = [
     path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
     path('', views.index, name='index'),
 
+    path(r'mdeditor/', include('mdeditor.urls')),  # 处理后台markdown插件图片上传
     path('favicon.ico', RedirectView.as_view(url='static/images/favicon.ico')),  # 全局头图标
     path(r'static/<path:path>', serve, {'document_root': settings.STATIC_ROOT},),  # 处理静态文件
     path(r'media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT},),  # 处理图片文件
