@@ -6,3 +6,5 @@ django-mdeditor==0.1.18
 markdown~=3.3.4
 django-modeladmin-reorder==0.3.1
 django-redis==5.0.0
+django-simple-captcha==0.5.14
+django-password-reset==2.0
