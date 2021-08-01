@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    <title>登录</title>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="max-width: 50%; margin: auto">
+        <div class="col-md-4">用户名: {{ userinfo.username }}</div>
+        <form method="post" action=".">
+            {% csrf_token %}
+            <!-- phone -->
+            <div class="form-group col-md-4">
+                <label for="avatar">用户头像</label><br>
+                <img type="text" class="form-control" id="avatar" alt="" src="{{ userinfo.avatar }}">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="mobile">手机号</label><br>
+                <input type="text" class="form-control" id="mobile" name="mobile" value="{{ userinfo.mobile }}">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="sex">性别</label><br>
+                <p type="text" class="form-control" id="sex" href="{{ userinfo.sex }}">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="wechart">微信</label><br>
+                <input type="text" class="form-control" id="wechart" name="wechart" value="{{ userinfo.wechart }}">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="qq">QQ</label><br>
+                <input type="text" class="form-control" id="qq" name="qq" value="{{ userinfo.qq }}">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="blog_address">博客地址</label><br>
+                <input type="text" class="form-control" id="blog_address" name="blog_address"
+                       value="{{ userinfo.blog_address }}">
+            </div>
+            <!-- bio -->
+            <div class="form-group col-md-4">
+                <label for="introduction">自我介绍</label><br>
+                <textarea type="text" class="form-control" id="introduction" name="introduction" rows="12"
+                          style="width: 100%">{{ userinfo.introduction }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">提交</button>
+        </form>
+    </div>
+
+    <style>
+        .errorlist {
+            color: red;
+        }
+    </style>
+
+{% endblock content %}
