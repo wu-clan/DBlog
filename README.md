@@ -21,10 +21,10 @@
 * echarts 博文统计图（发布，分类，标签）
 * 第三方社会化评论系统(畅言)
 * 冷数据使用 redis 缓存
-* windows gzip 压缩主站，linux nginx压缩全站
+* windows:django-gzip压缩主站，linux:nginx-gzip压缩全站
 * Rss / Atom 订阅
-* 支持图床功能，后台上传图片可直链访问和调用  
-* 全站配置信息后台管理
+* 支持图床，后台上传图片可直链访问及调用  
+* 自定义配置及simpleui后台管理
 
 （持续更新ing......oauth登录,邮箱订阅）
 
