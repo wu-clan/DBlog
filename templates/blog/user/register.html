@@ -15,8 +15,15 @@
                 <div class="unit-1-2 unit-1-on-mobile">
                     <h3 style="text-align: center">注册</h3>
                     <form class="form" action="{% url 'blog:register' %}" method="post">
-                        {% if messgae %}
-                            <div class="alert alert-warning">{{ message }}</div>
+                        {# 错误信息弹窗 #}
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                                        {{ message.message }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         {% endif %}
                         {% csrf_token %}
                         <!-- 账号 -->
@@ -41,9 +48,9 @@
                         </div>
                         <!-- 验证码 -->
                         <div class="form-group">
-                            {{ login_form.captcha.errors }}
-                            {{ login_form.captcha.label_tag }}
-                            {{ login_form.captcha }}
+                            {{ register_form.captcha.errors }}
+                            {{ register_form.captcha.label_tag }}
+                            {{ register_form.captcha }}
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">注册</button>
                     </form>
@@ -54,13 +61,7 @@
             </div>
         </div>
     </div>
-
-    <style>
-        .errorlist {
-            color: red;
-        }
-    </style>
-
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
     <script>
         $(function () {
             // Add refresh button after field (this can be done in the template as well)
@@ -69,17 +70,32 @@
             );
 
             $('.captcha-refresh').click(function () {
-                var $form = $(this).parents('form');
-                var url = location.protocol + "//" + window.location.hostname + ":"
-                    + location.port + "/captcha/refresh/";
-
-                // Make the AJAX-call
-                $.getJSON(url, {}, function (json) {
-                    $form.find('input[name="captcha_0"]').val(json.key);
-                    $form.find('img.captcha').attr('src', json.image_url);
+                $.getJSON("/captcha/refresh/", function (result) {
+                    $('.captcha').attr('src', result['image_url']);
+                    $('#id_captcha_0').val(result['key'])
                 });
-                return false;
             });
         });
     </script>
+    <style type="text/css">
+        .errorlist {
+            color: red;
+        }
+
+        .info {
+            color: #267fd9;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .warning {
+            color: yellow;
+        }
+    </style>
 {% endblock %}

@@ -212,6 +212,9 @@ div#tooltip p:after {
     background-size: 10%;
 }
 
+/**, :after, :before {*/
+/*     box-sizing: border-box !important;*/
+/*}*/
 
 header {
     width: 100% !important;
@@ -243,6 +246,12 @@ header .mynav {
     float: right;
     height: 100%;
     position: relative;
+}
+
+header .user .nav-item {
+    list-style: none;
+    margin-left: 18px;
+    margin-top: 25px;
 }
 
 .top .logo {

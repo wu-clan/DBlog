@@ -31,6 +31,9 @@
                         {% endif %}
                     {% endfor %}
                     <button type="submit" class="btn btn-primary btn-block">提交</button>
+                    <br>
+                    <h3 class="wait">功能待建设...please wait...</h3>
+                    <p class="return_base">点击<a href="{% url 'blog:index' %}">这里</a>返回首页吧</p>
                 </form>
             </div>
         </div>
@@ -38,6 +41,12 @@
 </div>
 <style>
     .form label {
+        color: white;
+    }
+    .wait {
+        color: white;
+    }
+    .return_base {
         color: white;
     }
 </style>

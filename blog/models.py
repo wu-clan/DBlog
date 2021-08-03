@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+import datetime
 import os
 
-from django.contrib.auth.models import AbstractUser
+from django.core.validators import RegexValidator
 from django.db import models
 from django.conf import settings
 from django.core.cache import cache  # 使用redis缓存
@@ -11,6 +12,58 @@ from mdeditor.fields import MDTextField
 
 
 # Create your models here.
+
+class SiteUser(models.Model):
+	"""
+	用户
+	"""
+
+	username = models.CharField('账号', max_length=200, unique=True)
+	password = models.CharField('密码', max_length=200)
+	email = models.EmailField('邮箱', unique=True)
+	time_joined = models.DateTimeField(auto_now_add=True, verbose_name='注册时间')
+
+	class Meta:
+		ordering = ['time_joined']
+		verbose_name = '用户信息'
+		verbose_name_plural = verbose_name
+
+	def __str__(self):  # 使用__str__帮助人性化显示对象信息
+		return self.username
+
+
+class UserInfo(models.Model):
+	"""
+	用户扩展信息
+	"""
+	# 与 User 模型构成一对一的关系
+	username = models.OneToOneField('siteuser', on_delete=models.CASCADE)
+	avatar = models.ImageField(upload_to='users_avatar', blank=True, default='static/images/icon/user.gif',
+	                           verbose_name='用户头像')
+	# 手机号格式正则校验
+	mobile_validator = RegexValidator(r"^1[3-9]\d{9}$", "手机号码格式不正确")
+	mobile = models.IntegerField(unique=True,
+	                             blank=True,
+	                             verbose_name='手机号',
+	                             validators=[mobile_validator],
+	                             error_messages={"max_length": "手机号长度有误"}
+	                             )
+	sex_choice = (
+		(0, '女性'),
+		(1, '男性'),
+	)
+	sex = models.IntegerField(choices=sex_choice, default=1)
+	wechart = models.CharField(blank=True, max_length=50, verbose_name='微信')
+	qq = models.CharField(blank=True, max_length=10, verbose_name='QQ')
+	blog_address = models.CharField(blank=True, max_length=100, verbose_name='博客地址')
+	introduction = models.TextField(blank=True, max_length=500, verbose_name='自我介绍')
+
+	class Meta:
+		verbose_name = '用户扩展信息'
+		verbose_name_plural = verbose_name
+
+	def __str__(self):
+		return self.username
 
 
 class Carousel(models.Model):
@@ -67,7 +120,7 @@ class Conf(models.Model):
 	                               default='https://avatars.githubusercontent.com/u/52145145?v=4')
 	website_author = models.CharField(max_length=20, verbose_name='网站作者', default='xiaowu')
 	website_author_link = models.CharField(max_length=200, verbose_name='网站作者链接', default='http://www.xwboy.top')
-	email = models.EmailField(max_length=50, verbose_name='收件邮箱', default='2186656812@qq.com')
+	email = models.EmailField(max_length=50, verbose_name='作者收件邮箱', default='2186656812@qq.com')
 	website_number = models.CharField(max_length=100, verbose_name='备案号', default='豫ICP备 2021019092号-1')
 	git = models.CharField(max_length=100, verbose_name='git链接', default='https://gitee.com/wu_cl')
 	website_logo = models.ImageField(upload_to='logo', verbose_name='网站logo', default='')
@@ -150,7 +203,7 @@ class About(models.Model):
 	"""
 	关于
 	"""
-	contents = MDTextField(verbose_name='内容')
+	contents = MDTextField(verbose_name='关于Text')
 
 	class Meta:
 		verbose_name = '关于'

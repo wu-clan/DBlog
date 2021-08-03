@@ -29,8 +29,14 @@ urlpatterns = [
 	path('rss/', rss.DBlogRssFeed(), name='rss'),
 	# Atom
 	path('atom/', rss.DBlogAtomFeed(), name='atom'),
+
+	###########
+	# 用户操作 #
+	###########
 	# 登录
 	path('login/', views.user_login, name='login'),
+	# 登录校验
+	path('is_login_backend/', views.is_login_backend, name='is_login_backend'),
 	# 注册
 	path('register/', views.user_register, name='register'),
 	# 密码重置

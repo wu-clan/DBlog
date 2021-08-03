@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -32,9 +33,11 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
 	'simpleui',  # 第三方后台主题
-	'import_export',  # 后台导入导出模块
-	'mdeditor',  # 后台markdown编写文章模块
+	'import_export',  # 后台快捷 导入导出 组件
+	'mdeditor',  # 第三方 markdown 插件
 	# 'admin_reorder',  # 应用程序和模型的自定义排序组件...(更多:https://github.com/mishbahr/django-modeladmin-reorder)
+	'captcha',  # 用户登录验证码
+	'password_reset',  # 用户密码重置
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -104,7 +107,7 @@ DATABASES = {
 	}
 }
 
-# redis配置
+# redis 默认配置
 CACHES = {
 	"default": {
 		"BACKEND": "django_redis.cache.RedisCache",
@@ -179,7 +182,7 @@ website_author_link = 'http://www.xwboy.top'
 email = '2186656812@qq.com'
 website_number = '豫ICP备 2021019092号-1'
 git = 'https://gitee.com/wu_cl'
-website_logo = 'static/images/logo/DBlog.png'
+website_logo = 'logo/DBlog.png'
 
 """
 后台models自定义排序：(两个库都还有其他用法，请自行查看官方文档)
@@ -211,7 +214,7 @@ ADMIN_REORDER = (
 # simpleui 排序后台app导航栏
 SIMPLEUI_CONFIG = {
 	'system_keep': True,
-	'menu_display': ['文章配置', '网站配置信息', '权限验证'],
+	'menu_display': ['文章配置', '网站配置信息', '权限验证', ],
 	'dynamic': True,
 	'menus': [{
 		'name': '文章配置',
@@ -267,6 +270,14 @@ SIMPLEUI_CONFIG = {
 			'name': '用户组',
 			'icon': 'fa fa-users',
 			'url': 'auth/group/'
+		}, {
+			'name': '用户信息',
+			'icon': 'fa fa-users',
+			'url': '/admin/blog/siteuser'
+		}, {
+			'name': '用户扩展信息',
+			'icon': 'fa fa-users',
+			'url': '/admin/blog/userinfo'
 		}]
 	}]
 }
@@ -283,3 +294,21 @@ SIMPLEUI_HOME_INFO = False
 # 后台header, title
 admin.AdminSite.site_header = SIMPLEUI_HOME_TITLE
 admin.AdminSite.site_title = SIMPLEUI_HOME_TITLE
+
+# 字母验证码
+CAPTCHA_IMAGE_SIZE = (100, 36)  # 设置 captcha 图片大小
+CAPTCHA_LENGTH = 4  # 字符个数
+CAPTCHA_TIMEOUT = 3  # 超时(minutes)
+
+# SMTP服务器
+EMAIL_HOST = 'smtp.qq.com'
+# 邮箱地址
+EMAIL_HOST_USER = 'xiaowu-nav@qq.com'
+# 密码 qq为设置=>账户=>POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务=> 开启服务POP3/SMTP服务=> 生成授权码
+EMAIL_HOST_PASSWORD = 'vszjyenrlvfkeaef'
+# 发送邮件的端口
+EMAIL_PORT = 465
+# 是否使用 TLS
+EMAIL_USE_TLS = True
+# 默认的发件人
+DEFAULT_FROM_EMAIL = 'xiaowu的个人博客'
