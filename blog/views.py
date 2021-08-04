@@ -2,6 +2,8 @@
 # Create your views here.
 import hashlib
 import json
+import random
+import string
 
 from django.contrib import messages
 from django.contrib.auth import login, logout
@@ -34,13 +36,14 @@ def get_page(request):
 	return 1 if not page_number or not page_number.isdigit() else int(page_number)
 
 
-def hash_code(_hash, salt='blog'):
+def hash_code(_hash, salt='050721..'):
 	"""
 	加密
+	@salt:加点盐更强大
 	"""
 	data = hashlib.sha256()
 	_hash += salt
-	data.update(_hash.encode())
+	data.update(_hash.encode(encoding='utf-8'))
 	return data.hexdigest()
 
 
