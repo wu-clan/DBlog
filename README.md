@@ -1,15 +1,19 @@
-## Django博客系统
+## Django博客系统 :rocket:  :rocket:  :rocket: 
 [![python3](https://img.shields.io/badge/Python-3.8-red.svg)](https://www.python.org/downloads)
 [![Django3.2](https://img.shields.io/badge/Django-3.2.4-green.svg)](https://docs.djangoproject.com/zh-hans/3.2)
 [![simpleui](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui)
 
-使用Django快速搭建博客
+ :interrobang: here: 使用Django快速搭建博客系统，采用Django框架最基础结构（仅一个app）
+
+###### 优点：减少逻辑性，便于入门学习...
+
+###### 缺点：内容沉余，不够灵活...
 
 ### 基本要求
 * Python: 3.8
 * Django: 3.2.4
 
-### 示例博客：http://www.xwboy.top/ 
+### 示例博客： :tw-1f310: http://www.xwboy.top/ 
 
 ### 功能点
 
@@ -24,9 +28,9 @@
 * windows:django-gzip压缩主站，linux:nginx-gzip压缩全站
 * Rss / Atom 订阅
 * 支持图床，后台上传图片可直链访问及调用  
-* 自定义配置及simpleui后台管理
+* simpleui后台管理  +   后台自定义全站配置信息
 
-（持续更新ing......oauth登录,邮箱订阅）
+ _（持续更新ing...）_ 
 
 ###### ps: 如果访问网站期间，你使用了某些墙代理网络，会失去一些网页功能 ！！！
 
@@ -68,7 +72,7 @@ http://ip:port/admin
 
 
 ### END:
-浏览器中打开<http://127.0.0.1:8000/>即可访问
+浏览器中打开 :tw-1f310: <http://127.0.0.1:8000/>即可访问
 
 
 ## PS: 搭建Linux服务端
@@ -93,7 +97,7 @@ http://ip:port/admin
 
 ### 安装，使用
 ```
-步骤同上，注意需要将 pip 改为 pip3，python 改为 python3 ，再执行命令
+步骤同上 ，注意需要将 pip 改为 pip3，python 改为 python3 ，再执行命令
 ```
 
 
