@@ -1,9 +1,12 @@
-## Django博客系统 :rocket:  :rocket:  :rocket: 
+## 🔥🔥🔥 Django博客系统 🚀🚀🚀
+
+（📢 _持续更新ing... 欢迎提交Issues..._ ）
+
 [![python3](https://img.shields.io/badge/Python-3.8-red.svg)](https://www.python.org/downloads)
 [![Django3.2](https://img.shields.io/badge/Django-3.2.4-green.svg)](https://docs.djangoproject.com/zh-hans/3.2)
 [![simpleui](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui)
 
- :interrobang: here: 使用Django快速搭建博客系统，采用Django框架最基础结构（仅一个app）
+🙈🙈🙈 使用Django快速搭建博客系统，采用Django框架最基础结构（仅一个app）
 
 ###### 优点：减少逻辑性，便于入门学习...
 
@@ -45,9 +48,9 @@ git clone https://gitee.com/wu_cl/DBlog.git
 ```
 1：pip install -r requirements.txt  # 安装所有依赖
 
-2：修改setting.py配置数据库
+2：修改setting.py mysql数据库配置
 
-配置畅言：到http://changyan.kuaizhan.com/注册站点,
+2.5:配置畅言：到http://changyan.kuaizhan.com/注册站点,
 将templates/blog/component/changyan.html中js部分换成你在畅言中生成的js。
 畅言js位置: 畅言进入工作台-》安装畅言-》通用代码安装-》自适应安装代码
 
@@ -66,18 +69,16 @@ python manage.py createsuperuser
 http://ip:port/admin
 
 # 注：创建用户如果遇到以下报错：
-# django.db.utils.IntegrityError: (1048, "Column 'last_login' cannot be null")
-# 执行 python manage.py migrate auth 后，再新建用户即可
+django.db.utils.IntegrityError: (1048, "Column 'last_login' cannot be null")
+执行 python manage.py migrate auth 后，再新建用户即可
 ```
-
-
 ### END:
-浏览器中打开 :tw-1f310: <http://127.0.0.1:8000/>即可访问
+浏览器中打开 <http://127.0.0.1:8000/> 即可访问
 
-
-## PS: 搭建Linux服务端
-```python
-示例环境: Ubuntu-20.04, nginx-1.18.0, uwsgi, mysql-8, python-3.8, redis-server
+## 🙏 搭建Linux服务端
+```
+示例环境 : （不同发行版本的linux之间命令方式可能存在细微差异,仅供参考）
+Ubuntu-20.04, nginx-1.18.0, uwsgi, mysql-8, python-3.8, redis-server
 
 # 在linux文件夹中给出了相关文件的提供参考
 # nginx_conf： nginx 配置文件
@@ -87,12 +88,11 @@ http://ip:port/admin
 环境准备:
 1, 进入目录 /home , 执行上文中的下载命令将项目下载到本地
 2, pip3 install uwsgi
-3, apt-get install mysql-server, redis-server (mysql,redis本地配置自行百度)
-4, 将 nginx_conf 中的内容替换到 /etc/nginx/sites-enabled/default, 并根据自己的网站设置进行修改
+3, apt-get install mysql-server, redis-server
+4, 将 nginx_conf 中的内容替换到 /etc/nginx/sites-enabled/default, 根据对网站的要求自行修改
 5, 将 uwsgi.sh 复制到 /etc/init.d/ 中, 执行 chmod 755 uwsgi.sh 赋予权限
 
-# 如果更改uwsgi配置文件的位置，记得修改配置文件里面的路径
-# 环境准备过程中遇到的问题请自行百度，并将它当作一个学习的过程
+ps: 如果更改了 uwsgi 任一配置文件的位置，请记得修改配置文件里面的路径
 ```
 
 ### 安装，使用
@@ -101,5 +101,5 @@ http://ip:port/admin
 ```
 
 
-### Theme
+#### 🙇‍ 感谢
 ☞ [jhao104](https://github.com/jhao104/django-blog)
