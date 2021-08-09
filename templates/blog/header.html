@@ -42,25 +42,23 @@
                     </div>
                 </li>
                 <li><a href="{% url "blog:archive" %}">归档</a></li>
-                <li><a href="{% url "blog:message" %}">留言</a></li>
                 <li><a href="{% url "blog:about" %}">关于</a></li>
-            </ul>
-            <div class="user">
+                {# 如果用户已经登录，则可以显示用户名下拉框#}
                 {% if is_login_username %}
-                    {# 如果用户已经登录，则可以显示用户名下拉框#}
-                    <li class="nav-item dropdown" style="float: right">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
+                    {# 登陆后显示留言 #}
+                    <li><a href="{% url "blog:message" %}">留言</a></li>
+                    <li style="float: right">
+                        <a>
                             <i class="el el-user"></i>
                             {{ is_login_username }}
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <ul>
                             <a class="dropdown-item" href='{% url "blog:edituser" user_id %}'>个人信息</a>
                             <a class="dropdown-item" href="#" onclick="user_delete()">注销用户</a>
                             <a class="dropdown-item" href="{% url "blog:logout" %}">退出登录</a>
                         </ul>
+                        {# 注销 #}
                         {% if is_login_username %}
-                            {# 通过 user_id 注销 #}
                             <form style="display:none;" id="user_delete" action="{% url 'blog:delete' user_id %}"
                                   method="POST">
                                 {% csrf_token %}
@@ -83,21 +81,28 @@
                         {% endif %}
                     </li>
                 {% else %}
-                    {# 如果用户未登录，则显示 “登录,注册”#}
-                    <li class="nav-item" style="float: right">
-                        <a href="{% url 'blog:register' %}"
-                           style="color: #fff; background-color: #0cabd3; border-radius: 0 50px 50px 0px; border: 1px solid transparent;
-                           padding: .375rem .75rem; margin-left: -10px;">注册
-                        </a>
-                    </li>
-                    <li class=" nav-item" style="float: right">
-                        <a href="{% url 'blog:login' %}"
-                           style="border-radius: 50px 0px 0px 50px; border: 1px solid transparent; padding: .375rem .75rem;
-                           border-color: #0cabd3; margin-right: -10px;">登录
-                        </a>
-                    </li>
+                    <div class="user">
+                        {# 如果用户未登录，则显示 “登录,注册”#}
+                        <li class="nav-item" style="float: right">
+                            <a href="{% url 'blog:register' %}"
+                               style="color: #fff;
+                               background-color: #0cabd3;
+                               border: 1px solid transparent;
+                               padding: .375rem .75rem;
+                               margin-left: -10px;">注册
+                            </a>
+                        </li>
+                        <li class="nav-item" style="float: right">
+                            <a href="{% url 'blog:login' %}"
+                               style="border: 1px solid transparent;
+                               padding: .375rem .75rem;
+                               border-color: #0cabd3;
+                               margin-right: -10px;">登录
+                            </a>
+                        </li>
+                    </div>
                 {% endif %}
-            </div>
+            </ul>
         </nav>
 
         <!--这里是手机导航-->
@@ -131,13 +136,12 @@
             <div class="user" style="float: left; margin-top: -18px; margin-bottom: 10px;">
                 {% if is_login_username %}
                     {# 如果用户已经登录，则可以显示用户名下拉框#}
-                    <li class="nav-item dropdown" style="float: right">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
+                    <li style="float: right">
+                        <a>
                             <i class="el el-user"></i>
                             {{ is_login_username }}
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <ul>
                             <a class="dropdown-item" href='{% url "blog:edituser" user_id %}'>个人信息</a>
                             <a class="dropdown-item" href="#" onclick="user_delete()">删除用户</a>
                             <a class="dropdown-item" href="{% url "blog:logout" %}">退出登录</a>
@@ -166,17 +170,20 @@
                         {% endif %}
                     </li>
                 {% else %}
-                    {# 如果用户未登录，则显示 “登录,注册”#}
-                    <li class="nav-item" style="float: right">
-                        <a href="{% url 'blog:register' %}">注册</a>
-                    </li>
-                    <li class=" nav-item" style="float: right">
-                        <a href="{% url 'blog:login' %}">登录</a>
-                    </li>
+                    <div class="mob_user">
+                        {# 如果用户未登录，则显示 “登录,注册”#}
+                        <li class="nav-item" style="float: right">
+                            <a style="color: #0C0C0C" href="{% url 'blog:register' %}">注册</a>
+                        </li>
+                        <li class=" nav-item" style="float: right">
+                            <a style="color: #0C0C0C" href="{% url 'blog:login' %}">登录</a>
+                        </li>
+                    </div>
                 {% endif %}
             </div>
         </div>
     </div>
+
     <!--换肤--->
     <script src="/static/js/skin.js"></script>
     <div class="select-skin">
