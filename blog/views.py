@@ -5,8 +5,8 @@ import json
 import random
 import string
 
-from django.contrib import messages
-from django.contrib.auth import login, logout
+from django.contrib import auth, messages
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
@@ -66,7 +66,7 @@ def user_login(request):
 					request.session['user_id'] = user.id
 					request.session['user_name'] = user.username
 					# 登陆成功返回主页
-					return redirect(reverse('blog:is_login_backend'))
+					return redirect('/blog')
 				else:
 					messages.error(request, "密码不正确~")
 			except:
@@ -76,23 +76,6 @@ def user_login(request):
 	# 如果是不是POST请求，返回登陆表单
 	login_form = UserForm()
 	return render(request, 'blog/user/login.html', locals())
-
-
-def is_login_backend(request):
-	"""
-	后端登录验证
-	"""
-	# 这里必须用读取字典的get()方法把is_login的value缺省设置为False，当用户访问backend这个url先尝试获取这个浏览器对应
-	# 的session中的 is_login 的值。如果对方登录成功的话，在login里就已经把is_login的值修改为了True,反之这个值就是False的
-	is_login = request.session.get('is_login', False)
-	if is_login:
-		cookie_content = request.COOKIES
-		session_content = request.session
-		is_login_username = request.session['user_name']
-		user_id = request.session['user_id']
-		return render(request, 'blog/base.html', locals())
-	else:
-		return redirect(reverse('blog:login'))
 
 
 def user_register(request):
@@ -149,38 +132,41 @@ def password_reset_done(request):
 
 
 def user_logout(request):
+	"""
+	用户退出
+	"""
 	if not request.session.get('is_login', None):
 		# 如果没登录，就不能登出
-		return redirect('/')
+		return redirect('/blog')
 	# 或者使用下面的方法
 	request.session.flush()
 	# del request.session['is_login']
 	# del request.session['user_id']
 	# del request.session['user_name']
-	return redirect('/')
+	return redirect('/blog')
 
 
-@login_required(login_url='blog/login/')
-def user_delete(request):
+def user_delete(request, id):
 	"""
 	用户注销
 	"""
 	if request.method == 'POST':
 		user = SiteUser.objects.get(id=id)
+		curr_user = request.session.get('user_name')
 		# 验证用户是否匹配，只有登录者才能执行注销
-		if request.username == user:
+		if curr_user == user.username:
 			# 注销用户，返回主页
-			logout(request)
+			request.session.flush()
 			user.delete()
-			return redirect('/')
+			return redirect('/blog')
 		else:
-			return HttpResponse('非此账户登录者，没有权限执行注销操作~')
+			messages.error(request, '非注销账户登录，您没有权限执行注销操作')
+			return redirect('/blog')
 	else:
-		return redirect('/')
+		return redirect('/blog')
 
 
 # 编辑用户信息
-@login_required(login_url='blog/login/')
 def profile_edit(request, id):
 	user = SiteUser.objects.get(id=id)
 	# user_id 是 OneToOneField 自动生成的字段

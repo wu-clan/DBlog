@@ -28,7 +28,7 @@ class SiteUser(models.Model):
 		verbose_name = '用户信息'
 		verbose_name_plural = verbose_name
 
-	def __str__(self):  # 使用__str__帮助人性化显示对象信息
+	def __str__(self):
 		return self.username
 
 
@@ -36,8 +36,8 @@ class UserInfo(models.Model):
 	"""
 	用户扩展信息
 	"""
-	# 与 User 模型构成一对一的关系
-	username = models.OneToOneField('siteuser', on_delete=models.CASCADE)
+	# 与 SiteUser 模型构成一对一的关系
+	username = models.OneToOneField(SiteUser, on_delete=models.CASCADE)
 	avatar = models.ImageField(upload_to='users_avatar', blank=True, default='static/images/icon/user.gif',
 	                           verbose_name='用户头像')
 	# 手机号格式正则校验

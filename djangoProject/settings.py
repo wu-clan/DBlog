@@ -295,6 +295,9 @@ SIMPLEUI_HOME_INFO = False
 admin.AdminSite.site_header = SIMPLEUI_HOME_TITLE
 admin.AdminSite.site_title = SIMPLEUI_HOME_TITLE
 
+# 登录后重定向到/blog/页面
+LOGIN_REDIRECT_URL = '/blog/'
+
 # 字母验证码
 CAPTCHA_IMAGE_SIZE = (100, 36)  # 设置 captcha 图片大小
 CAPTCHA_LENGTH = 4  # 字符个数
