@@ -1,4 +1,4 @@
-## 🔥🔥🔥 Django博客系统 🚀🚀🚀
+# Django博客系统 
 
 （📢 _持续更新ing... 欢迎提交Issues..._ ）
 
@@ -16,7 +16,7 @@
 * Python: 3.8
 * Django: 3.2.4
 
-### 示例博客： :tw-1f310: http://www.xwboy.top/ 
+### 示例博客：http://www.xwboy.top/ 
 
 ### 功能点
 
@@ -37,7 +37,7 @@
 
 ###### ps: 如果访问网站期间，你使用了某些墙代理网络，会失去一些网页功能 ！！！
 
-### 源码下载
+## 源码下载
 ```
 wget https://gitee.com/wu_cl/DBlog.git/master.zip
 or
@@ -100,6 +100,15 @@ ps: 如果更改了 uwsgi 任一配置文件的位置，请记得修改配置文
 步骤同上 ，注意需要将 pip 改为 pip3，python 改为 python3 ，再执行命令
 ```
 
+## ❓问题相关
+
+欢迎提交问题到 [Issus](https://gitee.com/wu_cl/DBlog/issues) 
+或我的QQ邮箱 `2186656812@qq.com`, 我将在看到问题后第一时间回复
+
+### 学习交流群
+应热爱学习的小伙伴，我们也建群了，这是一个New Group，期待并欢迎您的加入
+
+![](readme/django_study.jpg)
 
 #### 🙇‍ 感谢
 ☞ [jhao104](https://github.com/jhao104/django-blog)
