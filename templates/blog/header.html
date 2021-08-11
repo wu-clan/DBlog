@@ -111,82 +111,87 @@
         </nav>
 
         <!--这里是手机导航-->
-        {#        <div class="mob-menu">#}
-        {#            <!--手机顶部搜索-->#}
-        {#            <div class="search ">#}
-        {#                <form action="{% url "blog:search" %}" method="get">#}
-        {#                    <div class="search-index">#}
-        {#                        <input name="name" type="text" placeholder="请输入关键字" onfocus="this.placeholder=''"#}
-        {#                               onblur="this.placeholder='请输入关键字'"/>#}
-        {#                        <i class="el-search"><input value=" " type="submit"/></i>#}
-        {#                    </div>#}
-        {#                </form>#}
-        {#            </div>#}
-        {#            <!--手机下拉菜单-->#}
-        {#            <ul class='mob_header'>#}
-        {#                <li><a href="{% url "blog:index" %}">首页</a></li>#}
-        {#                <li><a href="{% url "blog:list" %}">博客</a></li>#}
-        {#                <li class='mob-drop'>#}
-        {#                    <a href="JavaScript:;">分类</a>#}
-        {#                    <ul class="mob-dropmenu">#}
-        {#                        {% for category in category_list %}#}
-        {#                            <li><a href="{% url "blog:category" name=category.name %}">{{ category.name }}</a></li>#}
-        {#                        {% endfor %}#}
-        {#                    </ul>#}
-        {#                </li>#}
-        {#                <li><a href="{% url "blog:archive" %}">归档</a></li>#}
-        {#                <li><a href="{% url "blog:message" %}">留言</a></li>#}
-        {#                <li><a href="{% url "blog:about" %}">关于</a></li>#}
-        {#            </ul>#}
-        {#            <div class="user" style="float: left; margin-top: -18px; margin-bottom: 10px;">#}
-        {#                {% if is_login_username %}#}
-        {# 如果用户已经登录，则可以显示用户名下拉框#}
-        {#                    <li style="float: right">#}
-        {#                        <a>#}
-        {#                            <i class="el el-user"></i>#}
-        {#                            {{ is_login_username }}#}
-        {#                        </a>#}
-        {#                        <ul>#}
-        {#                            <a class="dropdown-item" href='{% url "blog:edituser" request.session.user_id %}'>个人信息</a>#}
-        {#                            <a class="dropdown-item" href="#" onclick="user_delete()">删除用户</a>#}
-        {#                            <a class="dropdown-item" href="{% url "blog:logout" %}">退出登录</a>#}
-        {#                        </ul>#}
-        {#                        {% if is_login_username %}#}
-        {# 通过 user_id 注销 #}
-        {#                            <form style="display:none;" id="user_delete" action="{% url 'blog:delete' request.session.user_id %}"#}
-        {#                                  method="POST">#}
-        {#                                {% csrf_token %}#}
-        {#                                <button type="submit">发送</button>#}
-        {#                            </form>#}
-        {# 注销用户弹窗 #}
-        {#                            <script>#}
-        {#                                function user_delete() {#}
-        {#                                    // 调用layer弹窗组件#}
-        {#                                    layer.open({#}
-        {#                                        title: "确认注销",#}
-        {#                                        content: "确认注销用户吗？",#}
-        {#                                        yes: function (index, layero) {#}
-        {#                                            $('form#user_delete button').click();#}
-        {#                                            layer.close(index);#}
-        {#                                        },#}
-        {#                                    })#}
-        {#                                }#}
-        {#                            </script>#}
-        {#                        {% endif %}#}
-        {#                    </li>#}
-        {#                {% else %}#}
-        {#                    <div class="mob_user">#}
-        {# 如果用户未登录，则显示 “登录,注册”#}
-        {#                        <li class="nav-item" style="float: right">#}
-        {#                            <a style="color: #0C0C0C" href="{% url 'blog:register' %}">注册</a>#}
-        {#                        </li>#}
-        {#                        <li class=" nav-item" style="float: right">#}
-        {#                            <a style="color: #0C0C0C" href="{% url 'blog:login' %}">登录</a>#}
-        {#                        </li>#}
-        {#                    </div>#}
-        {#                {% endif %}#}
-        {#            </div>#}
-        {#        </div>#}
+        <div class="mob-menu">
+            <!--手机顶部搜索-->
+            <div class="search ">
+                <form action="{% url "blog:search" %}" method="get">
+                    <div class="search-index">
+                        <input name="name" type="text" placeholder="请输入关键字" onfocus="this.placeholder=''"
+                               onblur="this.placeholder='请输入关键字'"/>
+                        <i class="el-search"><input value=" " type="submit"/></i>
+                    </div>
+                </form>
+            </div>
+            <!--手机下拉菜单-->
+            <ul class='mob_header'>
+                <li><a href="{% url "blog:index" %}">首页</a></li>
+                <li><a href="{% url "blog:list" %}">博客</a></li>
+                <li class='mob-drop'>
+                    <a href="JavaScript:;">分类</a>
+                    <ul class="mob-dropmenu">
+                        {% for category in category_list %}
+                            <li><a href="{% url "blog:category" name=category.name %}">{{ category.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li><a href="{% url "blog:archive" %}">归档</a></li>
+                <li><a href="{% url "blog:about" %}">关于</a></li>
+            </ul>
+            <div class="user" style="float: left; margin-top: -18px; margin-bottom: 10px;">
+                {% if request.session.user_name %}
+                    {# 登陆后增加留言 #}
+                    <li><a href="{% url "blog:message" %}">留言</a></li>
+                    {# 个人信息 #}
+                    <li class='drop'>
+                        <a href="JavaScript:;"><i class="el el-user"></i>{{ request.session.user_name }}</a>
+                        <div class="drop-nav orange-text">
+                            <ul>
+                                <li><a href='{% url "blog:edituser" id=request.session.user_id %}'>个人信息</a></li>
+                                <li><a href="#" onclick="user_delete()">注销用户</a></li>
+                                <li><a href="{% url "blog:logout" %}">退出登录</a></li>
+                            </ul>
+                        </div>
+                        {# 注销 #}
+                        <form style="display:none;" action="{% url 'blog:delete' id=request.session.user_id %}"
+                              method="POST">
+                            {% if messages %}
+                                <script type="text/javascript">
+                                    {% for msg in messages %}
+                                        alert('{{ msg.message }}');
+                                    {% endfor %}
+                                </script>
+                            {% endif %}
+                            {% csrf_token %}
+                            <button id="user_delete" type="submit">注销</button>
+                        </form>
+                        <script>
+                            function user_delete() {
+                                // 调用layer弹窗组件
+                                layer.open({
+                                    title: "确认注销",
+                                    content: "确认注销用户吗？",
+                                    yes: function (index) {
+                                        let sub = document.getElementById("user_delete");
+                                        sub.click()
+                                        layer.close(index);
+                                    },
+                                })
+                            }
+                        </script>
+                    </li>
+                {% else %}
+                    <div class="mob_user">
+                        {# 如果用户未登录，则显示 “登录,注册” #}
+                        <li class="nav-item" style="float: right">
+                            <a style="color: #0C0C0C" href="{% url 'blog:register' %}">注册</a>
+                        </li>
+                        <li class=" nav-item" style="float: right">
+                            <a style="color: #0C0C0C" href="{% url 'blog:login' %}">登录</a>
+                        </li>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
 
     <!--换肤--->
