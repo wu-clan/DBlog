@@ -96,7 +96,6 @@ $(document).ready(function () {
         }, 500);
     });
 
-
     //相册动画
 
 
@@ -110,6 +109,20 @@ $(document).ready(function () {
         $(".drop-nav").css({"-webkit-animation": "zuo2 0.5s", "animation": "zuo2 0.5s"});
         setTimeout(function () {
             $(".drop-nav").hide();
+        }, 500);
+
+    });
+
+    // 登录用户滑动效果
+    $(".drop_user").mouseenter(function () {
+
+        $(".drop_user-nav").css({"-webkit-animation": "zuo1 0.5s", "animation": "zuo1 0.5s"}).show();
+
+    });
+    $(".drop_user").mouseleave(function () {
+        $(".drop_user-nav").css({"-webkit-animation": "zuo2 0.5s", "animation": "zuo2 0.5s"});
+        setTimeout(function () {
+            $(".drop_user-nav").hide();
         }, 500);
 
     });

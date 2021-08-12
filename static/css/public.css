@@ -430,6 +430,92 @@ header .user .nav-item {
     font-size: 16px !important;
 }
 
+.drop_user:hover .el-chevron-down {
+    color: inherit;
+}
+
+
+.drop_user-nav {
+}
+
+.drop_user-nav li.nav-active a {
+    border: none;
+}
+
+.drop_user .el-chevron-down {
+    font-size: 12px;
+    margin-left: 10px;
+    display: inline-block;
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+
+.nav-active .el-chevron-down {
+    transform: rotate(180deg);
+}
+
+.drop_user:hover .el-chevron-down {
+    transform: rotate(180deg);
+}
+
+.drop_user-nav {
+    position: absolute;
+    width: 150px;
+    border: 1px solid #ddd;
+    top: 70px;
+    box-sizing: border-box;
+    border-top: none;
+    display: none;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 2px 2px 8px #ccc;
+}
+
+.drop_user-nav li {
+    padding: 10px 0;
+    width: 100%;
+    color: inherit;
+    font-size: 14px;
+    text-align: center;
+    border-bottom: 1px dotted #ddd;
+    box-sizing: border-box;
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+
+.drop_user-nav li:hover {
+    background: #13c5f8;
+    font-size: 16px;
+}
+
+.drop_user-nav li:hover a, .drop_user-nav li:hover a i {
+    color: #fff;
+}
+
+.drop_user-nav li a {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    color: #ff6700 !important;
+}
+
+.drop_user-nav li:hover a {
+    color: #fff !important;
+}
+
+.drop_user-nav li a i {
+    font-size: 12px;
+    margin-right: 10px;
+    color: #7d7d7d;
+}
+
+.drop_user-nav li.nav-active {
+    background: #13c5f8 !important;
+}
+
+.drop_user-nav li.nav-active a {
+    color: #fff !important;
+    font-size: 16px !important;
+}
 
 .mobile-nav {
     overflow: hidden;

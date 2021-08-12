@@ -48,9 +48,9 @@
                     {# 登陆后增加留言 #}
                     <li><a href="{% url "blog:message" %}">留言</a></li>
                     {# 个人信息 #}
-                    <li class='drop'>
+                    <li class='drop_user'>
                         <a href="JavaScript:;"><i class="el el-user"></i>{{ request.session.user_name }}</a>
-                        <div class="drop-nav orange-text">
+                        <div class="drop_user-nav orange-text">
                             <ul>
                                 <li><a href='{% url "blog:edituser" id=request.session.user_id %}'>个人信息</a></li>
                                 <li><a href="#" onclick="user_delete()">注销用户</a></li>
@@ -136,15 +136,13 @@
                 </li>
                 <li><a href="{% url "blog:archive" %}">归档</a></li>
                 <li><a href="{% url "blog:about" %}">关于</a></li>
-            </ul>
-            <div class="user" style="float: left; margin-top: -18px; margin-bottom: 10px;">
                 {% if request.session.user_name %}
                     {# 登陆后增加留言 #}
                     <li><a href="{% url "blog:message" %}">留言</a></li>
                     {# 个人信息 #}
-                    <li class='drop'>
+                    <li class='drop_user'>
                         <a href="JavaScript:;"><i class="el el-user"></i>{{ request.session.user_name }}</a>
-                        <div class="drop-nav orange-text">
+                        <div class="drop_user-nav orange-text">
                             <ul>
                                 <li><a href='{% url "blog:edituser" id=request.session.user_id %}'>个人信息</a></li>
                                 <li><a href="#" onclick="user_delete()">注销用户</a></li>
@@ -180,18 +178,17 @@
                         </script>
                     </li>
                 {% else %}
-                    <div class="mob_user">
-                        {# 如果用户未登录，则显示 “登录,注册” #}
-                        <li class="nav-item" style="float: right">
-                            <a style="color: #0C0C0C" href="{% url 'blog:register' %}">注册</a>
-                        </li>
-                        <li class=" nav-item" style="float: right">
-                            <a style="color: #0C0C0C" href="{% url 'blog:login' %}">登录</a>
-                        </li>
-                    </div>
+                    {# 如果用户未登录，则显示 “登录,注册” #}
+                    <li class="nav-item">
+                        <a style="color: #0C0C0C" href="{% url 'blog:register' %}">注册</a>
+                    </li>
+                    <li class=" nav-item">
+                        <a style="color: #0C0C0C" href="{% url 'blog:login' %}">登录</a>
+                    </li>
                 {% endif %}
-            </div>
+            </ul>
         </div>
+    </div>
     </div>
 
     <!--换肤--->
