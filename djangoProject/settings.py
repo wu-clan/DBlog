@@ -155,8 +155,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-# 收集静态文件命令：python manage.py collectstatic
 STATIC_URL = '/static/'
+# 当你关闭DEBUG模式时，需要打开STATIC_ROOT注释，同时注释掉STATICFILES_DIRS，然后执行命令收集静态文件：python manage.py collectstatic
 # STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = (
 	BASE_DIR / 'static',
@@ -305,9 +305,9 @@ CAPTCHA_TIMEOUT = 3  # 超时(minutes)
 
 # SMTP服务器
 EMAIL_HOST = 'smtp.qq.com'
-# 邮箱地址
+# 邮箱地址(请替换为你自己的哟)
 EMAIL_HOST_USER = 'xiaowu-nav@qq.com'
-# 密码 qq为设置=>账户=>POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务=> 开启服务POP3/SMTP服务=> 生成授权码
+# 密码(请替换为你自己的哟) qq为设置=>账户=>POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务=> 开启服务POP3/SMTP服务=> 生成授权码
 EMAIL_HOST_PASSWORD = 'vszjyenrlvfkeaef'
 # 发送邮件的端口
 EMAIL_PORT = 465
