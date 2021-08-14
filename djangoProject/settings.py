@@ -30,7 +30,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # Application definition
-
 INSTALLED_APPS = [
 	'simpleui',  # 第三方后台主题
 	'import_export',  # 后台快捷 导入导出 组件
@@ -93,7 +92,6 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql',
@@ -122,7 +120,6 @@ NEVER_REDIS_TIMEOUT = 365 * 24 * 60 * 60
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
 	{
 		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -140,7 +137,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
-
 LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'Asia/Shanghai'
@@ -153,7 +149,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-
 STATIC_URL = '/static/'
 # 当你关闭DEBUG模式时，需要打开STATIC_ROOT注释，同时注释掉STATICFILES_DIRS，然后执行命令收集静态文件：python manage.py collectstatic
 # STATIC_ROOT = BASE_DIR / 'static'
@@ -166,7 +161,6 @@ MEDIA_ROOT = BASE_DIR / 'static/media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 网站默认配置
@@ -296,6 +290,10 @@ admin.AdminSite.site_title = SIMPLEUI_HOME_TITLE
 
 # 登录后重定向到/blog/页面
 LOGIN_REDIRECT_URL = '/blog/'
+
+# session设置
+SESSION_COOKIE_AGE = 86400  # Session的cookie失效日期（秒）
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # 是否关闭浏览器使得Session过期
 
 # 字母验证码
 CAPTCHA_IMAGE_SIZE = (100, 36)  # 设置 captcha 图片大小
