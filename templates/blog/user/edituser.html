@@ -10,47 +10,67 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container" style="max-width: 50%; margin: auto">
-        <div class="col-md-4">用户名: {{ userinfo.username }}</div>
-        <form method="post" action=".">
-            {% csrf_token %}
-            <!-- phone -->
-            <div class="form-group col-md-4">
-                <label for="avatar">用户头像</label><br>
-                <img type="text" class="form-control" id="avatar" alt="" src="{{ userinfo.avatar }}">
+    <div class="flex-center mysection">
+        <div class="container">
+            <div class="flex-center">
+                <div class="unit-1-2 unit-1-on-mobile">
+                    <h3 style="text-align: center">用户信息</h3>
+                    <div class="col-md-4">用户名:&nbsp;&nbsp;{{ user.username }}</div>
+                    <form class="form" action="{% url 'blog:edituser' user.id %}" method="post">
+                        {# 错误信息弹窗 #}
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                                        {{ message.message }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="avatar">用户头像:</label>
+                            {{ profile_form.avatar }}
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile">手机号:</label>
+                            {{ profile_form.mobile }}
+                        </div>
+                        <div class="form-group">
+                            <label for="sex">性别:</label>
+                            {{ profile_form.sex }}
+                        </div>
+                        <div class="form-group">
+                            <label for="wechart">微信:</label>
+                            {{ profile_form.wechart }}
+                        </div>
+                        <div class="form-group">
+                            <label for="qq">QQ:</label>
+                            {{ profile_form.qq }}
+                        </div>
+                        <div class="form-group">
+                            <label for="blog_address">博客地址:</label>
+                            {{ profile_form.blog_address }}
+                        </div>
+                        <div class="form-group">
+                            <label for="introduction">自我介绍:</label>
+                            {{ profile_form.introduction }}
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">提交</button>
+                    </form>
+                </div>
             </div>
-            <div class="form-group col-md-4">
-                <label for="mobile">手机号</label><br>
-                <input type="text" class="form-control" id="mobile" name="mobile" value="{{ userinfo.mobile }}">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="sex">性别</label><br>
-                <p type="text" class="form-control" id="sex" href="{{ userinfo.sex }}">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="wechart">微信</label><br>
-                <input type="text" class="form-control" id="wechart" name="wechart" value="{{ userinfo.wechart }}">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="qq">QQ</label><br>
-                <input type="text" class="form-control" id="qq" name="qq" value="{{ userinfo.qq }}">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="blog_address">博客地址</label><br>
-                <input type="text" class="form-control" id="blog_address" name="blog_address"
-                       value="{{ userinfo.blog_address }}">
-            </div>
-            <!-- bio -->
-            <div class="form-group col-md-4">
-                <label for="introduction">自我介绍</label><br>
-                <textarea type="text" class="form-control" id="introduction" name="introduction" rows="12"
-                          style="width: 100%">{{ userinfo.introduction }}</textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">提交</button>
-        </form>
+        </div>
     </div>
-
     <style>
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+
         .errorlist {
             color: red;
         }

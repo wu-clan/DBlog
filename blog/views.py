@@ -240,39 +240,31 @@ def user_delete(request, id):
 # 编辑用户信息
 def profile_edit(request, id):
 	user = SiteUser.objects.get(id=id)
-	# user_id 是 OneToOneField 自动生成的字段
-	if UserInfo.objects.filter(user_id=id).exists():
-		profile = UserInfo.objects.get(user_id=id)
-	else:
-		profile = UserInfo.objects.create(user=user)
-
+	profile_form = ProfileForm(request.POST)
 	if request.method == 'POST':
-		# 验证修改数据者，是否为用户本人
-		if request.user != user:
-			messages.error(request, '非本人账户，无法修改个人信息')
-			return redirect('blog:edituser.html')
-
-		profile_form = ProfileForm(request.POST, request.FILES)
 		if profile_form.is_valid():
-			# 取得清洗后的合法数据
-			profile_cd = profile_form.cleaned_data
-			# 用户信息保存
-			profile.avatar = profile_cd['avatar']
-			profile.mobile = profile_cd['mobile']
-			profile.sex = profile_cd['sex']
-			profile.wechart = profile_cd['wechart']
-			profile.qq = profile_cd['qq']
-			profile.blog_address = profile_cd['blog_address']
-			profile.introduction = profile_cd['introduction']
-			if 'avatar' in request.FILES:
-				profile.avatar = profile_cd["avatar"]
-			profile.save()
-			# 带参数的 redirect()
-			return redirect("blog:edituser", id=id)
+			avatar = profile_form.cleaned_data['avatar']
+			mobile = profile_form.cleaned_data['mobile']
+			sex = profile_form.cleaned_data['sex']
+			wechart = profile_form.cleaned_data['wechart']
+			qq = profile_form.cleaned_data['qq']
+			blog_address = profile_form.cleaned_data['blog_address']
+			introduction = profile_form.cleaned_data['introduction']
+			siteinfo = UserInfo.objects.update(
+				avatar=avatar,
+				mobile=mobile,
+				sex=sex,
+				wechart=wechart,
+				qq=qq,
+				blog_address=blog_address,
+				introduction=introduction
+			)
+			messages.success(request, '更新个人信息成功')
+			return redirect('/')
 		else:
-			messages.error(request, '信息输入有误，请重新输入！')
-			return redirect(reverse('blog:edituser.html'))
-	profile_form = ProfileForm()
+			messages.error(request, '输入信息有误，请检查')
+	else:
+		profile_form = ProfileForm()
 	return render(request, 'blog/user/edituser.html', locals())
 
 

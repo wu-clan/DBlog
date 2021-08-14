@@ -42,12 +42,10 @@ class UserInfo(models.Model):
 	                           verbose_name='用户头像')
 	# 手机号格式正则校验
 	mobile_validator = RegexValidator(r"^1[3-9]\d{9}$", "手机号码格式不正确")
-	mobile = models.IntegerField(unique=True,
-	                             blank=True,
+	mobile = models.IntegerField(blank=True,
 	                             verbose_name='手机号',
 	                             validators=[mobile_validator],
-	                             error_messages={"max_length": "手机号长度有误"}
-	                             )
+	                             default='158')
 	sex_choice = (
 		(0, '女性'),
 		(1, '男性'),
@@ -64,6 +62,19 @@ class UserInfo(models.Model):
 
 	def __str__(self):
 		return self.username
+
+
+# 信号接收，创建用户时自动调用并创建用户信息
+@receiver(post_save, sender=SiteUser)
+def create_user_profile(sender, instance, created, **kwargs):
+	if created:
+		UserInfo.objects.create(username=instance)
+
+
+# 信号接收，注销用户时自动调用清除用户信息
+@receiver(pre_delete, sender=SiteUser)
+def create_user_profile(sender, instance, **kwargs):
+	instance.username = None
 
 
 class Carousel(models.Model):
