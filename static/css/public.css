@@ -744,14 +744,13 @@ header .user .nav-item {
 }
 
 .for-me .headportrait {
-    margin-left: -165px;
-    margin-top: -50px;
-    transform: scale(0.6);
+    /*margin-left: -68px;*/
+    /*margin-top: 68px;*/
+    /*transform: scale(3);*/
+    margin-left: -116px;
+    transform: scale(0.8);
     border-radius: 50%;
-    transition: All 0.4s ease-in-out;
     -webkit-transition: All 0.4s ease-in-out;
-    -moz-transition: All 0.4s ease-in-out;
-    -o-transition: All 0.4s ease-in-out;
 }
 
 .for-me a:hover {
@@ -759,11 +758,8 @@ header .user .nav-item {
 }
 
 .for-me .headportrait:hover {
-    transform: scale(0.7);
-    -webkit-transform: scale(0.7);
-    -moz-transform: scale(0.7);
-    -o-transform: scale(0.7);
-    -ms-transform: scale(0.7);
+    /*-webkit-transform: scale(3.3);*/
+    -webkit-transform: scale(1);
 }
 
 .notransition {

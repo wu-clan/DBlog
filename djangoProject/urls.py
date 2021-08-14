@@ -28,8 +28,6 @@ urlpatterns = [
 	path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
 	path('', views.index, name='index'),
 
-	# 用户密码重置
-	path('password_reset/', include('password_reset.urls')),
 	# 登录验证码
 	path('captcha/', include('captcha.urls')),
 	# markdown插件

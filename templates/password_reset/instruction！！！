@@ -1,5 +1,0 @@
-不要随意改动 此目录位置及目录名 和 base.html 文件名，根据重置密码第三方插件官方文档来讲，此目录文件结构是有限制的
-
-详情请查看官方文档：
-https://django-password-reset.readthedocs.io/en/latest/quickstart.html#usage
-

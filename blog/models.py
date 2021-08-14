@@ -280,7 +280,6 @@ class Article(models.Model):
 		return self.title
 
 
-# 需要放在最后
 # 同步删除上传文件
 @receiver(pre_delete, sender=Article)
 def delete_upload_files(sender, instance, **kwargs):

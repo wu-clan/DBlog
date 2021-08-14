@@ -26,6 +26,21 @@ class RegisterForm(forms.Form):
 	captcha = CaptchaField(label='验证码', widget=CaptchaTextInput(attrs={'class': 'form-control'}))
 
 
+class RestCodeForm(forms.Form):
+	"""
+	重置密码验证码表单
+	"""
+	username_email = forms.CharField(label='用户名或邮箱', max_length=16,
+	                                 widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+
+class RestPwdForm(forms.Form):
+	password1 = forms.CharField(label='新密码', max_length=16, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+	password2 = forms.CharField(label='确认新密码', max_length=16,
+	                            widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+	reset_code = forms.CharField(label='邮箱验证码', widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+
 class ProfileForm(forms.ModelForm):
 	"""
 	用户扩展信息表单

@@ -37,7 +37,6 @@ INSTALLED_APPS = [
 	'mdeditor',  # 第三方 markdown 插件
 	# 'admin_reorder',  # 应用程序和模型的自定义排序组件...(更多:https://github.com/mishbahr/django-modeladmin-reorder)
 	'captcha',  # 用户登录验证码
-	'password_reset',  # 用户密码重置
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -176,7 +175,7 @@ main_website = 'xwboy.top'
 name = "CL' WU"
 chinese_description = '永不放弃坚持就是这么酷！要相信光'
 english_description = 'Never give up persistence is so cool！Believe in the light'
-avatar_link = 'https://avatars.githubusercontent.com/u/52145145?v=4'
+avatar_link = 'https://portrait.gitee.com/uploads/avatars/user/2194/6583646_wu_cl_1628047961.png!avatar200'
 website_author = 'xiaowu'
 website_author_link = 'http://www.xwboy.top'
 email = '2186656812@qq.com'
@@ -304,14 +303,14 @@ CAPTCHA_LENGTH = 4  # 字符个数
 CAPTCHA_TIMEOUT = 3  # 超时(minutes)
 
 # SMTP服务器
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.qq.com'
-# 邮箱地址(请替换为你自己的哟)
 EMAIL_HOST_USER = 'xiaowu-nav@qq.com'
 # 密码(请替换为你自己的哟) qq为设置=>账户=>POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务=> 开启服务POP3/SMTP服务=> 生成授权码
 EMAIL_HOST_PASSWORD = 'vszjyenrlvfkeaef'
-# 发送邮件的端口
+# 发送邮件端口和加密（两种方式不能同时使用）
+# 云服务器使用：
 EMAIL_PORT = 465
-# 是否使用 TLS
-EMAIL_USE_TLS = True
+EMAIL_USE_SSL = True
 # 默认的发件人
 DEFAULT_FROM_EMAIL = 'xiaowu的个人博客'

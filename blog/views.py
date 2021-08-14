@@ -8,11 +8,14 @@ import string
 from django.contrib import auth, messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.db.models import Q
 from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
 
 from blog.models import SiteUser
-from blog.user.forms import ProfileForm, RegisterForm, UserForm
+from blog.user.forms import ProfileForm, RegisterForm, RestCodeForm, RestPwdForm, UserForm
+from djangoProject import settings
 from djangoProject.util import PageInfo
 from blog.models import Article, Category, Comment, UserInfo, Tag
 from django.views.decorators.csrf import csrf_exempt
@@ -71,10 +74,8 @@ def user_login(request):
 					messages.error(request, "密码不正确~")
 			except:
 				messages.error(request, "用户不存在~")
-		else:
-			return render(request, 'blog/user/login.html', locals())
-	# 如果是不是POST请求，返回登陆表单
-	login_form = UserForm()
+	else:
+		login_form = UserForm()
 	return render(request, 'blog/user/login.html', locals())
 
 
@@ -112,8 +113,8 @@ def user_register(request):
 				new_user.save()
 				messages.success(request, '注册成功，请登录')
 				return redirect(reverse('blog:login'))
-	# 如果请求不是POST，则渲染一个空的表单。
-	register_form = RegisterForm()
+	else:
+		register_form = RegisterForm()
 	return render(request, 'blog/user/register.html', locals())
 
 
@@ -121,14 +122,84 @@ def password_reset(request):
 	"""
 	密码重置
 	"""
-	return render(request, 'password_reset/password_reset.html')
+	return render(request, 'blog/password_reset/password_reset.html')
+
+
+def reset_code(random_length=6):
+	"""
+	密码重置随机验证码
+	"""
+	str_code = ''
+	chars = 'abcdefghijklmnopqrstuvwsyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+	length = len(chars) - 1
+	for i in range(random_length):
+		str_code += chars[random.randint(0, length)]
+	return str_code
+
+
+def password_reset_email(request):
+	"""
+	密码重置验证码
+	"""
+	if request.method == "POST":
+		rest_pwd_form = RestCodeForm(request.POST)
+		if rest_pwd_form.is_valid():
+			username_email = rest_pwd_form.cleaned_data['username_email']
+			try:
+				user = SiteUser.objects.filter(Q(username=username_email) | Q(email=username_email))
+				if user:
+					mail_receiver = user[0].email
+					email_title = "重置密码"
+					code = reset_code()  # 验证码
+					request.session["code"] = code  # 将验证码保存到session
+					email_body = "验证码为：{0}".format(code)
+					send_status = send_mail(email_title, email_body, settings.EMAIL_HOST_USER, (mail_receiver,),
+					                        auth_user=settings.EMAIL_HOST_USER,
+					                        auth_password=settings.EMAIL_HOST_PASSWORD)
+					messages.success(request, "验证码已发送，请查收邮件, 继续重置密码")
+					return redirect(reverse('blog:password_reset_base'))
+			# 调试的时候请将此expect注释
+			except WindowsError:
+				messages.error(request, '验证码发送失败，请联系网站管理员吧')
+			else:
+				messages.error(request, '用户名或邮箱不存在')
+	else:
+		rest_pwd_form = RestCodeForm()
+	return render(request, 'blog/password_reset/password_reset_email.html', locals())
+
+
+def password_reset_base(request):
+	"""
+	密码重置主页
+	"""
+	if request.method == 'POST':
+		rest_pwd_form = RestPwdForm(request.POST)
+		if rest_pwd_form.is_valid():
+			password1 = rest_pwd_form.cleaned_data['password1']
+			password2 = rest_pwd_form.cleaned_data['password2']
+			code = rest_pwd_form.cleaned_data['reset_code']
+			if password1 == password2:
+				if code == request.session["code"]:
+					new_user = SiteUser.objects.update(
+						password=hash_code(password2)
+					)
+					del request.session["code"]  # 删除session
+					messages.success(request, "密码已重置")
+					return redirect(reverse('blog:password_reset_done'))
+				else:
+					messages.error(request, '验证码错误')
+			else:
+				messages.error(request, '密码输入不一致，请重新输入')
+	else:
+		rest_pwd_form = RestPwdForm()
+	return render(request, 'blog/password_reset/password_reset_base.html', locals())
 
 
 def password_reset_done(request):
 	"""
 	重置结束
 	"""
-	return render(request, 'password_reset/password_reset_done.html')
+	return render(request, 'blog/password_reset/password_reset_done.html')
 
 
 def user_logout(request):

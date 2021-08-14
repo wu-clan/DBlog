@@ -22,6 +22,7 @@
                         });
                     </script>
                 </div>
+                {# 头像 #}
                 <a class="notransition" href="{% url "blog:about" %}" data-pjax-state="">
                     <img class="headportrait" src="{{ avatar_link }}">
                 </a>
@@ -152,8 +153,7 @@
                     <a class="blue-text" href="{{ comment.url }}" title="{{ comment.comment }}">
                         {{ comment.comment }}
                     </a>
-                    <span style="text-align: right; margin-left: 50px">— &nbsp;
-                        <i class="el-user"></i>
+                    <span style="text-align: right; margin-left: 50px">— &nbsp;<i class="el-user"></i>
                         {{ comment.user_name }}
                     </span>
                 </div>
