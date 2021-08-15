@@ -37,7 +37,7 @@
 
 ###### ps: 如果访问网站期间，你使用了某些墙代理网络，会失去一些网页功能 ！！！
 
-## 📈源码下载
+## ⬇ 源码下载
 ```
 wget https://gitee.com/wu_cl/DBlog.git/master.zip
 or
@@ -102,7 +102,7 @@ ps: 如果更改了项目或任一配置文件的位置，请记得修改各配�
 步骤同上 ，注意需要将命令中 pip 改为 pip3，python 改为 python3 ，再执行命令
 ```
 
-## ❓问题相关
+## ❓ 问题相关
 欢迎提交问题到 [Issues](https://gitee.com/wu_cl/DBlog/issues) 
 或我的QQ邮箱 `2186656812@qq.com`, 我将在看到问题后第一时间回复
 
