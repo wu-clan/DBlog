@@ -20,8 +20,8 @@ def sidebar(request):
 	# 友链
 	friends = Friend.objects.all()
 
-	# 捐助首款图
-	payimg = Pay.objects.all().order_by('-payimg')[0:2]
+	# 捐助收款图
+	payimg = Pay.objects.all()[0:2]
 
 	# 轮播图
 	carousel = Carousel.objects.all()
