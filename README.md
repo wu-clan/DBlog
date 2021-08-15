@@ -1,6 +1,6 @@
 # Django博客系统 
 
-（📢 _持续更新ing... 欢迎提交Issues...如果想保持同步状态，请及时通过 git 更新..._）
+（📢 _持续更新ing... 欢迎提交Issues，如果想保持同步状态，请及时通过 git 更新 ）
 
 [![python3](https://img.shields.io/badge/Python-3.8-red.svg)](https://www.python.org/downloads)
 [![Django3.2](https://img.shields.io/badge/Django-3.2.4-green.svg)](https://docs.djangoproject.com/zh-hans/3.2)
@@ -24,20 +24,20 @@
 * 4 种皮肤（清新，清爽，简约，暗黑）自由切换
 * 最新评论 / 阅读排行榜
 * 多目标源博文分享（支持https）
-* echarts 博文统计图（发布，分类，标签）
+* echarts 博文统计图（文章发布，分类，标签），雷达统计图（分类）
 * 第三方社会化评论系统(畅言)
-* 冷数据使用 redis 缓存
+* 冷数据 redis 缓存
 * windows: django-gzip压缩主站，linux: nginx-gzip压缩全站
 * Rss / Atom 订阅
 * 支持图床，后台上传图片可直链访问及调用  
 * simpleui后台管理  +   后台自定义全站配置信息
-* 用户注册，登录
+* 用户注册，登录，注销，密码邮箱验证修改（非 django-auth 验证方式）
 
- _（㊙持续更新ing...）_ 
+ _（持续更新ing...）_ 
 
 ###### ps: 如果访问网站期间，你使用了某些墙代理网络，会失去一些网页功能 ！！！
 
-## 源码下载
+## 📈源码下载
 ```
 wget https://gitee.com/wu_cl/DBlog.git/master.zip
 or
