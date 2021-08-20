@@ -74,25 +74,23 @@ django.db.utils.IntegrityError: (1048, "Column 'last_login' cannot be null")
 ### END:
 浏览器中打开 <http://127.0.0.1:8000/> 即可访问
 
-&nbsp;
-
 ## 🙏 搭建Linux服务端
 ```python
 # 前提条件
 你已经成功在windows部署并运行过DBlog项目
 
-# 示例环境 : （全过程已示例环境为基础）
+# 示例环境（全过程已示例环境为基础）
 Ubuntu-20.04, nginx-1.18.0, uwsgi, mysql-8, python-3.8, redis-server
 
 # linux文件夹中提供了配置的参考文件
-nginx_conf： nginx 配置文件(https)
-uwsgi.py： 开机自启动服务脚本
-uwsgi.sh:  用于调用自启动服务脚本的shell脚本
+nginx_conf: nginx 配置文件(https)
+uwsgi.py: 开机自启动服务脚本
+uwsgi.sh: 用于调用自启动服务脚本的shell脚本
 ```
 
 ### 环境准备
 ```python
-0，安装Ubuntu-20.04，进入linux系统，打开命令行窗口
+0，安装Ubuntu-20.04,进入linux系统,打开命令行窗口
 
 1, cd /home, 将 windows 项目拷贝至 /home 目录下
    # 不建议直接将项目下载到linux，对于初学者，这是不友好的，
@@ -101,30 +99,30 @@ uwsgi.sh:  用于调用自启动服务脚本的shell脚本
 2, pip3 install uwsgi
 
 3, 安装 mysql8 和 redis
-   百度： Ubuntu-20.04 安装 mysql8
-   百度： Ubuntu-20.04 安装 redis
+   百度: Ubuntu-20.04 安装 mysql8
+   百度: Ubuntu-20.04 安装 redis
 
-4, 将参考文件 nginx_conf 文件中的内容替换到 /etc/nginx/sites-enabled/default 文件中, 注意是替换内容，不是直接替换文件，如果网站未使用https，请百度django nginx配置，再修改文件内容
+4, 将参考文件 nginx_conf 文件中的内容替换到 /etc/nginx/sites-enabled/default 文件中, 注意是替换内容,不是直接替换文件,如果网站未使用https,请百度django nginx配置,再修改文件内容
 
 5, 将参考文件 uwsgi.sh 拷贝到 /etc/init.d/ 目录下, 并进入 /etc/init.d/ 目录执行 chmod 755 uwsgi.sh 赋予该脚本权限
 
- ps: 之所以让百度，是因为细节太多了...
+ps: 之所以让百度,是因为细节太多了...
 ```
 
 ### 安装
 ```
-1：cd /home/DBlog，执行 pip install -r requirements.txt  # 安装所有依赖
+1: cd /home/DBlog, 执行 pip install -r requirements.txt  # 安装所有依赖
 
-2：修改setting.py mysql数据库配置
+2: 修改setting.py mysql数据库配置
 
-3：python manage.py makemigrations
-4：python manage.py migrate
-5：python manage.py runserver
+3: python manage.py makemigrations
+4: python manage.py migrate
+5: python manage.py runserver
 ```
 
 ### 使用
 ```python
-# 初始化用户名密码，按照提示输入用户名、邮箱、密码即可
+# 初始化用户名密码,按照提示输入用户名、邮箱、密码即可
 python manage.py createsuperuser
 
 # 登录后台 编辑类型、标签、发布文章等
@@ -134,16 +132,14 @@ http://服务器ip:8000/admin
 ### END:
 浏览器中打开 <http://服务器ip:8000/> 即可访问
 
-&nbsp;
-
 ## ❓ 问题相关
 欢迎提交问题到 [Issues](https://gitee.com/wu_cl/DBlog/issues) 
 或我的QQ邮箱 `2186656812@qq.com`, 我将在看到问题后第一时间回复
 
 ### 学习交流群
-应热爱学习的小伙伴，我们也建群了，这是一个New Group，期待并欢迎您的加入
+应热爱学习的小伙伴, 我们也建群了, 这是一个New Group，期待并欢迎您的加入
 
-有任何部署问题，也可进群向我提问
+有任何部署问题, 也可进群向我提问
 
 ![](readme/django_study.jpg)
 
