@@ -48,7 +48,7 @@ git clone https://gitee.com/wu_cl/DBlog.git
 ```
 1：pip install -r requirements.txt  # 安装所有依赖
 
-2：修改setting.py mysql数据库配置 (创建数据库时记得选择 utf8mb4 编码)
+2：创建数据库，修改setting.py mysql数据库配置 (创建数据库时记得选择 utf8mb4 编码)
 
 2.5: 配置畅言：到 http://changyan.kuaizhan.com/ 注册站点,
 将templates/blog/component/changyan.html中js部分换成你在畅言js。
@@ -99,7 +99,7 @@ uwsgi.sh: 用于调用自启动服务脚本的shell脚本
 2, pip3 install uwsgi
 
 3, 安装 mysql8 和 redis
-   百度: Ubuntu-20.04 安装 mysql8
+   百度: Ubuntu-20.04 安装 mysql8 并创建数据库
    百度: Ubuntu-20.04 安装 redis
 
 4, 将参考文件 nginx_conf 文件中的内容替换到 /etc/nginx/sites-enabled/default 文件中, 注意是替换内容,不是直接替换文件,如果网站未使用https,请百度django nginx配置,再修改文件内容
