@@ -90,7 +90,7 @@ uwsgi.sh: 用于调用自启动服务脚本的shell脚本
 
 ### 环境准备
 ```python
-0，安装Ubuntu-20.04,进入linux系统,打开命令行窗口
+已安装Ubuntu-20.04,进入linux系统,打开命令行窗口
 
 1, cd /home, 将 windows 项目拷贝至 /home 目录下
    # 不建议直接将项目下载到linux，对于初学者，这是不友好的，
