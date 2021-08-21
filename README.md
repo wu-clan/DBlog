@@ -143,5 +143,6 @@ http://服务器ip:8000/admin
 
 ![](readme/django_study.jpg)
 
-## 🙇‍ 感谢
-☞ [jhao104](https://github.com/jhao104/django-blog)
+[comment]: <> (## 🙇‍ 感谢)
+
+[comment]: <> (☞ [jhao104]&#40;https://github.com/jhao104/django-blog&#41;)
