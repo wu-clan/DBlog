@@ -2,13 +2,13 @@
     <div class="top">
         <!--头像左边部分-->
         <div class="top-left">
+            {# logo #}
             <div class="logo">
                 <a href="{% url "blog:index" %}">
-                    <img src="/media/{{ website_logo }}" alt=""/>
+                    <img src="/media/{{ website_logo }}" alt="logo"/>
                 </a>
             </div>
-
-            <!--滚动消息-->
+            {# 滚动信息 #}
             <div class="web-xiaoxi">
                 <i class="el-speaker"></i>
                 <ul class="mulitline">
@@ -19,7 +19,6 @@
                     {% endfor %}
                 </ul>
             </div>
-            <!--END 消息 -->
 
             <!--手机菜单按钮-->
             <div class="mobile-nav"><i class="el-lines"></i><i class="el-remove"></i></div>

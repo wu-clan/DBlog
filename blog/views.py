@@ -152,11 +152,11 @@ def password_reset_email(request):
 					email_title = "重置密码"
 					code = reset_code()  # 验证码
 					request.session["code"] = code  # 将验证码保存到session
-					email_body = "验证码为：{0}".format(code)
+					email_body = "您的重置密码验证码为：{0}\n为了不影响您正常使用，请在24小时之内完成重置".format(code)
 					send_status = send_mail(email_title, email_body, settings.EMAIL_HOST_USER, (mail_receiver,),
 					                        auth_user=settings.EMAIL_HOST_USER,
 					                        auth_password=settings.EMAIL_HOST_PASSWORD)
-					messages.success(request, "验证码已发送，请查收邮件, 继续重置密码")
+					messages.success(request, "验证码已发送，请查收邮件")
 					return redirect(reverse('blog:password_reset_base'))
 			# 调试的时候请将此expect注释
 			except WindowsError:
@@ -184,7 +184,7 @@ def password_reset_base(request):
 						password=hash_code(password2)
 					)
 					del request.session["code"]  # 删除session
-					messages.success(request, "密码已重置")
+					# messages.success(request, "密码已重置")
 					return redirect(reverse('blog:password_reset_done'))
 				else:
 					messages.error(request, '验证码错误')

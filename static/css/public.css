@@ -260,8 +260,8 @@ header .user .nav-item {
 }
 
 .top .logo img {
-    width: 90%;
-    padding-top: 0.2em;
+    width: 145px;
+    height: 70px;
 }
 
 
@@ -744,10 +744,7 @@ header .user .nav-item {
 }
 
 .for-me .headportrait {
-    /*margin-left: -68px;*/
-    /*margin-top: 68px;*/
-    /*transform: scale(3);*/
-    margin-left: -116px;
+    margin-left: -115px;
     transform: scale(0.8);
     border-radius: 50%;
     -webkit-transition: All 0.4s ease-in-out;
@@ -758,8 +755,7 @@ header .user .nav-item {
 }
 
 .for-me .headportrait:hover {
-    /*-webkit-transform: scale(3.3);*/
-    -webkit-transform: scale(1);
+    -webkit-transform: scale(0.88);
 }
 
 .notransition {
@@ -963,12 +959,9 @@ header .user .nav-item {
     float: none !important;
 }
 
-
 .cloud {
     width: 100%;
     clear: both;
-    overflow: hidden;
-    border-radius: 0px;
     border: 0px solid #eee;
     margin-top: 30px;
     overflow: auto;

@@ -1,19 +1,18 @@
 {% extends "blog/base.html" %}
 
 {% block css %}
-    <link rel="stylesheet" href="/static/css/flexslider.css"/>
+    <link rel="stylesheet" href="/static/css/swiper-bundle.min.css">
 {% endblock %}
 
 {% block content %}
-
     <section class="mysection">
+        {# 轮播图设置 #}
         <div class="swiper-container">
             <ul class="slides swiper-wrapper">
-                {#轮播图设置#}
                 {% for carousels in carousel_list %}
                     <li class="swiper-slide">
                         <a href="#" title="{{ carousels.img_link_title }}">
-                            <img src="/media/{{ carousels.carousel }}"
+                            <img style="width: 871px; height: 395px" src="/media/{{ carousels.carousel }}"
                                  alt="{{ carousels.img_alt }}"/>
                         </a>
                         <div class="swiper-pagination"></div>
@@ -21,9 +20,9 @@
                     </li>
                 {% endfor %}
             </ul>
-            <!-- Add Arrows -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
         </div>
 
         <div class="arclist">
@@ -44,24 +43,22 @@
 {% endblock %}
 
 {% block js %}
-    <script src="/static/js/album.js"></script>
-    <script src="/static/js/jquery.flexslider-min.js"></script>
+    <script src="/static/js/swiper-bundle.min.js"></script>
     <script type="text/javascript">
         $(function () {
             // 轮播图
             new Swiper('.swiper-container', {
-                nextButton: '.swiper-button-next',
-                prevButton: '.swiper-button-prev',
-                pagination: '.swiper-pagination',
-                paginationType: 'fraction',
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                },
                 centeredSlides: true,
-                autoplay: 4000,//自动播放时间
+                autoplay: true, //自动播放时间
                 autoHeight: true //自动高度
-
             });
-            //瀑布流
-            $('.su').jaliswall({item: '.su-li'});
-
         });
     </script>
 {% endblock %}

@@ -127,8 +127,7 @@ class Conf(models.Model):
 	chinese_description = models.CharField(max_length=30, verbose_name='关注我_中文描述', default='永不放弃坚持就是这么酷！要相信光')
 	english_description = models.TextField(max_length=100, verbose_name='关注我_英文描述',
 	                                       default='Never give up persistence is so cool！Believe in the light！！！')
-	avatar_link = models.CharField(max_length=150, verbose_name='关注我_头像超链接',
-	                               default='https://avatars.githubusercontent.com/u/52145145?v=4')
+	avatar_link = models.CharField(max_length=150, verbose_name='关注我_头像超链接')
 	website_author = models.CharField(max_length=20, verbose_name='网站作者', default='xiaowu')
 	website_author_link = models.CharField(max_length=200, verbose_name='网站作者链接', default='http://www.xwboy.top')
 	email = models.EmailField(max_length=50, verbose_name='作者收件邮箱', default='2186656812@qq.com')
