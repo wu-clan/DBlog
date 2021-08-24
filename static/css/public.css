@@ -260,10 +260,8 @@ header .user .nav-item {
 }
 
 .top .logo img {
-    width: 145px;
-    height: 70px;
+    width: 90%;
 }
-
 
 .web-xiaoxi {
     margin-top: 25px;
@@ -622,7 +620,7 @@ header .user .nav-item {
 .arclist {
     width: 100%;
     overflow: hidden;
-    margin-top: 25px;
+    margin-top: 10px;
 }
 
 .arclist > ul {
