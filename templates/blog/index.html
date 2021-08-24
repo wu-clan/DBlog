@@ -4,6 +4,10 @@
     <link rel="stylesheet" href="/static/css/swiper-bundle.min.css">
 {% endblock %}
 
+{% block js %}
+    <script src="/static/js/swiper-bundle.min.js"></script>
+{% endblock %}
+
 {% block content %}
     <section class="mysection">
         {# 轮播图设置 #}
@@ -23,6 +27,23 @@
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
             <div class="swiper-pagination"></div>
+            <script type="text/javascript">
+                $(function () {
+                    // 轮播图
+                    new Swiper('.swiper-container', {
+                        navigation: {
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        },
+                        pagination: {
+                            el: '.swiper-pagination',
+                        },
+                        centeredSlides: true,
+                        autoplay: true, //自动播放时间
+                        autoHeight: true //自动高度
+                    });
+                });
+            </script>
         </div>
 
         <div class="arclist">
@@ -39,26 +60,4 @@
             {% include "blog/component/blog_list.html" with blogs=blog_hot id="Hot" %}
         </div>
     </section>
-
-{% endblock %}
-
-{% block js %}
-    <script src="/static/js/swiper-bundle.min.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            // 轮播图
-            new Swiper('.swiper-container', {
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                pagination: {
-                    el: '.swiper-pagination',
-                },
-                centeredSlides: true,
-                autoplay: true, //自动播放时间
-                autoHeight: true //自动高度
-            });
-        });
-    </script>
 {% endblock %}
