@@ -221,7 +221,7 @@ header {
     height: 70px !important;
     background: rgba(255, 255, 255, .5) url(../images/backgroundimg/topbg1.png) repeat-x 100% 100%;
     box-shadow: 0 0 5px #13c5f8 !important;
-    position: fixed !important;
+    /*position: fixed !important;*/
     z-index: 10 !important;
 }
 
@@ -610,7 +610,7 @@ header .user .nav-item {
     min-width: 320px;
     margin: auto;
     overflow: hidden;
-    padding-top: 100px;
+    padding-top: 30px;
 }
 
 
