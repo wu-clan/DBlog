@@ -33,11 +33,11 @@
             <!--文章正文-->
             <div class="article-content bg-color markdown-body">
                 <div class="post-content" style="padding: 10px 20px 20px 10px">
-                    <div class="BlogAnchor" style="text-indent: 5px; font-size: 16px; margin-top: 15px">
+                    <div class="toc" style="text-indent: 5px; font-size: 16px; margin-top: 15px">
                         <p>▶ 目录</p>
+                        {{ toc|safe }}
                     </div>
                     <div class="code text_dark">
-                        {{ toc|safe }}
                         {{ blog.content|safe }}
                     </div>
                 </div>
