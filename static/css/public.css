@@ -1104,20 +1104,21 @@ header .user .nav-item {
 }
 
 .search {
-    margin-top: 20px;
-    margin-bottom: 30px;
+    /*margin-top: 20px;*/
+    margin-bottom: 20px;
 }
 
 .search form {
-    width: 95%;
+    width: 75%;
     margin: auto;
-    padding-bottom: 0px;
+    padding-bottom: 0;
 }
 
 .search-index {
     overflow: hidden;
-    padding-top: 10px;
-    height: 2em;
+    border-radius: 20px;
+    height: 2.5em;
+    border: 1px solid rgb(206 212 218);
 }
 
 .search-index input {
@@ -1126,6 +1127,7 @@ header .user .nav-item {
     height: 100%;
     width: 80%;
     float: left;
+    border: none !important;
 }
 
 .search-index i {
@@ -1136,18 +1138,17 @@ header .user .nav-item {
     margin: 0;
     text-align: center;
     font-size: 16px;
-    line-height: 2em;
+    line-height: 2.5em;
 }
 
 .search form input[type="submit"] {
     cursor: pointer;
     position: relative;
-    top: -32px;
+    top: -40px;
     background: none;
     width: 100%;
-    border: 1px solid #ccc;
     box-sizing: border-box;
-    border-left: none;
+    border: none;
 }
 
 
