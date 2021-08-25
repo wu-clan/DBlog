@@ -1,16 +1,4 @@
 <aside class="myaside">
-
-    <!--搜索-->
-    <div class="search animation-div">
-        <form action="{% url "blog:search" %}" method="get">
-            <div class="search-index">
-                <input name="key" type="text" placeholder="请输入关键字..." onfocus="this.placeholder=''"
-                       onblur="this.placeholder='请输入关键字...'"/>
-                <i class="el-search"><input value=" " type="submit"/></i>
-            </div>
-        </form>
-    </div>
-
     <!--关注我-->
     <div class="focus-me bg-color animation-div">
         <h4 class="index-title"><i class="el-heart"></i>关注我
@@ -105,6 +93,17 @@
             with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://www.landiannews.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
             </script>
         </div>
+    </div>
+
+    <!--搜索-->
+    <div class="search animation-div">
+        <form action="{% url "blog:search" %}" method="get">
+            <div class="search-index">
+                <input name="key" type="text" placeholder="请输入关键字..." onfocus="this.placeholder=''"
+                       onblur="this.placeholder='请输入关键字...'"/>
+                <i class="el-search"><input value=" " type="submit"/></i>
+            </div>
+        </form>
     </div>
 
     <!--公告-->
