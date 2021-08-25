@@ -453,6 +453,7 @@ def get_comment(request, pk):
 		form = CommentForm(request.POST)
 		if form.is_valid():
 			comment = form.save(commit=False)
+			comment.title = blog.title
 			# 关联评论与文章
 			comment.post = blog
 			comment.save()
