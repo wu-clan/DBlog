@@ -331,11 +331,14 @@ class Comment(models.Model):
 	评论
 	"""
 	title = models.CharField("标题", max_length=100)
-	source_id = models.CharField('文章id或source名称', max_length=25)
+	# source_id = models.CharField('文章id或source名称', max_length=25)
 	create_time = models.DateTimeField('评论时间', auto_now=True)
 	user_name = models.CharField('评论用户', max_length=25)
+	email = models.EmailField('预留邮箱', max_length=50, default='')
 	url = models.CharField('链接', max_length=100)
 	comment = models.TextField('评论内容', max_length=500)
+	# 文章评论一对一
+	post = models.ForeignKey(Article, related_name='post', default='', on_delete=models.CASCADE)
 
 	class Meta:
 		ordering = ['create_time']
@@ -343,4 +346,4 @@ class Comment(models.Model):
 		verbose_name_plural = verbose_name
 
 	def __str__(self):
-		return self.title
+		return self.comment[:20]

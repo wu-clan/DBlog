@@ -1,4 +1,30 @@
 <h3 class="form-btn blue-text"><a href="javascript:;"><i class="el-edit"></i>我要留言 / 展开表单</a></h3>
 <div id="Coon" class="form-zd form-in">
-    {% include 'blog/component/changyan.html' %}
+    {#    {% include 'blog/component/changyan.html' %}#}
+    <form action="{% url 'blog:get_comment' blog.id %}" method="post" class="comment-form">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4">
+                <label for="{{ form.user_name.id_for_label }}">名字：</label>
+                {{ form.user_name }}
+                {{ form.user_name.errors }}
+            </div>
+            <div class="col-md-4">
+                <label for="{{ form.email.id_for_label }}">邮箱：</label>
+                {{ form.email }}
+                {{ form.email.errors }}
+            </div>
+            <div class="col-md-4">
+                <label for="{{ form.url.id_for_label }}">URL：</label>
+                {{ form.url }}
+                {{ form.url.errors }}
+            </div>
+            <div class="col-md-12">
+                <label for="{{ form.comment.id_for_label }}">评论：</label>
+                {{ form.comment }}
+                {{ form.comment.errors }}
+                <button type="submit" class="comment-btn">发表</button>
+            </div>
+        </div>
+    </form>
 </div>

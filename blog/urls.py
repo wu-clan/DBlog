@@ -22,7 +22,7 @@ urlpatterns = [
 	# 留言表单
 	path('message/', views.message, name='message'),
 	# 评论
-	path('get_comment/', views.get_comment, name='get_comment'),
+	path('get_comment/<int:pk>/', views.get_comment, name='get_comment'),
 	# 关于
 	path('about/', views.about, name='about'),
 	# Rss

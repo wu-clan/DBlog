@@ -14,6 +14,7 @@ from django.db.models import Q
 from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
 
+from blog.comment.forms import CommentForm
 from blog.models import SiteUser
 from blog.user.forms import ProfileForm, RegisterForm, RestCodeForm, RestPwdForm, UserForm
 from djangoProject import settings
@@ -286,8 +287,18 @@ def detail(request, pk):
 			'markdown.extensions.toc',
 		]
 	)
+	# md文章内容
 	blog.content = md.convert(blog.content)
-	return render(request, 'blog/detail.html', {"blog": blog, 'toc': md.toc})
+	form = CommentForm()
+	# 获取这篇 post 下的全部评论
+	comment_list = blog.post.all()
+	context = {
+		"blog": blog,
+		'toc': md.toc,
+		'form': form,
+		'comment_list': comment_list
+	}
+	return render(request, 'blog/detail.html', context=context)
 
 
 def blog_list(request):
@@ -433,27 +444,43 @@ def search(request):
 	return render(request, 'blog/search.html', {"blog_list": _blog_list, "pages": page_info, "key": key})
 
 
-@csrf_exempt
-def get_comment(request):
+# @csrf_exempt
+# def get_comment(request):
+# 	"""
+# 	接收畅言的评论回推， post方式回推
+# 	记得去畅言配置回推地址 http://网站地址/blog/get_comment/
+# 	启用SSL的网站使用 https
+# 	"""
+# 	arg = request.POST
+# 	data = arg.get('data')
+# 	data = json.loads(data)
+# 	title = data.get('title')
+# 	url = data.get('url')
+# 	source_id = data.get('sourceid')
+# 	if source_id not in ['message']:
+# 		article = Article.objects.get(pk=source_id)
+# 		article.commenced()
+# 	comments = data.get('comments')[0]
+# 	content = comments.get('content')
+# 	user = comments.get('user').get('nickname')
+# 	Comment(title=title, source_id=source_id, user_name=user, url=url, comment=content).save()
+# 	return JsonResponse({"status": "ok"})
+
+def get_comment(request, pk):
 	"""
-	接收畅言的评论回推， post方式回推
-	记得去畅言配置回推地址 http://网站地址/blog/get_comment/
-	启用SSL的网站使用 https
+	评论
 	"""
-	arg = request.POST
-	data = arg.get('data')
-	data = json.loads(data)
-	title = data.get('title')
-	url = data.get('url')
-	source_id = data.get('sourceid')
-	if source_id not in ['message']:
-		article = Article.objects.get(pk=source_id)
-		article.commenced()
-	comments = data.get('comments')[0]
-	content = comments.get('content')
-	user = comments.get('user').get('nickname')
-	Comment(title=title, source_id=source_id, user_name=user, url=url, comment=content).save()
-	return JsonResponse({"status": "ok"})
+	blog = get_object_or_404(Article, pk=pk)
+	if request.method == 'POST':
+		form = CommentForm(request.POST)
+		if form.is_valid():
+			comment = form.save(commit=False)
+			# 关联评论与文章
+			comment.post = blog
+			comment.save()
+			return redirect('blog:get_comment', pk=pk)
+	# 不是 post 请求，重定向到文章详情页。
+	return redirect('blog:detail', pk=pk)
 
 
 def page_not_found_error(request, exception):
