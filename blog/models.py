@@ -331,7 +331,6 @@ class Comment(models.Model):
 	评论
 	"""
 	title = models.CharField("标题", max_length=100)
-	# source_id = models.CharField('文章id或source名称', max_length=25)
 	create_time = models.DateTimeField('评论时间', auto_now=True)
 	user_name = models.CharField('评论用户', max_length=25)
 	email = models.EmailField('预留邮箱', max_length=50, default='')

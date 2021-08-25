@@ -69,11 +69,6 @@
                 </div>
             </div>
 
-            {# 畅言打赏组件 #}
-            <div class="cyReward " style="text-align: center">
-                <div id="cyReward" role="cylabs" data-use="reward" sid="{{ blog.id }}"></div>
-            </div>
-
             <hr>
 
             <!--标签-->
@@ -91,15 +86,9 @@
 
             <hr>
 
-            {# <畅言表情包组件></畅言表情包组件> #}
-            <div class="cyEmoji" style="text-align: center">
-                <div id="cyEmoji" role="cylabs" data-use="emoji" sid="{{ blog.id }}"></div>
-            </div>
-
         </article>
 
         <!--评论表单-->
-        {#        {% include "blog/message.html"  with source_id=blog.id %}#}
         <div class="comments">
             <ul class="comment-list">
                 {% for comment in comment_list %}
@@ -142,7 +131,4 @@
 
 
     </script>
-
-    {# 畅言组件js调用 #}
-    {#    <script async type="text/javascript" charset="utf-8" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cyvvtVNGI"></script>#}
 {% endblock %}

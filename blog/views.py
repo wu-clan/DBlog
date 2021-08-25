@@ -444,28 +444,6 @@ def search(request):
 	return render(request, 'blog/search.html', {"blog_list": _blog_list, "pages": page_info, "key": key})
 
 
-# @csrf_exempt
-# def get_comment(request):
-# 	"""
-# 	接收畅言的评论回推， post方式回推
-# 	记得去畅言配置回推地址 http://网站地址/blog/get_comment/
-# 	启用SSL的网站使用 https
-# 	"""
-# 	arg = request.POST
-# 	data = arg.get('data')
-# 	data = json.loads(data)
-# 	title = data.get('title')
-# 	url = data.get('url')
-# 	source_id = data.get('sourceid')
-# 	if source_id not in ['message']:
-# 		article = Article.objects.get(pk=source_id)
-# 		article.commenced()
-# 	comments = data.get('comments')[0]
-# 	content = comments.get('content')
-# 	user = comments.get('user').get('nickname')
-# 	Comment(title=title, source_id=source_id, user_name=user, url=url, comment=content).save()
-# 	return JsonResponse({"status": "ok"})
-
 def get_comment(request, pk):
 	"""
 	评论

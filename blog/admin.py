@@ -172,7 +172,6 @@ class CommentAdmin(admin.ModelAdmin):
 	"""
 	list_display = (
 		'title',
-		# 'source_id',
 		'create_time',
 		'user_name',
 		'email',
