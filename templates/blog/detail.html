@@ -1,5 +1,4 @@
 {% extends "blog/base.html" %}
-{% load custom_filter %}
 
 {% block title %}
     <title>{{ blog.title }}</title>
@@ -17,7 +16,6 @@
 {% endblock %}
 
 {% block content %}
-
     <div class="mysection content">
         <article>
             <h3 class="arc-title index-title">{{ blog.title }} </h3>
@@ -36,13 +34,11 @@
             <div class="article-content bg-color markdown-body">
                 <div class="post-content" style="padding: 10px 20px 20px 10px">
                     <div class="BlogAnchor" style="text-indent: 5px; font-size: 16px; margin-top: 15px">
-                        <p>▶
-                            <b id="AnchorContentToggle" title="收起" style="cursor:pointer;">目录[-]</b>
-                        </p>
-                        <div class="AnchorContent" id="AnchorContent"></div>
+                        <p>▶ 目录</p>
                     </div>
-                    <div class="text_dark">
-                        {{ blog.content|custom_markdown|safe }}
+                    <div class="code text_dark">
+                        {{ toc|safe }}
+                        {{ blog.content|safe }}
                     </div>
                 </div>
             </div>
@@ -112,7 +108,7 @@
     <script src="/static/js/jquery.2.1.4.min.js"></script>
     <script src="/static/prism/clipboard.min.js"></script>
     <script src="/static/prism/prism.js" charset="utf-8"></script>
-    <script type="text/javascript"
+    <script async type="text/javascript"
             src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -122,32 +118,5 @@
     </script>
 
     {# 畅言组件js调用 #}
-    <script type="text/javascript" charset="utf-8" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cyvvtVNGI"></script>
-
-    <script>
-        function GenerateContentList() {
-            $(".post-content").find("h2,h3").each(function (i, item) {
-                var tag = $(item).get(0).localName;
-                $(item).attr("id", "wow" + i);
-                $("#AnchorContent").append('<li><a class="new' + tag + ' anchor-link"  href="#wow' + i + '">' + $(this).text() + '</a></li>');
-                $(".newh2").css("margin-left", 0);
-                $(".newh3").css("margin-left", 20);
-                $(".newh4").css("margin-left", 40);
-                $(".newh5").css("margin-left", 60);
-                $(".newh6").css("margin-left", 80);
-            });
-            $("#AnchorContentToggle").click(function () {
-                var text = $(this).html();
-                if (text == "目录[-]") {
-                    $(this).html("目录[+]");
-                    $(this).attr({"title": "展开"});
-                } else {
-                    $(this).html("目录[-]");
-                    $(this).attr({"title": "收起"});
-                }
-                $("#AnchorContent").toggle();
-            });
-        }
-        GenerateContentList();
-    </script>
+    <script async type="text/javascript" charset="utf-8" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cyvvtVNGI"></script>
 {% endblock %}

@@ -5,6 +5,7 @@ import json
 import random
 import string
 
+import markdown
 from django.contrib import auth, messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -271,11 +272,27 @@ def profile_edit(request, id):
 """"""""""""""""""""""""" 登录结束 """""""""""""""""""""""""
 
 
+def detail(request, pk):
+	"""
+	博文详情
+	"""
+	blog = get_object_or_404(Article, pk=pk)
+	blog.viewed()
+	md = markdown.Markdown(
+		extensions=[
+			'markdown.extensions.extra',
+			'markdown.extensions.fenced_code',
+			'markdown.extensions.tables',
+			'markdown.extensions.toc',
+		]
+	)
+	blog.content = md.convert(blog.content)
+	return render(request, 'blog/detail.html', {"blog": blog, 'toc': md.toc})
+
+
 def blog_list(request):
 	"""
 	文章列表
-	:param request:
-	:return:
 	"""
 	page_number = get_page(request)
 	blog_count = Article.objects.count()
@@ -287,9 +304,6 @@ def blog_list(request):
 def category(request, name):
 	"""
 	文章分类
-	:param request:
-	:param name:
-	:return:
 	"""
 	categories = Category.fetch_all_category()
 
@@ -308,9 +322,6 @@ def category(request, name):
 def tag(request, name):
 	"""
 	标签
-	:param request:
-	:param name
-	:return:
 	"""
 	page_number = get_page(request)
 	blog_count = Article.objects.filter(tag__tag_name=name).count()
@@ -324,8 +335,6 @@ def tag(request, name):
 def archive(request):
 	"""
 	文章归档
-	:param request:
-	:return:
 	"""
 	_blog_list = Article.objects.values("id", "title", "date_time").order_by('-date_time')
 	archive_dict = {}
@@ -412,14 +421,24 @@ def about(request):
 	})
 
 
+def search(request):
+	"""
+	搜索
+	"""
+	key = request.GET['key']
+	page_number = get_page(request)
+	blog_count = Article.objects.filter(title__icontains=key).count()
+	page_info = PageInfo(page_number, blog_count)
+	_blog_list = Article.objects.filter(title__icontains=key)[page_info.index_start: page_info.index_end]
+	return render(request, 'blog/search.html', {"blog_list": _blog_list, "pages": page_info, "key": key})
+
+
 @csrf_exempt
 def get_comment(request):
 	"""
 	接收畅言的评论回推， post方式回推
 	记得去畅言配置回推地址 http://网站地址/blog/get_comment/
 	启用SSL的网站使用 https
-	:param request:
-	:return:
 	"""
 	arg = request.POST
 	data = arg.get('data')
@@ -435,32 +454,6 @@ def get_comment(request):
 	user = comments.get('user').get('nickname')
 	Comment(title=title, source_id=source_id, user_name=user, url=url, comment=content).save()
 	return JsonResponse({"status": "ok"})
-
-
-def detail(request, pk):
-	"""
-	博文详情
-	:param request:
-	:param pk:
-	:return:
-	"""
-	blog = get_object_or_404(Article, pk=pk)
-	blog.viewed()
-	return render(request, 'blog/detail.html', {"blog": blog})
-
-
-def search(request):
-	"""
-	搜索
-	:param request:
-	:return:
-	"""
-	key = request.GET['key']
-	page_number = get_page(request)
-	blog_count = Article.objects.filter(title__icontains=key).count()
-	page_info = PageInfo(page_number, blog_count)
-	_blog_list = Article.objects.filter(title__icontains=key)[page_info.index_start: page_info.index_end]
-	return render(request, 'blog/search.html', {"blog_list": _blog_list, "pages": page_info, "key": key})
 
 
 def page_not_found_error(request, exception):

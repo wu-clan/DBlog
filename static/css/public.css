@@ -1,7 +1,7 @@
 body {
     font-size: 14px;
     font-size: 100%;
-    font-family: PingFang SC,DFPKingGothicGB-Regular,sans-serif;
+    font-family: PingFang SC, DFPKingGothicGB-Regular, sans-serif;
     line-height: 24px;
     margin: 0;
     padding: 0;
@@ -292,6 +292,9 @@ header .user .nav-item {
     overflow: hidden;
 }
 
+.code .code-toolbar {
+    margin-left: 39px
+}
 
 #tianqi {
     max-height: 90px;
@@ -743,7 +746,7 @@ header .user .nav-item {
 
 .for-me .headportrait {
     margin-left: -115px;
-    transform: scale(0.8);
+    transform: scale(0.75);
     border-radius: 50%;
     -webkit-transition: All 0.4s ease-in-out;
 }
@@ -753,7 +756,7 @@ header .user .nav-item {
 }
 
 .for-me .headportrait:hover {
-    -webkit-transform: scale(0.88);
+    -webkit-transform: scale(0.8);
 }
 
 .notransition {
@@ -2104,7 +2107,6 @@ footer {
         right: 10px;
     }
 
-    /*���ض���*/
     .mob-hidden {
         display: none;
     }
@@ -2122,7 +2124,7 @@ footer {
         font-size: 12px;
     }
 
-     .aboutme p > img {
+    .aboutme p > img {
         width: 150%;
         margin-left: -125px;
     }
