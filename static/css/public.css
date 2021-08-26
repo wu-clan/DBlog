@@ -2181,7 +2181,6 @@ footer {
     border: 1px solid rgb(240 240 240);
     border-radius: 4px;
     margin-bottom: 10px;
-    overflow: hidden;
     position: relative;
     padding: 10px;
     background: rgba(255, 255, 255, .5);
@@ -2209,22 +2208,8 @@ footer {
     max-width: 100%;
 }
 
-.vctrl {
-    margin-top: 10px;
-    position: relative;
-    display: inline-block;
-    color: rgb(136 136 136);
-    border: 1px solid rgb(221 221 221);
-    border-radius: 4px;
-    font-size: 13px;
-    padding: 2px 5px;
-    height: 22px;
-    box-sizing: border-box;
-    z-index: 2;
-    line-height: 16px;
-}
-
 .vbtn {
+    margin-top: 20px;
     float: right;
     -webkit-transition-duration: .4s;
     transition-duration: .4s;
@@ -2233,7 +2218,7 @@ footer {
     border: 1px solid rgb(237 237 237);
     border-radius: .3em;
     display: inline-block;
-    background: rgb(237 237 237);
+    background: rgb(255 255 255);
     margin-bottom: 0;
     font-weight: 400;
     vertical-align: middle;

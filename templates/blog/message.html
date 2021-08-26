@@ -1,3 +1,7 @@
+{% block css %}
+    <link rel="stylesheet" href="/static/css/OwO.min.css">
+{% endblock %}
+
 <h3 class="form-btn blue-text"><a href="javascript:;"><i class="el-edit"></i>我要留言 / 展开表单</a></h3>
 <div id="Coon" class="form-zd form-in">
     <form action="{% url 'blog:get_comment' blog.id %}" method="post" class="comment-form">
@@ -19,14 +23,31 @@
             </div>
             <div class="vedit">
                 <label>
-                    <input class="vediter vinput" name="comment" placeholder="在这里输入吧..." type="text">
+                    <input class="vediter vinput OwO-textarea" name="comment" placeholder="在这里输入吧..." type="text">
                     {{ form.comment.errors }}
                 </label>
-                <div class="vctrl">
-                    <span class="vemoji-btn">OωO表情</span>
+                <div class="OwO" style="width: 50%;">
+                    <div class="OwO-logo">
+                        <span>OωO表情</span>
+                    </div>
                 </div>
+                <button class="vsubmit vbtn" type="submit" title="Cmd|Ctrl+Enter">发表</button>
             </div>
-            <button class="vsubmit vbtn" type="submit" title="Cmd|Ctrl+Enter">发表</button>
         </div>
     </form>
 </div>
+{% block js %}
+    <script src="/static/js/OwO.min.js"></script>
+    <script>
+        const OwO_demo = new OwO({
+            logo: 'OωO表情',
+            container: document.getElementsByClassName('OwO')[0],
+            target: document.getElementsByClassName('OwO-textarea')[0],
+            api: '/static/OwO.json',
+            position: 'down',
+            width: '100%',
+            maxHeight: '250px'
+        });
+    </script>
+{% endblock %}
+
