@@ -8,24 +8,24 @@
         {% csrf_token %}
         <div class="vwrap">
             <div class="vheader item3">
-                <label>
-                    <input class="vnick vinput" name="user_name" placeholder="昵称" type="text">
-                    {{ form.user_name.errors }}
-                </label>
-                <label>
-                    <input class="vmail vinput" name="email" placeholder="邮箱" type="text">
-                    {{ form.user_name.errors }}
-                </label>
-                <label>
-                    <input class="vlink vinput" name="url" placeholder="url" type="text">
-                    {{ form.user_name.errors }}
-                </label>
+                <input class="vnick vinput" name="user_name" placeholder="昵称" maxlength="25" required=""
+                       id="id_user_name" type="text">
+                {# {{ form.user_name }}#}
+                {{ form.user_name.errors }}
+                <input class="vmail vinput" name="email" placeholder="邮箱" maxlength="50" required="" id="id_email"
+                       type="email">
+                {# {{ form.email }}#}
+                {{ form.email.errors }}
+                <input class="vlink vinput" name="url" placeholder="url" maxlength="100" required="" id="id_url"
+                       type="text">
+                {# {{ form.url }}#}
+                {{ form.url.errors }}
             </div>
             <div class="vedit">
-                <label>
-                    <input class="vediter vinput OwO-textarea" name="comment" placeholder="在这里输入吧..." type="text">
-                    {{ form.comment.errors }}
-                </label>
+                <textarea class="vediter vinput OwO-textarea" name="comment" placeholder="在这里输入吧..." maxlength="500"
+                          required="" id="id_comment" type="text"></textarea>
+                {# {{ form.comment }}#}
+                {{ form.comment.errors }}
                 <div class="OwO" style="width: 50%;">
                     <div class="OwO-logo">
                         <span>OωO表情</span>
