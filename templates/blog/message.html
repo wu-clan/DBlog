@@ -2,28 +2,31 @@
 <div id="Coon" class="form-zd form-in">
     <form action="{% url 'blog:get_comment' blog.id %}" method="post" class="comment-form">
         {% csrf_token %}
-        <div class="row">
-            <div class="col-md-4">
-                <label for="{{ form.user_name.id_for_label }}">名字：</label>
-                {{ form.user_name }}
-                {{ form.user_name.errors }}
+        <div class="vwrap">
+            <div class="vheader item3">
+                <label>
+                    <input class="vnick vinput" name="user_name" placeholder="昵称" type="text">
+                    {{ form.user_name.errors }}
+                </label>
+                <label>
+                    <input class="vmail vinput" name="email" placeholder="邮箱" type="text">
+                    {{ form.user_name.errors }}
+                </label>
+                <label>
+                    <input class="vlink vinput" name="url" placeholder="url" type="text">
+                    {{ form.user_name.errors }}
+                </label>
             </div>
-            <div class="col-md-4">
-                <label for="{{ form.email.id_for_label }}">邮箱：</label>
-                {{ form.email }}
-                {{ form.email.errors }}
+            <div class="vedit">
+                <label>
+                    <input class="vediter vinput" name="comment" placeholder="在这里输入吧..." type="text">
+                    {{ form.comment.errors }}
+                </label>
+                <div class="vctrl">
+                    <span class="vemoji-btn">OωO表情</span>
+                </div>
             </div>
-            <div class="col-md-4">
-                <label for="{{ form.url.id_for_label }}">URL：</label>
-                {{ form.url }}
-                {{ form.url.errors }}
-            </div>
-            <div class="col-md-12">
-                <label for="{{ form.comment.id_for_label }}">评论：</label>
-                {{ form.comment }}
-                {{ form.comment.errors }}
-                <button type="submit" class="comment-btn">发表</button>
-            </div>
+            <button class="vsubmit vbtn" type="submit" title="Cmd|Ctrl+Enter">发表</button>
         </div>
     </form>
 </div>

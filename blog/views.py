@@ -290,13 +290,13 @@ def detail(request, pk):
 	# md文章内容
 	blog.content = md.convert(blog.content)
 	form = CommentForm()
-	# 获取这篇 post 下的全部评论
-	comment_list = blog.post.all()
+	# 获取对应文章的全部评论
+	comments = blog.post.all()
 	context = {
 		"blog": blog,
 		'toc': md.toc,
 		'form': form,
-		'comment_list': comment_list
+		'comments': comments
 	}
 	return render(request, 'blog/detail.html', context=context)
 

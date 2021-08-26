@@ -1492,6 +1492,11 @@ header .user .nav-item {
     float: none !important;
 }
 
+.comment-num {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
 .comment-item {
     padding: 12px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
@@ -2170,6 +2175,80 @@ footer {
 
 #category-radar {
     width: 871px;
+}
+
+.vwrap {
+    border: 1px solid rgb(240 240 240);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    position: relative;
+    padding: 10px;
+    background: rgba(255, 255, 255, .5);
+}
+
+.vwrap .vheader .vinput {
+    width: 33.33%;
+    float: left;
+    height: 3rem;
+    border: none;
+    border-bottom: 1px dashed rgb(222 222 222);
+}
+
+.vedit .vediter {
+    margin-top: 20px;
+    width: 100%;
+    min-height: 8.75em;
+    font-size: .875em;
+    -webkit-transition: all .25s ease;
+    transition: all .25s ease;
+    border: none;
+    resize: none;
+    outline: none;
+    padding: 10px 5px;
+    max-width: 100%;
+}
+
+.vctrl {
+    margin-top: 10px;
+    position: relative;
+    display: inline-block;
+    color: rgb(136 136 136);
+    border: 1px solid rgb(221 221 221);
+    border-radius: 4px;
+    font-size: 13px;
+    padding: 2px 5px;
+    height: 22px;
+    box-sizing: border-box;
+    z-index: 2;
+    line-height: 16px;
+}
+
+.vbtn {
+    float: right;
+    -webkit-transition-duration: .4s;
+    transition-duration: .4s;
+    text-align: center;
+    color: rgb(49 49 49);
+    border: 1px solid rgb(237 237 237);
+    border-radius: .3em;
+    display: inline-block;
+    background: rgb(237 237 237);
+    margin-bottom: 0;
+    font-weight: 400;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: .5em 1.25em;
+    font-size: .875em;
+    line-height: 1.42857143;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
 }
 
 .row {

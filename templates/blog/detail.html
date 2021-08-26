@@ -87,11 +87,17 @@
             <hr>
 
         </article>
-
         <!--评论表单-->
+        {% include "blog/message.html" %}
+        {# 评论数 #}
+        <div class="comment-num">
+            <span style="font-weight: 600;font-size: 1.25em;">{{ comments.count }}</span>
+            <span> 评论</span>
+        </div>
+        {# 评论内容 #}
         <div class="comments">
             <ul class="comment-list">
-                {% for comment in comment_list %}
+                {% for comment in comments %}
                     <li class="comment-item">
                         <a href="javascript:void(0);">
                             <img class="comment-avatar" src="{{ avatar_link }}" alt="">
@@ -106,11 +112,10 @@
                         </div>
                     </li>
                 {% empty %}
-                    暂无评论...
+                    <saan>快来写下第一条评论吧...</saan>
                 {% endfor %}
             </ul>
         </div>
-        {% include "blog/message.html" %}
 
     </div>
 {% endblock %}
@@ -128,6 +133,7 @@
             tex2jax: {inlineMath: [['$', '$']]},
             messageStyle: "none"
         });
+
 
 
     </script>
