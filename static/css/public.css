@@ -2163,9 +2163,13 @@ footer {
         font-size: 12px;
     }
 
+    .aboutme p {
+        margin-left: 0;
+    }
+
     .aboutme p > img {
-        width: 150%;
-        margin-left: -125px;
+        width: 100%;
+        display: table-cell;
     }
 
     #category-radar {

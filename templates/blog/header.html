@@ -44,7 +44,7 @@
                 <li><a href="{% url "blog:about" %}">关于</a></li>
                 {% if request.session.user_name %}
                     {# 个人信息 #}
-                    <li class='drop_user'>
+                    <li class='drop_user' style="float: right;">
                         <a href="JavaScript:;"><i class="el el-user"></i>{{ request.session.user_name }}</a>
                         <div class="drop_user-nav orange-text">
                             <ul>
