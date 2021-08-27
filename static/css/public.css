@@ -2013,8 +2013,10 @@ footer {
         background-size: 100%;
     }
 
-    .post-content p {
-        margin-left: 0 !important;
+    .markdown-body p, .markdown-body blockquote, .markdown-body ul,
+    .markdown-body ol, .markdown-body dl, .markdown-body table,
+    .markdown-body pre {
+        margin-left: 0.5rem;
     }
 
     .container {
