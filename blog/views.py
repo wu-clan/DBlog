@@ -360,22 +360,6 @@ def archive(request):
 	return render(request, 'blog/archive.html', {"data": data})
 
 
-def message(request):
-	"""
-	留言
-	"""
-	if request.method == 'POST':
-		form = CommentForm(request.POST)
-		if form.is_valid():
-			comment = form.save(commit=False)
-			comment.title = '留言板'
-			# 关联评论与文章
-			comment.save()
-			return redirect('blog:message')
-	# 不是 post 请求，重定向到文章详情页。
-	return render(request, 'blog/message_board.html', locals())
-
-
 def about(request):
 	"""
 	关于（包含统计图）
