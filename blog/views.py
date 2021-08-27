@@ -364,21 +364,23 @@ def about(request):
 	"""
 	关于（包含统计图）
 	"""
+	# markdown自我介绍
 	about = About.objects.all().first()
-	about.contents = markdown.markdown(about.contents,
-	                                   extensions=[
-		                                   'markdown.extensions.extra',
-		                                   'markdown.extensions.fenced_code',
-		                                   'markdown.extensions.tables',
-	                                   ]
-	                                   )
+	if about:
+		about.contents = markdown.markdown(about.contents,
+		                             extensions=[
+			                             'markdown.extensions.extra',
+			                             'markdown.extensions.fenced_code',
+			                             'markdown.extensions.tables',
+		                             ]
+		                             )
+
 	# 统计图准备
-	articles = Article.objects.filter(category=True).all().order_by('-date_time')
+	articles = Article.objects.filter().all().order_by('-date_time')
 	categories = Category.fetch_all_category()
 	if not articles or not categories:
 		# 没有文章或者分类的情况
 		return render(request, 'blog/about.html', {'articles': None, 'categories': None})
-
 	# 发布统计
 	all_date = articles.values('date_time')
 	# 计算最近一年的时间list作为坐标横轴 注意时间为 例如[2019-5] 里面不是2019-05

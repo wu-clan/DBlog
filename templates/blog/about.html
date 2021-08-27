@@ -14,9 +14,15 @@
         <div class="aboutme">
             <p>About The Author</p><br>
             <center>
-                <div class="text_dark markdown-body">
-                    {{ about.contents | safe }}
-                </div>
+                {% if about.contents %}
+                    <div class="text_dark markdown-body">
+                        {{ about.contents | safe }}
+                    </div>
+                {% else %}
+                    <div class="text_dark markdown-body">
+                        作者忘记做我介绍啦~ 😜😜😜
+                    </div>
+                {% endif %}
             </center>
         </div>
 

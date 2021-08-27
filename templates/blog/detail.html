@@ -112,7 +112,9 @@
                         </div>
                     </li>
                 {% empty %}
-                    <saan>快来写下第一条评论吧...</saan>
+                    <div style="margin-bottom: 99px; margin-top: 30px; color: rgb(188 188 188);">
+                        <span style="margin-left: 26px">🙈 这篇文章还没有评论哟，快来写下第一条评论吧...</span>
+                    </div>
                 {% endfor %}
             </ul>
         </div>
@@ -133,5 +135,7 @@
             tex2jax: {inlineMath: [['$', '$']]},
             messageStyle: "none"
         });
+
+
     </script>
 {% endblock %}
