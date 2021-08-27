@@ -59,8 +59,8 @@ class CarouselAdmin(admin.ModelAdmin):
 	首页轮播图配置
 	"""
 	list_display = (
-		'carousel',
 		'carousel_title',
+		'carousel',
 		'img_link_title',
 		'img_alt'
 	)
@@ -172,9 +172,9 @@ class CommentAdmin(admin.ModelAdmin):
 	"""
 	list_display = (
 		'title',
-		'create_time',
+		'comment',
 		'user_name',
 		'email',
 		'url',
-		'comment'
+		'create_time',
 	)
