@@ -1869,7 +1869,6 @@ footer {
     margin-right: 10px;
 }
 
-
 #toTop {
     width: 47px;
     height: 47px;
@@ -2012,6 +2011,10 @@ footer {
         background-attachment: fixed;
         background-repeat: no-repeat;
         background-size: 100%;
+    }
+
+    .post-content p {
+        margin-left: 0 !important;
     }
 
     .container {
