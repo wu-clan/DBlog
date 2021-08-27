@@ -2018,6 +2018,14 @@ footer {
         margin-left: 0.5rem;
     }
 
+    .pagination ul > li > a, .pagination ul > li > span {
+        padding: 0 6px !important;
+    }
+
+    .search-index {
+        margin-top: 12px;
+    }
+
     .container {
         /*padding-top: 4.5em;*/
     }
