@@ -368,12 +368,12 @@ def about(request):
 	about = About.objects.all().first()
 	if about:
 		about.contents = markdown.markdown(about.contents,
-		                             extensions=[
-			                             'markdown.extensions.extra',
-			                             'markdown.extensions.fenced_code',
-			                             'markdown.extensions.tables',
-		                             ]
-		                             )
+		                                   extensions=[
+			                                   'markdown.extensions.extra',
+			                                   'markdown.extensions.fenced_code',
+			                                   'markdown.extensions.tables',
+		                                   ]
+		                                   )
 
 	# 统计图准备
 	articles = Article.objects.filter().all().order_by('-date_time')
@@ -449,6 +449,9 @@ def get_comment(request, pk):
 		if form.is_valid():
 			comment = form.save(commit=False)
 			comment.title = blog.title
+			# 文章url
+			url = request.headers['Referer']
+			comment.url = str(url)
 			# 关联评论与文章
 			comment.post = blog
 			comment.save()

@@ -334,7 +334,8 @@ class Comment(models.Model):
 	create_time = models.DateTimeField('评论时间', auto_now=True)
 	user_name = models.CharField('评论用户', max_length=25)
 	email = models.EmailField('预留邮箱', max_length=50, default='')
-	url = models.CharField('链接', max_length=100)
+	url = models.CharField('链接', max_length=200)
+	url_input = models.CharField('输入链接拼接', max_length=100, default='')  # 暂时未使用
 	comment = models.TextField('评论内容', max_length=500)
 	# 文章评论一对一
 	post = models.ForeignKey(Article, related_name='post', default='', on_delete=models.CASCADE)

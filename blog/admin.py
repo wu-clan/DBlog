@@ -176,5 +176,6 @@ class CommentAdmin(admin.ModelAdmin):
 		'user_name',
 		'email',
 		'url',
+		'url_input',
 		'create_time',
 	)

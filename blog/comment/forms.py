@@ -13,6 +13,6 @@ class CommentForm(forms.ModelForm):
 		fields = (
 			'user_name',
 			'email',
-			'url',
+			'url_input',
 			'comment'
 		)
