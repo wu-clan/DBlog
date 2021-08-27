@@ -4,10 +4,60 @@
     <title>留言板</title>
 {% endblock %}
 
+{% block css %}
+    <link rel="stylesheet" href="/static/css/OwO.min.css">
+{% endblock %}
+
 {% block content %}
-
-    <section class="mysection">
-        {% include "blog/message.html" %}
-    </section>
-
+    <div class="mysection">
+        <h3 class="form-btn blue-text"><a href="javascript:;"><i class="el-edit"></i>我要留言 / 展开表单</a></h3>
+        <div id="Coon" class="form-zd form-in">
+            <form action="{% url 'blog:message' %}" method="post" class="comment-form">
+                {% csrf_token %}
+                <div class="vwrap">
+                    <div class="vheader item3">
+                        <input class="vnick vinput" name="user_name" placeholder="昵称" maxlength="25" required=""
+                               id="id_user_name" type="text">
+                        {# {{ form.user_name }}#}
+                        {{ form.user_name.errors }}
+                        <input class="vmail vinput" name="email" placeholder="邮箱" maxlength="50" required=""
+                               id="id_email"
+                               type="email">
+                        {# {{ form.email }}#}
+                        {{ form.email.errors }}
+                        <input class="vlink vinput" name="url" placeholder="url" maxlength="100" required="" id="id_url"
+                               type="text">
+                        {# {{ form.url }}#}
+                        {{ form.url.errors }}
+                    </div>
+                    <div class="vedit">
+                <textarea class="vediter vinput OwO-textarea" name="comment" placeholder="在这里输入吧..." maxlength="500"
+                          required="" id="id_comment" type="text"></textarea>
+                        {# {{ form.comment }}#}
+                        {{ form.comment.errors }}
+                        <div class="OwO" style="width: 50%;">
+                            <div class="OwO-logo">
+                                <span>OωO表情</span>
+                            </div>
+                        </div>
+                        <button class="vsubmit vbtn" type="submit" title="Cmd|Ctrl+Enter">发表</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% block js %}
+        <script src="/static/js/OwO.min.js"></script>
+        <script>
+            const OwO_demo = new OwO({
+                logo: 'OωO表情',
+                container: document.getElementsByClassName('OwO')[0],
+                target: document.getElementsByClassName('OwO-textarea')[0],
+                api: '/static/OwO.json',
+                position: 'down',
+                width: '100%',
+                maxHeight: '250px'
+            });
+        </script>
+    {% endblock %}
 {% endblock %}

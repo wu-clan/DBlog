@@ -1,5 +1,4 @@
 {% extends "blog/base.html" %}
-{% load custom_filter %}
 
 {% block title %}
     <title>AboutMe</title>
@@ -13,19 +12,11 @@
     <div class="mysection">
         <h1 class="aboutme">FOR {{ website_author }}:</h1>
         <div class="aboutme">
-            <p>About The Author</p>
+            <p>About The Author</p><br>
             <center>
-                <strong>程序猿最烦两件事:
-                    <br>第一件事是别人要他给自己的代码写文档，
-                    <br>第二件事是别人的程序没有留下文档。
-                </strong>
-                <br>
-                <br>
-                {% for about in about %}
-                    <div class="text_dark markdown-body">
-                        {{ about.contents | custom_markdown | safe }}
-                    </div>
-                {% endfor %}
+                <div class="text_dark markdown-body">
+                    {{ about.contents | safe }}
+                </div>
             </center>
         </div>
 

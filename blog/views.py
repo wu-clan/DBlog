@@ -15,7 +15,7 @@ from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
 
 from blog.comment.forms import CommentForm
-from blog.models import SiteUser
+from blog.models import About, SiteUser
 from blog.user.forms import ProfileForm, RegisterForm, RestCodeForm, RestPwdForm, UserForm
 from djangoProject import settings
 from djangoProject.util import PageInfo
@@ -364,22 +364,39 @@ def message(request):
 	"""
 	留言
 	"""
-	return render(request, 'blog/message_board.html', {"source_id": "message"})
+	if request.method == 'POST':
+		form = CommentForm(request.POST)
+		if form.is_valid():
+			comment = form.save(commit=False)
+			comment.title = '留言板'
+			# 关联评论与文章
+			comment.save()
+			return redirect('blog:message')
+	# 不是 post 请求，重定向到文章详情页。
+	return render(request, 'blog/message_board.html', locals())
 
 
 def about(request):
 	"""
 	关于（包含统计图）
 	"""
+	about = About.objects.all().first()
+	about.contents = markdown.markdown(about.contents,
+	                                   extensions=[
+		                                   'markdown.extensions.extra',
+		                                   'markdown.extensions.fenced_code',
+		                                   'markdown.extensions.tables',
+	                                   ]
+	                                   )
+	# 统计图准备
 	articles = Article.objects.filter(category=True).all().order_by('-date_time')
 	categories = Category.fetch_all_category()
-
 	if not articles or not categories:
 		# 没有文章或者分类的情况
 		return render(request, 'blog/about.html', {'articles': None, 'categories': None})
 
+	# 发布统计
 	all_date = articles.values('date_time')
-
 	# 计算最近一年的时间list作为坐标横轴 注意时间为 例如[2019-5] 里面不是2019-05
 	latest_date = all_date[0]['date_time']
 	end_year = latest_date.strftime("%Y")
@@ -388,22 +405,21 @@ def about(request):
 	for i in range(int(end_month), 13):
 		date = str(int(end_year) - 1) + '-' + str(i)
 		date_list.append(date)
-
 	for j in range(1, int(end_month) + 1):
 		date = end_year + '-' + str(j)
 		date_list.append(date)
-
 	value_list = []
 	all_date_list = []
-
-	# for i in all_date:
-	#     # 这里直接格式化 去掉月份前面的0, !! window使用%#m, mac和linux使用%-m !!
-	#     all_date_list.append(i['date_time'].strftime('%Y-%?m'))
-	# 换个方法吧，调试出来的
-	all_date_list.append(date_list[-1])
-
+	for i in all_date:
+		# 这里直接格式化 去掉月份前面的0, !! window使用%#m, mac和linux使用%-m !!
+		try:
+			all_date_list.append(i['date_time'].strftime('%Y-%-m'))
+		except ValueError:
+			all_date_list.append(i['date_time'].strftime('%Y-%#m'))
 	for i in date_list:
 		value_list.append(all_date_list.count(i))
+
+	# 饼图统计
 	temp_list = []  # 临时集合
 	tags_list = []  # 存放每个标签对应的文章数
 	tags = Tag.objects.all()
@@ -412,24 +428,17 @@ def about(request):
 		temp_list.append(len(tag.article_set.all()))
 		tags_list.append(temp_list)
 		temp_list = []
+	# 根据文章数排序
+	tags_list.sort(key=lambda x: x[1], reverse=True)
 
-	tags_list.sort(key=lambda x: x[1], reverse=True)  # 根据文章数排序
-
+	# top10统计
 	top10_tags = []
 	top10_tags_values = []
 	for i in tags_list[:10]:
 		top10_tags.append(i[0])
 		top10_tags_values.append(i[1])
 
-	return render(request, 'blog/about.html', {
-		'articles': articles,
-		'categories': categories,
-		'tags': tags,
-		'date_list': date_list,
-		'value_list': value_list,
-		'top10_tags': top10_tags,
-		'top10_tags_values': top10_tags_values
-	})
+	return render(request, 'blog/about.html', locals())
 
 
 def search(request):

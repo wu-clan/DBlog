@@ -29,9 +29,6 @@ def sidebar(request):
 	# 公告
 	announcement = Announcement.objects.all()
 
-	# 关于
-	about = About.objects.all()[0:1]
-
 	return {
 		'category_list': category_list,
 		'blog_top': blog_top,
@@ -41,7 +38,6 @@ def sidebar(request):
 		'payimg_list': payimg,
 		'carousel_list': carousel,
 		'announcement_list': announcement,
-		'about': about
 	}
 
 

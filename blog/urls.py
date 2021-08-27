@@ -19,7 +19,7 @@ urlpatterns = [
 	path('archive/', views.archive, name='archive'),
 	# 搜索
 	path('search/', views.search, name='search'),
-	# 留言表单
+	# 留言板
 	path('message/', views.message, name='message'),
 	# 评论
 	path('get_comment/<int:pk>/', views.get_comment, name='get_comment'),
