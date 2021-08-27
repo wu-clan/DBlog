@@ -2013,9 +2013,8 @@ footer {
         background-size: 100%;
     }
 
-    .markdown-body p, .markdown-body blockquote, .markdown-body ul,
-    .markdown-body ol, .markdown-body dl, .markdown-body table,
-    .markdown-body pre {
+    .markdown-body p, .markdown-body blockquote, .markdown-body table,
+    .markdown-body ol, .markdown-body dl, .markdown-body pre {
         margin-left: 0.5rem;
     }
 
