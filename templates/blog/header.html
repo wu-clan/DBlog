@@ -41,11 +41,8 @@
                     </div>
                 </li>
                 <li><a href="{% url "blog:archive" %}">归档</a></li>
-                {# <li><a href="{% url "blog:message" %}">留言</a></li> #}
                 <li><a href="{% url "blog:about" %}">关于</a></li>
                 {% if request.session.user_name %}
-                    {# 登陆后增加留言 #}
-                    <li><a href="{% url "blog:message" %}">留言</a></li>
                     {# 个人信息 #}
                     <li class='drop_user'>
                         <a href="JavaScript:;"><i class="el el-user"></i>{{ request.session.user_name }}</a>
@@ -136,8 +133,6 @@
                 <li><a href="{% url "blog:archive" %}">归档</a></li>
                 <li><a href="{% url "blog:about" %}">关于</a></li>
                 {% if request.session.user_name %}
-                    {# 登陆后增加留言 #}
-                    <li><a href="{% url "blog:message" %}">留言</a></li>
                     {# 个人信息 #}
                     <li class='drop_user'>
                         <a href="JavaScript:;"><i class="el el-user"></i>{{ request.session.user_name }}</a>
