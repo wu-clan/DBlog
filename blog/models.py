@@ -28,8 +28,8 @@ class SiteUser(models.Model):
 		verbose_name = '用户信息'
 		verbose_name_plural = verbose_name
 
-# def __str__(self):
-# 	return self.username
+	# def __str__(self):
+	# 	return self.username
 
 
 class UserInfo(models.Model):
@@ -61,14 +61,14 @@ class UserInfo(models.Model):
 		verbose_name_plural = verbose_name
 
 	def __str__(self):
-		return self.wechart
+		return ''
 
 
 # 信号接收，创建用户时自动调用并创建用户名，并完成唯一信息绑定
 @receiver(post_save, sender=SiteUser)
 def create_user_profile(sender, instance, created, **kwargs):
 	if created:
-		UserInfo.objects.create(username=instance, )
+		UserInfo.objects.create(username=instance)
 
 
 # 信号接收，注销用户时自动调用清除用户信息

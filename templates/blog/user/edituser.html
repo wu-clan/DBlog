@@ -14,23 +14,28 @@
         <div class="container">
             <div class="flex-center">
                 <div class="unit-1-2 unit-1-on-mobile">
-                    <h3 style="text-align: center">用户信息</h3>
-                    <div class="col-md-4">用户名:&nbsp;&nbsp;{{ user.username }}</div>
+                    <h3 style="text-align: center; margin-bottom: 20px">用户信息</h3>
+                    {# 信息提示 #}
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                                    {{ message.message }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <div class="col-md-4"><span>用户名:&nbsp;&nbsp;&nbsp;</span>
+                        <span style="font-size: 1.2em">{{ user.username }}</span>
+                    </div>
                     <form class="form" action="{% url 'blog:edituser' user.id %}" method="post">
-                        {# 错误信息弹窗 #}
-                        {% if messages %}
-                            <ul class="messages">
-                                {% for message in messages %}
-                                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
-                                        {{ message.message }}
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
                         {% csrf_token %}
+{#                        <div class="form-group">#}
+{#                            <label for="email">邮箱:</label>#}
+{#                            <input type="email" name="email" id="id_email">#}
+{#                        </div>#}
                         <div class="form-group">
                             <label for="avatar">用户头像:</label>
-                            <div>{{ avatar }}</div>
                             {{ profile_form.avatar }}
                         </div>
                         <div class="form-group">

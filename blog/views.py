@@ -263,9 +263,7 @@ def profile_edit(request, id):
 				introduction=introduction
 			)
 			messages.success(request, '更新个人信息成功')
-			return redirect('/')
-		else:
-			messages.error(request, '输入信息有误，请检查')
+			return redirect('blog:edituser', id=id)
 	else:
 		profile_form = ProfileForm()
 	return render(request, 'blog/user/edituser.html', locals())
