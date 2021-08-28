@@ -1,26 +1,16 @@
 from django.contrib import admin
 
 # Register your models here.
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from import_export.admin import ImportExportModelAdmin
 from blog.models import About, Announcement, Carousel, Friend, SiteUser, UserInfo, Tag, Article, Category, Comment, \
 	Pay, Conf
 
 
-@admin.register(SiteUser)
-class User(admin.ModelAdmin):
-	list_display = (
-		'username',
-		'password',
-		'email',
-		'time_joined',
-	)
-
-
-@admin.register(UserInfo)
-class UserInfo(admin.ModelAdmin):
-	list_display = (
+# @admin.register(UserInfo)
+class UserInfoAdmin(admin.StackedInline):
+	model = UserInfo
+	fields = (
 		'avatar',
 		'mobile',
 		'sex',
@@ -31,8 +21,21 @@ class UserInfo(admin.ModelAdmin):
 	)
 
 
+@admin.register(SiteUser)
+class SiteUserAdmin(admin.ModelAdmin):
+	inlines = [
+		UserInfoAdmin,
+	]
+	list_display = (
+		'username',
+		# 'password',
+		'email',
+		'time_joined',
+	)
+
+
 @admin.register(About)
-class About(admin.ModelAdmin):
+class AboutAdmin(admin.ModelAdmin):
 	"""
 	关于
 	"""

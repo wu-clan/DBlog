@@ -231,6 +231,7 @@ def user_delete(request, id):
 			# 注销用户，返回主页
 			request.session.flush()
 			user.delete()
+			messages.success(request, '注销账户成功')
 			return redirect('/blog')
 		else:
 			messages.error(request, '非注销账户登录，您没有权限执行注销操作')

@@ -15,7 +15,7 @@ from mdeditor.fields import MDTextField
 
 class SiteUser(models.Model):
 	"""
-	用户
+	网站用户
 	"""
 
 	username = models.CharField('账号', max_length=200, unique=True)
@@ -28,8 +28,8 @@ class SiteUser(models.Model):
 		verbose_name = '用户信息'
 		verbose_name_plural = verbose_name
 
-	def __str__(self):
-		return self.username
+# def __str__(self):
+# 	return self.username
 
 
 class UserInfo(models.Model):
@@ -38,37 +38,37 @@ class UserInfo(models.Model):
 	"""
 	# 与 SiteUser 模型构成一对一的关系
 	username = models.OneToOneField(SiteUser, on_delete=models.CASCADE)
-	avatar = models.ImageField(upload_to='users_avatar', blank=True, default='static/images/icon/user.gif',
-	                           verbose_name='用户头像')
+	avatar = models.ImageField(upload_to='users_avatar', null=True, blank=True, verbose_name='用户头像')
 	# 手机号格式正则校验
 	mobile_validator = RegexValidator(r"^1[3-9]\d{9}$", "手机号码格式不正确")
-	mobile = models.IntegerField(blank=True,
+	mobile = models.IntegerField(null=True,
+	                             blank=True,
 	                             verbose_name='手机号',
-	                             validators=[mobile_validator],
-	                             default='158')
+	                             validators=[mobile_validator]
+	                             )
 	sex_choice = (
 		(0, '女性'),
 		(1, '男性'),
 	)
 	sex = models.IntegerField(choices=sex_choice, default=1)
-	wechart = models.CharField(blank=True, max_length=50, verbose_name='微信')
-	qq = models.CharField(blank=True, max_length=10, verbose_name='QQ')
-	blog_address = models.CharField(blank=True, max_length=100, verbose_name='博客地址')
-	introduction = models.TextField(blank=True, max_length=500, verbose_name='自我介绍')
+	wechart = models.CharField(null=True, blank=True, max_length=50, verbose_name='微信')
+	qq = models.CharField(null=True, blank=True, max_length=10, verbose_name='QQ')
+	blog_address = models.CharField(null=True, blank=True, max_length=100, verbose_name='博客地址')
+	introduction = models.TextField(null=True, blank=True, max_length=500, verbose_name='自我介绍')
 
 	class Meta:
 		verbose_name = '用户扩展信息'
 		verbose_name_plural = verbose_name
 
 	def __str__(self):
-		return self.username
+		return self.wechart
 
 
-# 信号接收，创建用户时自动调用并创建用户信息
+# 信号接收，创建用户时自动调用并创建用户名，并完成唯一信息绑定
 @receiver(post_save, sender=SiteUser)
 def create_user_profile(sender, instance, created, **kwargs):
 	if created:
-		UserInfo.objects.create(username=instance)
+		UserInfo.objects.create(username=instance, )
 
 
 # 信号接收，注销用户时自动调用清除用户信息

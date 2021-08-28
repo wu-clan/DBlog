@@ -264,14 +264,10 @@ SIMPLEUI_CONFIG = {
 			'icon': 'fa fa-users',
 			'url': 'auth/group/'
 		}, {
-			'name': '用户信息',
+			'name': '网站用户信息',
 			'icon': 'fa fa-users',
 			'url': '/admin/blog/siteuser'
-		}, {
-			'name': '用户扩展信息',
-			'icon': 'fa fa-users',
-			'url': '/admin/blog/userinfo'
-		}]
+		}, ]
 	}]
 }
 

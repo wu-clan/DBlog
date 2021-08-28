@@ -35,6 +35,9 @@ class RestCodeForm(forms.Form):
 
 
 class RestPwdForm(forms.Form):
+	"""
+	重置密码表单
+	"""
 	password1 = forms.CharField(label='新密码', max_length=16, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 	password2 = forms.CharField(label='确认新密码', max_length=16,
 	                            widget=forms.PasswordInput(attrs={'class': 'form-control'}))
