@@ -1,4 +1,12 @@
 <header class="myheader">
+    {# 信息弹窗提示，逻辑不是很好，暂停使用 #}
+{#    {% if messages %}#}
+{#        <script type="text/javascript">#}
+{#            {% for msg in messages %}#}
+{#                alert('{{ msg.message }}');#}
+{#            {% endfor %}#}
+{#        </script>#}
+{#    {% endif %}#}
     <div class="top">
         <!--头像左边部分-->
         <div class="top-left">
@@ -56,13 +64,6 @@
                         {# 注销 #}
                         <form style="display:none;" action="{% url 'blog:delete' id=request.session.user_id %}"
                               method="POST">
-                            {% if messages %}
-                                <script type="text/javascript">
-                                    {% for msg in messages %}
-                                        alert('{{ msg.message }}');
-                                    {% endfor %}
-                                </script>
-                            {% endif %}
                             {% csrf_token %}
                             <button id="user_delete" type="submit">注销</button>
                         </form>
@@ -146,13 +147,6 @@
                         {# 注销 #}
                         <form style="display:none;" action="{% url 'blog:delete' id=request.session.user_id %}"
                               method="POST">
-                            {% if messages %}
-                                <script type="text/javascript">
-                                    {% for msg in messages %}
-                                        alert('{{ msg.message }}');
-                                    {% endfor %}
-                                </script>
-                            {% endif %}
                             {% csrf_token %}
                             <button id="user_delete" type="submit">注销</button>
                         </form>

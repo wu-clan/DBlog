@@ -15,7 +15,7 @@
                 <div class="unit-1-2 unit-1-on-mobile">
                     <h3 style="text-align: center">注册</h3>
                     <form class="form" action="{% url 'blog:register' %}" method="post">
-                        {# 错误信息弹窗 #}
+                        {# 错误信息提示 #}
                         {% if messages %}
                             <ul class="messages">
                                 {% for message in messages %}
