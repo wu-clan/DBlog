@@ -100,7 +100,7 @@
                 {% for comment in comments %}
                     <li class="comment-item">
                         <a href="javascript:void(0);">
-                            <img class="comment-avatar" src="{{ avatar_link }}" alt="">
+                            <img class="comment-avatar" src="/static/images/icon/user.gif" alt="">
                         </a>
                         <span class="comment-author">{{ comment.user_name }}</span>
                         <div class="comment-meta">{{ comment.create_time }}</div>
@@ -108,7 +108,7 @@
                             <span>{{ comment.comment }}</span>
                         </div>
                         <div class="reply">
-                            <a class="comment-reply-link">回复</a>
+                            <a class="comment-reply-link" title="debugging...未启用">回复</a>
                         </div>
                     </li>
                 {% empty %}
