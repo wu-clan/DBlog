@@ -28,8 +28,8 @@ class SiteUser(models.Model):
 		verbose_name = '用户信息'
 		verbose_name_plural = verbose_name
 
-	# def __str__(self):
-	# 	return self.username
+# def __str__(self):
+# 	return self.username
 
 
 class UserInfo(models.Model):
@@ -41,20 +41,16 @@ class UserInfo(models.Model):
 	avatar = models.ImageField(upload_to='users_avatar', null=True, blank=True, verbose_name='用户头像')
 	# 手机号格式正则校验
 	mobile_validator = RegexValidator(r"^1[3-9]\d{9}$", "手机号码格式不正确")
-	mobile = models.IntegerField(null=True,
-	                             blank=True,
-	                             verbose_name='手机号',
-	                             validators=[mobile_validator]
-	                             )
+	mobile = models.IntegerField(null=True, blank=True, verbose_name='手机号', validators=[mobile_validator])
 	sex_choice = (
 		(0, '女性'),
 		(1, '男性'),
 	)
 	sex = models.IntegerField(choices=sex_choice, default=1)
-	wechart = models.CharField(null=True, blank=True, max_length=50, verbose_name='微信')
-	qq = models.CharField(null=True, blank=True, max_length=10, verbose_name='QQ')
-	blog_address = models.CharField(null=True, blank=True, max_length=100, verbose_name='博客地址')
-	introduction = models.TextField(null=True, blank=True, max_length=500, verbose_name='自我介绍')
+	wechart = models.CharField(null=True, blank=True, default='', max_length=50, verbose_name='微信')
+	qq = models.CharField(null=True, blank=True, default='', max_length=10, verbose_name='QQ')
+	blog_address = models.CharField(null=True, blank=True, default='', max_length=100, verbose_name='博客地址')
+	introduction = models.TextField(null=True, blank=True, default='', max_length=500, verbose_name='自我介绍')
 
 	class Meta:
 		verbose_name = '用户扩展信息'

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from captcha.fields import CaptchaField, CaptchaTextInput
 from django import forms
+from django.db.models import fields
 
-from blog.models import UserInfo
+from blog.models import SiteUser, UserInfo
 
 
 class UserForm(forms.Form):
@@ -59,4 +60,16 @@ class ProfileForm(forms.ModelForm):
 			'qq',
 			'blog_address',
 			'introduction',
+		)
+
+
+class EditUserInfo(forms.ModelForm):
+	"""
+	编辑用户信息表单
+	"""
+
+	class Meta:
+		model = SiteUser
+		fields = (
+			'email',
 		)

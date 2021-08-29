@@ -26,9 +26,13 @@ class SiteUserAdmin(admin.ModelAdmin):
 	inlines = [
 		UserInfoAdmin,
 	]
+	readonly_fields = [
+		'username',
+		'password',
+	]
 	list_display = (
 		'username',
-		# 'password',
+		'password',
 		'email',
 		'time_joined',
 	)

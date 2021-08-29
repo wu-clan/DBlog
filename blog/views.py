@@ -6,6 +6,7 @@ import random
 import string
 
 import markdown
+from asgiref.sync import sync_to_async
 from django.contrib import auth, messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -16,7 +17,7 @@ from django.urls import reverse
 
 from blog.comment.forms import CommentForm
 from blog.models import About, SiteUser
-from blog.user.forms import ProfileForm, RegisterForm, RestCodeForm, RestPwdForm, UserForm
+from blog.user.forms import EditUserInfo, ProfileForm, RegisterForm, RestCodeForm, RestPwdForm, UserForm
 from djangoProject import settings
 from djangoProject.util import PageInfo
 from blog.models import Article, Category, Comment, UserInfo, Tag
@@ -24,6 +25,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect, render, get_object_or_404
 
 
+@sync_to_async
 def index(request):
 	"""
 	主页
@@ -33,6 +35,7 @@ def index(request):
 	return render(request, 'blog/index.html', {"blog_list": _blog_list, "blog_hot": _blog_hot})
 
 
+@sync_to_async
 def get_page(request):
 	"""
 	分页
@@ -243,8 +246,26 @@ def user_delete(request, id):
 # 编辑用户信息
 def profile_edit(request, id):
 	user = SiteUser.objects.get(id=id)
-	profile_form = ProfileForm(request.POST)
+	old_email = user.email
+	userinfo = UserInfo.objects.get(username_id=id)
+	u_sex = userinfo.sex
+	if u_sex == 0:
+		u_sex = '女'
+	else:
+		u_sex = '男'
 	if request.method == 'POST':
+		# 更新邮箱
+		user_form = EditUserInfo(request.POST, instance=user)
+		if user_form.is_valid():
+			new_email = user_form.cleaned_data['email']
+			if new_email != old_email:
+				user_email = SiteUser.objects.filter(email=new_email)
+				if user_email:
+					messages.error(request, '该邮箱地址已经被注册过啦，请使用其他邮箱吧！')
+					return redirect('blog:edituser', id=id)
+				user.save()
+		# 更新用户信息
+		profile_form = ProfileForm(request.POST, instance=userinfo)
 		if profile_form.is_valid():
 			avatar = profile_form.cleaned_data['avatar']
 			mobile = profile_form.cleaned_data['mobile']
@@ -253,15 +274,7 @@ def profile_edit(request, id):
 			qq = profile_form.cleaned_data['qq']
 			blog_address = profile_form.cleaned_data['blog_address']
 			introduction = profile_form.cleaned_data['introduction']
-			siteinfo = UserInfo.objects.update(
-				avatar=avatar,
-				mobile=mobile,
-				sex=sex,
-				wechart=wechart,
-				qq=qq,
-				blog_address=blog_address,
-				introduction=introduction
-			)
+			userinfo.save()
 			messages.success(request, '更新个人信息成功')
 			return redirect('blog:edituser', id=id)
 	else:
@@ -272,6 +285,7 @@ def profile_edit(request, id):
 """"""""""""""""""""""""" 登录结束 """""""""""""""""""""""""
 
 
+@sync_to_async
 def detail(request, pk):
 	"""
 	博文详情
@@ -300,6 +314,7 @@ def detail(request, pk):
 	return render(request, 'blog/detail.html', context=context)
 
 
+@sync_to_async
 def blog_list(request):
 	"""
 	文章列表
@@ -311,6 +326,7 @@ def blog_list(request):
 	return render(request, 'blog/list.html', {"blog_list": _blog_list, "page_info": page_info})
 
 
+@sync_to_async
 def category(request, name):
 	"""
 	文章分类
@@ -329,6 +345,7 @@ def category(request, name):
 	})
 
 
+@sync_to_async
 def tag(request, name):
 	"""
 	标签
@@ -342,6 +359,7 @@ def tag(request, name):
 	                                         "page_info": page_info})
 
 
+@sync_to_async
 def archive(request):
 	"""
 	文章归档
@@ -359,6 +377,7 @@ def archive(request):
 	return render(request, 'blog/archive.html', {"data": data})
 
 
+@sync_to_async
 def about(request):
 	"""
 	关于（包含统计图）
@@ -426,6 +445,7 @@ def about(request):
 	return render(request, 'blog/about.html', locals())
 
 
+@sync_to_async
 def search(request):
 	"""
 	搜索
@@ -438,6 +458,7 @@ def search(request):
 	return render(request, 'blog/search.html', {"blog_list": _blog_list, "pages": page_info, "key": key})
 
 
+@sync_to_async
 def get_comment(request, pk):
 	"""
 	评论

@@ -30,37 +30,42 @@
                     </div>
                     <form class="form" action="{% url 'blog:edituser' user.id %}" method="post">
                         {% csrf_token %}
-{#                        <div class="form-group">#}
-{#                            <label for="email">邮箱:</label>#}
-{#                            <input type="email" name="email" id="id_email">#}
-{#                        </div>#}
+                        <div class="form-group">
+                            <label for="email">邮箱:</label>
+                            <input type="email" name="email" value='{{ user.email }}'>
+                        </div>
                         <div class="form-group">
                             <label for="avatar">用户头像:</label>
-                            {{ profile_form.avatar }}
+                            <input type="file" name="avatar" accept="image/*"
+                                   value='{{ userinfo.avatar }}'>
                         </div>
                         <div class="form-group">
                             <label for="mobile">手机号:</label>
-                            {{ profile_form.mobile }}
+                            <input type="number" name="mobile" value='{{ userinfo.mobile }}'>
                         </div>
                         <div class="form-group">
-                            <label for="sex">性别:</label>
-                            {{ profile_form.sex }}
+                            <label for="sex">性别: ( {{ u_sex }} )</label>
+                            <select name="sex" class="form-control">
+                                <option value="0">女性</option>
+                                <option value="1">男性</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="wechart">微信:</label>
-                            {{ profile_form.wechart }}
+                            <input type="text" name="wechart" maxlength="50" value='{{ userinfo.wechart }}'>
                         </div>
                         <div class="form-group">
                             <label for="qq">QQ:</label>
-                            {{ profile_form.qq }}
+                            <input type="text" name="qq" maxlength="10" value='{{ userinfo.qq }}'>
                         </div>
                         <div class="form-group">
                             <label for="blog_address">博客地址:</label>
-                            {{ profile_form.blog_address }}
+                            <input type="text" name="blog_address" maxlength="100" value='{{ userinfo.blog_address }}'>
                         </div>
                         <div class="form-group">
                             <label for="introduction">自我介绍:</label>
-                            {{ profile_form.introduction }}
+                            <textarea type="email" name="introduction" cols="40" rows="10" maxlength="500"
+                                      value='{{ userinfo.introduction }}'></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">更新</button>
                     </form>
