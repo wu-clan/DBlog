@@ -25,7 +25,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect, render, get_object_or_404
 
 
-@sync_to_async
 def index(request):
 	"""
 	主页
@@ -35,7 +34,6 @@ def index(request):
 	return render(request, 'blog/index.html', {"blog_list": _blog_list, "blog_hot": _blog_hot})
 
 
-@sync_to_async
 def get_page(request):
 	"""
 	分页
@@ -285,7 +283,6 @@ def profile_edit(request, id):
 """"""""""""""""""""""""" 登录结束 """""""""""""""""""""""""
 
 
-@sync_to_async
 def detail(request, pk):
 	"""
 	博文详情
@@ -314,7 +311,6 @@ def detail(request, pk):
 	return render(request, 'blog/detail.html', context=context)
 
 
-@sync_to_async
 def blog_list(request):
 	"""
 	文章列表
@@ -326,7 +322,6 @@ def blog_list(request):
 	return render(request, 'blog/list.html', {"blog_list": _blog_list, "page_info": page_info})
 
 
-@sync_to_async
 def category(request, name):
 	"""
 	文章分类
@@ -345,7 +340,6 @@ def category(request, name):
 	})
 
 
-@sync_to_async
 def tag(request, name):
 	"""
 	标签
@@ -359,7 +353,6 @@ def tag(request, name):
 	                                         "page_info": page_info})
 
 
-@sync_to_async
 def archive(request):
 	"""
 	文章归档
@@ -377,7 +370,6 @@ def archive(request):
 	return render(request, 'blog/archive.html', {"data": data})
 
 
-@sync_to_async
 def about(request):
 	"""
 	关于（包含统计图）
@@ -445,7 +437,6 @@ def about(request):
 	return render(request, 'blog/about.html', locals())
 
 
-@sync_to_async
 def search(request):
 	"""
 	搜索
@@ -458,7 +449,6 @@ def search(request):
 	return render(request, 'blog/search.html', {"blog_list": _blog_list, "pages": page_info, "key": key})
 
 
-@sync_to_async
 def get_comment(request, pk):
 	"""
 	评论

@@ -10,6 +10,6 @@
 2，配置为本地，只能在一个固定地址访问到，如果界面url发生改变，那么 share.js 的配置路径便需要根据url做出改变
 ......
 以下暂时找到了一个支持 https 的百度share.js源
-但是同样的，如果他的网站挂壁了，那么你的https下的百度share.js同样会失效
+但是同样的，如果他的cdn挂壁了，那么你的https下的百度share.js同样会失效
 
 源地址：https://www.landiannews.com
