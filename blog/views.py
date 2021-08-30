@@ -246,11 +246,11 @@ def profile_edit(request, id):
 	user = SiteUser.objects.get(id=id)
 	old_email = user.email
 	userinfo = UserInfo.objects.get(username_id=id)
-	u_sex = userinfo.sex
-	if u_sex == 0:
-		u_sex = '女'
-	else:
-		u_sex = '男'
+	# u_sex = userinfo.sex
+	# if u_sex == 0:
+	# 	u_sex = '女'
+	# else:
+	# 	u_sex = '男'
 	if request.method == 'POST':
 		# 更新邮箱
 		user_form = EditUserInfo(request.POST, instance=user)
@@ -259,15 +259,14 @@ def profile_edit(request, id):
 			if new_email != old_email:
 				user_email = SiteUser.objects.filter(email=new_email)
 				if user_email:
-					messages.error(request, '该邮箱地址已经被注册过啦，请使用其他邮箱吧！')
-					return redirect('blog:edituser', id=id)
+					messages.error(request, '该邮箱地址已经被注册过了，请使用其他邮箱吧！')
 				user.save()
 		# 更新用户信息
 		profile_form = ProfileForm(request.POST, instance=userinfo)
 		if profile_form.is_valid():
 			avatar = profile_form.cleaned_data['avatar']
 			mobile = profile_form.cleaned_data['mobile']
-			sex = profile_form.cleaned_data['sex']
+			# sex = profile_form.cleaned_data['sex']
 			wechart = profile_form.cleaned_data['wechart']
 			qq = profile_form.cleaned_data['qq']
 			blog_address = profile_form.cleaned_data['blog_address']
@@ -276,6 +275,7 @@ def profile_edit(request, id):
 			messages.success(request, '更新个人信息成功')
 			return redirect('blog:edituser', id=id)
 	else:
+		user_form = EditUserInfo()
 		profile_form = ProfileForm()
 	return render(request, 'blog/user/edituser.html', locals())
 

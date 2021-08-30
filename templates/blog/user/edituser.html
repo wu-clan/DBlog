@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 {% extends 'blog/base.html' %}
 
 {% block title %}
@@ -32,40 +31,49 @@
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="email">邮箱:</label>
-                            <input type="email" name="email" value='{{ user.email }}'>
+                            {{ user_form.new_email.label_tag }}
+                            <input type="email" name="email"
+                                   value='{{ user.email }}'>
                         </div>
                         <div class="form-group">
-                            <label for="avatar">用户头像:</label>
+                            <label for="avatar">头像:
+                                <img src="/media/{{ userinfo.avatar|default_if_none:'(无)' }}"
+                                     style="max-width: 30%; border-radius: 15%" alt="加载失败~" title="建议使用等边头像哟~">
+                            </label>
                             <input type="file" name="avatar" accept="image/*"
                                    value='{{ userinfo.avatar }}'>
                         </div>
                         <div class="form-group">
-                            <label for="mobile">手机号:</label>
-                            <input type="number" name="mobile" value='{{ userinfo.mobile }}'>
+                            {{ profile_form.mobile.label_tag }}
+                            <input type="number" name="mobile"
+                                   value='{{ userinfo.mobile|default_if_none:'' }}'>
+                        </div>
+                        {#                        <div class="form-group">#}
+                        {#                            <label for="sex">性别: ( {{ u_sex }} )</label>#}
+                        {#                            <select name="sex" class="form-control">#}
+                        {#                                <option value="0">女性</option>#}
+                        {#                                <option value="1">男性</option>#}
+                        {#                            </select>#}
+                        {#                        </div>#}
+                        <div class="form-group">
+                            {{ profile_form.wechart.label_tag }}
+                            <input type="text" name="wechart" maxlength="50"
+                                   value='{{ userinfo.wechart|default_if_none:'' }}'>
                         </div>
                         <div class="form-group">
-                            <label for="sex">性别: ( {{ u_sex }} )</label>
-                            <select name="sex" class="form-control">
-                                <option value="0">女性</option>
-                                <option value="1">男性</option>
-                            </select>
+                            {{ profile_form.qq.label_tag }}
+                            <input type="text" name="qq" maxlength="10"
+                                   value='{{ userinfo.qq|default_if_none:'' }}'>
                         </div>
                         <div class="form-group">
-                            <label for="wechart">微信:</label>
-                            <input type="text" name="wechart" maxlength="50" value='{{ userinfo.wechart }}'>
+                            {{ profile_form.blog_address.label_tag }}
+                            <input type="text" name="blog_address" maxlength="100"
+                                   value='{{ userinfo.blog_address|default_if_none:'' }}'>
                         </div>
                         <div class="form-group">
-                            <label for="qq">QQ:</label>
-                            <input type="text" name="qq" maxlength="10" value='{{ userinfo.qq }}'>
-                        </div>
-                        <div class="form-group">
-                            <label for="blog_address">博客地址:</label>
-                            <input type="text" name="blog_address" maxlength="100" value='{{ userinfo.blog_address }}'>
-                        </div>
-                        <div class="form-group">
-                            <label for="introduction">自我介绍:</label>
-                            <textarea type="email" name="introduction" cols="40" rows="10" maxlength="500"
-                                      value='{{ userinfo.introduction }}'></textarea>
+                            {{ profile_form.introduction.label_tag }}
+                            <textarea name="introduction" cols="40" rows="10" maxlength="500"
+                                      value="{{ userinfo.introduction|default_if_none:'' }}"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">更新</button>
                     </form>

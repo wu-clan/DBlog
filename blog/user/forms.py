@@ -55,7 +55,7 @@ class ProfileForm(forms.ModelForm):
 		fields = (
 			'avatar',
 			'mobile',
-			'sex',
+			# 'sex',
 			'wechart',
 			'qq',
 			'blog_address',

@@ -36,17 +36,16 @@ class UserInfo(models.Model):
 	"""
 	用户扩展信息
 	"""
-	# 与 SiteUser 模型构成一对一的关系
 	username = models.OneToOneField(SiteUser, on_delete=models.CASCADE)
 	avatar = models.ImageField(upload_to='users_avatar', null=True, blank=True, verbose_name='用户头像')
 	# 手机号格式正则校验
 	mobile_validator = RegexValidator(r"^1[3-9]\d{9}$", "手机号码格式不正确")
 	mobile = models.IntegerField(null=True, blank=True, verbose_name='手机号', validators=[mobile_validator])
-	sex_choice = (
-		(0, '女性'),
-		(1, '男性'),
-	)
-	sex = models.IntegerField(choices=sex_choice, default=1)
+	# sex_choice = (
+	# 	(0, '女性'),
+	# 	(1, '男性'),
+	# )
+	# sex = models.IntegerField(choices=sex_choice, default=1)
 	wechart = models.CharField(null=True, blank=True, default='', max_length=50, verbose_name='微信')
 	qq = models.CharField(null=True, blank=True, default='', max_length=10, verbose_name='QQ')
 	blog_address = models.CharField(null=True, blank=True, default='', max_length=100, verbose_name='博客地址')
