@@ -55,17 +55,17 @@
                     </ul>
                     <script>
                         window._bd_share_config = {
-                        "common": {
-                            "bdSnsKey": {},
-                            "bdText": "",
-                            "bdMini": "2",
-                            "bdMiniList": false,
-                            "bdPic": "",
-                            "bdStyle": "1",
-                            "bdSize": "32"
-                        }, "share": {}
-                    };
-                    with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = '/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+                            "common": {
+                                "bdSnsKey": {},
+                                "bdText": "",
+                                "bdMini": "2",
+                                "bdMiniList": false,
+                                "bdPic": "",
+                                "bdStyle": "1",
+                                "bdSize": "32"
+                            }, "share": {}
+                        };
+                        with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = '/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
                     </script>
                 </div>
             </div>
@@ -127,16 +127,11 @@
 
 {% block js %}
     <script src="/static/js/jquery.2.1.4.min.js"></script>
-    <script src="/static/prism/clipboard.min.js"></script>
     <script src="/static/prism/prism.js" charset="utf-8"></script>
+    <script src="/static/prism/clipboard.min.js"></script>
     <script async type="text/javascript"
-            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            src="http://cdjs.cloudflare.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-            tex2jax: {inlineMath: [['$', '$']]},
-            messageStyle: "none"
-        });
-
-
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$', '$']]},messageStyle: "none"});
     </script>
 {% endblock %}
