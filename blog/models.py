@@ -342,3 +342,19 @@ class Comment(models.Model):
 
 	def __str__(self):
 		return self.comment[:20]
+
+
+class Subscription(models.Model):
+	"""
+	文章邮箱订阅
+	"""
+	email = models.EmailField(verbose_name='邮箱订阅用户', max_length=200)
+	sub_time = models.DateTimeField(verbose_name='订阅时间', auto_now=True)
+
+	class Meta:
+		ordering = ['sub_time']
+		verbose_name = '邮箱订阅'
+		verbose_name_plural = verbose_name
+
+	def __str__(self):
+		return self.email

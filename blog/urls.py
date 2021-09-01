@@ -27,6 +27,10 @@ urlpatterns = [
 	path('rss/', rss.DBlogRssFeed(), name='rss'),
 	# Atom
 	path('atom/', rss.DBlogAtomFeed(), name='atom'),
+	# 邮箱订阅
+	path('subscription_record/', views.subscription_record, name='subscription_record'),
+	path('subscription/', views.subscription, name='subscription'),
+	path('unsubscribe/', views.unsubscribe, name='unsubscribe'),
 
 	###########
 	# 用户操作 #
