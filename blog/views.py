@@ -479,7 +479,7 @@ def subscription_record(request):
 
 def subscription(request):
 	"""
-	邮箱订阅
+	邮箱订阅推送
 	"""
 	# 1，检测文章发布
 	# 2, 提取文章标题

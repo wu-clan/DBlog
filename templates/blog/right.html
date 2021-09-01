@@ -59,19 +59,17 @@
                 <span>订阅我</span>
             </div>
         </div>
-
+        {# 邮箱订阅表单弹窗 #}
         <div class="mail-dy">
-            <form action="#">
-                <input type="hidden" name="t" value="qf_booked_feedback"/>
-                <input type="hidden" name="id" value="b2b151b4bc010575c083e18e227ae907aac82bc47e84d3e0"/>
+            <form action="{% url "blog:subscription_record" %}" method="post">
                 <span>订阅</span>
-                <input name="to" type="text" placeholder="输入邮箱点击订阅吧(暂未开放)"/>
-                <i class="el-envelope"><input value=" " type="submit"/></i>
+                <input name="subscribed" type="text" placeholder="输入邮箱点击订阅"/>
+                <i class="el-envelope"><input type="submit"/></i>
             </form>
             <i class="el-remove fx-close"></i>
         </div>
-
-        <div class="bd-fx side-bdfx ">
+        {# 分享弹窗 #}
+        <div class="bd-fx side-bdfx">
             <i class="el-remove fx-close"></i>
             <ul class="bdsharebuttonbox">
                 <li><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></li>
@@ -229,7 +227,7 @@
 </aside>
 
 <script>
-    // 点击分享
+    // 分享，订阅 弹窗
     $(".side-fx").click(function (e) {
         $(".side-bdfx").show();
         $(".mail-dy").hide();
