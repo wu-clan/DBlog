@@ -470,6 +470,32 @@ def get_comment(request, pk):
 	return redirect('blog:detail', pk=pk)
 
 
+def subscription_record(request):
+	"""
+	邮箱订阅记录
+	"""
+	# 记录订阅用户
+
+
+def subscription(request):
+	"""
+	邮箱订阅
+	"""
+	# 1，检测文章发布
+	# 2, 提取文章标题
+	# 3，拼写文章链接
+	# 4，提取订阅用户邮箱
+	# 5，发送邮件，包含文章头，文章链接，取消订阅链接
+
+
+def unsubscribe(request):
+	"""
+	取消邮箱订阅
+	"""
+	# 1，点击取消订阅跳转确认界面
+	# 2，确认取消，调用数据库，删除此订阅邮箱
+
+
 def page_not_found_error(request, exception):
 	return render(request, "404.html", status=404)
 
