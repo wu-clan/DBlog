@@ -207,7 +207,7 @@ ADMIN_REORDER = (
 # simpleui 排序后台app导航栏
 SIMPLEUI_CONFIG = {
 	'system_keep': True,
-	'menu_display': ['文章配置', '网站配置信息', '权限验证', ],
+	'menu_display': ['文章配置', '网站配置信息', '文章订阅', '权限验证', ],
 	'dynamic': True,
 	'menus': [{
 		'name': '文章配置',
@@ -251,6 +251,12 @@ SIMPLEUI_CONFIG = {
 			'name': "关于",
 			'icon': 'fa fa-id-card',
 			'url': '/admin/blog/about'
+		}]
+	}, {
+		'name': '文章订阅',
+		'models': [{
+			'name': '订阅用户',
+			'url': '/admin/blog/subscription'
 		}]
 	}, {
 		'name': '权限验证',
