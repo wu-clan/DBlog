@@ -63,8 +63,8 @@
         <div class="mail-dy">
             <form action="{% url "blog:subscription_record" %}" method="post">
                 <span>订阅</span>
-                <input name="subscribed" type="text" placeholder="输入邮箱点击订阅"/>
-                <i class="el-envelope"><input type="submit"/></i>
+                <input name="email" type="email" placeholder="输入邮箱点击订阅"/>
+                <i class="el-envelope"><input value=" " type="submit"/> </i>
             </form>
             <i class="el-remove fx-close"></i>
         </div>

@@ -4,7 +4,7 @@ from django import forms
 from blog.models import Subscription
 
 
-class subscription(forms.ModelForm):
+class SubscriptionForm(forms.ModelForm):
 	"""
 	邮箱订阅表单
 	"""

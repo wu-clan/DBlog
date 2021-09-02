@@ -16,7 +16,8 @@ from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
 
 from blog.comment.forms import CommentForm
-from blog.models import About, SiteUser
+from blog.models import About, SiteUser, Subscription
+from blog.subscription.form import SubscriptionForm
 from blog.user.forms import EditUserInfo, ProfileForm, RegisterForm, RestCodeForm, RestPwdForm, UserForm
 from djangoProject import settings
 from djangoProject.util import PageInfo
@@ -474,7 +475,16 @@ def subscription_record(request):
 	"""
 	邮箱订阅记录
 	"""
-	# 记录订阅用户
+	if request == 'POST':
+		form = SubscriptionForm(request.POST)
+		if form.is_valid():
+			_email = form.cleaned_data['email']
+			email = Subscription.objects.filter(Q(email=_email))
+			if email:
+				sub = form.save(commit=False)
+				sub.save()
+			return redirect('blog:subscription_record')
+	return redirect('/blog')
 
 
 def subscription(request):

@@ -3,7 +3,8 @@ from django.contrib import admin
 # Register your models here.
 
 from import_export.admin import ImportExportModelAdmin
-from blog.models import About, Announcement, Carousel, Friend, SiteUser, UserInfo, Tag, Article, Category, Comment, \
+from blog.models import About, Announcement, Carousel, Friend, SiteUser, Subscription, UserInfo, Tag, Article, Category, \
+	Comment, \
 	Pay, Conf
 
 
@@ -35,6 +36,17 @@ class SiteUserAdmin(admin.ModelAdmin):
 		'password',
 		'email',
 		'time_joined',
+	)
+
+
+@admin.register(Subscription)
+class SubscriptionAdmin(admin.ModelAdmin):
+	"""
+	订阅
+	"""
+	list_display = (
+		'email',
+		'sub_time'
 	)
 
 
