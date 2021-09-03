@@ -28,6 +28,7 @@ class SiteUser(models.Model):
 		verbose_name = '用户信息'
 		verbose_name_plural = verbose_name
 
+
 # def __str__(self):
 # 	return self.username
 
@@ -59,19 +60,6 @@ class UserInfo(models.Model):
 		return ''
 
 
-# 信号接收，创建用户时自动调用并创建用户名，并完成唯一信息绑定
-@receiver(post_save, sender=SiteUser)
-def create_user_profile(sender, instance, created, **kwargs):
-	if created:
-		UserInfo.objects.create(username=instance)
-
-
-# 信号接收，注销用户时自动调用清除用户信息
-@receiver(pre_delete, sender=SiteUser)
-def create_user_profile(sender, instance, **kwargs):
-	instance.username = None
-
-
 class Carousel(models.Model):
 	"""
 	首页轮播图配置
@@ -87,30 +75,6 @@ class Carousel(models.Model):
 
 	def __str__(self):
 		return self.carousel_title
-
-
-@receiver(pre_delete, sender=Carousel)
-def delete_upload_files(sender, instance, **kwargs):
-	instance.carousel.delete(False)
-
-
-# 同步修改文件
-@receiver(post_init, sender=Carousel)
-def file_path(sender, instance, **kwargs):
-	"""
-	instance.字段名
-	"""
-	instance._current_file = instance.carousel
-
-
-@receiver(post_save, sender=Carousel)
-def delete_old_image(sender, instance, **kwargs):
-	"""
-	instance.字段名.path
-	"""
-	if hasattr(instance, '_current_file'):
-		if instance._current_file != instance.carousel.path:
-			instance._current_file.delete(save=False)
 
 
 class Conf(models.Model):
@@ -149,11 +113,6 @@ class Conf(models.Model):
 
 	def __str__(self):
 		return self.main_website
-
-
-@receiver(pre_delete, sender=Conf)
-def delete_upload_files(sender, instance, **kwargs):
-	instance.website_logo.delete(False)
 
 
 class Announcement(models.Model):
@@ -197,11 +156,6 @@ class Pay(models.Model):
 	class Meta:
 		verbose_name = '捐助收款图'
 		verbose_name_plural = verbose_name
-
-
-@receiver(pre_delete, sender=Pay)
-def delete_upload_files(sender, instance, **kwargs):
-	instance.payimg.delete(False)
 
 
 class About(models.Model):
@@ -285,16 +239,6 @@ class Article(models.Model):
 		return self.title
 
 
-# 同步删除上传文件
-@receiver(pre_delete, sender=Article)
-def delete_upload_files(sender, instance, **kwargs):
-	"""
-	sender: 模型类名
-	instance.字段名
-	"""
-	instance.picture.delete(False)
-
-
 class Category(models.Model):
 	"""
 	文章类型
@@ -358,3 +302,44 @@ class Subscription(models.Model):
 
 	def __str__(self):
 		return self.email
+
+
+""""""""""""""""""""""""""" models监听器分割线 """""""""""""""""""""""""""""
+
+
+# 创建用户时自动调用，绑定用户和用户信息
+@receiver(post_save, sender=SiteUser)
+def create_user_profile(sender, instance, created, **kwargs):
+	if created:
+		UserInfo.objects.create(username=instance)
+
+
+# 注销用户时自动调用，删除对应用户信息
+@receiver(pre_delete, sender=SiteUser)
+def create_user_profile(sender, instance, **kwargs):
+	instance.username = None
+
+
+# 同步删除轮播图文件
+@receiver(pre_delete, sender=Carousel)
+def delete_upload_files(sender, instance, **kwargs):
+	instance.carousel.delete(False)
+
+
+# 同步删除文章标题图
+@receiver(pre_delete, sender=Article)
+def delete_upload_files(sender, instance, **kwargs):
+	instance.picture.delete(False)
+
+
+# 同步删除捐助图
+@receiver(pre_delete, sender=Pay)
+def delete_upload_files(sender, instance, **kwargs):
+	instance.payimg.delete(False)
+
+
+# 同步删除网站logo
+@receiver(pre_delete, sender=Conf)
+def delete_upload_files(sender, instance, **kwargs):
+	instance.website_logo.delete(False)
+

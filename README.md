@@ -31,7 +31,7 @@ ps：项目处于热开发试运行阶段，如果你想查看一版稳定的代
 * 多目标源博文分享（支持https）
 ---
 * echarts 博文统计图（折线图，饼图，梯形图），雷达统计图（雷达图）
-* 冷数据 redis 缓存
+* 网站配置数据 redis 缓存
 * windows: django-gzip压缩主站，linux: nginx-gzip压缩全站
 * Rss / Atom 订阅
 * 支持图床，后台上传图片可直链访问及调用  

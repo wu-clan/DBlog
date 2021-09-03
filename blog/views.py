@@ -478,12 +478,13 @@ def subscription_record(request):
 	if request == 'POST':
 		form = SubscriptionForm(request.POST)
 		if form.is_valid():
-			_email = form.cleaned_data['email']
-			email = Subscription.objects.filter(Q(email=_email))
-			if email:
+			email = form.cleaned_data['email']
+			_email = Subscription.objects.filter(Q(email=email))
+			if _email:
 				sub = form.save(commit=False)
 				sub.save()
-			return redirect('blog:subscription_record')
+				messages.success(request, '订阅成功')
+				return render(request, 'blog/right.html', locals())
 	return redirect('/blog')
 
 
