@@ -12,6 +12,8 @@ from mdeditor.fields import MDTextField
 
 
 # Create your models here.
+from blog.views import subscription
+
 
 class SiteUser(models.Model):
 	"""
@@ -343,3 +345,9 @@ def delete_upload_files(sender, instance, **kwargs):
 def delete_upload_files(sender, instance, **kwargs):
 	instance.website_logo.delete(False)
 
+
+# 监听文章发布，自动调用订阅视图函数发送订阅邮件
+@receiver(post_save, sender=Article)
+def send_stu_email(sender, instance, created, **kwargs):
+	if created:
+		subscription()
