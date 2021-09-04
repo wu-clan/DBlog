@@ -303,11 +303,12 @@ CAPTCHA_LENGTH = 4  # 字符个数
 CAPTCHA_TIMEOUT = 3  # 超时(minutes)
 
 # SMTP服务器
+# 请更改为自己的邮箱配置
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.qq.com'
-EMAIL_HOST_USER = 'xiaowu-nav@qq.com'
+EMAIL_HOST_USER = 'xxx-nav@qq.com'
 # 密码(请替换为你自己的哟) qq为设置=>账户=>POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务=> 开启服务POP3/SMTP服务=> 生成授权码
-EMAIL_HOST_PASSWORD = 'vszjyenrlvfkeaef'
+EMAIL_HOST_PASSWORD = 'xxxvszjyenrlvfkeaef'
 # 发送邮件端口和加密（两种方式不能同时使用）
 # 云服务器使用：
 EMAIL_PORT = 465
