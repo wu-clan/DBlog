@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
-
+import requests
 from django.conf import settings
 from django.core.cache import cache  # 使用redis缓存
+from django.core.mail import send_mail
 from django.core.validators import RegexValidator
 from django.db import models
 from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
+from django.http import request
+from django.shortcuts import redirect
 from mdeditor.fields import MDTextField
 
 
@@ -201,7 +204,10 @@ class Article(models.Model):
 		verbose_name = '博客文章'
 		verbose_name_plural = verbose_name
 
-	def sourceUrl(self):
+	def source_link(self):
+		"""
+		文章链接拼接
+		"""
 		source_url = settings.HOST + '/blog/detail/{id}'.format(id=self.pk)
 		return source_url
 
@@ -338,13 +344,3 @@ def delete_upload_files(sender, instance, **kwargs):
 def delete_upload_files(sender, instance, **kwargs):
 	instance.website_logo.delete(False)
 
-
-# 监听文章发布，自动调用订阅视图函数发送订阅邮件
-# 导入放在这里，不然会报错
-from blog.views import subscription_send
-
-
-@receiver(post_save, sender=Article)
-def send_stu_email(sender, created, **kwargs):
-	if created:
-		subscription_send()

@@ -11,7 +11,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.views import View
+from typing import List
 
 from blog.comment.forms import CommentForm
 from blog.models import About, SiteUser, Subscription
@@ -452,12 +452,14 @@ def get_comment(request, pk):
 	评论
 	"""
 	blog = get_object_or_404(Article, pk=pk)
+	blog.commenced()
 	if request.method == 'POST':
 		form = CommentForm(request.POST)
 		if form.is_valid():
 			comment = form.save(commit=False)
 			comment.title = blog.title
 			# 文章跳转url
+			# url = request.get_full_path()
 			url = request.headers['Referer']
 			comment.url = str(url)
 			# 关联评论与文章
@@ -491,21 +493,29 @@ def subscription_record(request):
 	return redirect('/blog')
 
 
-def subscription_send(request):
+@receiver(post_save, sender=Article)
+def send_stu_email(sender, created, **kwargs):
 	"""
-	邮箱订阅推送
+	文章发布监听器，发布文章时触发并直接发送邮件订阅通知
 	"""
-	# 获取最新文章的title
-	title = Article.objects.values('title').first()
-	rq = request
-	# 文章链接
-	link = request.headers['Referer']
-	email_list = Subscription.objects.values('email')
-	email_title = "文章订阅推送"
-	email_body = "你订阅的 %s 的博客发布新文章啦，快点击链接查阅吧\n文章：%s\n链接：%s" % (settings.website_author_link, title, link)
-	send_mail(email_title, email_body, settings.EMAIL_HOST_USER, (email_list,),
-	          auth_user=settings.EMAIL_HOST_USER,
-	          auth_password=settings.EMAIL_HOST_PASSWORD)
+	if created:
+		blog = Article.objects.filter()
+		if blog:
+			link_id = blog.count()
+			title = blog.values('title').first().get('title').strip()
+			# 文章链接
+			print(request.get_full_path())
+			# 本地调试时请将 settings.website_author_link 换成 http://127.0.0.1:端口号
+			link = settings.website_author_link + '/blog/detail/{id}'.format(id=link_id)
+			_email = Subscription.objects.filter().values_list('email', flat=True)
+			if _email:
+				email_list = _email[:99999999]
+				email_title = "文章订阅推送"
+				email_body = "你订阅的 %s: %s 的博客发布新文章啦，快点击链接查阅吧\n文章：%s\n链接：%s" \
+				             % (settings.website_author, settings.website_author_link, title, link)
+				send_mail(email_title, email_body, settings.EMAIL_HOST_USER, email_list,
+				          auth_user=settings.EMAIL_HOST_USER,
+				          auth_password=settings.EMAIL_HOST_PASSWORD)
 
 
 def unsubscribe(request):
