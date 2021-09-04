@@ -14,7 +14,7 @@ class UserInfoAdmin(admin.StackedInline):
 	fields = (
 		'avatar',
 		'mobile',
-		'sex',
+		# 'sex',
 		'wechart',
 		'qq',
 		'blog_address',
