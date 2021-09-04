@@ -504,7 +504,6 @@ def send_stu_email(sender, created, **kwargs):
 			link_id = blog.count()
 			title = blog.values('title').first().get('title').strip()
 			# 文章链接
-			print(request.get_full_path())
 			# 本地调试时请将 settings.website_author_link 换成 http://127.0.0.1:端口号
 			link = settings.website_author_link + '/blog/detail/{id}'.format(id=link_id)
 			_email = Subscription.objects.filter().values_list('email', flat=True)
@@ -513,9 +512,14 @@ def send_stu_email(sender, created, **kwargs):
 				email_title = "文章订阅推送"
 				email_body = "你订阅的 %s: %s 的博客发布新文章啦，快点击链接查阅吧\n文章：%s\n链接：%s" \
 				             % (settings.website_author, settings.website_author_link, title, link)
-				send_mail(email_title, email_body, settings.EMAIL_HOST_USER, email_list,
-				          auth_user=settings.EMAIL_HOST_USER,
-				          auth_password=settings.EMAIL_HOST_PASSWORD)
+				try:
+					send_mail(email_title, email_body, settings.EMAIL_HOST_USER, email_list,
+					          auth_user=settings.EMAIL_HOST_USER,
+					          auth_password=settings.EMAIL_HOST_PASSWORD)
+				except Exception:
+					# 发送失败默认不发送，不影响发布文章
+					print('发送文章订阅邮件失败，请调试检查！！！')
+					pass
 
 
 def unsubscribe(request):
