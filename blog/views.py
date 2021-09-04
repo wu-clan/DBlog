@@ -159,7 +159,7 @@ def password_reset_email(request):
 					                        auth_password=settings.EMAIL_HOST_PASSWORD)
 					messages.success(request, "验证码已发送，请查收邮件")
 					return redirect(reverse('blog:password_reset_base'))
-			except WindowsError:
+			except Exception:
 				messages.error(request, '验证码发送失败，请联系网站管理员吧')
 			else:
 				messages.error(request, '用户名或邮箱不存在')
