@@ -1,29 +1,25 @@
 # -*- coding: utf-8 -*-
 # Create your views here.
 import hashlib
-import json
 import random
-import string
 
 import markdown
-from asgiref.sync import sync_to_async
-from django.contrib import auth, messages
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.core.mail import send_mail
 from django.db.models import Q
-from django.http import HttpResponse, JsonResponse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+from django.views import View
 
 from blog.comment.forms import CommentForm
 from blog.models import About, SiteUser, Subscription
+from blog.models import Article, Category, Tag, UserInfo
 from blog.subscription.form import SubscriptionForm
 from blog.user.forms import EditUserInfo, ProfileForm, RegisterForm, RestCodeForm, RestPwdForm, UserForm
 from djangoProject import settings
 from djangoProject.util import PageInfo
-from blog.models import Article, Category, Comment, UserInfo, Tag
-from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import redirect, render, get_object_or_404
 
 
 def index(request):
@@ -149,6 +145,7 @@ def password_reset_email(request):
 		rest_pwd_form = RestCodeForm(request.POST)
 		if rest_pwd_form.is_valid():
 			username_email = rest_pwd_form.cleaned_data['username_email']
+			# 调试的时候请将此 try 方法注释，改为只是用 if 判断
 			try:
 				user = SiteUser.objects.filter(Q(username=username_email) | Q(email=username_email))
 				if user:
@@ -156,13 +153,12 @@ def password_reset_email(request):
 					email_title = "重置密码"
 					code = reset_code()  # 验证码
 					request.session["code"] = code  # 将验证码保存到session
-					email_body = "您的重置密码验证码为：{0}\n为了不影响您正常使用，请在24小时之内完成重置".format(code)
+					email_body = "您的重置密码验证码为：{0}\n为了不影响您正常使用，请在24小时之内完成密码重置".format(code)
 					send_status = send_mail(email_title, email_body, settings.EMAIL_HOST_USER, (mail_receiver,),
 					                        auth_user=settings.EMAIL_HOST_USER,
 					                        auth_password=settings.EMAIL_HOST_PASSWORD)
 					messages.success(request, "验证码已发送，请查收邮件")
 					return redirect(reverse('blog:password_reset_base'))
-			# 调试的时候请将此expect注释
 			except WindowsError:
 				messages.error(request, '验证码发送失败，请联系网站管理员吧')
 			else:
@@ -290,6 +286,7 @@ def detail(request, pk):
 	"""
 	blog = get_object_or_404(Article, pk=pk)
 	blog.viewed()
+	# Markdown渲染文章(含目录)，注意Markdown的 M 大小写
 	md = markdown.Markdown(
 		extensions=[
 			'markdown.extensions.extra',
@@ -300,13 +297,13 @@ def detail(request, pk):
 	)
 	# md文章内容
 	blog.content = md.convert(blog.content)
-	form = CommentForm()
-	# 获取对应文章的全部评论
-	comments = blog.post.all()
+	# form = CommentForm()
+	# 获取对应文章的全部评论，倒序显示
+	comments = blog.post.all().order_by('-create_time')
 	context = {
 		"blog": blog,
 		'toc': md.toc,
-		'form': form,
+		# 'form': form,
 		'comments': comments
 	}
 	return render(request, 'blog/detail.html', context=context)
@@ -375,7 +372,7 @@ def about(request):
 	"""
 	关于（包含统计图）
 	"""
-	# markdown自我介绍
+	# markdown渲染自我介绍
 	about = About.objects.all().first()
 	if about:
 		about.contents = markdown.markdown(about.contents,
@@ -460,7 +457,7 @@ def get_comment(request, pk):
 		if form.is_valid():
 			comment = form.save(commit=False)
 			comment.title = blog.title
-			# 文章url
+			# 文章跳转url
 			url = request.headers['Referer']
 			comment.url = str(url)
 			# 关联评论与文章
@@ -475,29 +472,40 @@ def subscription_record(request):
 	"""
 	邮箱订阅记录
 	"""
-	if request == 'POST':
+	if request.method == 'POST':
 		form = SubscriptionForm(request.POST)
 		if form.is_valid():
 			email = form.cleaned_data['email']
-			_email = Subscription.objects.filter(Q(email=email))
-			if _email:
-				sub = form.save(commit=False)
-				sub.save()
-				messages.success(request, '订阅成功')
-				return render(request, 'blog/right.html', locals())
+			try:
+				_email = Subscription.objects.filter(Q(email=email))
+				if _email:
+					messages.success(request, '此邮箱已经订阅过啦')
+					return redirect('blog:subscription_record')
+				else:
+					sub = form.save(commit=False)
+					sub.save()
+					return redirect('blog:subscription_record')
+			except ValueError:
+				messages.error(request, '订阅失败')
+	messages.success(request, '订阅成功，发布新文章后会通过邮箱及时通知你哟')
 	return redirect('/blog')
 
 
-def subscription(request):
+def subscription_send(request):
 	"""
 	邮箱订阅推送
 	"""
-
-	# 1，检测文章发布
-	# 2, 提取文章标题
-	# 3，拼写文章链接
-	# 4，提取订阅用户邮箱
-	# 5，发送邮件，包含文章头，文章链接，取消订阅链接
+	# 获取最新文章的title
+	title = Article.objects.values('title').first()
+	rq = request
+	# 文章链接
+	link = request.headers['Referer']
+	email_list = Subscription.objects.values('email')
+	email_title = "文章订阅推送"
+	email_body = "你订阅的 %s 的博客发布新文章啦，快点击链接查阅吧\n文章：%s\n链接：%s" % (settings.website_author_link, title, link)
+	send_mail(email_title, email_body, settings.EMAIL_HOST_USER, (email_list,),
+	          auth_user=settings.EMAIL_HOST_USER,
+	          auth_password=settings.EMAIL_HOST_PASSWORD)
 
 
 def unsubscribe(request):

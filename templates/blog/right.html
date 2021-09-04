@@ -61,9 +61,8 @@
         </div>
         {# 邮箱订阅表单弹窗 #}
         <div class="mail-dy">
-            <form action="{% url "blog:subscription_record" %}" method="post">
+            <form action="{% url 'blog:subscription_record' %}" method="post" class="comment-form">
                 <span>订阅</span>
-                {{ form.email }}
                 <input name="email" type="email" placeholder="文章发布邮箱订阅"/>
                 <i class="el-envelope"><input value=" " type="submit"/> </i>
             </form>
@@ -228,7 +227,7 @@
 </aside>
 
 <script>
-    // 分享，订阅 弹窗
+    // 分享和订阅弹窗
     $(".side-fx").click(function (e) {
         $(".side-bdfx").show();
         $(".mail-dy").hide();

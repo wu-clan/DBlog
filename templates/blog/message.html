@@ -10,21 +10,17 @@
             <div class="vheader item3">
                 <input class="vnick vinput" name="user_name" placeholder="昵称" maxlength="25" required=""
                        id="id_user_name" type="text">
-                {# {{ form.user_name }}#}
                 {{ form.user_name.errors }}
                 <input class="vmail vinput" name="email" placeholder="邮箱" maxlength="50" required="" id="id_email"
                        type="email">
-                {# {{ form.email }}#}
                 {{ form.email.errors }}
                 <input class="vlink vinput" name="url_input" placeholder="链接" maxlength="100" required="" id="id_url_input"
                        type="text">
-                {# {{ form.url_input }}#}
                 {{ form.url.errors }}
             </div>
             <div class="vedit">
                 <textarea class="vediter vinput OwO-textarea" name="comment" placeholder="在这里输入吧..." maxlength="500"
                           required="" id="id_comment" type="text"></textarea>
-                {# {{ form.comment }}#}
                 {{ form.comment.errors }}
                 <div class="OwO" style="width: 50%;">
                     <div class="OwO-logo">

@@ -1,18 +1,15 @@
 # -*- coding: utf-8 -*-
-import datetime
-import os
 
-from django.core.validators import RegexValidator
-from django.db import models
 from django.conf import settings
 from django.core.cache import cache  # 使用redis缓存
-from django.db.models.signals import post_init, post_save, pre_delete
+from django.core.validators import RegexValidator
+from django.db import models
+from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from mdeditor.fields import MDTextField
 
 
 # Create your models here.
-from blog.views import subscription
 
 
 class SiteUser(models.Model):
@@ -29,10 +26,6 @@ class SiteUser(models.Model):
 		ordering = ['time_joined']
 		verbose_name = '用户信息'
 		verbose_name_plural = verbose_name
-
-
-# def __str__(self):
-# 	return self.username
 
 
 class UserInfo(models.Model):
@@ -347,7 +340,11 @@ def delete_upload_files(sender, instance, **kwargs):
 
 
 # 监听文章发布，自动调用订阅视图函数发送订阅邮件
+# 导入放在这里，不然会报错
+from blog.views import subscription_send
+
+
 @receiver(post_save, sender=Article)
-def send_stu_email(sender, instance, created, **kwargs):
+def send_stu_email(sender, created, **kwargs):
 	if created:
-		subscription()
+		subscription_send()
