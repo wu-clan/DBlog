@@ -183,7 +183,7 @@ website_logo = 'logo/DBlog.png'
 2，simpleui 第三方库集成
 
 使用说明：
-如果您使用 admin_reorder 排序，仅需注释掉 SIMPLEUI_CONFIG 字段即可
+如果您使用 admin_reorder 排序，需注释掉 SIMPLEUI_CONFIG 字段并打开app: admin_reorder的注释
 如果您使用 simpleui 排序，需要注释掉app: admin_reorder
 两者只能使用其一，使用哪一个就注释掉另一个
 """
@@ -191,10 +191,12 @@ website_logo = 'logo/DBlog.png'
 ADMIN_REORDER = (
 	# Reorder app models
 	{'app': 'blog', 'models': (
+		'blog.SiteUser'
 		'blog.Carousel',
 		'blog.Announcement',
 		'blog.Conf',
 		'blog.Article',
+		'blog.Subscription',
 		'blog.Category',
 		'blog.Tag',
 		'blog.Comment',
