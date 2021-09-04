@@ -271,7 +271,7 @@ class Comment(models.Model):
 	评论
 	"""
 	title = models.CharField("标题", max_length=100)
-	create_time = models.DateTimeField('评论时间', auto_now=True)
+	create_time = models.DateTimeField('评论时间', auto_now_add=True)
 	user_name = models.CharField('评论用户', max_length=25)
 	email = models.EmailField('预留邮箱', max_length=50, default='')
 	url = models.CharField('链接', max_length=200)
@@ -294,7 +294,7 @@ class Subscription(models.Model):
 	文章邮箱订阅
 	"""
 	email = models.EmailField(verbose_name='邮箱订阅用户', max_length=200)
-	sub_time = models.DateTimeField(verbose_name='订阅时间', auto_now=True)
+	sub_time = models.DateTimeField(verbose_name='订阅时间', auto_now_add=True)
 
 	class Meta:
 		ordering = ['sub_time']
