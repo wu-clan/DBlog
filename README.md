@@ -1,7 +1,8 @@
 # Django博客系统
 
-ps：项目基本完成，处于试运行阶段，如果你想查看一版稳定的代码，请在标签中选择版本下载，
-如果你想查看实时更新状态下的代码，请直接下载当前分支
+ps：项目基本完成，处于试运行阶段，示例网站为当前分支最新代码，
+
+如果您想查看旧版本，可以到标签中选择对应的版本进行下载
 
 [![python3](https://img.shields.io/badge/Python-3.8-red.svg)](https://www.python.org/downloads)
 [![Django3.2](https://img.shields.io/badge/Django-3.2.4-green.svg)](https://docs.djangoproject.com/zh-hans/3.2)
