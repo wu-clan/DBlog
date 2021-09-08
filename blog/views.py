@@ -9,6 +9,7 @@ from django.core.mail import send_mail
 from django.db.models import Q
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from typing import List
@@ -449,10 +450,11 @@ def search(request):
 
 def get_comment(request, pk):
 	"""
-	评论
+	评论数据
 	"""
 	blog = get_object_or_404(Article, pk=pk)
 	blog.commenced()
+	result = {'status': 'error', 'content': '请求失败'}
 	if request.method == 'POST':
 		form = CommentForm(request.POST)
 		if form.is_valid():
@@ -460,14 +462,41 @@ def get_comment(request, pk):
 			comment.title = blog.title
 			# 文章跳转url
 			# url = request.get_full_path()
-			url = request.headers['Referer']
-			comment.url = str(url)
+			comment.url = str(request.headers['Referer'])
 			# 关联评论与文章
 			comment.post = blog
 			comment.save()
-			return redirect('blog:get_comment', pk=pk)
-	# 不是 post 请求，重定向到文章详情页。
-	return redirect('blog:detail', pk=pk)
+			result['status'] = 'success'
+			result['content'] = '评论保存成功'
+	elif request.method == 'GET':
+		form = CommentForm()
+		return render(request, 'blog/message.html', locals())
+	else:
+		result['content'] = '请求类型错误，请使用POST'
+	return JsonResponse(result)
+
+
+# def get_comment(request, pk):
+# 	"""
+# 	评论数据
+# 	"""
+# 	blog = get_object_or_404(Article, pk=pk)
+# 	blog.commenced()
+# 	if request.method == 'POST':
+# 		form = CommentForm(request.POST)
+# 		if form.is_valid():
+# 			comment = form.save(commit=False)
+# 			comment.title = blog.title
+# 			# 文章跳转url
+# 			# url = request.get_full_path()
+# 			url = request.headers['Referer']
+# 			comment.url = str(url)
+# 			# 关联评论与文章
+# 			comment.post = blog
+# 			comment.save()
+# 			return redirect('blog:get_comment', pk=pk)
+# 	# 不是 post 请求，重定向到文章详情页。
+# 	return redirect('blog:detail', pk=pk)
 
 
 def subscription_record(request):

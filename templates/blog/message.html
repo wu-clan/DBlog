@@ -4,30 +4,32 @@
 
 <h3 class="form-btn blue-text"><a href="javascript:;"><i class="el-edit"></i>我要留言 / 展开表单</a></h3>
 <div id="Coon" class="form-zd form-in">
-    <form action="{% url 'blog:get_comment' blog.id %}" method="post" class="comment-form">
+    <form class="comment-form">
         {% csrf_token %}
         <div class="vwrap">
             <div class="vheader item3">
-                <input class="vnick vinput" name="user_name" placeholder="昵称" maxlength="25" required=""
-                       id="id_user_name" type="text">
+                <input class="vnick vinput" name="user_name" placeholder="昵称" maxlength="25" id="id_user_name"
+                       type="text">
                 {{ form.user_name.errors }}
-                <input class="vmail vinput" name="email" placeholder="邮箱" maxlength="50" required="" id="id_email"
+                <input class="vmail vinput" name="email" placeholder="邮箱" maxlength="50" id="id_email"
                        type="email">
                 {{ form.email.errors }}
-                <input class="vlink vinput" name="url_input" placeholder="链接" maxlength="100" required="" id="id_url_input"
+                <input class="vlink vinput" name="url_input" placeholder="链接" maxlength="100" id="id_url_input"
                        type="text">
                 {{ form.url.errors }}
             </div>
             <div class="vedit">
-                <textarea class="vediter vinput OwO-textarea" name="comment" placeholder="在这里输入吧..." maxlength="500"
-                          required="" id="id_comment" type="text"></textarea>
+                <textarea class="vediter vinput OwO-textarea" name="comment" maxlength="500" id="id_comment"
+                          placeholder="在这里输入吧..."
+                          type="text">
+                </textarea>
                 {{ form.comment.errors }}
                 <div class="OwO" style="width: 50%;">
                     <div class="OwO-logo">
                         <span>OωO表情</span>
                     </div>
                 </div>
-                <button class="vsubmit vbtn" type="submit" title="Cmd|Ctrl+Enter">发表</button>
+                <button class="vsubmit vbtn" type="submit">发表</button>
             </div>
         </div>
     </form>
@@ -44,6 +46,28 @@
             width: '100%',
             maxHeight: '250px'
         });
+    </script>
+    <script>
+        $('.vbtn').click(function () {
+            $.ajax({
+                url: '{% url 'blog:get_comment' blog.id %}',
+                type: 'POST',
+                async: true,
+                data: {
+                    {#'csrfmiddlewaretoken': $("[name='csrfmiddlewaretoken']").val(),#}
+                    'user_name': $('#id_user_name').val(),
+                    'email': $('#id_email').val(),
+                    'url_imput': $('#id_url_input').val(),
+                    'comment': $('#id_comment').val(),
+                },
+                success: function (data) {
+                    console.log(data)
+                },
+                error: function (data) {
+                    console.log(data)
+                }
+            })
+        })
     </script>
 {% endblock %}
 
