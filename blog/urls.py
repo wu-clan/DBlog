@@ -13,7 +13,7 @@ urlpatterns = [
 	path('tag/<str:name>/', views.tag, name='tag'),
 	# 分类
 	path('category/<str:name>/', views.category, name='category'),
-	# 细节（图标，分享等...）
+	# 博文详情
 	path('detail/<int:pk>/', views.detail, name='detail'),
 	# 文章归档
 	path('archive/', views.archive, name='archive'),
