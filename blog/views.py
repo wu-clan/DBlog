@@ -448,40 +448,13 @@ def search(request):
 	return render(request, 'blog/search.html', {"blog_list": _blog_list, "pages": page_info, "key": key})
 
 
-def get_comment(request, pk):
-	"""
-	评论数据
-	"""
-	blog = get_object_or_404(Article, pk=pk)
-	blog.commenced()
-	result = {'status': 'error', 'content': '请求失败'}
-	if request.method == 'POST':
-		form = CommentForm(request.POST)
-		if form.is_valid():
-			comment = form.save(commit=False)
-			comment.title = blog.title
-			# 文章跳转url
-			# url = request.get_full_path()
-			comment.url = str(request.headers['Referer'])
-			# 关联评论与文章
-			comment.post = blog
-			comment.save()
-			result['status'] = 'success'
-			result['content'] = '评论保存成功'
-	elif request.method == 'GET':
-		form = CommentForm()
-		return render(request, 'blog/message.html', locals())
-	else:
-		result['content'] = '请求类型错误，请使用POST'
-	return JsonResponse(result)
-
-
 # def get_comment(request, pk):
 # 	"""
 # 	评论数据
 # 	"""
 # 	blog = get_object_or_404(Article, pk=pk)
 # 	blog.commenced()
+# 	result = {'status': 'error', 'content': '请求失败'}
 # 	if request.method == 'POST':
 # 		form = CommentForm(request.POST)
 # 		if form.is_valid():
@@ -494,9 +467,36 @@ def get_comment(request, pk):
 # 			# 关联评论与文章
 # 			comment.post = blog
 # 			comment.save()
-# 			return redirect('blog:get_comment', pk=pk)
-# 	# 不是 post 请求，重定向到文章详情页。
-# 	return redirect('blog:detail', pk=pk)
+# 			result['status'] = 'success'
+# 			result['content'] = '评论保存成功'
+# 		else:
+# 			return JsonResponse(result)
+# 	else:
+# 		result['content'] = '请求类型错误，请使用POST'
+# 		return JsonResponse(result)
+
+
+def get_comment(request, pk):
+	"""
+	评论数据
+	"""
+	blog = get_object_or_404(Article, pk=pk)
+	blog.commenced()
+	if request.method == 'POST':
+		form = CommentForm(request.POST)
+		if form.is_valid():
+			comment = form.save(commit=False)
+			comment.title = blog.title
+			# 文章跳转url
+			# url = request.get_full_path()
+			url = request.headers['Referer']
+			comment.url = str(url)
+			# 关联评论与文章
+			comment.post = blog
+			comment.save()
+			return redirect('blog:get_comment', pk=pk)
+	# 不是 post 请求，重定向到文章详情页。
+	return redirect('blog:detail', pk=pk)
 
 
 def subscription_record(request):
@@ -555,8 +555,10 @@ def unsubscribe(request):
 	"""
 	取消邮箱订阅
 	"""
-	# 1，点击取消订阅跳转确认界面
-	# 2，确认取消，调用数据库，删除此订阅邮箱
+
+
+# 1，点击取消订阅跳转确认界面
+# 2，确认取消，调用数据库，删除此订阅邮箱
 
 
 def page_not_found_error(request, exception):
