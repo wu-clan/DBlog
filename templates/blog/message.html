@@ -29,7 +29,7 @@
                         <span>OωO表情</span>
                     </div>
                 </div>
-                <button class="vsubmit vbtn" type="submit">发表</button>
+                <button class="vsubmit vbtn" id='vbtn', type="submit">发表</button>
             </div>
         </div>
     </form>
@@ -48,23 +48,20 @@
         });
     </script>
     <script>
-        $('.vbtn').click(function () {
+        $('#vbtn').click(function () {
             $.ajax({
                 url: '{% url 'blog:get_comment' blog.id %}',
-                type: 'POST',
+                type: 'post',
                 async: true,
-                data: {
-                    {#'csrfmiddlewaretoken': $("[name='csrfmiddlewaretoken']").val(),#}
-                    'user_name': $('#id_user_name').val(),
-                    'email': $('#id_email').val(),
-                    'url_imput': $('#id_url_input').val(),
-                    'comment': $('#id_comment').val(),
-                },
+                dataType: 'json',
+                data: $('#comment-form').serialize(),
                 success: function (data) {
-                    console.log(data)
+                    {#console.log(data)#}
+                    alert('发布评论成功')
                 },
                 error: function (data) {
-                    console.log(data)
+                    {#console.log(data)#}
+                    alert('发布评论失败')
                 }
             })
         })
