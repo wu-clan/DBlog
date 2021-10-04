@@ -176,7 +176,6 @@ class ArticleImgAdmin(admin.ModelAdmin):
         'images',
         'article_img',
     )
-    readonly_fields = ['article_img']
 
 
 @admin.register(Category)
