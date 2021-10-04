@@ -9,6 +9,7 @@ from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from django.http import request
 from django.shortcuts import redirect
+from django.utils.safestring import mark_safe
 from mdeditor.fields import MDTextField
 
 
@@ -196,7 +197,7 @@ class Article(models.Model):
 	author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='作者', on_delete=models.CASCADE)
 	view = models.BigIntegerField(default=0, verbose_name='阅读数')
 	comment = models.BigIntegerField(default=0, verbose_name='评论数')
-	picture = models.ImageField(upload_to='article_picture', blank=True, null=True, verbose_name='url(标题图)')  # 标题图片地址
+	picture = models.CharField(max_length=300, blank=True, null=True, verbose_name="url(标题图链接)")
 	tag = models.ManyToManyField(Tag)  # 标签
 
 	class Meta:
@@ -213,7 +214,7 @@ class Article(models.Model):
 
 	def content_validity(self):
 		"""
-		正文字数显示控制
+		后台正文字数显示控制
 		"""
 		if len(str(self.content)) > 40:  # 字数自己设置
 			return '{}……'.format(str(self.content)[0:40])  # 超出部分以省略号代替。
@@ -238,6 +239,42 @@ class Article(models.Model):
 
 	def __str__(self):
 		return self.title
+
+
+class ArticleImg(models.Model):
+	"""
+	文章大头图
+	"""
+	img_title = models.CharField(max_length=50, verbose_name='图片标题')
+	article_img = models.ImageField(upload_to='article_img', verbose_name='文章大头图')
+
+	def url(self):
+		"""
+		显示图片url
+		"""
+		if self.article_img:
+			return self.article_img.url
+		else:
+			return "url为空"
+
+	def images(self):
+		"""
+		预览图
+		"""
+		href = self.article_img.url
+		try:
+			img = mark_safe('<img src="%s" width="100px" />' % href)
+		except Exception:
+			img = ''
+		return img
+
+	# 修改列名显示
+	url.short_description = 'URL ( 复制粘贴即可 )'
+	images.short_description = '图片预览'
+	images.allow_tags = True
+
+	def __str__(self):
+		return self.img_title
 
 
 class Category(models.Model):
@@ -327,10 +364,10 @@ def delete_upload_files(sender, instance, **kwargs):
 	instance.carousel.delete(False)
 
 
-# 同步删除文章标题图
-@receiver(pre_delete, sender=Article)
+# 同步删除文章大头图
+@receiver(pre_delete, sender=ArticleImg)
 def delete_upload_files(sender, instance, **kwargs):
-	instance.picture.delete(False)
+	instance.article_img.delete(False)
 
 
 # 同步删除捐助图

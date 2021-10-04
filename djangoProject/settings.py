@@ -196,6 +196,7 @@ ADMIN_REORDER = (
 		'blog.Announcement',
 		'blog.Conf',
 		'blog.Article',
+		'blog.ArticleImg',
 		'blog.Subscription',
 		'blog.Category',
 		'blog.Tag',
@@ -214,6 +215,9 @@ SIMPLEUI_CONFIG = {
 	'menus': [{
 		'name': '文章配置',
 		'models': [{
+			'name': '文章大头图',
+			'url': '/admin/blog/articleimg'
+		}, {
 			'name': '文章',
 			'url': '/admin/blog/article'
 		}, {

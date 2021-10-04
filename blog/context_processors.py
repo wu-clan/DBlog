@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from blog.models import About, Announcement, Carousel, Category, Article, Conf, Friend, Pay, Tag, Comment, UserInfo
+from blog.models import About, Announcement, ArticleImg, Carousel, Category, Article, Conf, Friend, Pay, Tag, Comment, \
+	UserInfo
 from djangoProject import settings
 
 
 def sidebar(request):
 	# 所有文章类型
 	category_list = Category.objects.all()
+
+	# 文章大头图
+	article_img = ArticleImg.objects.all()
 
 	# 文章排行
 	blog_top = Article.objects.all().values("id", "title", "view").order_by('-view')[0:6]
@@ -31,6 +35,7 @@ def sidebar(request):
 
 	return {
 		'category_list': category_list,
+		'article_img': article_img,
 		'blog_top': blog_top,
 		'tag_list': tag_list,
 		'comment_list': comment,
