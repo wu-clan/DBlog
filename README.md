@@ -107,7 +107,8 @@ uwsgi.sh: 用于调用自启动服务脚本的shell脚本
    百度: Ubuntu-20.04 安装 mysql8 并创建数据库
    百度: Ubuntu-20.04 安装 redis
 
-4, 将参考文件 nginx_conf 文件中的内容替换到 /etc/nginx/sites-enabled/default 文件中, 注意是替换内容,不是直接替换文件,如果网站未使用https,请百度django nginx配置,再修改文件内容
+4, 将参考文件 nginx_conf 文件中的内容替换到 /etc/nginx/sites-enabled/default 文件中, 
+   # 注意是替换内容,不是直接替换文件,如果网站未使用https,请百度django nginx配置,再修改文件内容
 
 5, 将参考文件 uwsgi.sh 拷贝到 /etc/init.d/ 目录下, 并进入 /etc/init.d/ 目录执行 chmod 755 uwsgi.sh 赋予该脚本权限
 
@@ -138,10 +139,6 @@ http://服务器ip:8000/admin
 浏览器中打开 <http://服务器ip:8000/> 即可访问
 
 ## ❓ 问题相关
-欢迎提交问题到 [Issues](https://gitee.com/wu_cl/DBlog/issues) 
-或我的QQ邮箱 `2186656812@qq.com`, 我将在看到问题后第一时间回复,
-同时欢迎提交 request，我将在审阅并测试后第一时间通知
+欢迎提交问题到 [Issues](https://gitee.com/wu_cl/DBlog/issues) 或我的QQ邮箱 `2186656812@qq.com`, 我将在看到问题后第一时间回复 
 
-[comment]: <> (## 🙇‍ 感谢)
-
-[comment]: <> (☞ [jhao104]&#40;https://github.com/jhao104/django-blog&#41;)
+网站在一些逻辑和限制上面考虑还欠周全，后续开发已暂缓，欢迎 pull request，我将在审阅并测试后第一时间通知您
