@@ -1,8 +1,12 @@
+ps: 个人博客在一些逻辑和限制上面考虑还欠周全，存在bug，不影响正常使用，
+
+后续开发已暂缓，欢迎 pull request，我将在审阅并测试后第一时间通知您
+
 # Django博客系统
 
-ps：项目基本完成，处于试运行阶段，示例网站为当前分支最新代码，
-
+项目基本完成，处于试运行阶段，示例网站为当前分支最新代码，
 如果您想查看旧版本，可以到标签中选择对应的版本进行下载
+
 
 [![python3](https://img.shields.io/badge/Python-3.8-red.svg)](https://www.python.org/downloads)
 [![Django3.2](https://img.shields.io/badge/Django-3.2.4-green.svg)](https://docs.djangoproject.com/zh-hans/3.2)
@@ -140,5 +144,3 @@ http://服务器ip:8000/admin
 
 ## ❓ 问题相关
 欢迎提交问题到 [Issues](https://gitee.com/wu_cl/DBlog/issues) 或我的QQ邮箱 `2186656812@qq.com`, 我将在看到问题后第一时间回复 
-
-网站在一些逻辑和限制上面考虑还欠周全，后续开发已暂缓，欢迎 pull request，我将在审阅并测试后第一时间通知您
