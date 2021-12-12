@@ -121,19 +121,19 @@ ps: 之所以让百度,是因为细节太多了...
 
 ### 安装
 ```
-1: cd /home/DBlog, 执行 pip install -r requirements.txt  # 安装所有依赖
+1: cd /home/DBlog, 执行 pip3 install -r requirements.txt  # 安装所有依赖
 
 2: 修改setting.py mysql数据库配置
 
-3: python manage.py makemigrations
-4: python manage.py migrate
-5: python manage.py runserver
+3: python3 manage.py makemigrations
+4: python3 manage.py migrate
+5: python3 manage.py runserver
 ```
 
 ### 使用
 ```python
 # 初始化用户名密码,按照提示输入用户名、邮箱、密码即可
-python manage.py createsuperuser
+python3 manage.py createsuperuser
 
 # 登录后台 编辑类型、标签、发布文章等
 http://服务器ip:8000/admin
