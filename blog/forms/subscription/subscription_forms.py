@@ -13,3 +13,12 @@ class SubscriptionForm(forms.ModelForm):
 		fields = (
 			'email',
 		)
+
+
+class UnSubscriptionForm(forms.Form):
+	"""
+	取消邮件订阅
+	"""
+	email = forms.CharField(label='邮箱', widget=forms.EmailInput(attrs={'class': 'form-control'}))
+
+

@@ -152,8 +152,9 @@
                     <a class="blue-text" href="{{ comment.url }}" title="{{ comment.comment }}">
                         {{ comment.comment }}
                     </a>
-                    <span style="text-align: right; margin-left: 50px">— &nbsp;<i class="el-user"></i>
+                    <span style="text-align: right; margin-left: 50px">—&nbsp;&nbsp;<i class="el-user"></i>
                         {{ comment.user_name }}
+                        <p style="color: #7799 !important; font-size: xx-small">来自: {{ comment.request_ip }}</p>
                     </span>
                 </div>
             </li>
@@ -204,12 +205,7 @@
     <!--支持server-->
     <div class="side-link animation-div">
         <h4 class="index-title"><i class="el el-thumbs-up"></i>咖啡续命
-            <small>(WeChatPay / AliPay)
-{#                <a href="javascript:;">#}
-{#                    <img src="/static/images/icon/zhifu.png"#}
-{#                         style="margin-top: -2.5px; display: block; transform: scale(0.55) translateX(-6px) translateY(-6px); margin-right: 5px;">#}
-{#                </a>#}
-            </small>
+            <small>(WeChatPay / AliPay)</small>
         </h4>
         <table>
             <tr>

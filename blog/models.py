@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
-import requests
 from django.conf import settings
 from django.core.cache import cache  # 使用redis缓存
-from django.core.mail import send_mail
 from django.core.validators import RegexValidator
 from django.db import models
 from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
-from django.http import request
-from django.shortcuts import redirect
 from django.utils.safestring import mark_safe
 from mdeditor.fields import MDTextField
 
@@ -41,11 +37,6 @@ class UserInfo(models.Model):
 	# 手机号格式正则校验
 	mobile_validator = RegexValidator(r"^1[3-9]\d{9}$", "手机号码格式不正确")
 	mobile = models.IntegerField(null=True, blank=True, verbose_name='手机号', validators=[mobile_validator])
-	# sex_choice = (
-	# 	(0, '女性'),
-	# 	(1, '男性'),
-	# )
-	# sex = models.IntegerField(choices=sex_choice, default=1)
 	wechart = models.CharField(null=True, blank=True, default='', max_length=50, verbose_name='微信')
 	qq = models.CharField(null=True, blank=True, default='', max_length=10, verbose_name='QQ')
 	blog_address = models.CharField(null=True, blank=True, default='', max_length=100, verbose_name='博客地址')
@@ -310,6 +301,7 @@ class Comment(models.Model):
 	title = models.CharField("标题", max_length=100)
 	create_time = models.DateTimeField('评论时间', auto_now_add=True)
 	user_name = models.CharField('评论用户', max_length=25)
+	request_ip = models.CharField('请求者ip', max_length=128, default='未知')
 	email = models.EmailField('预留邮箱', max_length=50, default='')
 	url = models.CharField('链接', max_length=200)
 	url_input = models.CharField('输入链接拼接', max_length=100, default='')  # 暂时未使用

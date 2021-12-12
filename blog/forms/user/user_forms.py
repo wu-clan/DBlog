@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from captcha.fields import CaptchaField, CaptchaTextInput
 from django import forms
-from django.db.models import fields
 
 from blog.models import SiteUser, UserInfo
 
@@ -55,7 +54,6 @@ class ProfileForm(forms.ModelForm):
 		fields = (
 			'avatar',
 			'mobile',
-			# 'sex',
 			'wechart',
 			'qq',
 			'blog_address',

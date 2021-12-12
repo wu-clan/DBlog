@@ -1,21 +1,18 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
+
+from blog.models import About, Announcement, Article, ArticleImg, Carousel, Category, Comment, Conf, Friend, Pay, \
+    SiteUser, Subscription, Tag, UserInfo
+
 
 # Register your models here.
-from django.utils.safestring import mark_safe
-
-from import_export.admin import ImportExportModelAdmin
-from blog.models import About, Announcement, ArticleImg, Carousel, Friend, SiteUser, Subscription, UserInfo, Tag, \
-    Article, Category, \
-    Comment, Pay, Conf
 
 
-# @admin.register(UserInfo)
 class UserInfoAdmin(admin.StackedInline):
     model = UserInfo
     fields = (
         'avatar',
         'mobile',
-        # 'sex',
         'wechart',
         'qq',
         'blog_address',
@@ -207,6 +204,7 @@ class CommentAdmin(admin.ModelAdmin):
         'title',
         'comment',
         'user_name',
+        'request_ip',
         'email',
         'url',
         'url_input',

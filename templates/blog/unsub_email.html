@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>取消订阅</title>
+    <link rel="stylesheet" href="/static/css/mobi.min.css">
+</head>
+<body style="background-image: url(../../static/images/backgroundimg/y.jpg); background-repeat: no-repeat; background-size: cover;">
+<div class="flex-center">
+    <div class="container">
+        <div class="flex-center">
+            <div class="unit-1-2 unit-1-on-mobile">
+                <h1><a href="{% url 'blog:index' %}">DBlog</a></h1>
+                <h3 style="color: white">取消订阅</h3>
+                <form class="form" action="{% url 'blog:unsubscribe' %}" method="post">
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                                    {{ message.message }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% csrf_token %}
+                    <!-- 邮箱 -->
+                    <div class="form-group">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .success {
+        color: green;
+    }
+
+    .error {
+        color: red;
+    }
+
+    .errorlist {
+        color: red;
+    }
+
+    .form label {
+        color: white;
+    }
+
+    .wait {
+        color: white;
+    }
+
+    .return_base {
+        color: white;
+    }
+</style>
+</body>
+</html>

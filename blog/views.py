@@ -9,18 +9,17 @@ from django.core.mail import send_mail
 from django.db.models import Q
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from typing import List
 
-from blog.comment.forms import CommentForm
+from blog.forms.comment.comment_forms import CommentForm
 from blog.models import About, SiteUser, Subscription
 from blog.models import Article, Category, Tag, UserInfo
-from blog.subscription.form import SubscriptionForm
-from blog.user.forms import EditUserInfo, ProfileForm, RegisterForm, RestCodeForm, RestPwdForm, UserForm
+from blog.forms.subscription.subscription_forms import SubscriptionForm, UnSubscriptionForm
+from blog.forms.user.user_forms import EditUserInfo, ProfileForm, RegisterForm, RestCodeForm, RestPwdForm, UserForm
 from djangoProject import settings
-from djangoProject.util import PageInfo
+from djangoProject.utils.comments_check import DFAFilter
+from djangoProject.utils.util import PageInfo
 
 
 def index(request):
@@ -244,11 +243,6 @@ def profile_edit(request, id):
 	user = SiteUser.objects.get(id=id)
 	old_email = user.email
 	userinfo = UserInfo.objects.get(username_id=id)
-	# u_sex = userinfo.sex
-	# if u_sex == 0:
-	# 	u_sex = '女'
-	# else:
-	# 	u_sex = '男'
 	if request.method == 'POST':
 		# 更新邮箱
 		user_form = EditUserInfo(request.POST, instance=user)
@@ -264,7 +258,6 @@ def profile_edit(request, id):
 		if profile_form.is_valid():
 			avatar = profile_form.cleaned_data['avatar']
 			mobile = profile_form.cleaned_data['mobile']
-			# sex = profile_form.cleaned_data['sex']
 			wechart = profile_form.cleaned_data['wechart']
 			qq = profile_form.cleaned_data['qq']
 			blog_address = profile_form.cleaned_data['blog_address']
@@ -448,37 +441,9 @@ def search(request):
 	return render(request, 'blog/search.html', {"blog_list": _blog_list, "pages": page_info, "key": key})
 
 
-# def get_comment(request, pk):
-# 	"""
-# 	评论数据
-# 	"""
-# 	blog = get_object_or_404(Article, pk=pk)
-# 	blog.commenced()
-# 	result = {'status': 'error', 'content': '请求失败'}
-# 	if request.method == 'POST':
-# 		form = CommentForm(request.POST)
-# 		if form.is_valid():
-# 			comment = form.save(commit=False)
-# 			comment.title = blog.title
-# 			# 文章跳转url
-# 			# url = request.get_full_path()
-# 			url = request.headers['Referer']
-# 			comment.url = str(url)
-# 			# 关联评论与文章
-# 			comment.post = blog
-# 			comment.save()
-# 			result['status'] = 'success'
-# 			result['content'] = '评论保存成功'
-# 		else:
-# 			return JsonResponse(result)
-# 	else:
-# 		result['content'] = '请求类型错误，请使用POST'
-# 		return JsonResponse(result)
-
-
 def get_comment(request, pk):
 	"""
-	评论数据
+	发表评论
 	"""
 	blog = get_object_or_404(Article, pk=pk)
 	blog.commenced()
@@ -486,6 +451,12 @@ def get_comment(request, pk):
 		form = CommentForm(request.POST)
 		if form.is_valid():
 			comment = form.save(commit=False)
+			if request.META.get('HTTP_X_FORWARDED_FOR'):
+				ip = request.META.get("HTTP_X_FORWARDED_FOR")
+			else:
+				ip = request.META.get("REMOTE_ADDR")
+			comment.request_ip = ip
+			comment.comment = DFAFilter().check_comments(comment.comment)
 			comment.title = blog.title
 			# 文章跳转url
 			# url = request.get_full_path()
@@ -501,7 +472,7 @@ def get_comment(request, pk):
 
 def subscription_record(request):
 	"""
-	邮箱订阅记录
+	邮箱订阅
 	"""
 	if request.method == 'POST':
 		form = SubscriptionForm(request.POST)
@@ -520,6 +491,37 @@ def subscription_record(request):
 				messages.error(request, '订阅失败')
 	messages.success(request, '订阅成功，发布新文章后会通过邮箱及时通知你哟')
 	return redirect('/blog')
+
+
+def begin_unsub(request):
+	"""
+	取消订阅跳转
+	"""
+	return redirect('blog:unsubscribe')
+
+
+def unsubscribe(request):
+	"""
+	取消邮箱订阅
+	"""
+	if request.method == 'POST':
+		form = UnSubscriptionForm(request.POST)
+		if form.is_valid():
+			email = form.cleaned_data['email']
+			try:
+				_email = Subscription.objects.filter(Q(email=email))
+				if not _email:
+					messages.error(request, '此邮箱还没有订阅')
+					return redirect('blog:unsubscribe')
+				else:
+					Subscription.objects.filter(email=email).delete()
+					messages.success(request, '取消订阅成功')
+					return redirect('blog:unsubscribe')
+			except ValueError:
+				messages.error(request, '取消订阅失败')
+	else:
+		form = UnSubscriptionForm()
+	return render(request, 'blog/unsub_email.html', locals())
 
 
 @receiver(post_save, sender=Article)
@@ -549,16 +551,6 @@ def send_stu_email(sender, created, **kwargs):
 					# 发送失败默认不发送，不影响发布文章
 					print('发送文章订阅邮件失败，请调试检查！！！')
 					pass
-
-
-def unsubscribe(request):
-	"""
-	取消邮箱订阅
-	"""
-
-
-# 1，点击取消订阅跳转确认界面
-# 2，确认取消，调用数据库，删除此订阅邮箱
 
 
 def page_not_found_error(request, exception):

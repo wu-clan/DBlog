@@ -9,8 +9,9 @@
                 <a href="https://beian.miit.gov.cn"><img src="//gw.alicdn.com/tfs/TB1jwakrbH1gK0jSZFwXXc7aXXa-20-20.png"
                                                          style="vertical-align: -5px; margin-right: 5px">{{ website_number }}</a>&nbsp;|&nbsp;
                 <a href="{% url 'blog:rss' %}"><i class="el el-rss" style="color: white"></i><strong>Rss</strong></a>&nbsp;/
-                <a href="{% url 'blog:atom' %}"><strong>Atom</strong></a>
+                <a href="{% url 'blog:atom' %}"><strong>Atom</strong></a>&nbsp;|&nbsp;
             </span>
+            <u><a href="{% url 'blog:begin_unsub' %}">取消订阅</a></u>
         </p>
 
         <div id="toTop">Back to Top</div>
