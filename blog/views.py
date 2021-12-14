@@ -459,6 +459,8 @@ def get_comment(request, pk):
 			comment.comment = DFAFilter().check_comments(comment.comment)
 			if '*' in DFAFilter().check_comments(comment.user_name):
 				comment.user_name = '信球'
+			else:
+				comment.user_name = comment.user_name
 			comment.title = blog.title
 			# 文章跳转url
 			# url = request.get_full_path()
