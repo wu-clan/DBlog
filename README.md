@@ -51,16 +51,14 @@ wget https://gitee.com/wu_cl/DBlog.git/master.zip
 or
 git clone https://gitee.com/wu_cl/DBlog.git
 ```
+敏感词文件内容 static/sensitive_words/sensitive_words_lines.txt,
+请前往 https://github.com/wjhgg/sensitive_words 进行替换
 
 ### 安装
 ```
 1：pip install -r requirements.txt  # 安装所有依赖
 
 2：创建数据库，修改setting.py mysql数据库配置 (创建数据库时记得选择 utf8mb4 编码)
-
-2.5: 配置畅言：到 http://changyan.kuaizhan.com/ 注册站点,
-将templates/blog/component/changyan.html中js部分换成你在畅言js。
-畅言js位置: 畅言进入工作台->安装畅言->通用代码安装->自适应安装代码
 
 3：python manage.py makemigrations
 4：python manage.py migrate

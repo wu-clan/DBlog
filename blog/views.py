@@ -457,6 +457,8 @@ def get_comment(request, pk):
 				ip = request.META.get("REMOTE_ADDR")
 			comment.request_ip = ip
 			comment.comment = DFAFilter().check_comments(comment.comment)
+			if '*' in DFAFilter().check_comments(comment.user_name):
+				comment.user_name = '信球'
 			comment.title = blog.title
 			# 文章跳转url
 			# url = request.get_full_path()
