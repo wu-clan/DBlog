@@ -58,7 +58,8 @@ git clone https://gitee.com/wu_cl/DBlog.git
 ```
 1：pip install -r requirements.txt  # 安装所有依赖
 
-2：创建数据库，修改setting.py mysql数据库配置 (创建数据库时记得选择 utf8mb4 编码)
+2-1：创建数据库, 修改setting.py mysql数据库配置 (创建数据库时记得选择 utf8mb4 编码)
+2-2: 百度安装redis客户端, 安装完启动服务即可
 
 3：python manage.py makemigrations
 4：python manage.py migrate
