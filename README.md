@@ -83,7 +83,7 @@ django.db.utils.IntegrityError: (1048, "Column 'last_login' cannot be null")
 
 ---
 ## 🙏 搭建Linux服务端
-请移步 https://gitee.com/wu_cl/DBlog/wikis/pages 查看
+请移步 [wikis](https://gitee.com/wu_cl/DBlog/wikis/pages) 查看
 
 ## ❓ 问题相关
 欢迎提交问题到 [Issues](https://gitee.com/wu_cl/DBlog/issues) 或我的QQ邮箱 `2186656812@qq.com`, 我将在看到问题后第一时间回复 
