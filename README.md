@@ -52,7 +52,7 @@ or
 git clone https://gitee.com/wu_cl/DBlog.git
 ```
 敏感词文件内容 static/sensitive_words/sensitive_words_lines.txt,
-请前往 https://github.com/wjhgg/sensitive_words 进行替换
+请前往 [sensitive_words](https://github.com/wjhgg/sensitive_words) 进行替换
 
 ### 安装
 ```
@@ -83,63 +83,7 @@ django.db.utils.IntegrityError: (1048, "Column 'last_login' cannot be null")
 
 ---
 ## 🙏 搭建Linux服务端
-```python
-# 前提条件
-你已经成功在windows部署并运行过DBlog项目
-
-# 示例环境（全过程已示例环境为基础）
-Ubuntu-20.04, nginx-1.18.0, uwsgi, mysql-8, python-3.8, redis-server
-
-# linux文件夹中提供了配置的参考文件
-nginx_conf: nginx 配置文件(https)
-uwsgi.py: 开机自启动服务脚本
-uwsgi.sh: 用于调用自启动服务脚本的shell脚本
-```
-
-### 环境准备
-```python
-已安装Ubuntu-20.04,进入linux系统,打开命令行窗口
-
-1, cd /home, 将 windows 项目拷贝至 /home 目录下
-   # 不建议直接将项目下载到linux，对于初学者，这是不友好的，
-   # 可以下载和使用‘winscp’进行windows与linux之间的拖拽操作  
-
-2, pip3 install uwsgi
-
-3, 安装 mysql8 和 redis
-   百度: Ubuntu-20.04 安装 mysql8 并创建数据库
-   百度: Ubuntu-20.04 安装 redis
-
-4, 将参考文件 nginx_conf 文件中的内容替换到 /etc/nginx/sites-enabled/default 文件中, 
-   # 注意是替换内容,不是直接替换文件,如果网站未使用https,请百度django nginx配置,再修改文件内容
-
-5, 将参考文件 uwsgi.sh 拷贝到 /etc/init.d/ 目录下, 并进入 /etc/init.d/ 目录执行 chmod 755 uwsgi.sh 赋予该脚本权限
-
-ps: 之所以让百度,是因为细节太多了...
-```
-
-### 安装
-```
-1: cd /home/DBlog, 执行 pip3 install -r requirements.txt  # 安装所有依赖
-
-2: 修改setting.py mysql数据库配置
-
-3: python3 manage.py makemigrations
-4: python3 manage.py migrate
-5: python3 manage.py runserver
-```
-
-### 使用
-```python
-# 初始化用户名密码,按照提示输入用户名、邮箱、密码即可
-python3 manage.py createsuperuser
-
-# 登录后台 编辑类型、标签、发布文章等
-http://服务器ip:8000/admin
-```
-
-### END:
-浏览器中打开 <http://服务器ip:8000/> 即可访问
+请移步 https://gitee.com/wu_cl/DBlog/wikis/pages 查看
 
 ## ❓ 问题相关
 欢迎提交问题到 [Issues](https://gitee.com/wu_cl/DBlog/issues) 或我的QQ邮箱 `2186656812@qq.com`, 我将在看到问题后第一时间回复 
