@@ -5,6 +5,13 @@
 <h3 class="form-btn blue-text"><a href="javascript:;"><i class="el-edit"></i>我要留言 / 展开表单</a></h3>
 <div id="Coon" class="form-zd form-in">
     <form action="{% url 'blog:get_comment' blog.id %}" method="post" class="comment-form">
+        {% if messages %}
+            <script>
+                {% for msg in messages %}
+                    alert('{{ msg.message }}');
+                {% endfor %}
+            </script>
+        {% endif %}
         {% csrf_token %}
         <div class="vwrap">
             <div class="vheader item3">
@@ -14,7 +21,8 @@
                 <input class="vmail vinput" name="email" placeholder="邮箱" maxlength="50" required="" id="id_email"
                        type="email">
                 {{ form.email.errors }}
-                <input class="vlink vinput" name="url_input" placeholder="链接" maxlength="100" required="" id="id_url_input"
+                <input class="vlink vinput" name="url_input" placeholder="链接" maxlength="100" required=""
+                       id="id_url_input"
                        type="text">
                 {{ form.url.errors }}
             </div>
@@ -45,25 +53,5 @@
             maxHeight: '250px'
         });
     </script>
-{#    <script>#}
-{#        $('.vbtn').click(function () {#}
-{#            $.ajax({#}
-{#                url: '{% url 'blog:get_comment' blog.id %}',#}
-{#                type: 'post',#}
-{#                async: true,#}
-{#                dataType: 'json',#}
-{#                cache: false,#}
-{#                data: $('#comment-form').serialize(),#}
-{#                success: function (data) {#}
-{#                    console.log(data)#}
-{#                    parent.location.reload();#}
-{#                },#}
-{#                error: function (data) {#}
-{#                    console.log(data)#}
-{#                }#}
-{#            })#}
-{#            return false;#}
-{#        })#}
-{#    </script>#}
 {% endblock %}
 

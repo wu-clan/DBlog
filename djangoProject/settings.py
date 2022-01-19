@@ -114,9 +114,6 @@ CACHES = {
 		}
 	}
 }
-REDIS_TIMEOUT = 7 * 24 * 60 * 60
-CUBES_REDIS_TIMEOUT = 60 * 60
-NEVER_REDIS_TIMEOUT = 365 * 24 * 60 * 60
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

@@ -456,7 +456,9 @@ def get_comment(request, pk):
 			else:
 				ip = request.META.get("REMOTE_ADDR")
 			comment.request_ip = ip
-			comment.comment = DFAFilter().check_comments(comment.comment)
+			if '*' in DFAFilter().check_comments(comment.comment):
+				messages.error(request, '评论内容不合规，请修改后重新提交')
+				return redirect('blog:get_comment', pk=pk)
 			if '*' in DFAFilter().check_comments(comment.user_name):
 				comment.user_name = '信球'
 			else:
