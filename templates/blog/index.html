@@ -15,8 +15,8 @@
             <ul class="slides swiper-wrapper">
                 {% for carousels in carousel_list %}
                     <li class="swiper-slide">
-                        <a href="#" title="{{ carousels.img_link_title }}">
-                            <img src="/media/{{ carousels.carousel }}"
+                        <a href="{{ carousels.link }}" title="{{ carousels.img_link_title }}">
+                            <img src="{{ MEDIA_URL }}{{ carousels.carousel }}"
                                  alt="{{ carousels.img_alt }}" style="width:100%;height:100%;"/>
                         </a>
                         {# 图片左下角文字 #}

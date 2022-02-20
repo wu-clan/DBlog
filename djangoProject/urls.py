@@ -13,12 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-import os
 
 from django.conf import settings
-from django.urls import path, include
 from django.contrib import admin
-from django.views.generic import RedirectView
+from django.urls import path, include
 from django.views.static import serve
 
 from blog import views
@@ -32,8 +30,6 @@ urlpatterns = [
 	path('captcha/', include('captcha.urls')),
 	# markdown插件
 	path('mdeditor/', include('mdeditor.urls')),
-	# 全局头图标
-	path('favicon.ico', RedirectView.as_view(url='static/images/favicon.ico')),
 	# 处理静态文件
 	path(r'static/<path:path>', serve, {'document_root': settings.STATIC_ROOT}, ),
 	# 处理图片文件

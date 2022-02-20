@@ -1,40 +1,26 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
 from import_export.admin import ImportExportModelAdmin
 
-from blog.models import About, Announcement, Article, ArticleImg, Carousel, Category, Comment, Conf, Friend, Pay, \
-    SiteUser, Subscription, Tag, UserInfo
-
+from blog.models import About, Article, ArticleImg, Carousel, Category, Comment, Conf, Friend, Pay, \
+    Subscription, Tag, UserInfo, HeadAnnouncement, MainAnnouncement
 
 # Register your models here.
+admin.site.unregister(User)
 
 
 class UserInfoAdmin(admin.StackedInline):
     model = UserInfo
-    fields = (
-        'avatar',
-        'mobile',
-        'wechart',
-        'qq',
-        'blog_address',
-        'introduction',
-    )
+    can_delete = False
+    verbose_name_plural = 'UserInfo'
 
 
-@admin.register(SiteUser)
-class SiteUserAdmin(admin.ModelAdmin):
+@admin.register(User)
+class SiteUserAdmin(UserAdmin):
     inlines = [
         UserInfoAdmin,
     ]
-    readonly_fields = [
-        'username',
-        'password',
-    ]
-    list_display = (
-        'username',
-        'password',
-        'email',
-        'time_joined',
-    )
 
 
 @admin.register(Subscription)
@@ -76,6 +62,7 @@ class CarouselAdmin(admin.ModelAdmin):
     首页轮播图配置
     """
     list_display = (
+        'link',
         'carousel_title',
         'carousel',
         'img_link_title',
@@ -83,14 +70,23 @@ class CarouselAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Announcement)
+@admin.register(HeadAnnouncement)
 class AnnouncementAdmin(admin.ModelAdmin):
     """
     公告
     """
     list_display = (
         'head_announcement',
-        'main_announcement'
+    )
+
+
+@admin.register(MainAnnouncement)
+class AnnouncementAdmin(admin.ModelAdmin):
+    """
+    公告
+    """
+    list_display = (
+        'main_announcement',
     )
 
 

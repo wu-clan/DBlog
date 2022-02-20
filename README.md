@@ -1,12 +1,21 @@
-ps: 个人博客在一些逻辑和限制上面考虑还欠周全，存在bug，不影响正常使用，
-
-后续开发已暂缓，欢迎 pull request，我将在审阅并测试后第一时间通知您
+###### 📢❗❗❗ 2022.2.20 ❗❗❗ 
+###### 今天做了一次小幅升级维护，如果你正在使用旧版本并且想更新到最新 master
+```text
+请提前备份你的迁移文件和已上传到media目录下的文件，为了避免不必要的问题，这是重要的
+然后你需要执行如下: 
+1: pip install -r requirements.txt
+2: python manage.py makemigrations
+3：python manage.py migrate
+```
+###### 你未在使用旧版本的话，直接按照安装使用说明部署即可
 
 # Django博客系统
 
 项目基本完成，处于试运行阶段，示例网站为当前分支最新代码，
 如果您想查看旧版本，可以到标签中选择对应的版本进行下载
 
+ps: 个人博客在一些逻辑和限制上面考虑还欠周全，存在bug，不影响正常使用，
+后续开发已暂缓，欢迎 pull request，我将在审阅并测试后第一时间通知您
 
 [![python3](https://img.shields.io/badge/Python-3.8-red.svg)](https://www.python.org/downloads)
 [![Django3.2](https://img.shields.io/badge/Django-3.2.4-green.svg)](https://docs.djangoproject.com/zh-hans/3.2)

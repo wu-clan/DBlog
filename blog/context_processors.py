@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from blog.models import About, Announcement, ArticleImg, Carousel, Category, Article, Conf, Friend, Pay, Tag, Comment, \
-	UserInfo
+from blog.models import ArticleImg, Carousel, Category, Article, Conf, Friend, Pay, Tag, Comment, \
+	HeadAnnouncement, MainAnnouncement
 from djangoProject import settings
 
 
@@ -31,7 +31,8 @@ def sidebar(request):
 	carousel = Carousel.objects.all()
 
 	# 公告
-	announcement = Announcement.objects.all()
+	head_announcement = HeadAnnouncement.objects.all()
+	main_announcement = MainAnnouncement.objects.all()
 
 	return {
 		'category_list': category_list,
@@ -42,13 +43,13 @@ def sidebar(request):
 		'friends': friends,
 		'payimg_list': payimg,
 		'carousel_list': carousel,
-		'announcement_list': announcement,
+		'head_announcement_list': head_announcement,
+		'main_announcement_list': main_announcement,
 	}
 
 
 def website_conf(request):
 	# 网站配置
-	conf_list = Conf.objects.all()[0:1]
 	conf_list_redis = Conf.fetch_all_site_info()
 
 	if conf_list_redis:
@@ -64,7 +65,6 @@ def website_conf(request):
 			'website_number': conf_list_redis.website_number,
 			'git': conf_list_redis.git,
 			'website_logo': conf_list_redis.website_logo,
-			'config_list': conf_list,
 		}
 	else:
 		return {
@@ -79,7 +79,6 @@ def website_conf(request):
 			'website_number': settings.website_number,
 			'git': settings.git,
 			'website_logo': settings.website_logo,
-			'config_list': conf_list,
 		}
 
 

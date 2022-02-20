@@ -11,7 +11,7 @@
                 <div class="text">
                     <h2 class="cn">{{ name }}</h2>
                     <span id="typed"></span>
-                    <script src="https://cdn.bootcss.com/typed.js/2.0.9/typed.min.js"></script>
+                    <script src="/static/js/typed.min.js"></script>
                     <script>
                         var typed = new Typed("#typed", {
                             strings: ['{{ chinese_description }}', '{{ english_description }}'],
@@ -41,7 +41,7 @@
                 <span style="margin: -7%; margin-left: 1px">Gitee</span>
             </div>
             <div>
-                <a class="benbo" href="{{ git }}/DBlog" target="_blank">
+                <a class="benbo" href="https://gitee.com/wu_cl/DBlog" target="_blank">
                     <i class="el-download-alt"></i>
                 </a>
                 <span>博客源码</span>
@@ -71,26 +71,12 @@
         {# 分享弹窗 #}
         <div class="bd-fx side-bdfx">
             <i class="el-remove fx-close"></i>
-            <ul class="bdsharebuttonbox">
-                <li><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></li>
-                <li><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></li>
-                <li><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a></li>
-                <li><a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a></li>
-            </ul>
-            <script>
-                window._bd_share_config = {
-                "common": {
-                    "bdSnsKey": {},
-                    "bdText": "",
-                    "bdMini": "2",
-                    "bdMiniList": false,
-                    "bdPic": "",
-                    "bdStyle": "1",
-                    "bdSize": "32"
-                }, "share": {}
-            };
-            with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = '/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
-            </script>
+            <div class="social-share" data-initialized="true" style="text-align: center; margin: 30px;">
+                <a href="#" class="social-share-icon icon-weibo"></a>
+                <a href="#" class="social-share-icon icon-qq"></a>
+                <a href="#" class="social-share-icon icon-wechat"></a>
+                <a href="#" class="social-share-icon icon-qzone"></a>
+            </div>
         </div>
     </div>
 
@@ -108,10 +94,10 @@
     <!--公告-->
     <div class="main_news bg-color animation-div">
         <h4 class="index-title"><i class="el el-bullhorn"></i>公告
-            <small>Announcement</small>
+            <small>MainAnnouncement</small>
         </h4>
-        {% if announcement_list %}
-            {% for news in announcement_list %}
+        {% if main_announcement_list %}
+            {% for news in main_announcement_list %}
                 <p class="annou">
                     {{ news.main_announcement }}
                 </p>
@@ -145,31 +131,31 @@
             <a class="ph-btn" href="javascript:"><i class="el-signal"></i>文章排行</a>
         </div>
         <ul class="hudong-ul">
-        {% for comment in comment_list %}
-            <li>
-                <div class="sd-name">
-                    <span><i class="el-book"></i>{{ comment.title }}</span>
-                    <a class="blue-text" href="{{ comment.url }}" title="{{ comment.comment }}">
-                        {{ comment.comment }}
-                    </a>
-                    <span style="text-align: right; margin-left: 50px">—&nbsp;&nbsp;<i class="el-user"></i>
+            {% for comment in comment_list %}
+                <li>
+                    <div class="sd-name">
+                        <span><i class="el-book"></i>{{ comment.title }}</span>
+                        <a class="blue-text" href="{{ comment.url }}" title="{{ comment.comment }}">
+                            {{ comment.comment }}
+                        </a>
+                        <span style="text-align: right; margin-left: 50px">—&nbsp;&nbsp;<i class="el-user"></i>
                         {{ comment.user_name }}
                         <p style="color: #7799 !important; font-size: xx-small">来自: {{ comment.request_ip }}</p>
                     </span>
-                </div>
-            </li>
-        {% endfor %}
+                    </div>
+                </li>
+            {% endfor %}
         </ul>
         <!--文章排行模块-->
         <ul class="paihang-ul">
-        {% for blog in blog_top %}
-            <li>
-                <span></span>
-                <a href="{% url "blog:detail" blog.id %}" title="{{ blog.title }}">{{ blog.title }}
-                    <b><i class="el-eye-open"></i>({{ blog.view }})</b>
-                </a>
-            </li>
-        {% endfor %}
+            {% for blog in blog_top %}
+                <li>
+                    <span></span>
+                    <a href="{% url "blog:detail" blog.id %}" title="{{ blog.title }}">{{ blog.title }}
+                        <b><i class="el-eye-open"></i>({{ blog.view }})</b>
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
     </div>
 
@@ -196,9 +182,9 @@
             </a>
         </h4>
         <ul>
-        {% for friend in friends %}
-            <li><a href="{{ friend.url }}" target="_blank" title="{{ friend.title }}">{{ friend.name }}</a></li>
-        {% endfor %}
+            {% for friend in friends %}
+                <li><a href="{{ friend.url }}" target="_blank" title="{{ friend.title }}">{{ friend.name }}</a></li>
+            {% endfor %}
         </ul>
     </div>
 

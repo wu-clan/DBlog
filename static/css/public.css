@@ -1,6 +1,5 @@
 body {
     font-size: 14px;
-    font-size: 100%;
     font-family: PingFang SC, DFPKingGothicGB-Regular, sans-serif;
     line-height: 24px;
     margin: 0;
@@ -29,7 +28,6 @@ h1, h2, h3, h4, h5 {
     padding: 10px 0;
     margin: 0;
     text-indent: 5px;
-    margin-bottom: 0px;
 }
 
 input, button, select {
@@ -213,10 +211,6 @@ div#tooltip p:after {
     background-size: 10%;
 }
 
-/**, :after, :before {*/
-/*     box-sizing: border-box !important;*/
-/*}*/
-
 header {
     width: 100% !important;
     height: 70px !important;
@@ -294,7 +288,7 @@ header .user .nav-item {
 }
 
 .code .code-toolbar {
-    margin-left: 39px
+    margin-left: 31px
 }
 
 #tianqi {
@@ -327,12 +321,12 @@ header .user .nav-item {
 
 .mynav > ul > li > a:hover {
     background: #13c5f8;
-    color: #fff; /*url(../images/backgroundimg/nav.png)no-repeat;*/
+    color: #fff;
     font-size: 20px;
 }
 
 .mynav > .nav-active {
-    background: #13c5f8; /*url(../images/backgroundimg/nav.png)no-repeat;*/
+    background: #13c5f8;
 }
 
 .mynav > .nav-active a {
@@ -702,34 +696,9 @@ header .user .nav-item {
 }
 
 
-.add-more {
-    width: 100%;
-    padding: 10px 0;
-    text-align: center;
-    font-size: 16px;
-    margin: 15px 0;
-    display: inline-block;
-    border-bottom: 1px solid #ddd;
-    box-sizing: border-box;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-}
-
-.add-more:hover {
-    background: #ff6700;
-    color: #fff;
-}
-
-
 .myaside {
     width: 30%;
     float: right;
-}
-
-.left-side, .right-side {
-    width: 25%;
-    float: left;
-    margin-bottom: 30px;
 }
 
 .section {
@@ -838,30 +807,6 @@ header .user .nav-item {
     color: inherit;
 }
 
-.other-xg a {
-    width: 50%;
-    float: left;
-    text-align: center;
-    font-size: 14px;
-    color: #999;
-    cursor: pointer;
-}
-
-.other-xg i {
-    color: inherit;
-}
-
-.other-xg .rmb {
-    font-family: 'Microsoft YaHei'
-}
-
-
-.other-xg {
-    width: 100%;
-    overflow: hidden;
-    padding-bottom: 10px;
-}
-
 .side-bdfx {
     display: none;
     border-radius: 5px;
@@ -871,11 +816,6 @@ header .user .nav-item {
     box-shadow: 0px 0px 15px #ccc;
     border: 1px solid #ccc;
     z-index: 999;
-}
-
-.side-bdfx > .bdsharebuttonbox {
-    padding: 20px 0;
-    margin: 0;
 }
 
 .side-bdfx i {
@@ -890,68 +830,6 @@ header .user .nav-item {
 .focus-me {
     margin-bottom: 20px;
     position: relative;
-}
-
-.bdsharebuttonbox {
-    padding: 10px 0 25px 0;
-    text-align: center;
-    margin: auto;
-    overflow: hidden !important;
-}
-
-.bdsharebuttonbox li {
-    display: inline;
-}
-
-.bdsharebuttonbox a {
-    text-align: center;
-    background: url(../images/icon/bd-fx.png) no-repeat !important;
-    width: 50px !important;
-    height: 50px !important;
-    display: inline-block !important;
-    margin: 0 3.5% !important;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-}
-
-.bdsharebuttonbox .bds_weixin {
-    background-position: 0% 4% !important;
-}
-
-.bdsharebuttonbox .bds_tsina {
-    background-position: 33% 4% !important;
-}
-
-.bdsharebuttonbox .bds_qzone {
-    background-position: 66% 4% !important;
-}
-
-.bdsharebuttonbox .bds_tieba {
-    background-position: 99.5% 4% !important;
-}
-
-.bdsharebuttonbox .bds_weixin:hover {
-    background-position: 0% 90% !important;
-}
-
-.bdsharebuttonbox .bds_tsina:hover {
-    background-position: 33% 90% !important;
-}
-
-.bdsharebuttonbox .bds_qzone:hover {
-    background-position: 66% 90% !important;
-}
-
-.bdsharebuttonbox .bds_tieba:hover {
-    background-position: 99.5% 90% !important;
-}
-
-.bdsharebuttonbox a:last-child {
-    margin: 0;
-}
-
-.bdshare-button-style1-32 a {
-    float: none !important;
 }
 
 .cloud {
@@ -1031,7 +909,6 @@ header .user .nav-item {
     background: #3299BB
 }
 
-
 .article-push {
     margin-top: 30px;
 }
@@ -1097,6 +974,7 @@ header .user .nav-item {
     background: #f9fffc;
 }
 
+
 .search {
     /*margin-top: 20px;*/
     margin-bottom: 20px;
@@ -1111,12 +989,12 @@ header .user .nav-item {
 .search-index {
     overflow: hidden;
     border-radius: 20px;
-    height: 2.5em;
+    height: 2.8em;
     border: 1px solid rgb(206 212 218);
 }
 
 .search-index input {
-    font-size: 12px;
+    font-size: 14px;
     color: #333;
     height: 100%;
     width: 80%;
@@ -1145,100 +1023,8 @@ header .user .nav-item {
     border: none;
 }
 
-
-/*˵˵*/
-.shuo-side {
-    overflow: hidden;
-    padding-bottom: 10px;
-}
-
-.shuo-side ul {
-    width: 95%;
-    margin: auto;
-}
-
-.shuo-side ul li {
-    height: 45px;
-    overflow: hidden;
-    margin-bottom: 20px;
-    border-bottom: solid #fdceaf 1px;
-    padding-top: 10px;
-    position: relative;
-}
-
-.shuo-side span {
-    width: 80px;
-    height: 70px;
-    border-radius: 200px 0% 0 0;
-    position: relative;
-    float: left;
-    left: -5px;
-    color: #fff;
-    display: inline-block;
-    text-align: center;
-    line-height: 45px;
-    font-size: 14px;
-}
-
-.shuo-side span strong {
-    transform: rotate(-30deg);
-    -webkit-transform: rotate(-30deg);
-    display: block;
-    position: relative;
-    left: 5px;
-}
-
-.shuo-side div {
-    height: 100%;
-    line-height: 40px;
-    float: left;
-    width: 70%;
-}
-
-.shuo-side div a {
-    font-size: 12px;
-    color: #555;
-    float: left;
-    text-indent: 1.5em;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 100%;
-}
-
-.shuo-side div b {
-    font-weight: normal;
-    font-size: 12px;
-    color: #999;
-    position: absolute;
-    right: 5px;
-}
-
-.shuo-side ul li:nth-of-type(1) {
-    border-color: #0183ce
-}
-
-.shuo-side ul li:nth-of-type(2) {
-    border-color: #96ce01
-}
-
 .shuo-side ul li:nth-of-type(3) {
     border-color: #e26204
-}
-
-.shuobg1 {
-    background: #0183ce;
-    opacity: 0.6;
-}
-
-.shuobg2 {
-    background: #96ce01;
-    opacity: 0.6;
-}
-
-.shuobg3 {
-    background: #e26204;
-    opacity: 0.6;
 }
 
 .mytab {
@@ -1526,8 +1312,8 @@ header .user .nav-item {
     margin-left: 66px;
 }
 
-.comment-content {
-}
+/*.comment-content {*/
+/*}*/
 
 .comment-reply-link {
     text-decoration: none;
@@ -1543,95 +1329,6 @@ footer {
     width: 100%;
     background: rgba(0, 67, 94, 0.95);
     margin-top: 35px;
-}
-
-.footer-area {
-    width: 100%;
-    max-width: 1200px;
-    margin: auto;
-    padding: 25px 0;
-    color: #fff;
-    overflow: hidden;
-}
-
-.footer-area h4 {
-    color: #fff;
-    font-weight: normal;
-    background: none;
-    text-indent: 15px;
-    padding: 0;
-}
-
-.data-count {
-    width: 25%;
-    overflow: hidden;
-    float: left;
-}
-
-.data-count ul {
-    width: 90%;
-    margin: auto;
-    overflow: hidden;
-}
-
-.data-count ul li {
-    width: 50%;
-    float: left;
-    margin-bottom: 30px;
-    font-size: 12px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.data-count ul li i {
-    color: #fff;
-}
-
-.data-count ul li a {
-    color: #fff;
-}
-
-.data-count ul li span {
-    display: inline-block;
-    color: #fff;
-    padding: 2px 5px;
-    ext-align: center;
-}
-
-.about-blog {
-    width: 25%;
-    overflow: hidden;
-    float: left;
-}
-
-.ft-part1 {
-    width: 95%;
-    margin: auto;
-}
-
-.about-blog .mytb {
-    width: 98%;
-    margin: auto;
-    padding-bottom: 30px;
-}
-
-.about-blog .mytb > a {
-    display: inline-block;
-    width: 100%;
-    padding: 15px 0;
-    background: #ff6700;
-    border-radius: 0;
-    -webkit-border-radius: 0;
-    text-align: center;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-}
-
-.about-blog .mytb > a:hover {
-    background: #e34405;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
 }
 
 .mail-dy {
@@ -1654,7 +1351,7 @@ footer {
 .mail-dy form {
     overflow: hidden;
     padding: 15px 0;
-    height: 2em;
+    height: 2.3em;
 }
 
 .mail-dy form input {
@@ -1694,7 +1391,6 @@ footer {
     font-size: 14px;
     height: 100%;
     line-height: 33px;
-    text-align: center;
 }
 
 .mail-btn {
@@ -1722,110 +1418,6 @@ footer {
     -webkit-border-radius: 10px;
 }
 
-/*RSS*/
-.img-feed {
-    width: 100%;
-    padding: 10px 0;
-}
-
-.img-feed a {
-    float: left;
-    padding-top: 5px;
-}
-
-.img-feed a:nth-of-type(1) {
-    margin-right: 10%;
-}
-
-.img-feed p {
-    float: right;
-    font-size: 14px;
-}
-
-
-.close-fd {
-    width: 25%;
-    float: left;
-}
-
-.close-fd ul {
-    width: 95%;
-    margin: auto;
-}
-
-.close-fd ul li {
-    width: 100%;
-    padding: 8px 0;
-    overflow: hidden;
-}
-
-.close-fd ul li:last-child {
-    border: none;
-}
-
-.close-fd ul li .sd-tx {
-    float: left;
-    width: 45px;
-    height: 45px;
-}
-
-.close-fd ul li .sd-tx img {
-    width: 100%;
-}
-
-.close-fd ul li .sd-name {
-    width: 78%;
-    float: right;
-}
-
-.close-fd ul li .sd-name span {
-    display: inline-block;
-    width: 100%;
-    font-size: 12px;
-    color: #fff600;
-}
-
-.close-fd ul li .sd-name a {
-    display: block;
-    font-size: 12px;
-    line-height: 25px;
-    color: #fff;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.close-fd ul li .sd-name img {
-    max-width: 30px;
-    vertical-align: middle;
-}
-
-.tuwen-pd {
-    width: 25%;
-    float: left;
-}
-
-.tuwen-pd ul {
-    width: 95%;
-    margin: auto;
-}
-
-.tuwen-pd ul li {
-    float: left;
-    margin-bottom: 10px;
-    margin: 3%;
-}
-
-.tuwen-pd ul li img {
-    width: 50px;
-    height: 50px;
-}
-
-.tuwen-pd ul li img:hover {
-    opacity: 0.6;
-}
-
-/*foot-nav*/
 .foot-nav {
     width: 100%;
     text-align: center;
@@ -1883,7 +1475,6 @@ footer {
     z-index: 12;
     display: none;
 }
-
 
 .skin-btn {
     position: fixed;
@@ -2027,16 +1618,8 @@ footer {
         margin-top: 12px;
     }
 
-    .container {
-        /*padding-top: 4.5em;*/
-    }
-
     nav {
         display: none !important;
-    }
-
-    .shuo-side div b {
-        display: none;
     }
 
     header {
@@ -2117,22 +1700,8 @@ footer {
         width: 66%;
     }
 
-    .data-count ul, .cloud ul, .bdsharebuttonbox {
-        width: 95%;
-    }
-
     #tuijian, #Hot, #New {
         background-position: -100% -100%;
-    }
-
-    .left-side, .right-side {
-        width: 95%;
-        margin: auto;
-        float: none;
-    }
-
-    .bdsharebuttonbox a {
-        margin: 0 2.5% !important;
     }
 
     .about-blog, .close-fd, .tuwen-pd, .data-count {
@@ -2204,7 +1773,7 @@ footer {
 }
 
 .vwrap .vheader .vinput {
-    width: 33.33%;
+    width: 100%;
     float: left;
     height: 3rem;
     border: none;
@@ -2304,7 +1873,6 @@ footer {
 @media only screen and (min-width: 993px) {
 
     .row .col .l4 {
-        /*width: 33.3333333333%;*/
         margin-left: auto;
         left: auto;
         right: auto

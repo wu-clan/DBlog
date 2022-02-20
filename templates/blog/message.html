@@ -15,32 +15,42 @@
         {% csrf_token %}
         <div class="vwrap">
             <div class="vheader item3">
-                <input class="vnick vinput" name="user_name" placeholder="昵称" maxlength="25" required=""
-                       id="id_user_name" type="text">
-                {{ form.user_name.errors }}
-                <input class="vmail vinput" name="email" placeholder="邮箱" maxlength="50" required="" id="id_email"
-                       type="email">
-                {{ form.email.errors }}
                 <input class="vlink vinput" name="url_input" placeholder="链接" maxlength="100" required=""
                        id="id_url_input"
                        type="text">
                 {{ form.url.errors }}
             </div>
             <div class="vedit">
-                <textarea class="vediter vinput OwO-textarea" name="comment" placeholder="在这里输入吧..." maxlength="500"
-                          required="" id="id_comment" type="text"></textarea>
+                <textarea type="text" class="vediter vinput OwO-textarea" name="comment" placeholder="在这里输入吧..."
+                          maxlength="500" required="" id="id_comment" cols="40" rows="10"></textarea>
                 {{ form.comment.errors }}
                 <div class="OwO" style="width: 50%;">
                     <div class="OwO-logo">
                         <span>OωO表情</span>
                     </div>
                 </div>
-                <button class="vsubmit vbtn" type="submit">发表</button>
+                {% if request.user.username %}
+                    <button class="vsubmit vbtn" type="submit">发表</button>
+                {% else %}
+                    <span class="li" style="display: none">{% url 'blog:login' %}</span>
+                    <span class="lk" style="display: none">{{ request.path }}</span>
+                    <button class="vsubmit vbtn" type="submit">
+                        <a class="lc" href="javascript:;" style="color: #0181da">登陆后发表</a>
+                    </button>
+                    <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+                {% endif %}
             </div>
         </div>
     </form>
 </div>
 {% block js %}
+    <script>
+        var login = $('.li').text()
+        var link = $('.lk').text()
+        var rehref = login + '?next=' + link
+        $('.lc').attr('href', rehref)
+        {#console.log(login, link, rehref)#}
+    </script>
     <script src="/static/js/OwO.min.js"></script>
     <script>
         var OwO_demo = new OwO({

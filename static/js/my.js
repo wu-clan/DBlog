@@ -188,6 +188,10 @@ $(document).ready(function () {
     });
 
     //表单下拉
+    $(".directory a").click(function () {
+        $(".directory_list").slideToggle();
+    })
+
     $(".form-btn a").click(function () {
         $(".form-zd").slideToggle();
     });

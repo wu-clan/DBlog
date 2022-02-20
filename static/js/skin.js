@@ -58,17 +58,12 @@ window.onload = function(e) {
 
 window.onunload = function(e) {
   var title = getActiveStyleSheet();
-  createCookie("style", title, 365);
+  createCookie("style", title, 7);
 }
 
 var cookie = readCookie("style");
 var title = cookie ? cookie : getPreferredStyleSheet();
 setActiveStyleSheet(title);
-
-
-
-
-
 
 $(function(){
     H_qqServer={};

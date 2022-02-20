@@ -24,56 +24,57 @@
                             {% endfor %}
                         </ul>
                     {% endif %}
-                    <div class="col-md-4"><span>用户名:&nbsp;&nbsp;&nbsp;</span>
-                        <span style="font-size: 1.2em">{{ user.username }}</span>
+                    <div class="col-md-4"><span>上次登陆:&nbsp;&nbsp;&nbsp;</span>
+                        <span style="font-size: 1.2em">{{ user.last_login }}</span>
                     </div>
-                    <form class="form" action="{% url 'blog:edituser' user.id %}" method="post">
+                    <form class="form" action="{% url 'blog:edituser' user.id %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group">
-                            <label for="email">邮箱:</label>
-                            {{ user_form.new_email.label_tag }}
-                            <input type="email" name="email"
-                                   value='{{ user.email }}'>
+                            {{ user_form.username.label_tag }}
+                            <input type="text" name="username" class="form-control" maxlength="16" required=""
+                                   id="id_username" value="{{ user.username }}">
+                        </div>
+                        <div class="form-group">
+                            {{ user_form.email.label_tag }}
+                            <input type="email" name="email" class="form-control" required="" id="id_email"
+                                   value="{{ user.email }}">
                         </div>
                         <div class="form-group">
                             <label for="avatar">头像:
-                                <img src="/media/{{ userinfo.avatar|default_if_none:'(无)' }}"
-                                     style="max-width: 30%; border-radius: 15%" alt="加载失败~" title="建议使用等边头像哟~">
+                                {% if userinfo.avatar %}
+                                    <img src="{{ userinfo.avatar.url }}"
+                                         style="max-width: 30%; border-radius: 15%" alt="加载失败~" title="建议使用等边头像~">
+                                {% else %}
+                                    <img src="/static/images/icon/user.gif"
+                                         style="max-width: 30%; border-radius: 15%" alt="加载失败~" title="建议使用等边头像~">
+                                {% endif %}
                             </label>
-                            <input type="file" name="avatar" accept="image/*"
-                                   value='{{ userinfo.avatar }}'>
+                            {{ profile_form.avatar }}
                         </div>
                         <div class="form-group">
                             {{ profile_form.mobile.label_tag }}
-                            <input type="number" name="mobile"
-                                   value='{{ userinfo.mobile|default_if_none:'' }}'>
+                            <input type="number" name="mobile" class="form-control" maxlength="11" id="id_mobile"
+                                   value="{{ userinfo.mobile }}">
                         </div>
-                        {#                        <div class="form-group">#}
-                        {#                            <label for="sex">性别: ( {{ u_sex }} )</label>#}
-                        {#                            <select name="sex" class="form-control">#}
-                        {#                                <option value="0">女性</option>#}
-                        {#                                <option value="1">男性</option>#}
-                        {#                            </select>#}
-                        {#                        </div>#}
                         <div class="form-group">
-                            {{ profile_form.wechart.label_tag }}
-                            <input type="text" name="wechart" maxlength="50"
-                                   value='{{ userinfo.wechart|default_if_none:'' }}'>
+                            {{ profile_form.wechat.label_tag }}
+                            <input type="text" name="wechat" class="form-control" maxlength="50" id="id_wechat"
+                                   value="{{ userinfo.wechat|default_if_none:'' }}">
                         </div>
                         <div class="form-group">
                             {{ profile_form.qq.label_tag }}
-                            <input type="text" name="qq" maxlength="10"
+                            <input type="text" name="qq" class="form-control" maxlength="10" id="id_qq"
                                    value='{{ userinfo.qq|default_if_none:'' }}'>
                         </div>
                         <div class="form-group">
                             {{ profile_form.blog_address.label_tag }}
-                            <input type="text" name="blog_address" maxlength="100"
-                                   value='{{ userinfo.blog_address|default_if_none:'' }}'>
+                            <input type="text" name="blog_address" class="form-control" maxlength="100"
+                                   id="id_blog_address" value="{{ userinfo.blog_address|default_if_none:'' }}">
                         </div>
                         <div class="form-group">
                             {{ profile_form.introduction.label_tag }}
-                            <textarea name="introduction" cols="40" rows="10" maxlength="500"
-                                      value="{{ userinfo.introduction|default_if_none:'' }}"></textarea>
+                            <textarea name="introduction" class="form-control" cols="40" rows="10" maxlength="500"
+                                      id="id_introduction">{{ userinfo.introduction }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">更新</button>
                     </form>

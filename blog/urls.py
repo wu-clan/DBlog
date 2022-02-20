@@ -32,9 +32,7 @@ urlpatterns = [
 	path('begin_unsub/', views.begin_unsub, name='begin_unsub'),
 	path('unsubscribe/', views.unsubscribe, name='unsubscribe'),
 
-	###########
 	# 用户操作 #
-	###########
 	# 登录
 	path('login/', views.user_login, name='login'),
 	# 注册
@@ -47,8 +45,8 @@ urlpatterns = [
 	# 退出登录
 	path('logout/', views.user_logout, name='logout'),
 	# 用户信息
-	path('edituser/<int:id>/', views.profile_edit, name='edituser'),
+	path('edituser/<int:pk>/', views.profile_edit, name='edituser'),
 	# 注销用户
-	path('delete/<int:id>/', views.user_delete, name='delete'),
+	path('delete/<int:pk>/', views.user_delete, name='delete'),
 
 ]

@@ -38,11 +38,11 @@
                         </div>
                         <!-- 验证码 -->
                         <div class="form-group">
-                            {{ login_form.captcha.errors }}
                             {{ login_form.captcha.label_tag }}
                             {{ login_form.captcha }}
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">登录</button>
+                        <input type="hidden" name="next" value="{{request.GET.next }}" />
                     </form>
                     <div class="flex-left top-gap text-small">
                         <div class="unit-2-3">

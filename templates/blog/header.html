@@ -1,12 +1,4 @@
 <header class="myheader">
-    {# 信息弹窗提示，逻辑不是很好，暂停使用 #}
-{#    {% if messages %}#}
-{#        <script type="text/javascript">#}
-{#            {% for msg in messages %}#}
-{#                alert('{{ msg.message }}');#}
-{#            {% endfor %}#}
-{#        </script>#}
-{#    {% endif %}#}
     <div class="top">
         <!--头像左边部分-->
         <div class="top-left">
@@ -20,7 +12,7 @@
             <div class="web-xiaoxi">
                 <i class="el-speaker"></i>
                 <ul class="mulitline">
-                    {% for announcement in announcement_list %}
+                    {% for announcement in head_announcement_list %}
                         <li>{{ announcement.head_announcement }}</li>
                     {% empty %}
                         <li>热烈欢迎浏览本站</li>
@@ -34,8 +26,12 @@
         <!--电脑导航开始-->
         <nav class="mynav">
             <ul class="orange-text">
-                <li><a href="{% url "blog:index" %}">首页</a></li>
-                <li><a href="{% url "blog:list" %}">博客</a></li>
+                <li>
+                    <a href="{% url "blog:index" %}">首页</a>
+                </li>
+                <li>
+                    <a href="{% url "blog:list" %}">博客</a>
+                </li>
                 <li class='drop'>
                     <a href="JavaScript:;">分类<i class='el-chevron-down'></i></a>
                     <div class="drop-nav orange-text">
@@ -50,19 +46,19 @@
                 </li>
                 <li><a href="{% url "blog:archive" %}">归档</a></li>
                 <li><a href="{% url "blog:about" %}">关于</a></li>
-                {% if request.session.user_name %}
+                {% if request.user.username %}
                     {# 个人信息 #}
                     <li class='drop_user' style="float: right;">
-                        <a href="JavaScript:;"><i class="el el-user"></i>{{ request.session.user_name }}</a>
+                        <a href="JavaScript:;"><i class="el el-user"></i>{{ request.user.username }}</a>
                         <div class="drop_user-nav orange-text">
                             <ul>
-                                <li><a href='{% url "blog:edituser" id=request.session.user_id %}'>个人信息</a></li>
+                                <li><a href='{% url "blog:edituser" request.user.id %}'>个人信息</a></li>
                                 <li><a href="#" onclick="user_delete()">注销用户</a></li>
                                 <li><a href="{% url "blog:logout" %}">退出登录</a></li>
                             </ul>
                         </div>
                         {# 注销 #}
-                        <form style="display:none;" action="{% url 'blog:delete' id=request.session.user_id %}"
+                        <form style="display:none;" action="{% url 'blog:delete' request.user.id %}"
                               method="POST">
                             {% csrf_token %}
                             <button id="user_delete" type="submit">注销</button>
@@ -133,19 +129,19 @@
                 </li>
                 <li><a href="{% url "blog:archive" %}">归档</a></li>
                 <li><a href="{% url "blog:about" %}">关于</a></li>
-                {% if request.session.user_name %}
+                {% if request.user.username %}
                     {# 个人信息 #}
                     <li class='drop_user'>
-                        <a href="JavaScript:;"><i class="el el-user"></i>{{ request.session.user_name }}</a>
+                        <a href="JavaScript:;"><i class="el el-user"></i>{{ request.user.username }}</a>
                         <div class="drop_user-nav orange-text">
                             <ul>
-                                <li><a href='{% url "blog:edituser" id=request.session.user_id %}'>个人信息</a></li>
+                                <li><a href='{% url "blog:edituser" request.user.id %}'>个人信息</a></li>
                                 <li><a href="#" onclick="user_delete()">注销用户</a></li>
                                 <li><a href="{% url "blog:logout" %}">退出登录</a></li>
                             </ul>
                         </div>
                         {# 注销 #}
-                        <form style="display:none;" action="{% url 'blog:delete' id=request.session.user_id %}"
+                        <form style="display:none;" action="{% url 'blog:delete' request.user.id %}"
                               method="POST">
                             {% csrf_token %}
                             <button id="user_delete" type="submit">注销</button>
