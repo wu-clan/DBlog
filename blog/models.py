@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db import models
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from mdeditor.fields import MDTextField
 
@@ -190,19 +191,12 @@ class Article(models.Model):
         verbose_name = '博客文章'
         verbose_name_plural = verbose_name
 
-    def source_link(self):
-        """
-        文章链接拼接
-        """
-        source_url = settings.HOST + '/blog/detail/{id}'.format(id=self.pk)
-        return source_url
-
     def content_validity(self):
         """
         后台正文字数显示控制
         """
-        if len(str(self.content)) > 40:  # 字数自己设置
-            return '{}……'.format(str(self.content)[0:40])  # 超出部分以省略号代替。
+        if len(str(self.content)) > 30:  # 字数自己设置
+            return f'{str(self.content)[0:30]}……'  # 超出部分以省略号代替。
         else:
             return str(self.content)
 
@@ -310,6 +304,21 @@ class Comment(models.Model):
     class Meta:
         verbose_name = '评论'
         verbose_name_plural = verbose_name
+
+    def comment_validity(self):
+        """
+        后台正文字数显示控制
+        """
+        if len(str(self.comment)) > 30:
+            return f'{str(self.comment)[0:30]}……'
+        else:
+            return str(self.comment)
+
+    def avatar_link(self):
+        """
+        头像链接拼接
+        """
+        return format_html(f'<a href="/media//users_avatar/{str(self.avatar_address)}">{str(self.avatar_address)}</a>')
 
     def __str__(self):
         return self.comment[:20]

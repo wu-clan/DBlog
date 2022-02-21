@@ -203,11 +203,14 @@ class CommentAdmin(admin.ModelAdmin):
     """
     list_display = (
         'title',
-        'comment',
-        'user_name',
-        'request_ip',
-        'email',
-        'url',
-        'url_input',
         'create_time',
+        'user_name',
+        'email',
+        'request_ip',
+        'request_address',
+        'comment_validity',
+        'url',
+        'avatar_link',
+        'url_input',
     )
+    search_fields = ('user_name',)
