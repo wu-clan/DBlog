@@ -3,8 +3,6 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db import models
-from django.db.models.signals import post_save, pre_delete
-from django.dispatch import receiver
 from django.utils.safestring import mark_safe
 from mdeditor.fields import MDTextField
 
@@ -26,10 +24,10 @@ class UserInfo(models.Model):
 
     class Meta:
         verbose_name = '用户扩展信息'
-        verbose_name_plural = verbose_name
+        verbose_name_plural = 'userinfo'
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 
 class Carousel(models.Model):
@@ -328,43 +326,3 @@ class Subscription(models.Model):
 
     def __str__(self):
         return self.email
-
-
-""""""""""""""""""""""""""" models监听器分割线 """""""""""""""""""""""""""""
-
-
-# 创建用户时自动调用，绑定用户和用户信息
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserInfo.objects.create(user_id=instance.id)
-
-
-# 注销用户时自动调用，删除对应用户信息
-@receiver(pre_delete, sender=User)
-def create_user_profile(sender, instance, **kwargs):
-    instance.username = None
-
-
-# 同步删除轮播图文件
-@receiver(pre_delete, sender=Carousel)
-def delete_upload_files(sender, instance, **kwargs):
-    instance.carousel.delete(False)
-
-
-# 同步删除文章大头图文件
-@receiver(pre_delete, sender=ArticleImg)
-def delete_upload_files(sender, instance, **kwargs):
-    instance.article_img.delete(False)
-
-
-# 同步删除捐助图文件
-@receiver(pre_delete, sender=Pay)
-def delete_upload_files(sender, instance, **kwargs):
-    instance.payimg.delete(False)
-
-
-# 同步删除网站logo文件
-@receiver(pre_delete, sender=Conf)
-def delete_upload_files(sender, instance, **kwargs):
-    instance.website_logo.delete(False)

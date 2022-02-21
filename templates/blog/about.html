@@ -14,9 +14,9 @@
         <div class="aboutme">
             <p>About The Author</p><br>
             <center>
-                {% if about.contents %}
+                {% if about_text.contents %}
                     <div class="text_dark markdown-body">
-                        {{ about.contents | safe }}
+                        {{ about_text.contents | safe }}
                     </div>
                 {% else %}
                     <div class="text_dark markdown-body">

@@ -11,16 +11,21 @@ admin.site.unregister(User)
 
 
 class UserInfoAdmin(admin.StackedInline):
+    """
+    行内 admin 表
+    """
     model = UserInfo
     can_delete = False
-    verbose_name_plural = 'UserInfo'
 
 
 @admin.register(User)
 class SiteUserAdmin(UserAdmin):
-    inlines = [
+    """
+    重新注册 User
+    """
+    inlines = (
         UserInfoAdmin,
-    ]
+    )
 
 
 @admin.register(Subscription)

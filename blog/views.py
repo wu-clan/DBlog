@@ -371,15 +371,13 @@ def about(request):
     关于（包含统计图）
     """
     # markdown渲染自我介绍
-    _about = About.objects.first()
-    if _about:
-        _about.contents = markdown.markdown(
-            _about.contents,
-            extensions=[
-                'markdown.extensions.extra',
-                'markdown.extensions.fenced_code',
-                'markdown.extensions.tables',
-            ])
+    about_text = About.objects.all().first()
+    if about_text:
+        about_text.contents = markdown.markdown(about_text.contents, extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.fenced_code',
+            'markdown.extensions.tables',
+        ])
     # 统计图准备
     articles = Article.objects.filter().all().order_by('-date_time')
     categories = Category.fetch_all_category()

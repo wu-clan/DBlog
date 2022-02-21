@@ -42,7 +42,9 @@
                             {{ login_form.captcha }}
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">登录</button>
-                        <input type="hidden" name="next" value="{{request.GET.next }}" />
+                        {% if request.GET.next %}
+                            <input type="hidden" name="next" value="{{request.GET.next }}" />
+                        {% endif %}
                     </form>
                     <div class="flex-left top-gap text-small">
                         <div class="unit-2-3">
