@@ -296,15 +296,18 @@ class Comment(models.Model):
     create_time = models.DateTimeField('评论时间', auto_now_add=True)
     user_name = models.CharField('评论用户', max_length=25)
     request_ip = models.CharField('请求者ip', max_length=128, default='未知')
+    request_address = models.CharField('请求者地址', max_length=128, default=None)
     email = models.EmailField('预留邮箱', max_length=50, default='')
+    comment = models.TextField('评论内容', max_length=500)
+    avatar_address = models.ImageField('头像', null=True, blank=True)
     url = models.CharField('链接', max_length=200)
     url_input = models.CharField('输入链接拼接', max_length=100, default='')  # 暂时未使用
-    comment = models.TextField('评论内容', max_length=500)
-    # 文章评论一对一
+    # 文章评论多对一
     post = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='post')
+    # 评论用户多对一
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comment_user')
 
     class Meta:
-        ordering = ['create_time']
         verbose_name = '评论'
         verbose_name_plural = verbose_name
 

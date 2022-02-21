@@ -25,7 +25,7 @@
                 </div>
                 {# 头像 #}
                 <a class="notransition" href="{% url "blog:about" %}" data-pjax-state="">
-                    <img class="headportrait" src="{{ avatar_link }}">
+                    <img class="headportrait" alt="加载失败~" src="{{ avatar_link }}">
                 </a>
             </div>
             {# 组件 #}
@@ -197,9 +197,9 @@
             <tr>
                 {% for payimg in payimg_list %}
                     <td>
-                        <a href="/media/{{ payimg.payimg }}">
+                        <a href="{{ MEDIA_URL }}{{ payimg.payimg }}">
                             <img style="width: 135px; height: 150px; margin-top: 8px; margin-left: 30px"
-                                 src="/media/{{ payimg.payimg }}">
+                                 src="{{ MEDIA_URL }}{{ payimg.payimg }}">
                         </a>
                     </td>
                 {% endfor %}

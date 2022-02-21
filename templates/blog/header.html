@@ -5,7 +5,7 @@
             {# logo #}
             <div class="logo">
                 <a href="{% url "blog:index" %}">
-                    <img src="/media/{{ website_logo }}" alt="logo"/>
+                    <img src="{{ MEDIA_URL }}{{ website_logo }}" alt="logo"/>
                 </a>
             </div>
             {# 滚动信息 #}

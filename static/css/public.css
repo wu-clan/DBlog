@@ -256,6 +256,7 @@ header .user .nav-item {
 
 .top .logo img {
     width: 90%;
+    height: 70px;
 }
 
 .web-xiaoxi {
@@ -708,6 +709,8 @@ header .user .nav-item {
 }
 
 .for-me .headportrait {
+    width: 200px;
+    height: 200px;
     margin-left: -115px;
     transform: scale(0.75);
     border-radius: 50%;

@@ -89,15 +89,24 @@
             <ul class="comment-list">
                 {% for comment in comments %}
                     <li class="comment-item">
-                        <a href="javascript:void(0);">
-                            <img class="comment-avatar" src="/static/images/icon/user.gif" alt="">
+                        <a id="avatar">
+                        {% if comment.avatar_address %}
+                            <img class="comment-avatar" src="{{ MEDIA_URL }}/users_avatar/{{ comment.avatar_address }}"
+                                 alt="加载失败~">
+                        {% else %}
+                            <img class="comment-avatar" src="/static/images/icon/user.gif" alt="加载失败~">
+                        {% endif %}
                         </a>
                         <span class="comment-author">{{ comment.user_name }}</span>
                         <div class="comment-meta">{{ comment.create_time }}</div>
                         <div class="comment-content">
                             <span>{{ comment.comment }}</span>
                         </div>
-                        <p style="color: #7799 !important; font-size: xx-small">来自: {{ comment.request_ip }}</p>
+                        {% if comment.request_address %}
+                            <p style="color: #7799 !important; font-size: xx-small">来自: {{ comment.request_address }}</p>
+                        {% else %}
+                            <p style="color: #7799 !important; font-size: xx-small">来自: {{ comment.request_ip }}</p>
+                        {% endif %}
                         <div class="reply">
                             <a class="comment-reply-link" title="debugging...未启用">回复</a>
                         </div>

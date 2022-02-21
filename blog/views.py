@@ -27,6 +27,7 @@ from blog.models import Article, Category, Tag, UserInfo
 from djangoProject import settings
 from djangoProject.settings import SESSION_COOKIE_AGE
 from djangoProject.utils.comments_check import DFAFilter
+from djangoProject.utils.get_request_address import get_req_info
 from djangoProject.utils.pagination import PageInfo
 
 
@@ -256,9 +257,14 @@ def profile_edit(request, pk):
                 try:
                     # 删除旧头像文件
                     os.remove(os.path.join(settings.BASE_DIR, settings.MEDIA_ROOT, str(userinfo.avatar)))
-                except FileExistsError or FileNotFoundError:
+                except OSError or FileNotFoundError:
                     pass
                 userinfo.avatar = data['avatar']
+                # 同步更新用户所有评论头像地址
+                comment_avatar = user.comment_user.filter(user=user.id)
+                cmt_ava = comment_avatar.exists()
+                if cmt_ava:
+                    comment_avatar.all().update(avatar_address=data['avatar'])
             userinfo.mobile = data['mobile']
             userinfo.wechat = data['wechat']
             userinfo.qq = data['qq']
@@ -457,24 +463,26 @@ def get_comment(request, pk):
             else:
                 ip = request.META.get("REMOTE_ADDR")
             comment.request_ip = ip
+            try:
+                comment.request_address = get_req_info(ip)
+            except Exception:
+                pass
             comment.title = blog.title
             comment.email = request.user.email
-            # 文章跳转url
-            comment.url = str(request.headers['Referer'])
-            # 评论内容
-            if '*' in DFAFilter().check_comments(comment.comment):
+            comment.url = str(request.headers['Referer'])  # 文章跳转url
+            if '*' in DFAFilter().check_comments(comment.comment):  # 评论内容
                 messages.error(request, '评论内容不合规，请修改后重新提交')
                 return redirect('blog:get_comment', pk=pk)
-            if '*' in DFAFilter().check_comments(request.user.username):
+            if '*' in DFAFilter().check_comments(request.user.username):  # user_name
                 comment.user_name = '信球'
             else:
                 comment.user_name = request.user.username
-            # 关联评论与文章
-            comment.post = blog
+            comment.avatar_address = User.objects.get(id=request.user.pk).userinfo.avatar  # 头像链接转存
+            comment.post = blog  # 关联评论与文章
+            comment.user = request.user  # 关联评论与用户
             comment.save()
             blog.commenced(blog.post.all().count())
             return redirect('blog:get_comment', pk=pk)
-    # 不是 post 请求，重定向到文章详情页。
     return redirect('blog:detail', pk=pk)
 
 
