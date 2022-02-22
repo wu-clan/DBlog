@@ -46,6 +46,8 @@ urlpatterns = [
 	path('logout/', views.user_logout, name='logout'),
 	# 用户信息
 	path('edituser/<int:pk>/', views.profile_edit, name='edituser'),
+	# 删除用户头像
+	path('delete/avatar/<int:pk>', views.delete_avatar, name='delete_avatar'),
 	# 注销用户
 	path('delete/<int:pk>/', views.user_delete, name='delete'),
 

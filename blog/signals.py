@@ -4,7 +4,7 @@
 
 # 创建用户时自动调用，绑定用户和用户信息
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save, pre_delete
+from django.db.models.signals import post_save, pre_delete, post_delete
 from django.dispatch import receiver
 
 from blog.models import Carousel, ArticleImg, Pay, Conf, UserInfo
@@ -25,6 +25,14 @@ def update_user_profile(sender, instance, **kwargs):
     同步更新用户扩展信息
     """
     instance.userinfo.save()
+
+
+@receiver(post_delete, sender=UserInfo)
+def delete_user_avatar_files(sender, instance, **kwargs):
+    """
+    注销用户时同步删除头像文件
+    """
+    instance.avatar.delete(None)
 
 
 @receiver(pre_delete, sender=Carousel)

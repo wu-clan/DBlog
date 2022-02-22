@@ -91,7 +91,7 @@
                     <li class="comment-item">
                         <a id="avatar">
                         {% if comment.avatar_address %}
-                            <img class="comment-avatar" src="{{ MEDIA_URL }}/users_avatar/{{ comment.avatar_address }}"
+                            <img class="comment-avatar" src="{{ MEDIA_URL }}{{ comment.avatar_address }}"
                                  alt="加载失败~">
                         {% else %}
                             <img class="comment-avatar" src="/static/images/icon/user.gif" alt="加载失败~">

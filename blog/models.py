@@ -16,7 +16,8 @@ class UserInfo(models.Model):
     用户扩展信息
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='userinfo')
-    avatar = models.ImageField(upload_to='users_avatar', null=True, blank=True, verbose_name='用户头像')
+    users_avatar = 'users_avatar'
+    avatar = models.ImageField(upload_to=f'{users_avatar}', null=True, blank=True, verbose_name='用户头像')
     mobile = models.CharField(null=True, blank=True, default='', max_length=11, verbose_name='手机号')
     wechat = models.CharField(null=True, blank=True, default='', max_length=50, verbose_name='微信')
     qq = models.CharField(null=True, blank=True, default='', max_length=10, verbose_name='QQ')
@@ -240,8 +241,8 @@ class ArticleImg(models.Model):
         """
         预览图
         """
-        href = self.article_img.url
         try:
+            href = self.article_img.url
             img = mark_safe('<img src="%s" width="100px" />' % href)
         except Exception:
             img = ''
@@ -293,7 +294,7 @@ class Comment(models.Model):
     request_address = models.CharField('请求者地址', max_length=128, default=None)
     email = models.EmailField('预留邮箱', max_length=50, default='')
     comment = models.TextField('评论内容', max_length=500)
-    avatar_address = models.ImageField('头像', null=True, blank=True)
+    avatar_address = models.ImageField('头像', null=True, blank=True)  # 同步userinfo头像字段
     url = models.CharField('链接', max_length=200)
     url_input = models.CharField('输入链接拼接', max_length=100, default='')  # 暂时未使用
     # 文章评论多对一
@@ -316,9 +317,14 @@ class Comment(models.Model):
 
     def avatar_link(self):
         """
-        头像链接拼接
+        头像预览图
         """
-        return format_html(f'<a href="/media//users_avatar/{str(self.avatar_address)}">{str(self.avatar_address)}</a>')
+        try:
+            href = self.avatar_address.url
+            img = mark_safe(f'<img src="{href}" width="60px" height="60px" />')
+        except Exception:
+            img = ''
+        return img
 
     def __str__(self):
         return self.comment[:20]

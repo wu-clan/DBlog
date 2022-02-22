@@ -16,6 +16,9 @@ class UserInfoAdmin(admin.StackedInline):
     """
     model = UserInfo
     can_delete = False
+    readonly_fields = (
+        'avatar',
+    )
 
 
 @admin.register(User)
@@ -172,7 +175,7 @@ class ArticleImgAdmin(admin.ModelAdmin):
         'img_title',
         'url',
         'images',
-        'article_img',
+        # 'article_img',
     )
 
 

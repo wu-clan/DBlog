@@ -44,6 +44,9 @@
                                 {% if userinfo.avatar %}
                                     <img src="{{ userinfo.avatar.url }}"
                                          style="width: 100px; height: 100px; border-radius: 50%" alt="加载失败~" title="建议使用等边头像~">
+                                    <a href="javascript:;" style="color: #0181da; vertical-align: bottom;">
+                                        <span id="delete_avatar">删除</span>
+                                    </a>
                                 {% else %}
                                     <img src="/static/images/icon/user.gif"
                                          style="max-width: 30%; border-radius: 50%" alt="加载失败~" title="建议使用等边头像~">
@@ -97,3 +100,27 @@
     </style>
 
 {% endblock content %}
+
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $('#delete_avatar').click(function () {
+                if (confirm("确定删除头像?")) {
+                    $.ajax({
+                        type: "post",
+                        url: '{% url 'blog:delete_avatar' user.id %}',
+                        data: '',
+                        success: function (data) {
+                            {#alert(data['msg'])#}
+                            location.reload()
+                        },
+                        error: function (data) {
+                            {#alert(data['msg'])#}
+                            location.reload()
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+{% endblock %}

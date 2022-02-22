@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Create your views here.
+import json
 import os
 import re
 
@@ -13,6 +14,7 @@ from django.core.mail import send_mail
 from django.db.models import Q
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.text import slugify
@@ -22,7 +24,7 @@ from markdown.extensions.toc import TocExtension
 from blog.forms.comment.comment_forms import CommentForm
 from blog.forms.subscription.subscription_forms import SubscriptionForm, UnSubscriptionForm
 from blog.forms.user.user_forms import EditUserInfo, ProfileForm, RegisterForm, RestCodeForm, RestPwdForm, UserForm
-from blog.models import About, Subscription
+from blog.models import About, Subscription, Comment
 from blog.models import Article, Category, Tag, UserInfo
 from djangoProject import settings
 from djangoProject.settings import SESSION_COOKIE_AGE
@@ -194,6 +196,7 @@ def user_logout(request):
     return redirect('/blog')
 
 
+@login_required
 def user_delete(request, pk):
     """
     用户注销
@@ -255,8 +258,8 @@ def profile_edit(request, pk):
                     return redirect('blog:edituser', pk=pk)
             if 'avatar' in request.FILES:
                 try:
-                    # 删除旧头像文件
-                    os.remove(os.path.join(settings.BASE_DIR, settings.MEDIA_ROOT, str(userinfo.avatar)))
+                    # 更新时删除旧头像文件
+                    os.remove(os.path.join(settings.MEDIA_ROOT, str(userinfo.avatar)))
                 except OSError or FileNotFoundError:
                     pass
                 userinfo.avatar = data['avatar']
@@ -264,7 +267,7 @@ def profile_edit(request, pk):
                 comment_avatar = user.comment_user.filter(user=user.id)
                 cmt_ava = comment_avatar.exists()
                 if cmt_ava:
-                    comment_avatar.all().update(avatar_address=data['avatar'])
+                    comment_avatar.all().update(avatar_address=f"{userinfo.users_avatar}/{data['avatar']}")
             userinfo.mobile = data['mobile']
             userinfo.wechat = data['wechat']
             userinfo.qq = data['qq']
@@ -280,6 +283,33 @@ def profile_edit(request, pk):
         user_form = EditUserInfo()
         profile_form = ProfileForm()
     return render(request, 'blog/user/edituser.html', locals())
+
+
+@login_required
+def delete_avatar(request, pk):
+    """
+    删除用户头像
+    """
+    user = User.objects.get(id=pk)
+    userinfo = UserInfo.objects.filter(pk=pk)
+    if request.method == 'POST':
+        if request.user != user:
+            messages.error(request, '你没有权限修改此用户信息')
+            return HttpResponse(json.dumps({'msg': '你没有权限修改此用户信息'}), content_type="application/json")
+        try:
+            current_avatar = userinfo.first().avatar.url
+        except ValueError:
+            messages.error(request, '删除头像操作失败，请先上传头像')
+            return HttpResponse(json.dumps({'msg': '删除头像操作失败，请先上传头像'}), content_type="application/json")
+        try:
+            os.remove(os.path.join(settings.MEDIA_ROOT, str(userinfo.first().avatar)))
+        except OSError or FileNotFoundError:
+            pass
+        userinfo.update(avatar=None)
+        _comment = Comment.objects.filter(user=userinfo.first().user)
+        _comment.all().update(avatar_address=None)
+        messages.success(request, '删除头像成功')
+        return HttpResponse(json.dumps({'msg': '删除头像成功'}), content_type="application/json")
 
 
 """"""""""""""""""""""""" 登录结束 """""""""""""""""""""""""
