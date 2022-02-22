@@ -500,10 +500,10 @@ def get_comment(request, pk):
             comment.title = blog.title
             comment.email = request.user.email
             comment.url = str(request.headers['Referer'])  # 文章跳转url
-            if '*' in DFAFilter().check_comments(comment.comment):  # 评论内容
+            if '**' in DFAFilter().check_comments(comment.comment):  # 评论内容
                 messages.error(request, '评论内容不合规，请修改后重新提交')
                 return redirect('blog:get_comment', pk=pk)
-            if '*' in DFAFilter().check_comments(request.user.username):  # user_name
+            if '**' in DFAFilter().check_comments(request.user.username):  # user_name
                 comment.user_name = '信球'
             else:
                 comment.user_name = request.user.username
