@@ -248,7 +248,7 @@ def profile_edit(request, pk):
                     return redirect('blog:edituser', pk=pk)
                 if '**' in DFAFilter().check_comments(username):
                     messages.error(request, '新用户名含有违规内容，请修改后重新提交')
-                    return redirect(reverse('blog:register'))
+                    return redirect('blog:edituser', pk=pk)
                 user.username = username
                 user.save()
             if email != old_email:
