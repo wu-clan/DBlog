@@ -94,6 +94,13 @@ def user_register(request):
             if data.get('password1') != data.get('password2'):
                 messages.error(request, '密码输入不一致，请重新输入')
                 return redirect(reverse('blog:register'))
+            username_re = re.compile(r"^[a-zA-Z0-9_-]{4,16}$")
+            if not username_re.findall(str(data.get('username'))):
+                messages.error(request, '用户名格式错误，请修改后重新提交')
+                return redirect(reverse('blog:register'))
+            if '**' in DFAFilter().check_comments(data.get('username')):
+                messages.error(request, '用户名含有违规内容，请修改后重新提交')
+                return redirect(reverse('blog:register'))
             else:
                 same_name = User.objects.filter(username=data.get('username'))
                 if same_name:
@@ -255,6 +262,16 @@ def profile_edit(request, pk):
                 tel_re = re.compile(r"^1[3-9]\d{9}$")
                 if not tel_re.findall(str(data.get('mobile'))):
                     messages.error(request, '手机号码格式错误')
+                    return redirect('blog:edituser', pk=pk)
+            if data.get('wechat') is not None:
+                tel_re = re.compile(r"^[a-zA-Z]([-_a-zA-Z0-9]{5,19})+$")
+                if not tel_re.findall(str(data.get('wechat'))):
+                    messages.error(request, '微信号码输入有误')
+                    return redirect('blog:edituser', pk=pk)
+            if data.get('qq') is not None:
+                tel_re = re.compile(r"^[1-9][0-9]{4,10}$")
+                if not tel_re.findall(str(data.get('qq'))):
+                    messages.error(request, 'QQ号码输入有误')
                     return redirect('blog:edituser', pk=pk)
             if 'avatar' in request.FILES:
                 try:

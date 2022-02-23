@@ -9,7 +9,8 @@ class UserForm(forms.Form):
     """
     用户表单
     """
-    username = forms.CharField(label="账号", max_length=16, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(label="账号", min_length=4, max_length=16, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': '用户名只允许字母，数字，下划线，减号'}))
     password = forms.CharField(label="密码", max_length=16, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     captcha = CaptchaField(label='验证码', widget=CaptchaTextInput(attrs={'class': 'form-control'}))
 
@@ -18,7 +19,8 @@ class RegisterForm(forms.Form):
     """
     注册表单
     """
-    username = forms.CharField(label="账号", max_length=16, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(label="账号", min_length=4, max_length=16, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': '用户名只允许字母，数字，下划线，减号'}))
     password1 = forms.CharField(label="密码", max_length=16, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     password2 = forms.CharField(label="确认密码", max_length=16,
                                 widget=forms.PasswordInput(attrs={'class': 'form-control'}))
@@ -66,5 +68,6 @@ class EditUserInfo(forms.Form):
     """
     编辑用户信息表单
     """
-    username = forms.CharField(label="用户名", max_length=16, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(label="用户名", min_length=4, max_length=16, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': '用户名只允许字母，数字，下划线，减号'}))
     email = forms.EmailField(label="邮箱地址", widget=forms.EmailInput(attrs={'class': 'form-control'}))
