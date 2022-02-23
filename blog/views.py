@@ -246,6 +246,9 @@ def profile_edit(request, pk):
                 if user_username:
                     messages.error(request, f'用户名 {username} 已经被注册过了，请更换用户名后重新提交！')
                     return redirect('blog:edituser', pk=pk)
+                if '**' in DFAFilter().check_comments(username):
+                    messages.error(request, '用户名含有违规内容，请修改后重新提交')
+                    return redirect(reverse('blog:register'))
                 user.username = username
                 user.save()
             if email != old_email:
