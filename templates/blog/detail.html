@@ -99,7 +99,7 @@
                         </a>
                         <span class="comment-author">{{ comment.user_name }}</span>
                         <div class="comment-meta">{{ comment.create_time }}</div>
-                        <div class="comment-content">
+                        <div class="comment-content" id="{{ comment.comment }}">
                             <span>{{ comment.comment }}</span>
                         </div>
                         {% if comment.request_address %}
