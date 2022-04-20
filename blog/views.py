@@ -18,7 +18,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.text import slugify
-from fast_captcha import tCaptcha
+from fast_captcha import text_captcha
 from markdown.extensions.toc import TocExtension
 
 from blog.forms.comment.comment_forms import CommentForm
@@ -142,7 +142,7 @@ def password_reset_email(request):
                 if user:
                     mail_receiver = user[0].email
                     email_title = "重置密码"
-                    code = tCaptcha()  # 验证码
+                    code = text_captcha()  # 验证码
                     del request.session["tCaptcha"]
                     request.session["tCaptcha"] = code  # 将验证码保存到session
                     email_body = F"您的重置密码验证码为：{code}\n" \
