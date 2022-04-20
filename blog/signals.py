@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-""""""""""""""""""""""""""" models监听器分割线 """""""""""""""""""""""""""""
 
-# 创建用户时自动调用，绑定用户和用户信息
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save, pre_delete, post_delete
 from django.dispatch import receiver

@@ -8,6 +8,6 @@ class BlogConfig(AppConfig):
 
     def ready(self):
         """
-        导入信号监听函数
+        导入信号监听文件
         """
         import blog.signals
