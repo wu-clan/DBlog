@@ -143,8 +143,7 @@ def password_reset_email(request):
                     mail_receiver = user[0].email
                     email_title = "重置密码"
                     code = text_captcha()  # 验证码
-                    del request.session["tCaptcha"]
-                    request.session["tCaptcha"] = code  # 将验证码保存到session
+                    request.session["text_captcha"] = code  # 将验证码保存到session
                     email_body = F"您的重置密码验证码为：{code}\n" \
                                  F"为了不影响您正常使用，请在{SESSION_COOKIE_AGE / 60}分钟之内完成密码重置"
                     send_status = send_mail(email_title, email_body, settings.EMAIL_HOST_USER, (mail_receiver,),
@@ -172,11 +171,15 @@ def password_reset_base(request):
             password2 = rest_pwd_form.cleaned_data['password2']
             code = rest_pwd_form.cleaned_data['reset_code']
             if password1 == password2:
-                if code == request.session["tCaptcha"]:
+                captcha = request.session.get('text_captcha', default=None)
+                if captcha is None:
+                    messages.error(request, '验证码已过期，请重新获取')
+                    return redirect(reverse('blog:password_reset_email'))
+                elif code == captcha:
                     new_user = User.objects.update(
                         password=make_password(password2)
                     )
-                    del request.session["tCaptcha"]
+                    request.session.pop('text_captcha')
                     return redirect(reverse('blog:password_reset_done'))
                 else:
                     messages.error(request, '验证码错误')
