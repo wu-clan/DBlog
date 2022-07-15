@@ -4,8 +4,16 @@ import requests
 
 
 def get_req_info(ip):
-    r = requests.get(f'http://whois.pconline.com.cn/ipJson.jsp?ip={ip}&json=true')
-    return r.json()['addr']
+    """
+    获取请求IP的地址
+
+    :param ip:
+    :return:
+    """
+    rq = requests.session()
+    rq.trust_env = False
+    rp = rq.get(f'http://whois.pconline.com.cn/ipJson.jsp?ip={ip}&json=true')
+    return rp.json()['addr']
 
 
 if __name__ == '__main__':
