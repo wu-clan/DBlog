@@ -10,17 +10,18 @@ services:
     depends_on:
       - mysql
       - redis
-      - nginx
     volumes:
       - ./docker_settings.py:/blog_web/djangoProject/settings.py
+      - blog_static:/blog_web/static
+      - blog_templates:/blog_web/templates
     networks:
       - blog_network
     command:
-      - /bin/bash
-      - c
+      - bash
+      - -c
       - |
-        wait-for-it.sh dblog_mysql:3306
-        wait-for-it.sh dblog_redis:6379
+        ./wait-for-it.sh dblog_redis:6379
+        ./wait-for-it.sh dblog_mysql:3306 
         python manage.py makemigrations
         python manage.py migrate
         python manage.py collectstatic --noinput
@@ -64,11 +65,19 @@ services:
       - "8000:80"
     container_name: "dblog_nginx"
     restart: always
+    depends_on:
+      - app
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - blog_static:/www/blog/static
+      - blog_templates:/www/blog/templates
     networks:
       - blog_network
 
 
 networks:
   blog_network:
+
+volumes:
+  blog_static:
+  blog_templates:
