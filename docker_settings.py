@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-v%!69-+jqak^*4b+y5uz_udp-l^#ii$6w)qrm&khj2anfc25z&'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -43,7 +43,7 @@ ROOT_URLCONF = 'djangoProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [BASE_DIR / 'templates']  # noqa
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -211,7 +211,7 @@ website_logo = 'logo/DBlog.png'
 
 # simpleui本地配置
 # SIMPLEUI_LOGO：对官方css进行了某些修改以适应后台尺寸，使用个人logo时根据显示情况自行修改即可...
-SIMPLEUI_LOGO = 'http://127.0.0.1:8000/static/images/logo/DBlog.png' or 'http://127.0.0.1:8000/media/logo/DBlog.png'
+SIMPLEUI_LOGO = 'http://127.0.0.1:8000/static/images/logo/DBlog.png'
 SIMPLEUI_HOME_TITLE = 'DBlog后台管理'
 SIMPLEUI_ANALYSIS = False
 SIMPLEUI_LOADING = False
@@ -223,7 +223,7 @@ admin.AdminSite.site_header = SIMPLEUI_HOME_TITLE
 admin.AdminSite.site_title = SIMPLEUI_HOME_TITLE
 
 # 登录后重定向到主页面
-LOGIN_URL = '/blog/'
+LOGIN_URL = '/blog'
 
 # session设置
 SESSION_COOKIE_AGE = 86400  # Session的cookie失效日期（秒）

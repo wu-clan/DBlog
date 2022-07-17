@@ -10,8 +10,6 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import os
-from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -63,7 +61,7 @@ ROOT_URLCONF = 'djangoProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [BASE_DIR / 'templates']  # noqa
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -259,7 +257,7 @@ admin.AdminSite.site_header = SIMPLEUI_HOME_TITLE
 admin.AdminSite.site_title = SIMPLEUI_HOME_TITLE
 
 # 登录后重定向到主页面
-LOGIN_URL = '/blog/login/'
+LOGIN_URL = '/blog'
 
 # session设置
 SESSION_COOKIE_AGE = 86400  # Session的cookie失效日期（秒）
