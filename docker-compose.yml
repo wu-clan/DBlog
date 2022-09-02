@@ -20,13 +20,11 @@ services:
       - bash
       - -c
       - |
-        ./wait-for-it.sh dblog_redis:6379
-        ./wait-for-it.sh dblog_mysql:3306 
+        wait-for-it -s dblog_mysql:3306 -s dblog_redis:6379 -t 300
         python manage.py makemigrations
         python manage.py migrate
         python manage.py collectstatic --noinput
         uwsgi --ini docker_uwsgi.ini
-
 
   mysql:
     image: mysql:8.0.29
@@ -43,8 +41,10 @@ services:
     networks:
       - blog_network
     command:
+      --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_general_ci
+      --lower_case_table_names=1
 
   redis:
     image: redis:6.2.7

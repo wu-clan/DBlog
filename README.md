@@ -17,7 +17,7 @@ ps: 个人博客在一些逻辑和限制上面考虑还欠周全，存在bug，�
 后续开发已暂缓，欢迎 pull request，我将在审阅并测试后第一时间通知您
 
 [![python3](https://img.shields.io/badge/Python-3.8-red.svg)](https://www.python.org/downloads)
-[![Django3.2](https://img.shields.io/badge/Django-3.2.4-green.svg)](https://docs.djangoproject.com/zh-hans/3.2)
+[![Django3.2](https://img.shields.io/badge/Django-3.2-green.svg)](https://docs.djangoproject.com/zh-hans/3.2)
 [![simpleui](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui)
 
 🙈🙈🙈 使用Django快速搭建博客系统，采用Django框架最基础结构（仅一个app）
@@ -29,7 +29,7 @@ ps: 个人博客在一些逻辑和限制上面考虑还欠周全，存在bug，�
 ### 基本要求
 
 * Python: 3.8
-* Django: 3.2.4
+* Django: 3.2
 * Mysql: 8
 * Redis
 
@@ -49,7 +49,7 @@ ps: 个人博客在一些逻辑和限制上面考虑还欠周全，存在bug，�
 * 网站配置数据 redis 缓存
 * windows: django-gzip压缩主站，linux: nginx-gzip压缩全站
 * Rss / Atom 订阅
-* 支持图床，后台上传图片可直链访问及调用
+* 支持图床，后台上传图片并展示，可直链访问及调用
 * simpleui后台管理
 
 ###### ps: 如果访问网站期间，你使用了某些墙代理网络，会失去一些网页功能 ！！！
@@ -65,7 +65,7 @@ git clone https://gitee.com/wu_cl/DBlog.git
 敏感词文件内容 static/sensitive_words/sensitive_words_lines.txt,
 请前往 [sensitive_words](https://github.com/wjhgg/sensitive_words) 进行替换
 
-## 安装使用
+## 使用
 
 > ⚠️: 此过程请格外注意端口占用情况, 特别是 8000, 3306, 6379...
 
@@ -97,13 +97,10 @@ git clone https://gitee.com/wu_cl/DBlog.git
    docker-compose up -d --build
    ```
 
-## 使用
+## 访问
 
-创建管理员用户
+创建管理员用户： `python manage.py createsuperuser`
 
-```shell
-python manage.py createsuperuser
-```
 
 后台：http://127.0.0.1:8000/admin
 
@@ -111,14 +108,14 @@ python manage.py createsuperuser
 
 ## 🙏 搭建Linux服务端
 
-### 传统
+### 1. 传统
 
 请移步 [wikis](https://gitee.com/wu_cl/DBlog/wikis/pages) 查看
 
-### docker
+### 2. docker
 
-与安装使用相同，根据实际情况自行修改配置文件即可
+与使用方式相同
 
 ## ❓ 问题相关
 
-欢迎提交问题到 [Issues](https://gitee.com/wu_cl/DBlog/issues) 或我的QQ邮箱 `2186656812@qq.com`, 我将在看到问题后第一时间回复 
+欢迎提交问题到 [Issues](https://gitee.com/wu_cl/DBlog/issues) 或直接在下方评论, 我将在看到问题后第一时间回复 
