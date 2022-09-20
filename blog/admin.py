@@ -48,7 +48,7 @@ class AboutAdmin(admin.ModelAdmin):
     关于
     """
     list_display = (
-        'contents',
+        'about_text',
     )
 
 
@@ -94,7 +94,7 @@ class AnnouncementAdmin(admin.ModelAdmin):
     公告
     """
     list_display = (
-        'main_announcement',
+        'ment_text',
     )
 
 
@@ -141,7 +141,7 @@ class PayAdmin(admin.ModelAdmin):
     收款图
     """
     list_display = (
-        'payimg',
+        'pay_img',
     )
 
 
@@ -150,12 +150,12 @@ class ArticleAdmin(ImportExportModelAdmin):
     """
     文章
     """
-    date_hierarchy = 'date_time'
+    date_hierarchy = 'created_time'
     list_display = (
         'title',
         'category',
-        'date_time',
-        'content_validity',
+        'created_time',
+        'content_text',
         'digest',
         'author',
         'view',

@@ -4,5 +4,4 @@ Allow: /blog/list/
 Allow: /blog/tag/
 Allow: /blog/category/
 Allow: /blog/archive/
-Allow: /blog/getComment/
 Sitemap: http://www.xwboy.top/sitemap.xml

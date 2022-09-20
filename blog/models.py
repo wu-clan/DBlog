@@ -3,12 +3,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db import models
-from django.utils.html import format_html
 from django.utils.safestring import mark_safe
-from mdeditor.fields import MDTextField
-
-
-# Create your models here.
+from mdeditor.fields import MDTextField  # noqa
 
 
 class UserInfo(models.Model):
@@ -17,12 +13,12 @@ class UserInfo(models.Model):
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='userinfo')
     users_avatar = 'users_avatar'
-    avatar = models.ImageField(upload_to=f'{users_avatar}', null=True, blank=True, verbose_name='用户头像')
+    avatar = models.ImageField(null=True, blank=True, upload_to=f'{users_avatar}', verbose_name='用户头像')
     mobile = models.CharField(null=True, blank=True, default='', max_length=11, verbose_name='手机号')
-    wechat = models.CharField(null=True, blank=True, default='', max_length=50, verbose_name='微信')
+    wechat = models.CharField(null=True, blank=True, default='', max_length=30, verbose_name='微信')
     qq = models.CharField(null=True, blank=True, default='', max_length=10, verbose_name='QQ')
-    blog_address = models.CharField(null=True, blank=True, default='', max_length=100, verbose_name='博客地址')
-    introduction = models.TextField(null=True, blank=True, default='', max_length=500, verbose_name='自我介绍')
+    blog_address = models.CharField(null=True, blank=True, default='', max_length=255, verbose_name='博客地址')
+    introduction = models.TextField(null=True, blank=True, default='', verbose_name='自我介绍')
 
     class Meta:
         verbose_name = '用户扩展信息'
@@ -36,11 +32,11 @@ class Carousel(models.Model):
     """
     首页轮播图配置
     """
-    link = models.CharField(null=True, blank=True, default='#', max_length=256, verbose_name='链接')
+    link = models.CharField(null=True, blank=True, default='#', max_length=255, verbose_name='链接')
     carousel = models.ImageField(upload_to='carousel', verbose_name='轮播图')
-    carousel_title = models.TextField(blank=True, null=True, max_length=100, verbose_name='轮播图左下标题')
-    img_link_title = models.TextField(blank=True, null=True, max_length=100, verbose_name='图片标题')
-    img_alt = models.TextField(blank=True, null=True, max_length=100, verbose_name='轮播图alt')
+    carousel_title = models.TextField(blank=True, null=True, max_length=50, verbose_name='轮播图左下标题')
+    img_link_title = models.TextField(blank=True, null=True, max_length=255, verbose_name='图片标题')
+    img_alt = models.TextField(blank=True, null=True, max_length=255, verbose_name='轮播图alt')
 
     class Meta:
         verbose_name = '首页轮播图配置'
@@ -56,16 +52,17 @@ class Conf(models.Model):
     """
     main_website = models.CharField(max_length=64, verbose_name='主网站', default="xwboy.top")
     name = models.CharField(max_length=8, verbose_name='关注我_名称', default="CL' WU")
-    chinese_description = models.CharField(max_length=30, verbose_name='关注我_中文描述', default='永不放弃坚持就是这么酷！要相信光')
+    chinese_description = models.CharField(max_length=30, verbose_name='关注我_中文描述',
+                                           default='永不放弃坚持就是这么酷！要相信光')
     english_description = models.TextField(max_length=100, verbose_name='关注我_英文描述',
                                            default='Never give up persistence is so cool！Believe in the light！！！')
-    avatar_link = models.CharField(max_length=150, verbose_name='关注我_头像超链接')
-    website_author = models.CharField(max_length=20, verbose_name='网站作者', default='xiaowu')
-    website_author_link = models.CharField(max_length=200, verbose_name='网站作者链接', default='http://www.xwboy.top')
-    email = models.EmailField(max_length=50, verbose_name='作者收件邮箱', default='2186656812@qq.com')
+    avatar_link = models.CharField(max_length=255, verbose_name='关注我_头像超链接')
+    website_author = models.CharField(max_length=10, verbose_name='网站作者', default='xiaowu')
+    website_author_link = models.CharField(max_length=255, verbose_name='网站作者链接', default='https://www.xwboy.top')
+    email = models.EmailField(max_length=30, verbose_name='作者收件邮箱', default='2186656812@qq.com')
     website_number = models.CharField(max_length=100, verbose_name='备案号', default='豫ICP备 2021019092号-1')
-    git = models.CharField(max_length=100, verbose_name='git链接', default='https://gitee.com/wu_cl')
-    website_logo = models.ImageField(upload_to='logo', verbose_name='网站logo', default='')
+    git = models.CharField(max_length=255, verbose_name='git链接', default='https://gitee.com/wu_cl')
+    website_logo = models.ImageField(upload_to='logo', verbose_name='网站logo')
 
     @staticmethod
     def fetch_all_site_info():
@@ -92,7 +89,7 @@ class HeadAnnouncement(models.Model):
     """
     轮播公告
     """
-    head_announcement = models.CharField(max_length=30, verbose_name='头部轮播公告', default='热烈欢迎浏览本站')
+    head_announcement = models.CharField(max_length=16, verbose_name='头部轮播公告', default='热烈欢迎浏览本站')
 
     class Meta:
         verbose_name = '轮播公告'
@@ -106,12 +103,20 @@ class MainAnnouncement(models.Model):
     """
     主公告
     """
-    main_announcement = models.TextField(blank=True, null=True, max_length=300, verbose_name='右侧公告',
-                                         default='📢')
+    main_announcement = models.TextField(verbose_name='右侧公告', default='📢')
 
     class Meta:
         verbose_name = '主公告'
         verbose_name_plural = verbose_name
+
+    def ment_text(self):
+        """
+        后台字数显示控制
+        """
+        if len(str(self.main_announcement)) > 188:
+            return f'{str(self.main_announcement)[0:188]}……'
+        else:
+            return str(self.main_announcement)
 
     def __str__(self):
         return self.main_announcement
@@ -121,8 +126,8 @@ class Friend(models.Model):
     """
     友链
     """
-    url = models.CharField(max_length=200, verbose_name='友链链接', default='https://my.oschina.net/chulan')
-    title = models.CharField(max_length=100, verbose_name='超链接title', default='OSCHINA')
+    url = models.CharField(max_length=255, verbose_name='友链链接', default='https://my.oschina.net/chulan')
+    title = models.CharField(max_length=50, verbose_name='超链接title', default='OSCHINA')
     name = models.CharField(max_length=20, verbose_name='友链名称', default='chulan')
 
     class Meta:
@@ -137,7 +142,7 @@ class Pay(models.Model):
     """
     收款图
     """
-    payimg = models.ImageField(upload_to='pay', blank=True, null=True, verbose_name='捐助收款图')
+    pay_img = models.ImageField(blank=True, null=True, upload_to='pay', verbose_name='捐助收款图')
 
     class Meta:
         verbose_name = '捐助收款图'
@@ -154,6 +159,15 @@ class About(models.Model):
         verbose_name = '关于'
         verbose_name_plural = verbose_name
 
+    def about_text(self):
+        """
+        后台字数显示控制
+        """
+        if len(str(self.contents)) > 200:
+            return f'{str(self.contents)[0:200]}……'
+        else:
+            return str(self.contents)
+
     def __str__(self):
         return self.contents
 
@@ -162,7 +176,7 @@ class Tag(models.Model):
     """
     标签
     """
-    tag_name = models.CharField('标签名称', max_length=30, )
+    tag_name = models.CharField('标签名称', max_length=10)
 
     class Meta:
         verbose_name = '标签'
@@ -176,27 +190,27 @@ class Article(models.Model):
     """
     文章
     """
-    title = models.CharField(max_length=200, verbose_name='文章标题')  # 博客标题
-    category = models.ForeignKey('Category', verbose_name='文章类型', on_delete=models.CASCADE)
-    date_time = models.DateField(auto_now_add=True, verbose_name='创建时间')
+    title = models.CharField(max_length=50, verbose_name='文章标题')
     content = MDTextField(blank=True, null=True, verbose_name='文章正文')
     digest = models.TextField(blank=True, null=True, verbose_name='文章摘要')
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='作者', on_delete=models.CASCADE)
     view = models.BigIntegerField(default=0, verbose_name='阅读数')
     comment = models.BigIntegerField(default=0, verbose_name='评论数')
-    picture = models.CharField(max_length=300, blank=True, null=True, verbose_name="url(标题图链接)")
-    tag = models.ManyToManyField(Tag)  # 标签
+    picture = models.CharField(max_length=255, blank=True, null=True, verbose_name="url(标题图链接)")
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, verbose_name='文章类型')
+    tag = models.ManyToManyField(Tag, verbose_name='标签')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='作者')
+    created_time = models.DateField(auto_now_add=True, verbose_name='创建时间')
 
     class Meta:
-        ordering = ['-date_time']  # 按时间降序
+        ordering = ['-created_time']  # 按时间降序
         verbose_name = '博客文章'
         verbose_name_plural = verbose_name
 
-    def content_validity(self):
+    def content_text(self):
         """
         后台正文字数显示控制
         """
-        if len(str(self.content)) > 30:  # 字数自己设置
+        if len(str(self.content)) > 30:
             return f'{str(self.content)[0:30]}……'  # 超出部分以省略号代替。
         else:
             return str(self.content)
@@ -244,7 +258,7 @@ class ArticleImg(models.Model):
         try:
             href = self.article_img.url
             img = mark_safe('<img src="%s" width="100px" />' % href)
-        except Exception:
+        except Exception:  # noqa
             img = ''
         return img
 
@@ -287,7 +301,7 @@ class Comment(models.Model):
     """
     评论
     """
-    title = models.CharField("标题", max_length=100)
+    title = models.CharField("标题", max_length=50)
     create_time = models.DateTimeField('评论时间', auto_now_add=True)
     user_name = models.CharField('评论用户', max_length=25)
     request_ip = models.CharField('请求者ip', max_length=128, default='未知')
@@ -295,7 +309,7 @@ class Comment(models.Model):
     email = models.EmailField('预留邮箱', max_length=50, default='')
     comment = models.TextField('评论内容', max_length=500)
     avatar_address = models.ImageField('头像', null=True, blank=True)  # 同步userinfo头像字段
-    url = models.CharField('链接', max_length=200)
+    url = models.CharField('链接', max_length=255)
     url_input = models.CharField('输入链接拼接', max_length=100, default='')  # 暂时未使用
     # 文章评论多对一
     post = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='post')
@@ -308,7 +322,7 @@ class Comment(models.Model):
 
     def comment_validity(self):
         """
-        后台正文字数显示控制
+        后台字数显示控制
         """
         if len(str(self.comment)) > 30:
             return f'{str(self.comment)[0:30]}……'
@@ -322,7 +336,7 @@ class Comment(models.Model):
         try:
             href = self.avatar_address.url
             img = mark_safe(f'<img src="{href}" width="60px" height="60px" />')
-        except Exception:
+        except Exception:  # noqa
             img = ''
         return img
 
@@ -334,8 +348,8 @@ class Subscription(models.Model):
     """
     文章邮箱订阅
     """
-    email = models.EmailField(verbose_name='邮箱订阅用户', max_length=200)
-    sub_time = models.DateTimeField(verbose_name='订阅时间', auto_now_add=True)
+    email = models.EmailField('邮箱订阅用户', max_length=100)
+    sub_time = models.DateTimeField('订阅时间', auto_now_add=True)
 
     class Meta:
         ordering = ['sub_time']

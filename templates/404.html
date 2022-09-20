@@ -2,8 +2,6 @@
 <html class="no-js">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
     <title>404 page not found</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/static/404/style.css">
@@ -37,25 +35,23 @@
 <div class="container">
     <div id="plane" style="left: 832.644px;">
         <span><img src="/static/404/tail-end.png"></span>
-
         <span class="tail">Sorry, we can't find what you're looking for</span>
-
         <span><img src="/static/404/plane.png"></span>
     </div>
 
     <div class="centerContent clearfix">
         <div class="search">
-            <form action="{% url "blog:search" %}">
+            <form action="{% url 'blog:search' %}">
                 <input type="text" class="searchbox fl" name="key" placeholder="Search for something..."
                        style="font-size: 18px">
                 <input type="submit" class="searchbox-submit" value="">
             </form>
         </div>
         <div class="menu fl">
-            <a href="{% url "blog:index" %}">Home</a>
-            <a href="{% url "blog:list" %}">Blog</a>
-            <a href="{% url "blog:archive" %}">Archives</a>
-            <a href="{% url "blog:about" %}">About Me</a>
+            <a href="{% url 'blog:index' %}">Home</a>
+            <a href="{% url 'blog:list' %}">Blog</a>
+            <a href="{% url 'blog:archive' %}">Archives</a>
+            <a href="{% url 'blog:about' %}">About Me</a>
         </div>
         <div class="footer fl">
             <div class="social fl">
@@ -65,7 +61,7 @@
                 <a href="#"><img src="/static/404/email.png"></a>
                 <a href="#"><img src="/static/404/weibo.png"></a>
             </div>
-            <div class="credits">Copyright © 2021-2022 - <a href="{% url "blog:index" %}"><strong>xiaowu's blog</strong></a> All Rights Reserved.</div>
+            <div class="credits">Copyright © 2021-2022 - <a href="{% url 'blog:index' %}"><strong>xiaowu's blog</strong></a> All Rights Reserved.</div>
 
         </div>
     </div>

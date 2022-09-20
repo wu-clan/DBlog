@@ -7,9 +7,10 @@
 {% block content %}
     <section class="mysection">
         <h4 class="index-title">
-            <a href="{% url "blog:list" %}"><i class="el-search"></i>搜索到<b class="lable">{{ key }}</b>相关结果</a>
+            <a href="{% url 'blog:list' %}"><i class="el-search"></i>搜索到<b class="lable">{{ key }}</b>相关结果</a>
             <span style="float:right;margin-right:10px;">
-                共:<a class="orange-text"> {{ pages.total_number }} </a>篇</span>
+                共:<a class="orange-text"> {{ pages.total_number }} </a>篇
+            </span>
         </h4>
         {% if blog_list %}
             {% include "blog/component/blog_list.html" with blogs=blog_list %}
@@ -17,8 +18,10 @@
             <div class="pagination">
                 <div class="list-page">
                     <ul class="post-data">
-                        <li><a>第 {{ pages.current_page }} - {{ pages.total_page }} 页</a> <a>共 {{ pages.total_number }}
-                            条</a></li>
+                        <li>
+                            <a>第 {{ pages.current_page }} - {{ pages.total_page }} 页</a>
+                            <a>共 {{ pages.total_number }} 条</a>
+                        </li>
                     </ul>
                 </div>
                 <ul>
@@ -43,9 +46,8 @@
                     {% endif %}
                 </ul>
             </div>
-
         {% else %}
-            <span>暂时没有相关文章..</span><br><br>
+            <p style="text-align: center; margin-top: 100px;">空空如也..</p><br><br>
         {% endif %}
     </section>
 

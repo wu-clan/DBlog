@@ -4,15 +4,25 @@ $(document).ready(function () {
     //动画加载
     $("body").show();
     $(".jiazai").remove();
-    $(".top-left ,.homeh4,.mysection").css({"animation": "fuzuo 1s", "-webkit-animation": "fuzuo 1s"});
-    $(".swiper-container,.myaside").css({"-webkit-animation": "suoxiao 0.8s", "animation": "suoxiao 0.8s"})
-    $(".myheader").css({"-webkit-animation": "fushang 0.5s", "animation": "fushang 0.5s"})
-    $(".skin-btn").css({"-webkit-animation": "zuo2 0.5s", "-webkit-animation": "zuo2 0.5s"})
+    $(".top-left ,.homeh4,.mysection").css({
+        "animation": "fuzuo 0.5s",
+        "-webkit-animation": "fuzuo 0.5s"
+    });
+    $(".swiper-container,.myaside").css({
+        "-webkit-animation": "suoxiao 0.5s",
+        "animation": "suoxiao 0.5s"
+    })
+    $(".myheader").css({
+        "-webkit-animation": "fushang 0.5s",
+        "animation": "fushang 0.5s"
+    })
+    $(".skin-btn").css({
+        "-webkit-animation": "zuo2 0.5s",
+    })
 
     var sidelen = $(".animation-div").length
     var arclen = $(".arclist ul>li").length
     for (var s = 0; s <= sidelen; s++) {
-
         $(".animation-div").eq(s).css({
             "-webkit-animation-name": "fuxiasuo",
             "-webkit-animation-duration": s / 7 + 1 + "s",
@@ -20,9 +30,7 @@ $(document).ready(function () {
             "animation-duration": s / 7 + 1 + "s"
         });
     }
-
     for (var a = 0; a <= arclen; a++) {
-
         $(".arclist ul>li").eq(a).css({
             "-webkit-animation-name": "fuzuo",
             "-webkit-animation-duration": a / 8 + 1 + "s",
@@ -36,7 +44,6 @@ $(document).ready(function () {
     var pcliinde = pcli.index()
 
     for (var j = 0; j <= pclien; j++) {
-
         pcli.eq(j).css({
             "-webkit-animation-name": "fushang",
             "-webkit-animation-duration": j / 6 + 0.5 + "s",
@@ -54,7 +61,6 @@ $(document).ready(function () {
     //菜单下拉
     $(".mob-drop").click(function () {
         $(".mob-dropmenu").slideToggle();
-
     });
 
     //手机菜单下拉
@@ -67,7 +73,6 @@ $(document).ready(function () {
         $(this).hide();
         $(this).next("i").show()
         for (var m = 0; m <= mlen; m++) {
-
             mli.eq(m).css({
                 "-webkit-animation-name": "zuo",
                 "-webkit-animation-duration": m / 10 + 0.5 + "s",
@@ -75,14 +80,16 @@ $(document).ready(function () {
                 "animation-duration": m / 10 + 0.5 + "s"
             });
         }
-        $(".mob-menu").show().css({"-webkit-animation": "zuo 0.8s", "animation": "zuo 0.8s"})
+        $(".mob-menu").show().css({
+            "-webkit-animation": "zuo 0.8s",
+            "animation": "zuo 0.8s"
+        })
     });
 
     mb.find(".el-remove").click(function () {
         $(this).hide();
         $(this).prev("i").show();
         for (var m = 0; m <= mlen; m++) {
-
             mli.eq(m).css({
                 "-webkit-animation-name": "fuzuo",
                 "-webkit-animation-duration": m / 10 + 0.5 + "s",
@@ -90,41 +97,29 @@ $(document).ready(function () {
                 "animation-duration": m / 10 + 0.5 + "s"
             });
         }
-        $(".mob-menu").css({"-webkit-animation": "zuo3 0.8s", "animation": "zuo3 0.8s"});
+        $(".mob-menu").css({
+            "-webkit-animation": "zuo3 0.8s",
+            "animation": "zuo3 0.8s"
+        });
         setTimeout(function () {
             $(".mob-menu").hide();
         }, 500);
     });
 
-    //相册动画
-
-
     //滑动效果
     $(".drop").mouseenter(function () {
-
-        $(".drop-nav").css({"-webkit-animation": "zuo1 0.5s", "animation": "zuo1 0.5s"}).show();
-
+        $(".drop-nav").show("normal");
     });
     $(".drop").mouseleave(function () {
-        $(".drop-nav").css({"-webkit-animation": "zuo2 0.5s", "animation": "zuo2 0.5s"});
-        setTimeout(function () {
-            $(".drop-nav").hide();
-        }, 500);
-
+        $(".drop-nav").slideUp("normal");
     });
 
     // 登录用户滑动效果
     $(".drop_user").mouseenter(function () {
-
-        $(".drop_user-nav").css({"-webkit-animation": "zuo1 0.5s", "animation": "zuo1 0.5s"}).show();
-
+        $(".drop_user-nav").show("normal");
     });
     $(".drop_user").mouseleave(function () {
-        $(".drop_user-nav").css({"-webkit-animation": "zuo2 0.5s", "animation": "zuo2 0.5s"});
-        setTimeout(function () {
-            $(".drop_user-nav").hide();
-        }, 500);
-
+        $(".drop_user-nav").slideUp("normal");
     });
 
     //TAB切换
@@ -132,42 +127,36 @@ $(document).ready(function () {
         var index = $(this).index();
         $(this).addClass("tab-active").siblings().removeClass("tab-active");
         $(this).parents(".mytab").find("ul").eq(index).show().siblings('ul').hide();
-
     });
 
     //文字滚动
     $(function () {
-
-        var _wrap = $('.mulitline');//定义滚动区域
-        var _interval = 3000;//定义滚动间隙时间
-        var _moving;//需要清除的动画
+        var _wrap = $('.mulitline'); //定义滚动区域
+        var _interval = 3000; //定义滚动间隙时间
+        var _moving; //需要清除的动画
         _wrap.hover(function () {
-            clearInterval(_moving);//当鼠标在滚动区域中时,停止滚动
+            clearInterval(_moving); //当鼠标在滚动区域中时,停止滚动
         }, function () {
             _moving = setInterval(function () {
-                var _field = _wrap.find('li:first');//此变量不可放置于函数起始处，li:first取值是变化的
-                var _h = _field.height();//取得每次滚动高度
-                _field.animate({marginTop: -_h + 'px'}, 500, function () {//通过取负margin值，隐藏第一行
-                    _field.css('marginTop', 0).appendTo(_wrap);//隐藏后，将该行的margin值置零，并插入到最后，实现无缝滚动
+                var _field = _wrap.find('li:first'); //此变量不可放置于函数起始处，li:first取值是变化的
+                var _h = _field.height(); //取得每次滚动高度
+                _field.animate({marginTop: -_h + 'px'}, 500, function () { //通过取负margin值，隐藏第一行
+                    _field.css('marginTop', 0).appendTo(_wrap); //隐藏后，将该行的margin值置零，并插入到最后，实现无缝滚动
                 })
-            }, _interval)//滚动间隔时间取决于_interval
-        }).trigger('mouseleave');//函数载入时，模拟执行mouseleave，即自动滚动
-        if ($(".mulitline li").length <= 1)//小于等于1条时，不滚动
-        {
+            }, _interval) //滚动间隔时间取决于_interval
+        }).trigger('mouseleave'); //函数载入时，模拟执行mouseleave，即自动滚动
+        if ($(".mulitline li").length <= 1) { //小于等于1条时，不滚动
             clearInterval(_moving);
         }
     });
 
     //邮箱弹窗
     $(".mail-btn").click(function (e) {
-
         $(".mail-dy").show();
         $(".side-bdfx").hide();
         $(document).one("click", function () {
-
             $(".side-bdfx").hide();
             $(".mail-dy").hide();
-
         });
         e.stopPropagation();
     });
@@ -181,7 +170,6 @@ $(document).ready(function () {
                 $('#toTop').fadeOut();
             }
         });
-
         $('#toTop').click(function () {
             $('body,html').animate({scrollTop: 0}, "fast");
         });
@@ -191,7 +179,6 @@ $(document).ready(function () {
     $(".directory a").click(function () {
         $(".directory_list").slideToggle();
     })
-
     $(".form-btn a").click(function () {
         $(".form-zd").slideToggle();
     });
@@ -200,9 +187,7 @@ $(document).ready(function () {
     $(".fx-btn").click(function (e) {
         $(".arc-bdfx").show();
         $(document).one("click", function () {
-
             $(".arc-bdfx").hide();
-
         });
         e.stopPropagation();
     });
@@ -217,6 +202,4 @@ $(document).ready(function () {
         e.stopPropagation();
     });
 
-});//END Document ready
-
-//JS区域
+});

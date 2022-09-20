@@ -1,0 +1,132 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    <title>编辑个人信息</title>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/css/mobi.min.css">
+{% endblock %}
+
+{% block content %}
+    <div class="flex-center mysection">
+        <div class="container">
+            <div class="flex-center">
+                <div class="unit-1-2 unit-1-on-mobile">
+                    <h3 style="text-align: center; margin-bottom: 20px">用户信息</h3>
+                    {# 信息提示 #}
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                                    {{ message.message }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <div class="col-md-4"><span>上次登陆:&nbsp;&nbsp;&nbsp;</span>
+                        <span style="font-size: 1.2em">{{ user.last_login }}</span>
+                    </div>
+                    <form class="form" action="{% url 'blog:edit_user' user.id %}" method="post"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id_username">{{ user_form.username.label_tag }}</label>
+                            <input type="text" name="username" class="form-control" minlength="4" maxlength="16"
+                                   required="" id="id_username" placeholder="用户名只允许字母，数字，下划线，减号"
+                                   value="{{ user.username }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_email">{{ user_form.email.label_tag }}</label>
+                            <input type="email" name="email" class="form-control" required="" id="id_email"
+                                   value="{{ user.email }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="avatar">头像:
+                                {% if userinfo.avatar %}
+                                    <img src="{{ userinfo.avatar.url }}"
+                                         style="width: 100px; height: 100px; border-radius: 50%"
+                                         alt="加载失败~"
+                                         title="建议使用等边头像~">
+                                    <a href="javascript:;" style="color: #0181da; vertical-align: bottom;">
+                                        <span id="delete_avatar">删除</span>
+                                    </a>
+                                {% else %}
+                                    <img src="/static/images/icon/user.gif"
+                                         style="max-width: 30%; border-radius: 50%"
+                                         alt="加载失败~"
+                                         title="建议使用等边头像~">
+                                {% endif %}
+                            </label>
+                            {{ profile_form.avatar }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_mobile">{{ profile_form.mobile.label_tag }}</label>
+                            <input type="number" name="mobile" class="form-control" maxlength="11" id="id_mobile"
+                                   value="{{ userinfo.mobile }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_wechat">{{ profile_form.wechat.label_tag }}</label>
+                            <input type="text" name="wechat" class="form-control" maxlength="50" id="id_wechat"
+                                   value="{{ userinfo.wechat|default_if_none:'' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_qq">{{ profile_form.qq.label_tag }}</label>
+                            <input type="text" name="qq" class="form-control" maxlength="10" id="id_qq"
+                                   value='{{ userinfo.qq|default_if_none:'' }}'>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_blog_address">{{ profile_form.blog_address.label_tag }}</label>
+                            <input type="text" name="blog_address" class="form-control" maxlength="100"
+                                   id="id_blog_address" value="{{ userinfo.blog_address|default_if_none:'' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_introduction">{{ profile_form.introduction.label_tag }}</label>
+                            <textarea name="introduction" class="form-control" cols="40" rows="10" maxlength="500"
+                                      id="id_introduction">{{ userinfo.introduction }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">更新</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .errorlist {
+            color: red;
+        }
+    </style>
+
+{% endblock content %}
+
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $('#delete_avatar').click(function () {
+                if (confirm("确定删除头像?")) {
+                    $.ajax({
+                        type: "post",
+                        url: '{% url 'blog:delete_avatar' user.id %}',
+                        data: '',
+                        success: function (data) {
+                            {#alert(data['msg'])#}
+                            location.reload()
+                        },
+                        error: function (data) {
+                            {#alert(data['msg'])#}
+                            location.reload()
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+{% endblock %}

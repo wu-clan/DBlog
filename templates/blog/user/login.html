@@ -43,15 +43,17 @@
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">登录</button>
                         {% if request.GET.next %}
-                            <input type="hidden" name="next" value="{{request.GET.next }}" />
+                            <input type="hidden" name="next" value="{{ request.GET.next }}"/>
                         {% endif %}
                     </form>
                     <div class="flex-left top-gap text-small">
                         <div class="unit-2-3">
-                            <span>没有账号？<a href="{% url 'blog:register' %}" style="color: #267fd9">立即注册</a></span>
+                            <span>没有账号？
+                                <a href="{% url 'blog:register' %}" style="color: #267fd9">立即注册</a>
+                            </span>
                         </div>
                         <div class="unit-1-3 flex-right">
-                            <span><a href="{% url "blog:password_reset" %}" style="color: #267fd9">忘记密码？</a></span>
+                            <span><a href="{% url 'blog:password_reset' %}" style="color: #267fd9">忘记密码？</a></span>
                         </div>
                     </div>
                 </div>
@@ -60,7 +62,7 @@
     </div>
     <script>
         $(function () {
-            // Add refresh button after field (this can be done in the template as well)
+            // 在字段后添加刷新按钮（这也可以在模板中完成）
             $('img.captcha').after(
                 $('<a class="captcha-refresh" style="color: #267fd9; text-decoration: underline; margin-left: 16px">看不清</a>')
             );
@@ -73,7 +75,7 @@
             });
         });
     </script>
-    <style type="text/css">
+    <style>
         .errorlist {
             color: red;
         }

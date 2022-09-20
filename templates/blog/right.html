@@ -24,7 +24,7 @@
                     </script>
                 </div>
                 {# 头像 #}
-                <a class="notransition" href="{% url "blog:about" %}" data-pjax-state="">
+                <a class="notransition" href="{% url 'blog:about' %}" data-pjax-state="">
                     <img class="headportrait" alt="加载失败~" src="{{ avatar_link }}">
                 </a>
             </div>
@@ -63,7 +63,9 @@
         <div class="mail-dy">
             <form action="{% url 'blog:subscription_record' %}" method="post" class="comment-form">
                 <span>订阅</span>
-                <input name="email" type="email" placeholder="输入邮箱订阅文章发布"/>
+                <label>
+                    <input name="email" type="email" placeholder="输入邮箱订阅文章发布"/>
+                </label>
                 <i class="el-envelope"><a title="点击订阅"><input value="" type="submit"/></a></i>
             </form>
             <i class="el-remove fx-close"></i>
@@ -82,10 +84,12 @@
 
     <!--搜索-->
     <div class="search animation-div">
-        <form action="{% url "blog:search" %}" method="get">
+        <form action="{% url 'blog:search' %}" method="get">
             <div class="search-index">
-                <input name="key" type="text" placeholder="请输入关键字..." onfocus="this.placeholder=''"
-                       onblur="this.placeholder='请输入关键字...'"/>
+                <label>
+                    <input name="key" type="text" placeholder="请输入关键字..." onfocus="this.placeholder=''"
+                           onblur="this.placeholder='请输入关键字...'"/>
+                </label>
                 <i class="el-search"><input value=" " type="submit"/></i>
             </div>
         </form>
@@ -98,7 +102,7 @@
         </h4>
         {% if main_announcement_list %}
             {% for news in main_announcement_list %}
-                <p class="annou">
+                <p class="annou" style="word-break: break-all;">
                     {{ news.main_announcement }}
                 </p>
             {% endfor %}
@@ -156,7 +160,7 @@
             {% for blog in blog_top %}
                 <li>
                     <span></span>
-                    <a href="{% url "blog:detail" blog.id %}" title="{{ blog.title }}">{{ blog.title }}
+                    <a href="{% url 'blog:detail' blog.id %}" title="{{ blog.title }}">{{ blog.title }}
                         <b><i class="el-eye-open"></i>({{ blog.view }})</b>
                     </a>
                 </li>
@@ -171,7 +175,7 @@
         </h4>
         <ul id="3dcloud">
             {% for tag in tag_list %}
-                <li><a href="{% url "blog:tag" name=tag.tag_name %}"
+                <li><a href="{% url 'blog:tag' name=tag.tag_name %}"
                        title="标签：{{ tag.tag_name }} ">{{ tag.tag_name }}</a></li>
             {% endfor %}
         </ul>
@@ -183,7 +187,7 @@
             <small>Links -></small>
             <a style="float: none !important;"
                href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=2186656812@qq.com">
-                <small><i class="el el-envelope"></i>申请</small>
+                <small style="text-decoration: underline"><i class="el el-envelope"></i>申请</small>
             </a>
         </h4>
         <ul>
@@ -200,11 +204,11 @@
         </h4>
         <table>
             <tr>
-                {% for payimg in payimg_list %}
+                {% for pay_img in pay_img_list %}
                     <td>
-                        <a href="{{ MEDIA_URL }}{{ payimg.payimg }}">
+                        <a href="{{ MEDIA_URL }}{{ pay_img.pay_img }}">
                             <img style="width: 135px; height: 150px; margin-top: 8px; margin-left: 30px"
-                                 src="{{ MEDIA_URL }}{{ payimg.payimg }}">
+                                 src="{{ MEDIA_URL }}{{ pay_img.pay_img }}" alt="加载失败~">
                         </a>
                     </td>
                 {% endfor %}

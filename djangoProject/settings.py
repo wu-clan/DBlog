@@ -30,10 +30,8 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
-    'simpleui',  # 第三方后台主题
-    'import_export',  # 后台快捷 导入导出 组件
-    'mdeditor',  # 第三方 markdown 插件
-    'captcha',  # 用户登录验证码
+    # 第三方后台主题
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 注册app
-    'blog.apps.BlogConfig'
+    'blog.apps.BlogConfig',
+    # 后台快捷导入导出
+    'import_export',
+    # 第三方markdown
+    'mdeditor',
+    # 验证码
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -143,13 +147,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 STATIC_URL = '/static/'
-# 当你部署时，需要打开STATIC_ROOT注释，
-# 然后执行命令收集静态文件：python manage.py collectstatic --noinput  # noqa
+# 当你部署时，请使用 STATIC_ROOT
+# 然后执行命令收集静态文件：python manage.py collectstatic --noinput
 # STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = (
     BASE_DIR / 'static',
 )
-# media path
+
+# Media path
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'static/media'
 
@@ -244,7 +249,6 @@ git = 'https://gitee.com/wu_cl'
 website_logo = 'logo/DBlog.png'
 
 # simpleui本地配置
-# SIMPLEUI_LOGO：对官方css进行了某些修改以适应后台尺寸，使用个人logo时根据显示情况自行修改即可...
 SIMPLEUI_LOGO = 'https://www.xwboy.top/static/images/logo/DBlog.png' or 'https://www.xwboy.top/media/logo/DBlog.png'
 SIMPLEUI_HOME_TITLE = 'DBlog后台管理'
 SIMPLEUI_ANALYSIS = False
@@ -257,7 +261,7 @@ admin.AdminSite.site_header = SIMPLEUI_HOME_TITLE
 admin.AdminSite.site_title = SIMPLEUI_HOME_TITLE
 
 # 登录后重定向到主页面
-LOGIN_URL = '/blog'
+LOGIN_URL = '/blog/login'
 
 # session设置
 SESSION_COOKIE_AGE = 86400  # Session的cookie失效日期（秒）
@@ -276,8 +280,7 @@ EMAIL_HOST = 'smtp.qq.com'
 EMAIL_HOST_USER = 'xxx-nav@qq.com'
 # 密码(请替换为你自己的哟) qq为设置=>账户=>POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务=> 开启服务POP3/SMTP服务=> 生成授权码
 EMAIL_HOST_PASSWORD = 'xxxvszjyenrlvfkeaef'
-# 发送邮件端口和加密（两种方式不能同时使用）
-# 云服务器使用：
+# 发送邮件端口和加密
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 # 默认的发件人

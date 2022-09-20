@@ -29,7 +29,7 @@ from blog.models import Article, Category, Tag, UserInfo
 from djangoProject import settings
 from djangoProject.settings import SESSION_COOKIE_AGE
 from djangoProject.utils.comments_check import DFAFilter
-from djangoProject.utils.get_request_address import get_req_info
+from djangoProject.utils.get_request_address import get_request_address
 from djangoProject.utils.pagination import PageInfo
 
 
@@ -37,7 +37,7 @@ def index(request):
     """
     主页
     """
-    _blog_list = Article.objects.all().order_by('-date_time')[0:5]
+    _blog_list = Article.objects.all().order_by('-created_time')[0:5]
     _blog_hot = Article.objects.all().order_by('-view')[0:3]
     return render(request, 'blog/index.html', {"blog_list": _blog_list, "blog_hot": _blog_hot})
 
@@ -236,7 +236,7 @@ def profile_edit(request, pk):
     if request.method == 'POST':
         if request.user != user:
             messages.error(request, '你没有权限修改此用户信息')
-            return redirect('blog:edituser', pk=pk)
+            return redirect('blog:edit_user', pk=pk)
         # 更新邮箱
         user_form = EditUserInfo(request.POST)
         # 更新用户信息
@@ -248,17 +248,17 @@ def profile_edit(request, pk):
                 user_username = User.objects.filter(username=username)
                 if user_username:
                     messages.error(request, f'用户名 {username} 已经被注册过了，请更换用户名后重新提交！')
-                    return redirect('blog:edituser', pk=pk)
+                    return redirect('blog:edit_user', pk=pk)
                 if '**' in DFAFilter().check_comments(username):
                     messages.error(request, '新用户名含有违规内容，请修改后重新提交')
-                    return redirect('blog:edituser', pk=pk)
+                    return redirect('blog:edit_user', pk=pk)
                 user.username = username
                 user.save()
             if email != old_email:
                 user_email = User.objects.filter(email=email)
                 if user_email:
                     messages.error(request, f'邮箱地址 {email} 已经被注册过了，请更换邮箱地址后重新提交！')
-                    return redirect('blog:edituser', pk=pk)
+                    return redirect('blog:edit_user', pk=pk)
                 user.email = email
                 user.save()
         if profile_form.is_valid():
@@ -268,17 +268,17 @@ def profile_edit(request, pk):
                 tel_re = re.compile(r"^1[3-9]\d{9}$")
                 if not tel_re.findall(str(data.get('mobile'))):
                     messages.error(request, '手机号码格式错误')
-                    return redirect('blog:edituser', pk=pk)
+                    return redirect('blog:edit_user', pk=pk)
             if data.get('wechat') is not None:
                 tel_re = re.compile(r"^[a-zA-Z]([-_a-zA-Z0-9]{5,19})+$")
                 if not tel_re.findall(str(data.get('wechat'))):
                     messages.error(request, '微信号码输入有误')
-                    return redirect('blog:edituser', pk=pk)
+                    return redirect('blog:edit_user', pk=pk)
             if data.get('qq') is not None:
                 tel_re = re.compile(r"^[1-9][0-9]{4,10}$")
                 if not tel_re.findall(str(data.get('qq'))):
                     messages.error(request, 'QQ号码输入有误')
-                    return redirect('blog:edituser', pk=pk)
+                    return redirect('blog:edit_user', pk=pk)
             if 'avatar' in request.FILES:
                 try:
                     # 更新时删除旧头像文件
@@ -298,14 +298,14 @@ def profile_edit(request, pk):
             userinfo.introduction = data['introduction']
             userinfo.save()
             messages.success(request, '更新个人信息成功')
-            return redirect('blog:edituser', pk=pk)
+            return redirect('blog:edit_user', pk=pk)
         else:
             messages.error(request, '表单输入错误，更新用户信息失败')
-            return redirect('blog:edituser', pk=pk)
+            return redirect('blog:edit_user', pk=pk)
     else:
         user_form = EditUserInfo()
         profile_form = ProfileForm()
-    return render(request, 'blog/user/edituser.html', locals())
+    return render(request, 'blog/user/edit_user.html', locals())
 
 
 @login_required
@@ -359,7 +359,7 @@ def detail(request, pk):
     comments = blog.post.all().order_by('-create_time')
     context = {
         "blog": blog,
-        'toc': md.toc,
+        'toc': md.toc,  # noqa
         'comments': comments
     }
     return render(request, 'blog/detail.html', context=context)
@@ -412,10 +412,10 @@ def archive(request):
     """
     文章归档
     """
-    _blog_list = Article.objects.values("id", "title", "date_time").order_by('-date_time')
+    _blog_list = Article.objects.values("id", "title", "created_time").order_by('-created_time')
     archive_dict = {}
     for blog in _blog_list:
-        pub_month = blog.get("date_time").strftime("%Y年%m月")
+        pub_month = blog.get("created_time").strftime("%Y年%m月")
         if pub_month in archive_dict:
             archive_dict[pub_month].append(blog)
         else:
@@ -438,15 +438,15 @@ def about(request):
             'markdown.extensions.tables',
         ])
     # 统计图准备
-    articles = Article.objects.filter().all().order_by('-date_time')
+    articles = Article.objects.filter().all().order_by('-created_time')
     categories = Category.fetch_all_category()
     if not articles or not categories:
         # 没有文章或者分类的情况
         return render(request, 'blog/about.html', {'articles': None, 'categories': None})
     # 发布统计
-    all_date = articles.values('date_time')
+    all_date = articles.values('created_time')
     # 计算最近一年的时间list作为坐标横轴 注意时间为 例如[2019-5] 里面不是2019-05
-    latest_date = all_date[0]['date_time']
+    latest_date = all_date[0]['created_time']
     end_year = latest_date.strftime("%Y")
     end_month = latest_date.strftime("%m")
     date_list = []
@@ -461,9 +461,9 @@ def about(request):
     for i in all_date:
         # 这里直接格式化 去掉月份前面的0, !! window使用%#m, mac和linux使用%-m !!
         try:
-            all_date_list.append(i['date_time'].strftime('%Y-%-m'))
+            all_date_list.append(i['created_time'].strftime('%Y-%-m'))
         except ValueError:
-            all_date_list.append(i['date_time'].strftime('%Y-%#m'))
+            all_date_list.append(i['created_time'].strftime('%Y-%#m'))
     for i in date_list:
         value_list.append(all_date_list.count(i))
 
@@ -517,7 +517,7 @@ def get_comment(request, pk):
                 ip = request.META.get("REMOTE_ADDR")
             comment.request_ip = ip
             try:
-                comment.request_address = get_req_info(ip)
+                comment.request_address = get_request_address(ip)
             except Exception:
                 pass
             comment.title = blog.title
@@ -591,34 +591,6 @@ def unsubscribe(request):
     else:
         form = UnSubscriptionForm()
     return render(request, 'blog/unsub_email.html', locals())
-
-
-@receiver(post_save, sender=Article)
-def send_stu_email(sender, created, **kwargs):
-    """
-    文章发布监听器，发布文章时触发并直接发送邮件订阅通知
-    """
-    if created:
-        blog = Article.objects.filter()
-        if blog:
-            link_id = Article.objects.all().order_by('-id').first().pk
-            title = blog.values('title').first().get('title').strip()
-            # 文章链接
-            # 本地调试时请将 settings.website_author_link 换成 http://127.0.0.1:端口号
-            link = settings.website_author_link + f'/blog/detail/{link_id}'
-            _email = Subscription.objects.filter().values_list('email', flat=True)
-            if _email:
-                email_list = _email[:99999999]
-                email_title = "文章订阅推送"
-                email_body = "你订阅的 %s: %s 的博客发布新文章啦，快点击链接查阅吧\n文章：%s\n链接：%s" \
-                             % (settings.website_author, settings.website_author_link, title, link)
-                try:
-                    send_mail(email_title, email_body, settings.EMAIL_HOST_USER, email_list,
-                              auth_user=settings.EMAIL_HOST_USER,
-                              auth_password=settings.EMAIL_HOST_PASSWORD)
-                except Exception:
-                    # 发送失败默认不发送，不影响发布文章
-                    pass
 
 
 def page_not_found_error(request, exception):

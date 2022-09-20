@@ -22,18 +22,18 @@ from django.views.static import serve
 from blog import views
 
 urlpatterns = [
-	path('admin/', admin.site.urls),
-	path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
-	path('', views.index, name='index'),
+    path('admin/', admin.site.urls),
+    path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
+    path('', views.index, name='index'),
 
-	# 登录验证码
-	path('captcha/', include('captcha.urls')),
-	# markdown插件
-	path('mdeditor/', include('mdeditor.urls')),
-	# 处理静态文件
-	path(r'static/<path:path>', serve, {'document_root': settings.STATIC_ROOT}, ),
-	# 处理图片文件
-	path(r'media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}, ),
+    # 验证码
+    path('captcha/', include('captcha.urls')),
+    # markdown插件
+    path('mdeditor/', include('mdeditor.urls')),
+    # 处理静态文件
+    path(r'static/<path:path>', serve, {'document_root': settings.STATIC_ROOT}, ),
+    # 处理图片文件
+    path(r'media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}, ),
 ]
 
 handler404 = views.page_not_found_error

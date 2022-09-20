@@ -36,8 +36,8 @@
                                 <ul>
                                     {% for blog in blog_list.blogs %}
                                         <li>
-                                            <em>{{ blog.date_time |date:"d" }}日</em>
-                                            <a href="{% url "blog:detail" blog.id %}">{{ blog.title }}</a>
+                                            <em>{{ blog.created_time |date:"d" }}日</em>
+                                            <a href="{% url 'blog:detail' blog.id %}">{{ blog.title }}</a>
                                         </li>
                                     {% endfor %}
                                 </ul>

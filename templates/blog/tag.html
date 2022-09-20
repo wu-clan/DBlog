@@ -7,7 +7,7 @@
 {% block content %}
     <section class="mysection">
         <h4 class="index-title">
-            <a href="{% url "blog:tag" name=tag %}"><i class="el-tag"></i> 标签<b class="lable">{{ tag }}</b></a>
+            <a href="{% url 'blog:tag' name=tag %}"><i class="el-tag"></i> 标签<b class="lable">{{ tag }}</b></a>
             <span style="float:right;margin-right:10px;">共有:
                 <a class="orange-text"> {{ page_info.total_number }} </a>篇</span>
         </h4>

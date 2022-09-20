@@ -4,7 +4,7 @@
         <div class="top-left">
             {# logo #}
             <div class="logo">
-                <a href="{% url "blog:index" %}">
+                <a href="{% url 'blog:index' %}">
                     <img src="{{ MEDIA_URL }}{{ website_logo }}" alt="logo"/>
                 </a>
             </div>
@@ -27,10 +27,10 @@
         <nav class="mynav">
             <ul class="orange-text">
                 <li>
-                    <a href="{% url "blog:index" %}">首页</a>
+                    <a href="{% url 'blog:index' %}">首页</a>
                 </li>
                 <li>
-                    <a href="{% url "blog:list" %}">博客</a>
+                    <a href="{% url 'blog:list' %}">博客</a>
                 </li>
                 <li class='drop'>
                     <a href="JavaScript:;">分类<i class='el-chevron-down'></i></a>
@@ -38,23 +38,24 @@
                         <ul>
                             {% for category in category_list %}
                                 <li>
-                                    <a href="{% url "blog:category" name=category.name %}">{{ category.name }}</a>
+                                    <a href="{% url 'blog:category' name=category.name %}">{{ category.name }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
                     </div>
                 </li>
-                <li><a href="{% url "blog:archive" %}">归档</a></li>
-                <li><a href="{% url "blog:about" %}">关于</a></li>
+                <li><a href="{% url 'blog:archive' %}">归档</a></li>
+                <li><a href="{% url 'blog:about' %}">关于</a></li>
                 {% if request.user.username %}
                     {# 个人信息 #}
-                    <li class='drop_user' style="float: right;">
+                    <li class='drop_user'
+                        style="float: right; text-overflow:ellipsis; white-space:nowrap; overflow:visible;">
                         <a href="JavaScript:;"><i class="el el-user"></i>{{ request.user.username }}</a>
                         <div class="drop_user-nav orange-text">
                             <ul>
-                                <li><a href='{% url "blog:edituser" request.user.id %}'>个人信息</a></li>
+                                <li><a href='{% url 'blog:edit_user' request.user.id %}'>个人信息</a></li>
                                 <li><a href="#" onclick="user_delete()">注销用户</a></li>
-                                <li><a href="{% url "blog:logout" %}">退出登录</a></li>
+                                <li><a href="{% url 'blog:logout' %}">退出登录</a></li>
                             </ul>
                         </div>
                         {# 注销 #}
@@ -81,23 +82,25 @@
                 {% else %}
                     {# 如果用户未登录，则显示 “登录,注册” #}
                     <div class="user">
-                        <li class="nav-item" style="float: right">
-                            <a href="{% url 'blog:register' %}"
-                               style="color: #fff;
+                        <ul>
+                            <li class="nav-item" style="float: right">
+                                <a href="{% url 'blog:register' %}"
+                                   style="color: #fff;
                                background-color: #0cabd3;
                                border: 1px solid transparent;
                                padding: .375rem .75rem;
                                margin-left: -10px;">注册
-                            </a>
-                        </li>
-                        <li class="nav-item" style="float: right">
-                            <a href="{% url 'blog:login' %}"
-                               style="border: 1px solid transparent;
+                                </a>
+                            </li>
+                            <li class="nav-item" style="float: right">
+                                <a href="{% url 'blog:login' %}"
+                                   style="border: 1px solid transparent;
                                padding: .375rem .75rem;
                                border-color: #0cabd3;
                                margin-right: -10px;">登录
-                            </a>
-                        </li>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 {% endif %}
             </ul>
@@ -107,37 +110,41 @@
         <div class="mob-menu">
             <!--手机顶部搜索-->
             <div class="search ">
-                <form action="{% url "blog:search" %}" method="get">
+                <form action="{% url 'blog:search' %}" method="get">
                     <div class="search-index">
-                        <input name="key" type="text" placeholder="请输入关键字..." onfocus="this.placeholder=''"
-                               onblur="this.placeholder='请输入关键字...'"/>
+                        <label>
+                            <input name="key" type="text" placeholder="请输入关键字..." onfocus="this.placeholder=''"
+                                   onblur="this.placeholder='请输入关键字...'"/>
+                        </label>
                         <i class="el-search"><input value=" " type="submit"/></i>
                     </div>
                 </form>
             </div>
             <!--手机下拉菜单-->
             <ul class='mob_header'>
-                <li><a href="{% url "blog:index" %}">首页</a></li>
-                <li><a href="{% url "blog:list" %}">博客</a></li>
+                <li><a href="{% url 'blog:index' %}">首页</a></li>
+                <li><a href="{% url 'blog:list' %}">博客</a></li>
                 <li class='mob-drop'>
                     <a href="JavaScript:;">分类</a>
                     <ul class="mob-dropmenu">
                         {% for category in category_list %}
-                            <li><a href="{% url "blog:category" name=category.name %}">{{ category.name }}</a></li>
+                            <li>
+                                <a href="{% url 'blog:category' name=category.name %}">{{ category.name }}</a>
+                            </li>
                         {% endfor %}
                     </ul>
                 </li>
-                <li><a href="{% url "blog:archive" %}">归档</a></li>
-                <li><a href="{% url "blog:about" %}">关于</a></li>
+                <li><a href="{% url 'blog:archive' %}">归档</a></li>
+                <li><a href="{% url 'blog:about' %}">关于</a></li>
                 {% if request.user.username %}
                     {# 个人信息 #}
                     <li class='drop_user'>
                         <a href="JavaScript:;"><i class="el el-user"></i>{{ request.user.username }}</a>
                         <div class="drop_user-nav orange-text">
                             <ul>
-                                <li><a href='{% url "blog:edituser" request.user.id %}'>个人信息</a></li>
+                                <li><a href='{% url 'blog:edit_user' request.user.id %}'>个人信息</a></li>
                                 <li><a href="#" onclick="user_delete()">注销用户</a></li>
-                                <li><a href="{% url "blog:logout" %}">退出登录</a></li>
+                                <li><a href="{% url 'blog:logout' %}">退出登录</a></li>
                             </ul>
                         </div>
                         {# 注销 #}
@@ -172,7 +179,6 @@
                 {% endif %}
             </ul>
         </div>
-    </div>
     </div>
 
     <!--换肤--->

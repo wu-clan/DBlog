@@ -26,14 +26,16 @@ ps: 个人博客在一些逻辑和限制上面考虑还欠周全，存在bug，�
 
 缺点：内容沉余，不够灵活...
 
-### 基本要求
+### 技术栈
 
 * Python: 3.8
 * Django: 3.2
 * Mysql: 8
 * Redis
+* Docker
+* ......
 
-### 示例博客：http://www.xwboy.top/
+### 示例博客：[点我🤩](http://www.xwboy.top/)
 
 ### 功能点
 
@@ -42,23 +44,20 @@ ps: 个人博客在一些逻辑和限制上面考虑还欠周全，存在bug，�
 * 文章分类，归档，快捷搜索，标签集
 * 4 种皮肤（清新，清爽，简约，暗黑）切换
 * 文章排行榜 / 最新评论 / 阅读量排行榜
-* 博文评论系统（基本功能）
+* 博文评论系统
 * 多目标源博文分享（支持https）
-* echarts 博文发布，标签统计图（折线图，饼图，梯形图）
-* 文章分类 雷达统计图（雷达图）
-* 网站配置数据 redis 缓存
+* echarts 统计图（雷达，折线，饼，梯形）
 * windows: django-gzip压缩主站，linux: nginx-gzip压缩全站
 * Rss / Atom 订阅
-* 支持图床，后台上传图片并展示，可直链访问及调用
-* simpleui后台管理
+* Simpleui 后台管理
 
-###### ps: 如果访问网站期间，你使用了某些墙代理网络，会失去一些网页功能 ！！！
+###### ps: 访问网站期间，使用墙代理网络或广告拦截插件，会失去一些网页功能
 
 ## ⬇ 源码下载
 
-```
+```shell
 wget https://gitee.com/wu_cl/DBlog.git/master.zip
-or
+# or
 git clone https://gitee.com/wu_cl/DBlog.git
 ```
 

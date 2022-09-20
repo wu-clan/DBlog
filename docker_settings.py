@@ -12,10 +12,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
-    'simpleui',  # 第三方后台主题
-    'import_export',  # 后台快捷 导入导出 组件
-    'mdeditor',  # 第三方 markdown 插件
-    'captcha',  # 用户登录验证码
+    # 第三方后台主题
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -23,7 +21,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 注册app
-    'blog.apps.BlogConfig'
+    'blog.apps.BlogConfig',
+    # 后台快捷导入导出
+    'import_export',
+    # 第三方markdown
+    'mdeditor',
+    # 验证码
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -223,7 +227,7 @@ admin.AdminSite.site_header = SIMPLEUI_HOME_TITLE
 admin.AdminSite.site_title = SIMPLEUI_HOME_TITLE
 
 # 登录后重定向到主页面
-LOGIN_URL = '/blog'
+LOGIN_URL = '/blog/login'
 
 # session设置
 SESSION_COOKIE_AGE = 86400  # Session的cookie失效日期（秒）

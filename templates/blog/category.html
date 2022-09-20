@@ -11,7 +11,7 @@
         {% include 'blog/component/radar_chart.html' %}
 
         <h4 class="index-title">
-            <a href="{% url "blog:list" %}"><i class="el-th-list"></i> 列表&nbsp;&nbsp;> &nbsp;&nbsp;</a>
+            <a href="{% url 'blog:list' %}"><i class="el-th-list"></i> 列表&nbsp;&nbsp;> &nbsp;&nbsp;</a>
             <span class="orange-text">{{ category }}</span>
             <span style="float:right;margin-right:10px;">
                 共有:<a class="orange-text"> {{ page_info.total_number }} </a>篇

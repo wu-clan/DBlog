@@ -3,7 +3,7 @@
 import requests
 
 
-def get_req_info(ip):
+def get_request_address(ip):
     """
     获取请求IP的地址
 
@@ -14,7 +14,3 @@ def get_req_info(ip):
     rq.trust_env = False
     rp = rq.get(f'http://whois.pconline.com.cn/ipJson.jsp?ip={ip}&json=true')
     return rp.json()['addr']
-
-
-if __name__ == '__main__':
-    get_req_info('127.0.0.1')

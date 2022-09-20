@@ -21,8 +21,8 @@
             <h3 class="arc-title index-title">{{ blog.title }} </h3>
             <div class="post-line bg-color">
                 <ul>
-                    <li><a title="{{ blog.author }}发表于{{ blog.date_time }}"><i class="el-time"></i>
-                        <time>{{ blog.date_time }}</time>
+                    <li><a title="{{ blog.author }}发表于{{ blog.created_time }}"><i class="el-time"></i>
+                        <time>{{ blog.created_time }}</time>
                     </a></li>
                     <li><a href="#"><i class="el-user"></i>{{ blog.author }}</a></li>
                     <li><a href="#Coon" title="转到评论"><i class="el-comment"></i>{{ blog.comment }}条</a></li>
@@ -34,7 +34,7 @@
             <div class="article-content bg-color markdown-body">
                 <aside>
                     <h2 class="directory" style="margin-top: 5px !important; margin-bottom: 12px;">
-                        <a href=" javascript:;">📒 目录</a>
+                        <a href="javascript:;">📒 目录</a>
                     </h2>
                     <div class="directory_list">
                         {{ toc|safe }}
@@ -63,10 +63,10 @@
             <!--标签-->
             <div class="article_tag">
                 <ul>
-                    <li><a href="{% url "blog:category" blog.category %}"
+                    <li><a href="{% url 'blog:category' blog.category %}"
                            title="分类：{{ blog.category }}">{{ blog.category }}</a></li>
                     {% for tag in blog.tag.all %}
-                        <li><a href="{% url "blog:tag" name=tag.tag_name %}"
+                        <li><a href="{% url 'blog:tag' name=tag.tag_name %}"
                                title="标签：{{ tag.tag_name }} ">{{ tag.tag_name }}</a>&nbsp;
                         </li>
                     {% endfor %}
@@ -90,12 +90,12 @@
                 {% for comment in comments %}
                     <li class="comment-item">
                         <a id="avatar">
-                        {% if comment.avatar_address %}
-                            <img class="comment-avatar" src="{{ MEDIA_URL }}{{ comment.avatar_address }}"
-                                 alt="加载失败~">
-                        {% else %}
-                            <img class="comment-avatar" src="/static/images/icon/user.gif" alt="加载失败~">
-                        {% endif %}
+                            {% if comment.avatar_address %}
+                                <img class="comment-avatar" src="{{ MEDIA_URL }}{{ comment.avatar_address }}"
+                                     alt="加载失败~">
+                            {% else %}
+                                <img class="comment-avatar" src="/static/images/icon/user.gif" alt="加载失败~">
+                            {% endif %}
                         </a>
                         <span class="comment-author">{{ comment.user_name }}</span>
                         <div class="comment-meta">{{ comment.create_time }}</div>
@@ -103,7 +103,8 @@
                             <span>{{ comment.comment }}</span>
                         </div>
                         {% if comment.request_address %}
-                            <p style="color: #7799 !important; font-size: xx-small">来自: {{ comment.request_address }}</p>
+                            <p style="color: #7799 !important; font-size: xx-small">
+                                来自: {{ comment.request_address }}</p>
                         {% else %}
                             <p style="color: #7799 !important; font-size: xx-small">来自: {{ comment.request_ip }}</p>
                         {% endif %}

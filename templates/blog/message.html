@@ -16,8 +16,7 @@
         <div class="vwrap">
             <div class="vheader item3">
                 <input class="vlink vinput" name="url_input" placeholder="链接" maxlength="100" required=""
-                       id="id_url_input"
-                       type="text">
+                       id="id_url_input" type="text">
                 {{ form.url.errors }}
             </div>
             <div class="vedit">
@@ -47,13 +46,13 @@
     <script>
         var login = $('.li').text()
         var link = $('.lk').text()
-        var rehref = login + '?next=' + link
-        $('.lc').attr('href', rehref)
+        var re_href = login + '?next=' + link
+        $('.lc').attr('href', re_href)
         {#console.log(login, link, rehref)#}
     </script>
     <script src="/static/js/OwO.min.js"></script>
     <script>
-        var OwO_demo = new OwO({
+        const OwO_demo = new OwO({
             logo: 'OωO表情',
             container: document.getElementsByClassName('OwO')[0],
             target: document.getElementsByClassName('OwO-textarea')[0],
