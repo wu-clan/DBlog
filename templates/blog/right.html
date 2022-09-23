@@ -12,16 +12,6 @@
                     <h2 class="cn">{{ name }}</h2>
                     <span id="typed"></span>
                     <script src="/static/js/typed.min.js"></script>
-                    <script>
-                        var typed = new Typed("#typed", {
-                            strings: ['{{ chinese_description }}', '{{ english_description }}'],
-                            startDelay: 300,
-                            typeSpeed: 100,
-                            loop: true,
-                            backSpeed: 50,
-                            showCursor: true
-                        });
-                    </script>
                 </div>
                 {# 头像 #}
                 <a class="notransition" href="{% url 'blog:about' %}" data-pjax-state="">
@@ -218,6 +208,15 @@
 </aside>
 
 <script>
+    // 个人描述
+    var typed = new Typed("#typed", {
+        strings: ['{{ chinese_description }}', '{{ english_description }}'],
+        startDelay: 300,
+        typeSpeed: 100,
+        loop: true,
+        backSpeed: 50,
+        showCursor: true
+    });
     // 分享和订阅弹窗
     $(".side-fx").click(function (e) {
         $(".side-bdfx").show();

@@ -14,16 +14,6 @@
             <div class="flex-center">
                 <div class="unit-1-2 unit-1-on-mobile">
                     <h3 style="text-align: center; margin-bottom: 20px">用户信息</h3>
-                    {# 信息提示 #}
-                    {% if messages %}
-                        <ul class="messages">
-                            {% for message in messages %}
-                                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
-                                    {{ message.message }}
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
                     <div class="col-md-4"><span>上次登陆:&nbsp;&nbsp;&nbsp;</span>
                         <span style="font-size: 1.2em">{{ user.last_login }}</span>
                     </div>
@@ -41,7 +31,7 @@
                             <input type="email" name="email" class="form-control" required="" id="id_email"
                                    value="{{ user.email }}">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="avatar">
                             <label for="avatar">头像:
                                 {% if userinfo.avatar %}
                                     <img src="{{ userinfo.avatar.url }}"
@@ -91,42 +81,33 @@
             </div>
         </div>
     </div>
-    <style>
-        .success {
-            color: green;
-        }
-
-        .error {
-            color: red;
-        }
-
-        .errorlist {
-            color: red;
-        }
-    </style>
-
 {% endblock content %}
 
 {% block js %}
     <script>
         $(document).ready(function () {
             $('#delete_avatar').click(function () {
-                if (confirm("确定删除头像?")) {
+                layer.confirm("确定删除头像?", {
+                    btn: ['确定', '取消']
+                }, function () {
                     $.ajax({
                         type: "post",
                         url: '{% url 'blog:delete_avatar' user.id %}',
-                        data: '',
+                        dataType: "json",
                         success: function (data) {
-                            {#alert(data['msg'])#}
-                            location.reload()
+                            if (data['code'] === 200) {
+                                layer.msg(data['msg'], {icon: 1, time: 500}, function () {
+                                    location.reload()
+                                });
+                            } else {
+                                layer.msg(data['msg'], {icon: 2});
+                            }
                         },
-                        error: function (data) {
-                            {#alert(data['msg'])#}
-                            location.reload()
+                        error: function () {
                         }
-                    })
-                }
-            })
-        })
+                    });
+                });
+            });
+        });
     </script>
 {% endblock %}

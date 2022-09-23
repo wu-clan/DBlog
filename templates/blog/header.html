@@ -64,20 +64,6 @@
                             {% csrf_token %}
                             <button id="user_delete" type="submit">注销</button>
                         </form>
-                        <script>
-                            function user_delete() {
-                                // 调用layer弹窗组件
-                                layer.open({
-                                    title: "确认注销",
-                                    content: "确认注销用户吗？",
-                                    yes: function (index) {
-                                        let sub = document.getElementById("user_delete");
-                                        sub.click()
-                                        layer.close(index);
-                                    },
-                                })
-                            }
-                        </script>
                     </li>
                 {% else %}
                     {# 如果用户未登录，则显示 “登录,注册” #}
@@ -153,20 +139,6 @@
                             {% csrf_token %}
                             <button id="user_delete" type="submit">注销</button>
                         </form>
-                        <script>
-                            function user_delete() {
-                                // 调用layer弹窗组件
-                                layer.open({
-                                    title: "确认注销",
-                                    content: "确认注销用户吗？",
-                                    yes: function (index) {
-                                        let sub = document.getElementById("user_delete");
-                                        sub.click()
-                                        layer.close(index);
-                                    },
-                                })
-                            }
-                        </script>
                     </li>
                 {% else %}
                     {# 如果用户未登录，则显示 “登录,注册” #}
@@ -206,3 +178,19 @@
         </div>
     </div>
 </header>
+
+<script>
+    function user_delete() {
+        // 调用layer弹窗组件
+        layer.open({
+            title: "确认注销",
+            content: "确认注销用户吗？",
+            yes: function (index) {
+                layer.msg('注销成功', {icon: 1})
+                let sub = document.getElementById("user_delete");
+                sub.click()
+                layer.close(index);
+            },
+        })
+    }
+</script>

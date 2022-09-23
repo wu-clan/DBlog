@@ -302,7 +302,6 @@ class Comment(models.Model):
     评论
     """
     title = models.CharField("标题", max_length=50)
-    create_time = models.DateTimeField('评论时间', auto_now_add=True)
     user_name = models.CharField('评论用户', max_length=25)
     request_ip = models.CharField('请求者ip', max_length=128, default='未知')
     request_address = models.CharField('请求者地址', max_length=128, default=None)
@@ -311,6 +310,7 @@ class Comment(models.Model):
     avatar_address = models.ImageField('头像', null=True, blank=True)  # 同步userinfo头像字段
     url = models.CharField('链接', max_length=255)
     url_input = models.CharField('输入链接拼接', max_length=100, default='')  # 暂时未使用
+    create_time = models.DateTimeField('评论时间', auto_now_add=True)
     # 文章评论多对一
     post = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='post')
     # 评论用户多对一

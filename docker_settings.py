@@ -12,7 +12,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
-    # 第三方后台主题
     'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -20,13 +19,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 注册app
     'blog.apps.BlogConfig',
-    # 后台快捷导入导出
     'import_export',
-    # 第三方markdown
     'mdeditor',
-    # 验证码
     'captcha',
 ]
 

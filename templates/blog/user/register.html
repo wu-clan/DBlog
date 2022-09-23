@@ -15,16 +15,6 @@
                 <div class="unit-1-2 unit-1-on-mobile">
                     <h3 style="text-align: center">注册</h3>
                     <form class="form" action="{% url 'blog:register' %}" method="post">
-                        {# 错误信息提示 #}
-                        {% if messages %}
-                            <ul class="messages">
-                                {% for message in messages %}
-                                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
-                                        {{ message.message }}
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
                         {% csrf_token %}
                         <!-- 账号 -->
                         <div class="form-group col-md-4">
@@ -76,25 +66,9 @@
             });
         });
     </script>
-    <style type="text/css">
+    <style>
         .errorlist {
             color: red;
-        }
-
-        .info {
-            color: #267fd9;
-        }
-
-        .error {
-            color: red;
-        }
-
-        .success {
-            color: green;
-        }
-
-        .warning {
-            color: yellow;
         }
     </style>
 {% endblock %}

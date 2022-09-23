@@ -36,7 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    # 消息
     'django.contrib.messages',
+    # 静态文件
     'django.contrib.staticfiles',
     # 注册app
     'blog.apps.BlogConfig',
