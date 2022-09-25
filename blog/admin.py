@@ -206,8 +206,7 @@ class CommentAdmin(admin.ModelAdmin):
     """
     list_display = (
         'title',
-        'create_time',
-        'user_name',
+        'name',
         'email',
         'request_ip',
         'request_address',
@@ -215,5 +214,6 @@ class CommentAdmin(admin.ModelAdmin):
         'url',
         'avatar_link',
         'url_input',
+        'created_time'
     )
-    search_fields = ('user_name',)
+    search_fields = ('user', 'request_address', 'name')

@@ -13,6 +13,7 @@
 {% block css %}
     <link rel="stylesheet" href="/static/css/markdown.css">
     <link rel="stylesheet" href="/static/prism/prism.css">
+    <link rel="stylesheet" href="/static/css/OwO.min.css">
 {% endblock %}
 
 {% block content %}
@@ -76,7 +77,7 @@
         </article>
 
         <!--评论表单-->
-        {% include "blog/message.html" %}
+        {% include "blog/comment/comment.html" %}
 
         {# 评论数 #}
         <div class="comment-num">
@@ -85,41 +86,126 @@
         </div>
 
         {# 评论内容 #}
-        <div class="comments">
-            <ul class="comment-list">
-                {% for comment in comments %}
-                    <li class="comment-item">
-                        <a id="avatar">
-                            {% if comment.avatar_address %}
-                                <img class="comment-avatar" src="{{ MEDIA_URL }}{{ comment.avatar_address }}"
-                                     alt="加载失败~">
-                            {% else %}
-                                <img class="comment-avatar" src="/static/images/icon/user.gif" alt="加载失败~">
-                            {% endif %}
-                        </a>
-                        <span class="comment-author">{{ comment.user_name }}</span>
-                        <div class="comment-meta">{{ comment.create_time }}</div>
-                        <div class="comment-content" id="{{ comment.comment }}">
-                            <span>{{ comment.comment }}</span>
-                        </div>
-                        {% if comment.request_address %}
-                            <p style="color: #7799 !important; font-size: xx-small">
-                                来自: {{ comment.request_address }}</p>
-                        {% else %}
-                            <p style="color: #7799 !important; font-size: xx-small">来自: {{ comment.request_ip }}</p>
-                        {% endif %}
-                        <div class="reply">
-                            <a class="comment-reply-link" title="debugging...未启用">回复</a>
-                        </div>
-                    </li>
-                {% empty %}
-                    <div style="margin-bottom: 99px; margin-top: 30px; color: rgb(188 188 188);">
-                        <span style="margin-left: 26px">🙈 这篇文章还没有评论哟，快来写下第一条评论吧...</span>
-                    </div>
-                {% endfor %}
-            </ul>
-        </div>
+        {% if not comments %}
+            <div style="padding: 99px 0; color: rgb(114 55 55);">
+                <span style="margin-left: 30px">🙈 这篇文章还没有评论哟，快来写下第一条评论吧...</span>
+            </div>
+        {% endif %}
 
+        {% load mptt_tags %}
+
+        {% recursetree comments %}
+            {% with comment=node %}
+                <div class="{% if comment.reply %} comments-reply {% else %} comments {% endif %}"
+                     id="comment-tree-{{ comment.id }}">
+                    <ul class="comment-list">
+                        <li class="comment-item">
+                            <a id="avatar" title="{{ comment.name }}">
+                                {% if comment.avatar_address %}
+                                    <img class="comment-avatar" src="{{ MEDIA_URL }}{{ comment.avatar_address }}"
+                                         alt="加载失败~">
+                                {% else %}
+                                    <img class="comment-avatar" src="/static/images/icon/user.gif" alt="加载失败~">
+                                {% endif %}
+                            </a>
+                            {% if comment.reply %}
+                                <span class="comment-author">
+                                    <a style="color: #ff7c9b; font-size: larger;" href="{{ comment.url_input }}">
+                                        {{ comment.user }}
+                                    </a>
+                                    <span style="color: #777;"> 回复了 </span>
+                                    <a style="color: rgb(255 103 0); font-size: larger" href="{{ comment.url_input }}">
+                                        {{ comment.parent.user }}
+                                    </a>
+                                </span>
+                            {% else %}
+                                <span class="comment-author">
+                                    <a style="color: #ff7c9b; font-size: larger;" href="{{ comment.url_input }}">
+                                        {{ comment.user }}
+                                    </a>
+                                </span>
+                            {% endif %}
+                            <div class="comment-meta">{{ comment.created_time }}</div>
+                            <div class="comment-content" id="{{ comment.comment }}">
+                                {{ comment.comment | safe }}
+                            </div>
+                            {% if comment.request_address %}
+                                <p style="color: #7799 !important; font-size: xx-small">
+                                    来自: {{ comment.request_address }}</p>
+                            {% else %}
+                                <p style="color: #7799 !important; font-size: xx-small">
+                                    来自: {{ comment.request_ip }}</p>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                                <button type="button"
+                                        style="background-color: rgb(0 0 0 / 0%); border: none; padding: unset;"
+                                        onclick="reply_button_{{ comment.id }}()">
+                                    <svg t="1664106846681" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg" p-id="3011" width="20" height="20">
+                                        <path d="M628.363636 605.090909c-18.618182 0-34.909091-16.290909-34.909091-34.909091S609.745455 535.272727 628.363636 535.272727h41.890909c18.618182 0 34.909091 16.290909 34.909091 34.909091s-13.963636 34.909091-34.909091 34.909091H628.363636z m-325.818181 0c-18.618182 0-34.909091-16.290909-34.909091-34.909091S283.927273 535.272727 302.545455 535.272727h160.581818c18.618182 0 34.909091 16.290909 34.909091 34.909091s-16.290909 34.909091-34.909091 34.909091H302.545455z m0-209.454545c-18.618182 0-34.909091-16.290909-34.909091-34.909091S283.927273 325.818182 302.545455 325.818182h372.363636c18.618182 0 34.909091 16.290909 34.909091 34.909091S693.527273 395.636364 674.909091 395.636364H302.545455z m202.472727 507.345454l-104.727273 69.818182c-48.872727 32.581818-114.036364 18.618182-144.290909-30.254545-2.327273-4.654545-4.654545-6.981818-6.981818-11.636364l-18.618182-39.563636c-111.709091-13.963636-195.490909-107.054545-195.490909-218.763637V272.290909C34.909091 162.909091 116.363636 69.818182 225.745455 53.527273c95.418182-13.963636 190.836364-18.618182 286.254545-18.618182s190.836364 6.981818 286.254545 18.618182c109.381818 16.290909 190.836364 109.381818 190.836364 218.763636v400.290909c0 116.363636-90.763636 214.109091-207.127273 221.090909-90.763636 4.654545-179.2 9.309091-269.963636 9.309091h-6.981818zM474.763636 837.818182c4.654545-4.654545 11.636364-6.981818 18.618182-6.981818h16.290909c88.436364 0 176.872727-2.327273 265.309091-9.309091 79.127273-4.654545 141.963636-72.145455 141.963637-151.272728V269.963636c0-76.8-55.854545-139.636364-130.327273-148.945454-90.763636-9.309091-181.527273-16.290909-274.618182-16.290909s-183.854545 6.981818-276.945455 18.618182c-74.472727 9.309091-130.327273 74.472727-130.327272 148.945454v400.290909c0 79.127273 62.836364 146.618182 141.963636 151.272727h9.309091c11.636364 0 23.272727 6.981818 27.927273 18.618182l27.927272 55.854546c0 2.327273 2.327273 2.327273 2.327273 4.654545 11.636364 16.290909 32.581818 20.945455 48.872727 9.309091l111.709091-74.472727z"
+                                              fill="#bfbfbf" p-id="3012"></path>
+                                    </svg>
+                                </button>
+                                <button type="button"
+                                        style="background-color: rgb(0 0 0 / 0%); border: none;"
+                                        onclick="praise_button_{{ comment.id }}()"
+                                        title="planing">
+                                    <svg t="1664107590426" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg" p-id="2365" width="23" height="23">
+                                        <path d="M759.1936 826.9824c-20.0704 21.9136-43.52 32.5632-71.4752 32.5632L420.2496 859.5456c-32.768 0-59.392-27.8528-59.392-62.0544L360.8576 468.2752c28.2624-29.9008 103.936-118.4768 147.0464-250.88 6.7584-20.7872 21.8112-55.5008 47.3088-52.8384 19.8656 1.9456 40.6528 24.4736 43.7248 47.104 1.8432 16.896-14.4384 115.5072-40.5504 167.6288L535.552 424.8576l241.152 0c32.768 0 59.392 27.8528 59.4944 63.2832C838.8608 556.2368 829.952 749.9776 759.1936 826.9824zM296.448 797.3888c0 14.336-23.7568 31.0272-54.4768 31.0272-30.72 0-54.4768-16.6912-54.4768-31.0272L187.4944 486.912c0-14.336 23.7568-31.0272 54.4768-31.0272 30.72 0 54.4768 16.6912 54.4768 31.0272L296.448 797.3888zM895.6928 486.912c0-68.5056-53.3504-124.2112-118.8864-124.2112L629.1456 362.7008c19.6608-59.6992 31.9488-134.4512 28.5696-159.6416-7.0656-51.6096-49.664-95.6416-96.9728-100.2496-22.6304-2.1504-79.1552 2.56-109.1584 94.72-37.9904 116.736-103.8336 195.8912-128.9216 223.1296-20.48-16.6912-48.8448-26.8288-80.6912-26.8288-63.8976 0-113.9712 40.96-113.9712 93.184l0 310.4768c0 52.224 50.0736 93.184 113.9712 93.184 30.9248 0 58.4704-9.728 78.848-25.6 21.1968 33.9968 57.7536 56.6272 99.4304 56.6272l267.4688 0c44.3392 0 82.8416-17.408 114.3808-51.6096C904.704 758.3744 896.1024 496.7424 895.6928 486.912z"
+                                              p-id="2366" fill="#bfbfbf"></path>
+                                    </svg>
+                                </button>
+                                <button type="button"
+                                        style="background-color: rgb(0 0 0 / 0%); border: none; padding: 6px 0 !important; margin-left: -2px;"
+                                        onclick="tread_button_{{ comment.id }}()"
+                                        title="planing">
+                                    <svg t="1664107667502" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg" p-id="2615" width="23" height="23">
+                                        <path d="M836.3008 535.8592c0 35.4304-26.7264 63.2832-59.4944 63.2832L535.552 599.1424l22.7328 45.4656c26.0096 52.1216 42.3936 150.8352 40.5504 167.6288-3.072 22.6304-23.8592 45.1584-43.7248 47.104-25.4976 2.6624-40.5504-32.0512-47.3088-52.8384-43.008-132.4032-118.6816-220.9792-147.0464-250.88L360.7552 226.6112c0-34.2016 26.7264-62.0544 59.392-62.0544l267.4688 0c27.9552 0 51.4048 10.6496 71.4752 32.5632C829.952 274.0224 838.8608 467.7632 836.3008 535.8592zM296.448 537.088c0 14.336-23.7568 31.0272-54.4768 31.0272-30.72 0-54.4768-16.6912-54.4768-31.0272L187.4944 226.6112c0-14.336 23.7568-31.0272 54.4768-31.0272 30.72 0 54.4768 16.6912 54.4768 31.0272L296.448 537.088zM801.9968 154.0096C770.56 119.808 732.0576 102.4 687.616 102.4L420.2496 102.4c-41.6768 0-78.2336 22.6304-99.4304 56.6272-20.3776-15.7696-47.8208-25.6-78.848-25.6-63.8976 0-113.9712 40.96-113.9712 93.184l0 310.4768c0 52.224 50.0736 93.184 113.9712 93.184 31.8464 0 60.2112-10.1376 80.6912-26.8288 25.088 27.2384 90.9312 106.3936 128.9216 223.1296 30.0032 92.16 86.4256 96.768 109.1584 94.72 47.4112-4.608 90.0096-48.7424 96.9728-100.2496 3.3792-25.1904-8.9088-99.9424-28.5696-159.6416l147.6608 0c65.536 0 118.8864-55.7056 118.8864-124.2112C896.1024 527.2576 904.704 265.6256 801.9968 154.0096z"
+                                              p-id="2616" fill="#bfbfbf"></path>
+                                    </svg>
+                                </button>
+                                <button type="button"
+                                        style="background-color: rgb(0 0 0 / 0%); border: none;"
+                                        onclick="report_button_{{ comment.id }}()"
+                                        title="planing">
+                                    <svg t="1664107847823" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg" p-id="5856" width="23" height="23">
+                                        <path d="M529.2 956.4c-33.8 0-67.7-8.6-97.9-25.7L220.8 811c-65.4-37.2-106-108.1-106-185.1v-355c0-56.7 38.2-106.7 92.9-121.7l288.8-79c21.4-5.8 44.1-5.9 65.6 0l288.8 79c54.7 15 92.9 65 92.9 121.7v355c0 77-40.6 147.9-106 185.1L627.1 930.7c-30.2 17.2-64 25.7-97.9 25.7z m0-801.4c-3.1 0-6.3 0.4-9.3 1.3l-288.8 79c-16 4.4-27.3 19.1-27.3 35.7v355c0 45 23.4 86.3 60.9 107.6l210.6 119.7c33.2 18.9 74.5 18.9 107.7 0l210.6-119.7c37.6-21.4 60.9-62.6 60.9-107.6V271c0-16.7-11.2-31.3-27.3-35.7l-288.8-79c-2.9-0.9-6.1-1.3-9.2-1.3z"
+                                              fill="#bfbfbf" p-id="5857"></path>
+                                        <path d="M529.2 662.8m-50.1 0a50.1 50.1 0 1 0 100.2 0 50.1 50.1 0 1 0-100.2 0Z"
+                                              fill="#bfbfbf" p-id="5858"></path>
+                                        <path d="M529.2 573.7c-24.6 0-44.5-19.9-44.5-44.5V348.8c0-24.6 19.9-44.5 44.5-44.5s44.5 19.9 44.5 44.5v180.4c0 24.6-19.9 44.5-44.5 44.5z"
+                                              fill="#bfbfbf" p-id="5859"></path>
+                                    </svg>
+                                </button>
+                                {% include "blog/comment/reply.html" with comment_id=comment.id %}
+                                <script>
+                                    function reply_button_{{ comment.id }}() {
+                                        const r = document.getElementById('reply-self-{{comment.id}}');
+                                        if (r.style.display === 'none') {
+                                            r.style.display = 'block';
+                                        } else {
+                                            r.style.display = 'none';
+                                        }
+                                    }
+                                </script>
+                            {% else %}
+                                <button type="button" style="margin-top: 6px;">
+                                    <a href="{% url 'blog:login' %}">回复</a>
+                                </button>
+                            {% endif %}
+                        </li>
+                    </ul>
+                    {% if not comment.is_leaf_node %}
+                        <div class="children">
+                            {{ children }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endwith %}
+        {% endrecursetree %}
     </div>
 {% endblock %}
 
@@ -127,4 +213,5 @@
     <script src="/static/js/jquery.2.1.4.min.js"></script>
     <script src="/static/prism/prism.js" charset="utf-8"></script>
     <script src="/static/prism/clipboard.min.js"></script>
+    <script src="/static/js/OwO.min.js"></script>
 {% endblock %}

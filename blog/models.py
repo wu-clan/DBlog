@@ -5,6 +5,8 @@ from django.core.cache import cache
 from django.db import models
 from django.utils.safestring import mark_safe
 from mdeditor.fields import MDTextField  # noqa
+from mptt.fields import TreeForeignKey
+from mptt.models import MPTTModel
 
 
 class UserInfo(models.Model):
@@ -50,19 +52,22 @@ class Conf(models.Model):
     """
     网站配置信息
     """
-    main_website = models.CharField(max_length=64, verbose_name='主网站', default="xwboy.top")
-    name = models.CharField(max_length=8, verbose_name='关注我_名称', default="CL' WU")
-    chinese_description = models.CharField(max_length=30, verbose_name='关注我_中文描述',
+    main_website = models.CharField(null=True, blank=True, max_length=64, verbose_name='主网站', default="xwboy.top")
+    name = models.CharField(null=True, blank=True, max_length=8, verbose_name='关注我_名称', default="CL' WU")
+    chinese_description = models.CharField(null=True, blank=True, max_length=30, verbose_name='关注我_中文描述',
                                            default='永不放弃坚持就是这么酷！要相信光')
-    english_description = models.TextField(max_length=100, verbose_name='关注我_英文描述',
+    english_description = models.TextField(null=True, blank=True, max_length=100, verbose_name='关注我_英文描述',
                                            default='Never give up persistence is so cool！Believe in the light！！！')
-    avatar_link = models.CharField(max_length=255, verbose_name='关注我_头像超链接')
-    website_author = models.CharField(max_length=10, verbose_name='网站作者', default='xiaowu')
-    website_author_link = models.CharField(max_length=255, verbose_name='网站作者链接', default='https://www.xwboy.top')
-    email = models.EmailField(max_length=30, verbose_name='作者收件邮箱', default='2186656812@qq.com')
-    website_number = models.CharField(max_length=100, verbose_name='备案号', default='豫ICP备 2021019092号-1')
-    git = models.CharField(max_length=255, verbose_name='git链接', default='https://gitee.com/wu_cl')
-    website_logo = models.ImageField(upload_to='logo', verbose_name='网站logo')
+    avatar_link = models.CharField(null=True, blank=True, max_length=255, verbose_name='关注我_头像超链接')
+    website_author = models.CharField(null=True, blank=True, max_length=10, verbose_name='网站作者', default='xiaowu')
+    website_author_link = models.CharField(null=True, blank=True, max_length=255, verbose_name='网站作者链接',
+                                           default='https://www.xwboy.top')
+    email = models.EmailField(null=True, blank=True, max_length=30, verbose_name='作者收件邮箱',
+                              default='2186656812@qq.com')
+    website_number = models.CharField(null=True, blank=True, max_length=100, verbose_name='备案号')
+    git = models.CharField(null=True, blank=True, max_length=255, verbose_name='git链接',
+                           default='https://gitee.com/wu_cl')
+    website_logo = models.ImageField(null=True, blank=True, upload_to='logo', verbose_name='网站logo')
 
     @staticmethod
     def fetch_all_site_info():
@@ -196,10 +201,10 @@ class Article(models.Model):
     view = models.BigIntegerField(default=0, verbose_name='阅读数')
     comment = models.BigIntegerField(default=0, verbose_name='评论数')
     picture = models.CharField(max_length=255, blank=True, null=True, verbose_name="url(标题图链接)")
-    category = models.ForeignKey('Category', on_delete=models.CASCADE, verbose_name='文章类型')
     tag = models.ManyToManyField(Tag, verbose_name='标签')
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='作者')
     created_time = models.DateField(auto_now_add=True, verbose_name='创建时间')
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, verbose_name='文章类型')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='作者')
 
     class Meta:
         ordering = ['-created_time']  # 按时间降序
@@ -297,28 +302,31 @@ class Category(models.Model):
         return self.name
 
 
-class Comment(models.Model):
+class Comment(MPTTModel):
     """
     评论
     """
     title = models.CharField("标题", max_length=50)
-    user_name = models.CharField('评论用户', max_length=25)
+    name = models.CharField('昵称', max_length=25)
     request_ip = models.CharField('请求者ip', max_length=128, default='未知')
     request_address = models.CharField('请求者地址', max_length=128, default=None)
-    email = models.EmailField('预留邮箱', max_length=50, default='')
+    email = models.EmailField('预留邮箱', null=True, blank=True, max_length=50)
     comment = models.TextField('评论内容', max_length=500)
-    avatar_address = models.ImageField('头像', null=True, blank=True)  # 同步userinfo头像字段
+    avatar_address = models.ImageField('头像', null=True, blank=True)
     url = models.CharField('链接', max_length=255)
-    url_input = models.CharField('输入链接拼接', max_length=100, default='')  # 暂时未使用
-    create_time = models.DateTimeField('评论时间', auto_now_add=True)
-    # 文章评论多对一
-    post = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='post')
-    # 评论用户多对一
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comment_user')
+    url_input = models.CharField('输入链接', null=True, blank=True, max_length=100)
+    created_time = models.DateTimeField('评论时间', auto_now_add=True)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='article')
+    parent = TreeForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='children')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    reply = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE, related_name='reply')
 
     class Meta:
         verbose_name = '评论'
         verbose_name_plural = verbose_name
+
+    class MPTTMeta:
+        order_insertion_by = ['created_time']  # https://github.com/django-mptt/django-mptt/issues/167
 
     def comment_validity(self):
         """

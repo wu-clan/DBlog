@@ -18,6 +18,8 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     # 评论
     path('get_comment/<int:pk>/', views.get_comment, name='get_comment'),
+    # 二级评论
+    path('get_comment/<int:pk>/<int:parent_comment_id>/', views.get_comment, name='comment_reply'),
     # 关于
     path('about/', views.about, name='about'),
     # Rss

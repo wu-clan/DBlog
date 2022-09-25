@@ -131,10 +131,10 @@
                         <span><i class="el-book"></i>{{ comment.title }}</span>
                         <a class="blue-text" href="{{ comment.url }}#{{ comment.comment }}"
                            title="{{ comment.create_time }}">
-                            {{ comment.comment }}
+                            {{ comment.comment | safe }}
                         </a>
-                        <span style="text-align: right; margin-left: 50px">—&nbsp;&nbsp;<i class="el-user"></i>
-                        {{ comment.user_name }}
+                        <span style="text-align: right; margin-left: 66px">—&nbsp;&nbsp;<i class="el-user"></i>
+                        {{ comment.name }}
                             {% if comment.request_address %}
                                 <p style="color: #7799 !important; font-size: xx-small">来自: {{ comment.request_address }}</p>
                             {% else %}

@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'mdeditor',
     # 验证码
     'captcha',
+    # mptt
+    'mptt',
 ]
 
 MIDDLEWARE = [
@@ -167,16 +169,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # simpleui 排序后台app导航栏
 SIMPLEUI_CONFIG = {
     'system_keep': True,
-    'menu_display': ['文章配置', '网站配置信息', '文章订阅', '权限验证', ],
+    'menu_display': ['文章', '文章配置', '网站配置', '文章订阅', '权限验证', ],
     'dynamic': True,
     'menus': [{
+        'name': '文章',
+        'models': [{
+            'name': '文章',
+            'url': '/admin/blog/article'
+        }, {
+            'name': '评论',
+            'url': '/admin/blog/comment'
+        }]
+    }, {
         'name': '文章配置',
         'models': [{
             'name': '文章大头图',
             'url': '/admin/blog/articleimg'
-        }, {
-            'name': '文章',
-            'url': '/admin/blog/article'
         }, {
             'name': '文章类型',
             'icon': 'fa fa-list',
@@ -185,13 +193,9 @@ SIMPLEUI_CONFIG = {
             'name': '标签',
             'icon': 'fa fa-tags',
             'url': '/admin/blog/tag'
-        }, {
-            'name': '评论',
-            'icon': 'fa fa-comments',
-            'url': '/admin/blog/comment'
         }]
     }, {
-        'name': '网站配置信息',
+        'name': '网站配置',
         'models': [{
             'name': '网站基本配置',
             'url': '/admin/blog/conf'
@@ -242,11 +246,11 @@ main_website = 'xwboy.top'
 name = "CL' WU"
 chinese_description = '永不放弃坚持就是这么酷！要相信光'
 english_description = 'Never give up persistence is so cool！Believe in the light'
-avatar_link = 'https://portrait.gitee.com/uploads/avatars/user/2194/6583646_wu_cl_1628047961.png!avatar200'
+avatar_link = 'https://oscimg.oschina.net/oscnet/up-8c492f6804d9e46184f2c0e4e02c2671.jpg!/both/200x200'
 website_author = 'xiaowu'
 website_author_link = 'https://www.xwboy.top'
 email = '2186656812@qq.com'
-website_number = '豫ICP备 2021019092号-1'
+website_number = ''
 git = 'https://gitee.com/wu_cl'
 website_logo = 'logo/DBlog.png'
 

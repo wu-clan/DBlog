@@ -6,8 +6,12 @@
                 <a href="{{ website_author_link }}"><strong>{{ main_website }}</strong></a>&nbsp;|&nbsp;
                 <a href="https://docs.djangoproject.com/zh-hans/3.2/"><strong>Django</strong></a>&nbsp;|&nbsp;
                 <a href="https://github.com/jhao104/django-blog" target="_blank"><strong>jhao104</strong></a>&nbsp;|&nbsp;
-                <a href="https://beian.miit.gov.cn"><img src="//gw.alicdn.com/tfs/TB1jwakrbH1gK0jSZFwXXc7aXXa-20-20.png"
-                                                         style="vertical-align: -5px; margin-right: 5px">{{ website_number }}</a>&nbsp;|&nbsp;
+                {% if website_number %}
+                    <a href="https://beian.miit.gov.cn">
+                        <img src="//gw.alicdn.com/tfs/TB1jwakrbH1gK0jSZFwXXc7aXXa-20-20.png"
+                             style="vertical-align: -5px; margin-right: 5px">{{ website_number }}
+                    </a>&nbsp;|&nbsp;
+                {% endif %}
                 <a href="{% url 'blog:rss' %}"><i class="el el-rss" style="color: white"></i><strong>Rss</strong></a>&nbsp;/
                 <a href="{% url 'blog:atom' %}"><strong>Atom</strong></a>&nbsp;|&nbsp;
             </span>

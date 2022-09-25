@@ -14,6 +14,7 @@ from django.core.mail import send_mail
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.utils.text import slugify
 from fast_captcha import text_captcha
 from markdown.extensions.toc import TocExtension
@@ -356,7 +357,7 @@ def detail(request, pk):
     # md文章内容
     blog.content = md.convert(blog.content)
     # 获取对应文章的全部评论，倒序显示
-    comments = blog.post.all().order_by('-create_time')
+    comments = Comment.objects.filter(article=pk)
     return render(request, 'blog/detail.html', {
         "blog": blog,
         'toc': md.toc,  # noqa
@@ -519,11 +520,11 @@ def search(request):
 
 
 @login_required
-def get_comment(request, pk):
+def get_comment(request, pk, parent_comment_id=None):
     """
     发表评论
     """
-    blog = get_object_or_404(Article, pk=pk)
+    article = get_object_or_404(Article, pk=pk)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -536,23 +537,32 @@ def get_comment(request, pk):
             try:
                 comment.request_address = get_request_address(ip)
             except Exception:  # noqa
-                comment.request_address = '未知'
-            comment.title = blog.title
-            comment.email = request.user.email
+                comment.request_address = '飞出地球了'
+            comment.title = article.title
+            comment.email = comment.email
             comment.url = str(request.headers['Referer'])  # 文章跳转url
+            comment.url_input = comment.url_input if comment.url_input else None
             if '**' in DFAFilter().check_comments(comment.comment):  # 评论内容
                 messages.error(request, '评论内容不合规，请修改后重新提交')
                 return redirect('blog:get_comment', pk=pk)
-            if '**' in DFAFilter().check_comments(request.user.username):  # user_name
-                comment.user_name = '信球'
+            if '**' in DFAFilter().check_comments(comment.name):
+                comment.name = f'信球{comment.user.id}号'
             else:
-                comment.user_name = request.user.username
+                comment.name = comment.name
             comment.avatar_address = User.objects.get(id=request.user.pk).userinfo.avatar  # 头像链接转存
-            comment.post = blog  # 关联评论与文章
+            comment.article = article  # 关联评论与文章
             comment.user = request.user  # 关联评论与用户
+            # 二级评论
+            if parent_comment_id:
+                parent_comment = Comment.objects.get(id=parent_comment_id)
+                # 若回复层级超过二级，则转换为二级
+                comment.parent_id = parent_comment.get_root().id
+                # 被回复人
+                comment.reply = parent_comment.user
             comment.save()
-            blog.commenced(blog.post.all().count())  # 实时评论数
-            return redirect('blog:get_comment', pk=pk)
+            redirect_url = reverse('blog:detail', args=[pk]) + '#' + comment.comment
+            article.commenced(article.article.all().count())
+            return redirect(redirect_url)
     return redirect('blog:detail', pk=pk)
 
 

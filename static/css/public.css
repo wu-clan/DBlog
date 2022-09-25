@@ -1127,6 +1127,7 @@ header .user .nav-item {
 }
 
 .hudong-ul li .sd-name a {
+    padding: 5px 0 0 0;
     font-size: 13px;
     line-height: 25px;
     white-space: nowrap;
@@ -1287,9 +1288,13 @@ header .user .nav-item {
     font-size: 1.2em;
 }
 
+.comments-reply {
+    padding-left: 66px;
+}
+
 .comment-item {
-    padding: 12px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+    padding: 6px 0 1px 0;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 10%);
     margin-bottom: 15px;
     position: relative;
 }
@@ -1776,7 +1781,7 @@ footer {
 }
 
 .vwrap .vheader .vinput {
-    width: 100%;
+    width: 33%;
     float: left;
     height: 3rem;
     border: none;
@@ -1797,8 +1802,22 @@ footer {
     max-width: 100%;
 }
 
+.OwO .OwO-body .OwO-items {
+    overflow-y: scroll !important;
+    overflow-x: hidden !important
+}
+
+.OwO-reply .OwO-body .OwO-items {
+    overflow-y: scroll !important;
+    overflow-x: hidden !important
+}
+
+.OwO .OwO-body .OwO-bar {
+    height: auto; !important;
+}
+
 .vbtn {
-    margin-top: 20px;
+    margin-top: -26.5px;
     float: right;
     -webkit-transition-duration: .4s;
     transition-duration: .4s;
