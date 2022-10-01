@@ -1,54 +1,55 @@
-<div id="reply-self-{{ comment_id }}" style="display: none; margin-top: 10px;">
-    <form action="{% url 'blog:comment_reply' blog.id comment_id %}" method="post" class="comment-form">
-        {% if messages %}
-            <script>
-                {% for msg in messages %}
-                    alert('{{ msg.message }}');
-                {% endfor %}
-            </script>
-        {% endif %}
-        {% csrf_token %}
-        <div class="vwrap">
-            <div class="vheader item3">
-                <input class="vlink vinput" name="name" placeholder="昵称" maxlength="25" required=""
-                       id="id_name" type="text">
-                <label for="id_name">{{ form.url.errors }}</label>
-            </div>
-            <div class="vheader item3">
-                <input class="vlink vinput" name="email" placeholder="邮箱" maxlength="50"
-                       id="id_email" type="email">
-                <label for="id_email">{{ form.url.errors }}</label>
-            </div>
-            <div class="vheader item3">
-                <input class="vlink vinput" name="url_input" placeholder="链接" maxlength="100"
-                       id="id_url_input" type="url">
-                <label for="id_url_input">{{ form.url.errors }}</label>
-            </div>
-            <div class="vedit">
-                <textarea type="text" class="vediter vinput OwO-textarea-{{ comment_id }}" name="comment"
-                          placeholder="在这里输入吧..."
-                          maxlength="500" required="" id="id_comment" cols="40" rows="10"></textarea>
-                <label for="id_comment">{{ form.comment.errors }}</label>
-                <div class="OwO" style="width: 80%"></div>
-                <script>
-                    const OwO_msg_reply_{{ comment_id }} = new OwO({
-                        logo: 'OωO表情',
-                        container: document.getElementsByClassName('OwO')[0],
-                        target: document.getElementsByClassName('OwO-textarea-{{ comment_id }}')[0],
-                        api: '/static/OwO.json',
-                        position: 'up',
-                        width: '100%',
-                        maxHeight: '250px'
-                    });
-                </script>
-                {% if user.is_authenticated %}
-                    <button class="vsubmit vbtn" type="submit">发表</button>
-                {% else %}
-                    <button class="vsubmit vbtn" type="submit">
-                        <a href="{% url 'blog:login' %}">登陆后发表</a>
-                    </button>
-                {% endif %}
-            </div>
-        </div>
-    </form>
-</div>
+{% block js %}
+    <script>
+        function reply_button_{{ comment.id }}() {
+            var reply_html =
+                '<div id="reply-{{ comment_id }}" class="comment_reply_textarea" style="margin-top: 10px;">' +
+                '    <form action="{% url 'blog:comment_reply' blog.id comment_id %}" method="post" class="comment-form">' +
+                '        <div class="vwrap">' +
+                '            <div class="vheader item3">' +
+                '                <input class="vlink vinput" name="name" placeholder="昵称" maxlength="25" required=""' +
+                '                       id="id_name" type="text">' +
+                '                <label for="id_name">{{ form.url.errors }}</label>' +
+                '            </div>' +
+                '            <div class="vheader item3">' +
+                '                <input class="vlink vinput" name="email" placeholder="邮箱" maxlength="50"' +
+                '                       id="id_email" type="email">' +
+                '                <label for="id_email">{{ form.url.errors }}</label>' +
+                '            </div>' +
+                '            <div class="vheader item3">' +
+                '                <input class="vlink vinput" name="url_input" placeholder="链接" maxlength="100"' +
+                '                       id="id_url_input" type="url">' +
+                '                <label for="id_url_input">{{ form.url.errors }}</label>' +
+                '            </div>' +
+                '            <div class="vedit">' +
+                '                <textarea type="text" class="vediter vinput OwO-textarea" name="comment"' +
+                '                          placeholder="在这里输入吧..."' +
+                '                          maxlength="500" required="" id="id_comment" cols="40" rows="10"></textarea>' +
+                '                <label for="id_comment">{{ form.comment.errors }}</label>' +
+                '                <div class="OwO" style="width: 90%"></div>' +
+                '                {% if user.is_authenticated %}' +
+                    '                    <button class="vsubmit vbtn" type="submit">发表</button>' +
+                    '                {% else %}' +
+                    '                    <p>卡bug是吧，退！退！退！</p>' +
+                    '                {% endif %}' +
+                '            </div>' +
+                '        </div>' +
+                '    </form>' +
+                '</div>';
+            if (document.getElementById("reply-{{ comment_id }}")) {
+                return true;
+            } else {
+                $(".comment_reply_textarea").remove();
+                $(".reply_button_{{ comment_id }}").parent().append(reply_html);
+            }
+            new OwO({
+                logo: 'OωO表情',
+                container: document.getElementsByClassName('OwO')[1],
+                target: document.getElementsByClassName('OwO-textarea')[1],
+                api: '/static/OwO.json',
+                position: 'up',
+                width: '100%',
+                maxHeight: '250px'
+            });
+        }
+    </script>
+{% endblock %}

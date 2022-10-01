@@ -1284,7 +1284,7 @@ header .user .nav-item {
 }
 
 .comment-num {
-    margin-bottom: 20px;
+    margin: 16px 0 23px 0;
     font-size: 1.2em;
 }
 
@@ -1774,7 +1774,6 @@ footer {
 .vwrap {
     border: 1px solid rgb(240 240 240);
     border-radius: 4px;
-    margin-bottom: 10px;
     position: relative;
     padding: 10px;
     background: rgba(255, 255, 255, .5);

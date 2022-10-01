@@ -57,6 +57,7 @@ def user_login(request):
     """
     # 登录请求
     if request.method == "POST":
+        next_url = request.POST.get('next', 'index')  # 自定义跳转
         login_form = UserForm(request.POST)
         if login_form.is_valid():
             username = login_form.cleaned_data['username']
@@ -64,18 +65,19 @@ def user_login(request):
             login_user = User.objects.filter(username=username)
             if not login_user.exists():
                 messages.error(request, "用户不存在")
-                return redirect('blog:login')
+                return redirect(next_url)
             if not login_user.first().is_active:
                 messages.error(request, '用户已被锁定，请联系管理员')
-                return redirect('blog:login')
+                return redirect(next_url)
             user = authenticate(username=username, password=password)
             if user:
                 # 自动登录并存储session
                 login(request, user)
-                next_url = request.POST.get('next', 'index')  # 自定义跳转
                 return redirect(next_url)
             else:
                 messages.error(request, "密码输入有误。请重新输入")
+        else:
+            messages.error(request, '验证码错误，请重新输入')
     else:
         login_form = UserForm()
     return render(request, 'blog/user/login.html', locals())
@@ -118,6 +120,8 @@ def user_register(request):
                 new_user.save()
                 messages.success(request, '注册成功，现在可以登陆啦')
                 return redirect('blog:login')
+        else:
+            messages.error(request, '验证码错误，请重新输入')
     else:
         register_form = RegisterForm()
     return render(request, 'blog/user/register.html', locals())

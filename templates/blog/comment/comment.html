@@ -1,5 +1,5 @@
-<h3 class="form-btn blue-text"><a href="javascript:;"><i class="el-edit"></i>我要留言 / 展开表单</a></h3>
-<div id="Coon" class="form-zd form-in">
+<h3 id="ctb" class="form-btn blue-text"><a href="javascript:;"><i class="el-edit"></i>我要留言 / 展开表单</a></h3>
+<div class="form-zd form-in">
     <form action="{% url 'blog:get_comment' blog.id %}" method="post" class="comment-form">
         {% if messages %}
             <script>
@@ -29,12 +29,12 @@
                 <textarea type="text" class="vediter vinput OwO-textarea" name="comment" placeholder="在这里输入吧..."
                           maxlength="500" required="" id="id_comment" cols="40" rows="10"></textarea>
                 <label for="id_comment">{{ form.comment.errors }}</label>
-                <div class="OwO" style="width: 80%"></div>
+                <div class="OwO" style="width: 90%"></div>
                 {% if user.is_authenticated %}
                     <button class="btn vbtn" type="submit">发表</button>
                 {% else %}
-                    <button class="btn vbtn" type="submit">
-                        <a href="{% url 'blog:login' %}">登陆后发表</a>
+                    <button class="btn vbtn" type="button">
+                        <a href="{% url 'blog:login' %}?next={{ request.path }}#ctb">登陆后发表</a>
                     </button>
                 {% endif %}
             </div>
@@ -42,16 +42,14 @@
     </form>
 </div>
 
-{% block js %}
-    <script>
-        const OwO_msg = new OwO({
-            logo: 'OωO表情',
-            container: document.getElementsByClassName('OwO')[0],
-            target: document.getElementsByClassName('OwO-textarea')[0],
-            api: '/static/OwO.json',
-            position: 'down',
-            width: '100%',
-            maxHeight: '250px'
-        });
-    </script>
-{% endblock %}
+<script>
+    const OwO_msg = new OwO({
+        logo: 'OωO表情',
+        container: document.getElementsByClassName('OwO')[0],
+        target: document.getElementsByClassName('OwO-textarea')[0],
+        api: '/static/OwO.json',
+        position: 'down',
+        width: '100%',
+        maxHeight: '250px'
+    });
+</script>
