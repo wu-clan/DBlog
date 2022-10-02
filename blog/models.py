@@ -52,7 +52,7 @@ class Conf(models.Model):
     """
     网站配置信息
     """
-    main_website = models.CharField(null=True, blank=True, max_length=64, verbose_name='主网站', default="xwboy.top")
+    main_website = models.CharField(null=True, blank=True, max_length=50, verbose_name='主网站', default="xwboy.top")
     name = models.CharField(null=True, blank=True, max_length=8, verbose_name='关注我_名称', default="CL' WU")
     chinese_description = models.CharField(null=True, blank=True, max_length=30, verbose_name='关注我_中文描述',
                                            default='永不放弃坚持就是这么酷！要相信光')
@@ -94,7 +94,7 @@ class HeadAnnouncement(models.Model):
     """
     轮播公告
     """
-    head_announcement = models.CharField(max_length=16, verbose_name='头部轮播公告', default='热烈欢迎浏览本站')
+    head_announcement = models.CharField(max_length=50, verbose_name='头部轮播公告', default='热烈欢迎浏览本站')
 
     class Meta:
         verbose_name = '轮播公告'
@@ -181,7 +181,7 @@ class Tag(models.Model):
     """
     标签
     """
-    tag_name = models.CharField('标签名称', max_length=10)
+    tag_name = models.CharField('标签名称', max_length=30)
 
     class Meta:
         verbose_name = '标签'
@@ -195,7 +195,7 @@ class Article(models.Model):
     """
     文章
     """
-    title = models.CharField(max_length=50, verbose_name='文章标题')
+    title = models.CharField(max_length=100, verbose_name='文章标题')
     content = MDTextField(blank=True, null=True, verbose_name='文章正文')
     digest = models.TextField(blank=True, null=True, verbose_name='文章摘要')
     view = models.BigIntegerField(default=0, verbose_name='阅读数')
@@ -306,15 +306,15 @@ class Comment(MPTTModel):
     """
     评论
     """
-    title = models.CharField("标题", max_length=50)
+    title = models.CharField("标题", max_length=100)
     name = models.CharField('昵称', max_length=25)
-    request_ip = models.CharField('请求者ip', max_length=128, default='未知')
-    request_address = models.CharField('请求者地址', max_length=128, default=None)
+    request_ip = models.CharField('请求者ip', max_length=30, default='未知')
+    request_address = models.CharField('请求者地址', max_length=100, default=None)
     email = models.EmailField('预留邮箱', null=True, blank=True, max_length=50)
     comment = models.TextField('评论内容', max_length=500)
     avatar_address = models.ImageField('头像', null=True, blank=True)
     url = models.CharField('链接', max_length=255)
-    url_input = models.CharField('输入链接', null=True, blank=True, max_length=100)
+    url_input = models.CharField('输入链接', null=True, blank=True, max_length=255)
     created_time = models.DateTimeField('评论时间', auto_now_add=True)
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='article')
     parent = TreeForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='children')
@@ -356,7 +356,7 @@ class Subscription(models.Model):
     """
     文章邮箱订阅
     """
-    email = models.EmailField('邮箱订阅用户', max_length=100)
+    email = models.EmailField('邮箱订阅用户', max_length=50)
     sub_time = models.DateTimeField('订阅时间', auto_now_add=True)
 
     class Meta:
