@@ -32,6 +32,8 @@ urlpatterns = [
     path('begin_unsub/', views.begin_unsub, name='begin_unsub'),
     # 取消订阅
     path('unsubscribe/', views.unsubscribe, name='unsubscribe'),
+    # 举报
+    path('tip_off/<int:pk>/', views.tip_off, name='tip_off'),
 
     # 用户操作
     # 登录

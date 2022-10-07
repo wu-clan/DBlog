@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from import_export.admin import ImportExportModelAdmin
 
 from blog.models import About, Article, ArticleImg, Carousel, Category, Comment, Conf, Friend, Pay, \
-    Subscription, Tag, UserInfo, HeadAnnouncement, MainAnnouncement
+    Subscription, Tag, UserInfo, HeadAnnouncement, MainAnnouncement, TipOff
 
 # Register your models here.
 admin.site.unregister(User)
@@ -217,3 +217,15 @@ class CommentAdmin(admin.ModelAdmin):
         'created_time'
     )
     search_fields = ('user', 'request_address', 'name')
+
+
+@admin.register(TipOff)
+class SubscriptionAdmin(admin.ModelAdmin):
+    """
+    订阅
+    """
+    list_display = (
+        'info',
+        'status',
+        'tip_off_time'
+    )

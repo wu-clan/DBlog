@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Create your views here.
+import json
 import os
 import platform
 import re
@@ -22,7 +23,7 @@ from markdown.extensions.toc import TocExtension
 from blog.forms.comment.comment_forms import CommentForm
 from blog.forms.subscription.subscription_forms import SubscriptionForm, UnSubscriptionForm
 from blog.forms.user.user_forms import EditUserInfo, ProfileForm, RegisterForm, RestCodeForm, RestPwdForm, UserForm
-from blog.models import About, Subscription, Comment
+from blog.models import About, Subscription, Comment, TipOff
 from blog.models import Article, Category, Tag, UserInfo
 from djangoProject import settings
 from djangoProject.settings import SESSION_COOKIE_AGE
@@ -291,7 +292,7 @@ def profile_edit(request, pk):
                         pass
                     userinfo.avatar = data['avatar']
                     # 同步更新用户所有评论头像地址
-                    comment_avatar = user.comment_user.filter(user=user.id)
+                    comment_avatar = user.user.filter(user=user.id)
                     cmt_ava = comment_avatar.exists()
                     if cmt_ava:
                         comment_avatar.all().update(avatar_address=f"{userinfo.users_avatar}/{data['avatar']}")
@@ -615,6 +616,25 @@ def unsubscribe(request):
     else:
         form = UnSubscriptionForm()
     return render(request, 'blog/unsub_email.html', locals())
+
+
+def tip_off(request, pk):
+    """
+    举报
+    """
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        article = Article.objects.filter(pk=pk)
+        comment = Comment.objects.filter(pk=pk)
+        TipOff.objects.create({
+            'info': data['info'],
+            'article': article,
+            'comment': comment
+        })
+        return JsonResponse({
+            'code': 200,
+            'msg': '举报成功'
+        })
 
 
 def page_not_found_error(request, exception):

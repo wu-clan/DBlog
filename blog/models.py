@@ -366,3 +366,19 @@ class Subscription(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class TipOff(models.Model):
+    """
+    举报
+    """
+    info = models.CharField(max_length=100, verbose_name='举报信息')
+    status = models.BooleanField(default=1, verbose_name='举报状态')
+    tip_off_time = models.DateTimeField('举报时间', auto_now_add=True)
+    article = models.ForeignKey(Article, null=True, blank=True, on_delete=models.CASCADE, related_name='tip_article')
+    comment = models.ForeignKey(Comment, null=True, blank=True, on_delete=models.CASCADE, related_name='tip_comment')
+
+    class Meta:
+        ordering = ['tip_off_time']
+        verbose_name = '举报内容'
+        verbose_name_plural = verbose_name

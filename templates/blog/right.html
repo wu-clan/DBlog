@@ -130,15 +130,15 @@
                     <div class="sd-name">
                         <span><i class="el-book"></i>{{ comment.title }}</span>
                         <a class="blue-text" href="{{ comment.url }}#{{ comment.comment }}"
-                           title="{{ comment.create_time }}">
+                           title="{{ comment.created_time }}">
                             {{ comment.comment | safe }}
                         </a>
                         <span style="text-align: right; margin-left: 66px">—&nbsp;&nbsp;<i class="el-user"></i>
                         {{ comment.name }}
                             {% if comment.request_address %}
-                                <p style="color: #7799 !important; font-size: xx-small">来自: {{ comment.request_address }}</p>
+                                <p style="color: #7799 !important; font-size: xx-small">IP 属地: {{ comment.request_address }}</p>
                             {% else %}
-                                <p style="color: #7799 !important; font-size: xx-small">来自: {{ comment.request_ip }}</p>
+                                <p style="color: #7799 !important; font-size: xx-small">IP: {{ comment.request_ip }}</p>
                             {% endif %}
                         </span>
                     </div>
