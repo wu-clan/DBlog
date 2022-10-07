@@ -72,7 +72,7 @@ class Conf(models.Model):
     @staticmethod
     def fetch_all_site_info():
         # 获取站点信息
-        site_info = cache.get(f"site_info")
+        site_info = cache.get("site_info")
         if not site_info:
             # 查询最后一条站点信息
             site_info = Conf.objects.last()

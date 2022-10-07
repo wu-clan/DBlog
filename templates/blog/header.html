@@ -5,7 +5,8 @@
             {# logo #}
             <div class="logo">
                 <a href="{% url 'blog:index' %}">
-                    <img src="{{ MEDIA_URL }}{{ website_logo }}" alt="logo"/>
+                    <img src="{% if '/static/' in website_logo %} {{ website_logo }} {% else %}
+                        {{ MEDIA_URL }}{{ website_logo }} {% endif %}" alt="logo"/>
                 </a>
             </div>
             {# 滚动信息 #}

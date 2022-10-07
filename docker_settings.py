@@ -208,7 +208,7 @@ website_author_link = 'http://127.0.0.1:8000'
 email = '2186656812@qq.com'
 website_number = ''
 git = 'https://gitee.com/wu_cl'
-website_logo = 'logo/DBlog.png'
+website_logo = '/static/images/logo/DBlog.png'
 
 # simpleui本地配置
 # SIMPLEUI_LOGO：对官方css进行了某些修改以适应后台尺寸，使用个人logo时根据显示情况自行修改即可...

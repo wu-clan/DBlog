@@ -49,18 +49,33 @@ def sidebar(request):
 
 def website_conf(request):
     # 网站配置
-    conf_list_redis = Conf.fetch_all_site_info()
+    conf_by_redis = Conf.fetch_all_site_info()
 
-    return {
-        'main_website': conf_list_redis.main_website or settings.main_website,
-        'name': conf_list_redis.name or settings.name,
-        'chinese_description': conf_list_redis.chinese_description or settings.chinese_description,
-        'english_description': conf_list_redis.english_description or settings.english_description,
-        'avatar_link': conf_list_redis.avatar_link or settings.avatar_link,
-        'website_author': conf_list_redis.website_author or settings.website_author,
-        'website_author_link': conf_list_redis.website_author_link or settings.website_author_link,
-        'email': conf_list_redis.email or settings.email,
-        'website_number': conf_list_redis.website_number or settings.website_number,
-        'git': conf_list_redis.git or settings.git,
-        'website_logo': conf_list_redis.website_logo or settings.website_logo,
-    }
+    if conf_by_redis:
+        return {
+            'main_website': conf_by_redis.main_website,
+            'name': conf_by_redis.name,
+            'chinese_description': conf_by_redis.chinese_description,
+            'english_description': conf_by_redis.english_description,
+            'avatar_link': conf_by_redis.avatar_link,
+            'website_author': conf_by_redis.website_author,
+            'website_author_link': conf_by_redis.website_author_link,
+            'email': conf_by_redis.email,
+            'website_number': conf_by_redis.website_number,
+            'git': conf_by_redis.git,
+            'website_logo': conf_by_redis.website_logo,
+        }
+    else:
+        return {
+            'main_website': settings.main_website,
+            'name': settings.name,
+            'chinese_description': settings.chinese_description,
+            'english_description': settings.english_description,
+            'avatar_link': settings.avatar_link,
+            'website_author': settings.website_author,
+            'website_author_link': settings.website_author_link,
+            'email': settings.email,
+            'website_number': settings.website_number,
+            'git': settings.git,
+            'website_logo': settings.website_logo,
+        }

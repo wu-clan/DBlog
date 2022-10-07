@@ -252,10 +252,10 @@ website_author_link = 'https://www.xwboy.top'
 email = '2186656812@qq.com'
 website_number = ''
 git = 'https://gitee.com/wu_cl'
-website_logo = 'logo/DBlog.png'
+website_logo = '/static/images/logo/DBlog.png'
 
 # simpleui本地配置
-SIMPLEUI_LOGO = 'https://www.xwboy.top/static/images/logo/DBlog.png' or 'https://www.xwboy.top/media/logo/DBlog.png'
+SIMPLEUI_LOGO = 'https://www.xwboy.top/static/images/logo/DBlog.png'
 SIMPLEUI_HOME_TITLE = 'DBlog后台管理'
 SIMPLEUI_ANALYSIS = False
 SIMPLEUI_LOADING = False
