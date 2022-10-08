@@ -162,8 +162,13 @@ class ArticleAdmin(ImportExportModelAdmin):
         'comment',
         'picture'
     )
-    list_filter = ('category', 'author')
-    filter_horizontal = ('tag',)
+    list_filter = (
+        'category',
+        'author'
+    )
+    filter_horizontal = (
+        'tag',
+    )
 
 
 @admin.register(ArticleImg)
@@ -174,8 +179,7 @@ class ArticleImgAdmin(admin.ModelAdmin):
     list_display = (
         'img_title',
         'url',
-        'images',
-        # 'article_img',
+        'images'
     )
 
 
@@ -211,12 +215,15 @@ class CommentAdmin(admin.ModelAdmin):
         'request_ip',
         'request_address',
         'comment_validity',
-        'url',
         'avatar_link',
         'url_input',
         'created_time'
     )
-    search_fields = ('user', 'request_address', 'name')
+    search_fields = (
+        'user',
+        'request_address',
+        'name'
+    )
 
 
 @admin.register(TipOff)
@@ -227,5 +234,14 @@ class SubscriptionAdmin(admin.ModelAdmin):
     list_display = (
         'info',
         'status',
+        'article',
+        'comment',
         'tip_off_time'
+    )
+    list_filter = (
+        'status',
+    )
+    readonly_fields = (
+        'article',
+        'comment'
     )

@@ -169,7 +169,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # simpleui 排序后台app导航栏
 SIMPLEUI_CONFIG = {
     'system_keep': True,
-    'menu_display': ['文章', '文章配置', '网站配置', '文章订阅', '权限验证', ],
+    'menu_display': ['文章', '文章配置', '网站配置', '公告', '文章订阅', '审核', '权限验证', ],
     'dynamic': True,
     'menus': [{
         'name': '文章',
@@ -184,6 +184,7 @@ SIMPLEUI_CONFIG = {
         'name': '文章配置',
         'models': [{
             'name': '文章大头图',
+            'icon': 'fa fa-image',
             'url': '/admin/blog/articleimg'
         }, {
             'name': '文章类型',
@@ -203,14 +204,6 @@ SIMPLEUI_CONFIG = {
             'name': '首页轮播图配置',
             'url': '/admin/blog/carousel'
         }, {
-            'name': '轮播公告',
-            'icon': 'fas fa-bullhorn',
-            'url': '/admin/blog/headannouncement'
-        }, {
-            'name': '主公告',
-            'icon': 'fas fa-bullhorn',
-            'url': '/admin/blog/mainannouncement'
-        }, {
             'name': '友链',
             'icon': 'fa fa-link',
             'url': '/admin/blog/friend'
@@ -224,9 +217,28 @@ SIMPLEUI_CONFIG = {
             'url': '/admin/blog/about'
         }]
     }, {
+        'name': '公告',
+        'models': [{
+            'name': '轮播公告',
+            'icon': 'fas fa-bullhorn',
+            'url': '/admin/blog/headannouncement'
+        }, {
+            'name': '主公告',
+            'icon': 'fas fa-bullhorn',
+            'url': '/admin/blog/mainannouncement'
+        }, ]
+    }, {
+        'name': '审核',
+        'models': [{
+            'name': '举报',
+            'icon': 'fa fa-exclamation-triangle',
+            'url': '/admin/blog/tipoff'
+        }]
+    }, {
         'name': '文章订阅',
         'models': [{
             'name': '订阅用户',
+            'icon': 'fa fa-address-book',
             'url': '/admin/blog/subscription'
         }]
     }, {

@@ -15,7 +15,11 @@
                 </div>
                 {# 头像 #}
                 <a class="notransition" href="{% url 'blog:about' %}" data-pjax-state="">
-                    <img class="headportrait" alt="加载失败~" src="{{ avatar_link }}">
+                    {% if avatar_link %}
+                        <img class="headportrait" alt="加载失败~" src="{{ avatar_link }}">
+                    {% else %}
+                        <img class="headportrait" alt="加载失败~"  src="/static/images/icon/user.gif">
+                    {% endif %}
                 </a>
             </div>
             {# 组件 #}

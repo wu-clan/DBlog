@@ -123,6 +123,8 @@ class MainAnnouncement(models.Model):
         else:
             return str(self.main_announcement)
 
+    ment_text.short_description = '右侧主公告'
+
     def __str__(self):
         return self.main_announcement
 
@@ -172,6 +174,8 @@ class About(models.Model):
             return f'{str(self.contents)[0:200]}……'
         else:
             return str(self.contents)
+
+    about_text.short_description = '关于信息'
 
     def __str__(self):
         return self.contents
@@ -235,6 +239,8 @@ class Article(models.Model):
         """
         self.comment = num
         self.save(update_fields=['comment'])
+
+    content_text.short_description = '文章内容'
 
     def __str__(self):
         return self.title
@@ -316,9 +322,9 @@ class Comment(MPTTModel):
     url = models.CharField('链接', max_length=255)
     url_input = models.CharField('输入链接', null=True, blank=True, max_length=255)
     created_time = models.DateTimeField('评论时间', auto_now_add=True)
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='article')
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='article', verbose_name='关联文章')
     parent = TreeForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='children')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user', verbose_name='关联用户')
     reply = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE, related_name='reply')
 
     class Meta:
@@ -343,10 +349,13 @@ class Comment(MPTTModel):
         """
         try:
             href = self.avatar_address.url
-            img = mark_safe(f'<img src="{href}" width="60px" height="60px" />')
+            img = mark_safe(f'<img src="{href}" width="60px" height="60px"/>')
         except Exception:  # noqa
             img = ''
         return img
+
+    comment_validity.short_description = '评论内容'
+    avatar_link.short_description = '头像预览'
 
     def __str__(self):
         return self.comment[:20]
@@ -356,11 +365,11 @@ class Subscription(models.Model):
     """
     文章邮箱订阅
     """
-    email = models.EmailField('邮箱订阅用户', max_length=50)
+    email = models.EmailField('订阅邮箱', max_length=50)
     sub_time = models.DateTimeField('订阅时间', auto_now_add=True)
 
     class Meta:
-        ordering = ['sub_time']
+        ordering = ['-sub_time']
         verbose_name = '邮箱订阅'
         verbose_name_plural = verbose_name
 
@@ -373,12 +382,14 @@ class TipOff(models.Model):
     举报
     """
     info = models.CharField(max_length=100, verbose_name='举报信息')
-    status = models.BooleanField(default=1, verbose_name='举报状态')
+    status = models.BooleanField(default=0, verbose_name='审核状态')
     tip_off_time = models.DateTimeField('举报时间', auto_now_add=True)
-    article = models.ForeignKey(Article, null=True, blank=True, on_delete=models.CASCADE, related_name='tip_article')
-    comment = models.ForeignKey(Comment, null=True, blank=True, on_delete=models.CASCADE, related_name='tip_comment')
+    article = models.ForeignKey(Article, null=True, blank=True, on_delete=models.CASCADE, related_name='tip_article',
+                                verbose_name='关联文章')
+    comment = models.ForeignKey(Comment, null=True, blank=True, on_delete=models.CASCADE, related_name='tip_comment',
+                                verbose_name='关联评论')
 
     class Meta:
-        ordering = ['tip_off_time']
+        ordering = ['-tip_off_time']
         verbose_name = '举报内容'
         verbose_name_plural = verbose_name

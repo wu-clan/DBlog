@@ -22,13 +22,20 @@
             <h3 class="arc-title index-title">{{ blog.title }} </h3>
             <div class="post-line bg-color">
                 <ul>
-                    <li><a title="更新于{{ blog.created_time }}"><i class="el-time"></i>
-                        <time>{{ blog.created_time }}</time>
-                    </a></li>
-                    <li><a href="#" title="作者"><i class="el-user"></i>{{ blog.author }}</a></li>
+                    <li>
+                        <a title="更新于{{ blog.created_time }}">
+                            <i class="el-time"></i>
+                            <time>{{ blog.created_time }}</time>
+                        </a>
+                    </li>
+                    <li><a title="作者"><i class="el-user"></i>{{ blog.author }}</a></li>
                     <li><a href="#ctb" title="转到评论"><i class="el-comment"></i>{{ blog.comment }}条</a></li>
                     <li><a title="已有 {{ blog.view }} 次浏览"><i class="el-eye-open"></i>{{ blog.view }}</a></li>
-                    <li><a title="举报" onclick="tip_off()"><i class="el el-warning-sign"></i>举报</a></li>
+                    <li>
+                        <a class="top_off_button" title="举报" onclick="tip_off()">
+                            <i class="el el-warning-sign"></i>举报
+                        </a>
+                    </li>
                 </ul>
             </div>
 
@@ -170,6 +177,7 @@
                                 </button>
                                 <button type="button"
                                         style="background-color: rgb(0 0 0 / 0%); border: none;"
+                                        class="tip_off_button_comment_{{ comment.id }}"
                                         onclick="tip_off()"
                                         title="planing">
                                     <svg t="1664107847823" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -182,26 +190,38 @@
                                               fill="#bfbfbf" p-id="5859"></path>
                                     </svg>
                                 </button>
-{#                                <script>#}
-{#                                    $('.tip_off_content').click(function (obj) {#}
-{#                                        var comment = document.getElementsByClassName(obj).value#}
-{#                                        $.ajax({#}
-{#                                            type: "post",#}
-{#                                            url: '{% url 'blog:tip_off' comment.id %}',#}
-{#                                            dataType: "json",#}
-{#                                            data: JSON.stringify({'info': comment}),#}
-{#                                            success: function (data) {#}
-{#                                                if (data['code'] === 200) {#}
-{#                                                    layer.msg(data['msg'], {icon: 1, time: 500});#}
-{#                                                } else {#}
-{#                                                    layer.msg(data['msg'], {icon: 2});#}
-{#                                                }#}
-{#                                            },#}
-{#                                            error: function () {#}
-{#                                            }#}
-{#                                        });#}
-{#                                    })#}
-{#                                </script>#}
+                                <script>
+                                    $(document).ready(function () {
+                                        $('.tip_off_button_comment_{{ comment.id }}').click(function () {
+                                            $('.tip_off_content').click(function (obj) {
+                                                console.log(obj)
+                                                $.ajax({
+                                                    type: "post",
+                                                    url: '{% url 'blog:tip_off' blog.id %}',
+                                                    dataType: "json",
+                                                    data: JSON.stringify({
+                                                        'info': obj.target.innerText,
+                                                        'comment': {{ comment.id }}
+                                                    }),
+                                                    success: function (data) {
+                                                        if (data['code'] === 200) {
+                                                            layer.msg(data['msg'], {
+                                                                offset: 't',
+                                                                icon: 1
+                                                            });
+                                                        }
+                                                    },
+                                                    error: function (data) {
+                                                        layer.msg(data.statusText, {
+                                                            offset: 't',
+                                                            icon: 2
+                                                        });
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    });
+                                </script>
                                 {% include "blog/comment/reply.html" with comment_id=comment.id %}
                             {% else %}
                                 <button type="button"
@@ -234,7 +254,7 @@
                 closeBtn: 0,
                 shadeClose: true,
                 skin: 'tip-off',
-                content: '<div style="color: #a5a5a5; padding: 0 0 10px 20px;">请选择举报原因:</div>' +
+                content: '<div style="color: #a5a5a5; padding: 0 0 10px 20px; font-size: 12px">请选择举报原因:</div>' +
                     '<div class="tip_off_body">' +
                     '<ul>' +
                     '<li><a class="tip_off_content">含有广告等引导性内容</a></li>' +
@@ -249,25 +269,29 @@
     </script>
     <script>
         $(document).ready(function () {
-            $('.tip_off_content').click(function (obj) {
-                console.log(obj)
-                {#todo debug#}
-                {% comment %}$.ajax({
-                    type: "post",
-                    url: '{% url 'blog:tip_off' blog.id %}',
-                    dataType: "json",
-                    data: JSON.stringify({'info': article}),
-                    success: function (data) {
-                        if (data['code'] === 200) {
-                            layer.msg(data['msg'], {icon: 1});
-                        } else {
-                            layer.msg(data['msg'], {icon: 2});
+            $('.top_off_button').click(function () {
+                $('.tip_off_content').click(function (obj) {
+                    $.ajax({
+                        type: "post",
+                        url: '{% url 'blog:tip_off' blog.id %}',
+                        dataType: "json",
+                        data: JSON.stringify({'info': obj.target.innerText}),
+                        success: function (data) {
+                            if (data['code'] === 200) {
+                                layer.msg(data['msg'], {
+                                    offset: 't',
+                                    icon: 1
+                                });
+                            }
+                        },
+                        error: function (data) {
+                            layer.msg(data.statusText, {
+                                offset: 't',
+                                icon: 2
+                            });
                         }
-                    },
-                    error: function (data) {
-                        console.log(data)
-                    }
-                });{% endcomment %}
+                    });
+                });
             });
         });
     </script>

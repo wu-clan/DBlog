@@ -624,9 +624,14 @@ def tip_off(request, pk):
     """
     if request.method == 'POST':
         data = json.loads(request.body)
-        article = Article.objects.filter(pk=pk)
-        comment = Comment.objects.filter(pk=pk)
-        TipOff.objects.create({
+        comment_id = data.get('comment')
+        if comment_id:
+            article = None
+            comment = Comment.objects.filter(pk=comment_id).first()
+        else:
+            article = Article.objects.filter(pk=pk).first()
+            comment = None
+        TipOff.objects.create(**{
             'info': data['info'],
             'article': article,
             'comment': comment
