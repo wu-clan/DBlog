@@ -19,6 +19,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from fast_captcha import text_captcha
 from markdown.extensions.toc import TocExtension
+from ratelimit.decorators import ratelimit
 
 from blog.forms.comment.comment_forms import CommentForm
 from blog.forms.subscription.subscription_forms import SubscriptionForm, UnSubscriptionForm
@@ -135,6 +136,7 @@ def password_reset(request):
     return render(request, 'blog/password_reset/password_reset.html')
 
 
+@ratelimit(key='ip', rate='3/1m', block=True)
 def password_reset_email(request):
     """
     密码重置验证码
@@ -618,6 +620,7 @@ def unsubscribe(request):
     return render(request, 'blog/unsub_email.html', locals())
 
 
+@ratelimit(key='ip', rate='1/1d', block=True)
 def tip_off(request, pk):
     """
     举报
@@ -642,9 +645,25 @@ def tip_off(request, pk):
         })
 
 
+@ratelimit(key='ip', rate='6/1m', block=True)
+@login_required
+def praise(request):
+    """
+    点赞
+    """
+    if request.method == 'POST':
+        ...
+
+
+@ratelimit(key='ip', rate='6/1m', block=True)
+@login_required
+def tread(request):
+    """
+    踩
+    """
+    if request.method == 'POST':
+        ...
+
+
 def page_not_found_error(request, exception):
-    return render(request, "404.html", status=404)
-
-
-def page_error(request):
-    return render(request, "404.html", status=500)
+    return render(request, "404.html", exception, status=404)

@@ -22,9 +22,9 @@ from django.views.static import serve
 from blog import views
 
 urlpatterns = [
+    path('', views.index, name='index'),
     path('admin/', admin.site.urls),
     path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
-    path('', views.index, name='index'),
 
     # 验证码
     path('captcha/', include('captcha.urls')),
@@ -37,4 +37,3 @@ urlpatterns = [
 ]
 
 handler404 = views.page_not_found_error
-handler500 = views.page_error

@@ -7,15 +7,12 @@
     <link rel="stylesheet" href="/static/404/style.css">
     <link href="/static/404/css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="/static/404/jquery-1.11.0.min.js"></script>
-
     <script>
         $(document).ready(function () {
-
             function fly() {
                 plane.css('left', startPos);
                 plane.animate({left: 2600}, 32000, 'linear')
-            };
-
+            }
             var screenWidth = $(document).width();
             var startPos = -700;
             var plane = $('#plane')
@@ -25,10 +22,8 @@
             setInterval(function () {
                 fly();
             }, 34000);
-
         });
     </script>
-
 </head>
 
 <body style="">
@@ -38,7 +33,6 @@
         <span class="tail">Sorry, we can't find what you're looking for</span>
         <span><img src="/static/404/plane.png"></span>
     </div>
-
     <div class="centerContent clearfix">
         <div class="search">
             <form action="{% url 'blog:search' %}">
@@ -61,13 +55,11 @@
                 <a href="#"><img src="/static/404/email.png"></a>
                 <a href="#"><img src="/static/404/weibo.png"></a>
             </div>
-            <div class="credits">Copyright © 2021-2022 - <a href="{% url 'blog:index' %}"><strong>xiaowu's blog</strong></a> All Rights Reserved.</div>
-
+            <div class="credits">Copyright © 2021-2022 - <a href="{% url 'blog:index' %}"><strong>xiaowu's blog</strong></a>
+                All Rights Reserved.
+            </div>
         </div>
     </div>
-
 </div>
-
-
 </body>
 </html>

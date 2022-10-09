@@ -204,6 +204,8 @@ class Article(models.Model):
     digest = models.TextField(blank=True, null=True, verbose_name='文章摘要')
     view = models.BigIntegerField(default=0, verbose_name='阅读数')
     comment = models.BigIntegerField(default=0, verbose_name='评论数')
+    praise_num = models.BigIntegerField(default=0, verbose_name='点赞数')
+    tread_num = models.BigIntegerField(default=0, verbose_name='踩数')
     picture = models.CharField(max_length=255, blank=True, null=True, verbose_name="url(标题图链接)")
     tag = models.ManyToManyField(Tag, verbose_name='标签')
     created_time = models.DateField(auto_now_add=True, verbose_name='创建时间')
@@ -227,7 +229,6 @@ class Article(models.Model):
     def viewed(self):
         """
         增加阅读数
-        :return:
         """
         self.view += 1
         self.save(update_fields=['view'])
@@ -235,10 +236,23 @@ class Article(models.Model):
     def commenced(self, num):
         """
         刷新评论数
-        :return:
         """
         self.comment = num
         self.save(update_fields=['comment'])
+
+    def praised(self):
+        """
+        点赞数
+        """
+        self.praise_num += 1
+        self.save(update_fields=['praise_num'])
+
+    def tread(self):
+        """
+        踩数
+        """
+        self.tread_num += 1
+        self.save(update_fields=['tread_num'])
 
     content_text.short_description = '文章内容'
 
@@ -321,6 +335,8 @@ class Comment(MPTTModel):
     avatar_address = models.ImageField('头像', null=True, blank=True)
     url = models.CharField('链接', max_length=255)
     url_input = models.CharField('输入链接', null=True, blank=True, max_length=255)
+    praise_num = models.BigIntegerField(default=0, verbose_name='点赞数')
+    tread_num = models.BigIntegerField(default=0, verbose_name='踩数')
     created_time = models.DateTimeField('评论时间', auto_now_add=True)
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='article', verbose_name='关联文章')
     parent = TreeForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='children')
@@ -353,6 +369,20 @@ class Comment(MPTTModel):
         except Exception:  # noqa
             img = ''
         return img
+
+    def praised(self):
+        """
+        点赞数
+        """
+        self.praise_num += 1
+        self.save(update_fields=['praise_num'])
+
+    def tread(self):
+        """
+        踩数
+        """
+        self.tread_num += 1
+        self.save(update_fields=['tread_num'])
 
     comment_validity.short_description = '评论内容'
     avatar_link.short_description = '头像预览'

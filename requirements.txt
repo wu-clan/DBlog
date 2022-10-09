@@ -12,3 +12,4 @@ requests==2.25.1
 cryptography==37.0.4
 wait-for-it==2.2.1
 django-mptt==0.13.4
+django-ratelimit==3.0.1
