@@ -24,7 +24,7 @@ from ratelimit.decorators import ratelimit
 from blog.forms.comment.comment_forms import CommentForm
 from blog.forms.subscription.subscription_forms import SubscriptionForm, UnSubscriptionForm
 from blog.forms.user.user_forms import EditUserInfo, ProfileForm, RegisterForm, RestCodeForm, RestPwdForm, UserForm
-from blog.models import About, Subscription, Comment, TipOff
+from blog.models import About, Subscription, Comment, TipOff, CommentExtend, ArticleExtend
 from blog.models import Article, Category, Tag, UserInfo
 from djangoProject import settings
 from djangoProject.settings import SESSION_COOKIE_AGE
@@ -363,7 +363,7 @@ def detail(request, pk):
     )
     # md文章内容
     blog.content = md.convert(blog.content)
-    # 获取对应文章的全部评论，倒序显示
+    # 获取对应文章的全部评论
     comments = Comment.objects.filter(article=pk)
     return render(request, 'blog/detail.html', {
         "blog": blog,
@@ -568,7 +568,7 @@ def get_comment(request, pk, parent_comment_id=None):
                 comment.reply = parent_comment.user
             comment.save()
             redirect_url = reverse('blog:detail', args=[pk]) + '#' + comment.comment
-            article.commenced(article.article.all().count())
+            article.commenced(article.article_comment.all().count())
             return redirect(redirect_url)
     return redirect('blog:detail', pk=pk)
 
@@ -620,7 +620,7 @@ def unsubscribe(request):
     return render(request, 'blog/unsub_email.html', locals())
 
 
-@ratelimit(key='ip', rate='1/1d', block=True)
+@ratelimit(key='ip', rate='6/1d', block=True)
 def tip_off(request, pk):
     """
     举报
@@ -647,22 +647,138 @@ def tip_off(request, pk):
 
 @ratelimit(key='ip', rate='6/1m', block=True)
 @login_required
-def praise(request):
+def praise(request, pk):
     """
     点赞
     """
     if request.method == 'POST':
-        ...
+        data = json.loads(request.body)
+        comment_id = data.get('comment')
+        old_praise_num = CommentExtend.objects.all().filter(praise=1).count()
+        if comment_id:
+            ce = CommentExtend.objects.filter(comment_id=comment_id).filter(user_id=request.user)
+            if ce:
+                if ce.first().praise:
+                    ce.update(praise=0)
+                    return JsonResponse({
+                        'code': 200,
+                        'msg': '取消赞成功',
+                        'tread_num': old_praise_num - 1
+                    })
+                else:
+                    ce.update(praise=1)
+                    return JsonResponse({
+                        'code': 200,
+                        'msg': '赞成功',
+                        'tread_num': old_praise_num + 1
+                    })
+            else:
+                CommentExtend.objects.create(**{
+                    'praise': 1,
+                    'comment': Comment.objects.get(pk=comment_id),
+                    'user': request.user
+                })
+                return JsonResponse({
+                    'code': 200,
+                    'msg': '赞成功',
+                    'praise_num': old_praise_num + 1
+                })
+        else:
+            ae = ArticleExtend.objects.filter(article_id=pk).filter(user_id=request.user)
+            if ae:
+                if ae.first().praise:
+                    ae.update(praise=0)
+                    return JsonResponse({
+                        'code': 200,
+                        'msg': '取消赞成功',
+                        'praise_num': old_praise_num - 1
+                    })
+                else:
+                    ae.update(praise=1)
+                    return JsonResponse({
+                        'code': 200,
+                        'msg': '赞成功',
+                        'praise_num': old_praise_num + 1
+                    })
+            else:
+                ArticleExtend.objects.count(**{
+                    'praise': 1,
+                    'article': Article.objects.get(pk=comment_id),
+                    'user': request.user
+                })
+                return JsonResponse({
+                    'code': 200,
+                    'msg': '踩成功',
+                    'praise_num': old_praise_num + 1
+                })
 
 
 @ratelimit(key='ip', rate='6/1m', block=True)
 @login_required
-def tread(request):
+def tread(request, pk):
     """
     踩
     """
     if request.method == 'POST':
-        ...
+        data = json.loads(request.body)
+        comment_id = data.get('comment')
+        old_tread_num = CommentExtend.objects.all().filter(tread=1).count()
+        if comment_id:
+            ce = CommentExtend.objects.filter(comment_id=comment_id).filter(user_id=request.user)
+            if ce:
+                if ce.first().tread:
+                    ce.update(tread=0)
+                    return JsonResponse({
+                        'code': 200,
+                        'msg': '取消踩成功',
+                        'tread_num': old_tread_num - 1
+                    })
+                else:
+                    ce.update(tread=1)
+                    return JsonResponse({
+                        'code': 200,
+                        'msg': '踩成功',
+                        'tread_num': old_tread_num + 1
+                    })
+            else:
+                CommentExtend.objects.create(**{
+                    'tread': 1,
+                    'comment': Comment.objects.get(pk=comment_id),
+                    'user': request.user
+                })
+                return JsonResponse({
+                    'code': 200,
+                    'msg': '踩成功',
+                    'tread_num': old_tread_num + 1
+                })
+        else:
+            ae = ArticleExtend.objects.filter(article_id=pk).filter(user_id=request.user)
+            if ae:
+                if ae.first().tread:
+                    ae.update(tread=0)
+                    return JsonResponse({
+                        'code': 200,
+                        'msg': '取消踩成功',
+                        'tread_num': old_tread_num - 1
+                    })
+                else:
+                    ae.update(tread=1)
+                    return JsonResponse({
+                        'code': 200,
+                        'msg': '踩成功',
+                        'tread_num': old_tread_num + 1
+                    })
+            else:
+                ArticleExtend.objects.create(**{
+                    'tread': 1,
+                    'article': Article.objects.get(pk=comment_id),
+                    'user': request.user
+                })
+                return JsonResponse({
+                    'code': 200,
+                    'msg': '踩成功',
+                    'tread_num': old_tread_num + 1
+                })
 
 
 def page_not_found_error(request, exception):

@@ -1321,23 +1321,33 @@ body .tip-off .layui-layer-title {
 
 .comment-avatar {
     float: left;
-    border-radius: 50%;
+    border-radius: 30%;
     vertical-align: middle;
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
 }
 
 .comment-author {
-    padding-left: 16px;
+    padding-left: 15px;
+}
+
+.praise_tread_num_show li {
+    float: right;
+    margin-right: 8px;
 }
 
 .comment-meta {
-    color: #777;
-    font-size: 13px;
-    margin-left: 66px;
+    color: #7799;
+    margin-left: 60px;
+    font-size: xx-small;
+}
+
+.comments_button li {
+    display: inline-block;
+    width: 25px;
 }
 
 /*.comment-content {*/

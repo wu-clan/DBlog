@@ -47,16 +47,16 @@
         </div>
 
         <div class="arclist">
-            <h4 class="index-title homeh4"><a href=""><i class="el el-idea"></i>最新文章
-                <small>News</small>
-            </a></h4>
+            <h4 class="index-title homeh4">
+                <a href=""><i class="el el-idea"></i>最新文章<small>News</small></a>
+            </h4>
             {% include "blog/component/blog_list.html" with blogs=blog_list id="New" %}
         </div>
 
         <div class="arclist">
-            <h4 class="index-title homeh4"><a href=""><i class="el el-fire"></i>热门文章
-                <small>Hot</small>
-            </a></h4>
+            <h4 class="index-title homeh4">
+                <a href=""><i class="el el-fire"></i>热门文章<small>Hot</small></a>
+            </h4>
             {% include "blog/component/blog_list.html" with blogs=blog_hot id="Hot" %}
         </div>
     </section>

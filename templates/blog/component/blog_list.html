@@ -1,3 +1,4 @@
+{% load mytags %}
 <div class="arclist">
     <ul>
         {% for blog in blogs %}
@@ -22,15 +23,18 @@
             <p>{{ blog.digest }}</p>
             <ul>
                 <li>
-                    <a title="发布于 {{ blog.created_time }} "><i class="el-time"></i> {{ blog.created_time }}</a></li>
+                    <a title="发布于 {{ blog.created_time|timesince_zh }} ">
+                        <i class="el-time"></i> {{ blog.created_time|timesince_zh }}
+                    </a>
+                </li>
                 <li>
                     <a title="作者： {{ blog.author }}"><i class="el-user"></i>{{ blog.author }}</a>
                 </li>
                 <li>
-                    <a title="已有 {{ blog.comment }} 条评论"><i class="el-comment"></i>{{ blog.comment }}</a>
+                    <a title="{{ blog.comment }} 条评论"><i class="el-comment"></i>{{ blog.comment }}</a>
                 </li>
                 <li>
-                    <a title="已有 {{ blog.view }} 次浏览"><i class="el-eye-open"></i>{{ blog.view }}</a></li>
+                    <a title="{{ blog.view }} 次浏览"><i class="el-eye-open"></i>{{ blog.view }}</a></li>
                 {% for tag in blog.tag.values %}
                     <li class="mob-hidden">
                         <a title="标签: {{ tag.tag_name }}" href="{% url 'blog:tag' tag.tag_name %}">

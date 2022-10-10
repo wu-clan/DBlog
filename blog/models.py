@@ -13,14 +13,17 @@ class UserInfo(models.Model):
     """
     用户扩展信息
     """
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='userinfo')
-    users_avatar = 'users_avatar'
-    avatar = models.ImageField(null=True, blank=True, upload_to=f'{users_avatar}', verbose_name='用户头像')
+    avatar = models.ImageField(null=True, blank=True, upload_to='users_avatar', verbose_name='用户头像')
     mobile = models.CharField(null=True, blank=True, default='', max_length=11, verbose_name='手机号')
     wechat = models.CharField(null=True, blank=True, default='', max_length=30, verbose_name='微信')
     qq = models.CharField(null=True, blank=True, default='', max_length=10, verbose_name='QQ')
     blog_address = models.CharField(null=True, blank=True, default='', max_length=255, verbose_name='博客地址')
     introduction = models.TextField(null=True, blank=True, default='', verbose_name='自我介绍')
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='userinfo'
+    )
 
     class Meta:
         verbose_name = '用户扩展信息'
@@ -204,13 +207,19 @@ class Article(models.Model):
     digest = models.TextField(blank=True, null=True, verbose_name='文章摘要')
     view = models.BigIntegerField(default=0, verbose_name='阅读数')
     comment = models.BigIntegerField(default=0, verbose_name='评论数')
-    praise_num = models.BigIntegerField(default=0, verbose_name='点赞数')
-    tread_num = models.BigIntegerField(default=0, verbose_name='踩数')
     picture = models.CharField(max_length=255, blank=True, null=True, verbose_name="url(标题图链接)")
     tag = models.ManyToManyField(Tag, verbose_name='标签')
-    created_time = models.DateField(auto_now_add=True, verbose_name='创建时间')
-    category = models.ForeignKey('Category', on_delete=models.CASCADE, verbose_name='文章类型')
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='作者')
+    created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.CASCADE,
+        verbose_name='文章类型'
+    )
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name='作者'
+    )
 
     class Meta:
         ordering = ['-created_time']  # 按时间降序
@@ -239,20 +248,6 @@ class Article(models.Model):
         """
         self.comment = num
         self.save(update_fields=['comment'])
-
-    def praised(self):
-        """
-        点赞数
-        """
-        self.praise_num += 1
-        self.save(update_fields=['praise_num'])
-
-    def tread(self):
-        """
-        踩数
-        """
-        self.tread_num += 1
-        self.save(update_fields=['tread_num'])
 
     content_text.short_description = '文章内容'
 
@@ -335,13 +330,34 @@ class Comment(MPTTModel):
     avatar_address = models.ImageField('头像', null=True, blank=True)
     url = models.CharField('链接', max_length=255)
     url_input = models.CharField('输入链接', null=True, blank=True, max_length=255)
-    praise_num = models.BigIntegerField(default=0, verbose_name='点赞数')
-    tread_num = models.BigIntegerField(default=0, verbose_name='踩数')
     created_time = models.DateTimeField('评论时间', auto_now_add=True)
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='article', verbose_name='关联文章')
-    parent = TreeForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='children')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user', verbose_name='关联用户')
-    reply = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE, related_name='reply')
+    article = models.ForeignKey(
+        Article,
+        on_delete=models.CASCADE,
+        related_name='article_comment',
+        verbose_name='关联文章'
+    )
+    parent = TreeForeignKey(
+        'self',
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name='children'
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='user_comment',
+        verbose_name='关联用户'
+    )
+    reply = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name='reply_comment',
+        verbose_name='回复'
+    )
 
     class Meta:
         verbose_name = '评论'
@@ -369,20 +385,6 @@ class Comment(MPTTModel):
         except Exception:  # noqa
             img = ''
         return img
-
-    def praised(self):
-        """
-        点赞数
-        """
-        self.praise_num += 1
-        self.save(update_fields=['praise_num'])
-
-    def tread(self):
-        """
-        踩数
-        """
-        self.tread_num += 1
-        self.save(update_fields=['tread_num'])
 
     comment_validity.short_description = '评论内容'
     avatar_link.short_description = '头像预览'
@@ -414,12 +416,73 @@ class TipOff(models.Model):
     info = models.CharField(max_length=100, verbose_name='举报信息')
     status = models.BooleanField(default=0, verbose_name='审核状态')
     tip_off_time = models.DateTimeField('举报时间', auto_now_add=True)
-    article = models.ForeignKey(Article, null=True, blank=True, on_delete=models.CASCADE, related_name='tip_article',
-                                verbose_name='关联文章')
-    comment = models.ForeignKey(Comment, null=True, blank=True, on_delete=models.CASCADE, related_name='tip_comment',
-                                verbose_name='关联评论')
+    article = models.ForeignKey(
+        Article,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name='article_tip',
+        verbose_name='关联文章'
+    )
+    comment = models.ForeignKey(
+        Comment,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name='comment_tip',
+        verbose_name='关联评论'
+    )
 
     class Meta:
         ordering = ['-tip_off_time']
         verbose_name = '举报内容'
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.info
+
+
+class ArticleExtend(models.Model):
+    """
+    文章扩展
+    """
+    praise = models.BooleanField(default=0, verbose_name='点赞')
+    tread = models.BooleanField(default=0, verbose_name='踩')
+    article = models.ForeignKey(
+        Article,
+        on_delete=models.CASCADE,
+        verbose_name='关联文章',
+        related_name='article_extend'
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='关联用户',
+        related_name='user_article_extend'
+    )
+
+    def __str__(self):
+        return self.article
+
+
+class CommentExtend(models.Model):
+    """
+    评论扩展
+    """
+    praise = models.BooleanField(default=0, verbose_name='点赞')
+    tread = models.BooleanField(default=0, verbose_name='踩')
+    comment = models.ForeignKey(
+        Comment,
+        on_delete=models.CASCADE,
+        verbose_name='关联评论',
+        related_name='comment_extend'
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='关联用户',
+        related_name='user_comment_extend'
+    )
+
+    def __str__(self):
+        return self.comment

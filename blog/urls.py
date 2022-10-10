@@ -35,11 +35,11 @@ urlpatterns = [
     # 举报
     path('tip_off/<int:pk>/', views.tip_off, name='tip_off'),
     # 赞
-    path('praise/article/', views.praise, name='praise_article'),
-    path('praise/comment/', views.praise, name='praise_comment'),
+    path('praise/article/<int:pk>/', views.praise, name='praise_article'),
+    path('praise/comment/<int:pk>/', views.praise, name='praise_comment'),
     # 踩
-    path('tread/article/', views.tread, name='tread_article'),
-    path('tread/comment/', views.tread, name='tread_comment'),
+    path('tread/article/<int:pk>/', views.tread, name='tread_article'),
+    path('tread/comment/<int:pk>/', views.tread, name='tread_comment'),
 
     # 用户操作
     # 登录
