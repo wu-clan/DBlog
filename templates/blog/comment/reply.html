@@ -2,7 +2,7 @@
     <script>
         function reply_button_{{ comment.id }}() {
             var reply_html =
-                '<div id="reply-{{ comment_id }}" class="comment_reply_textarea" style="margin-top: 10px;">' +
+                '<div id="reply-{{ comment_id }}" class="comment_reply_textarea" style="margin-top: 3px;">' +
                 '    <form action="{% url 'blog:comment_reply' blog.id comment_id %}" method="post" class="comment-form">' +
                 '        <div class="vwrap">' +
                 '            <div class="vheader item3">' +
@@ -39,7 +39,7 @@
                 return true;
             } else {
                 $(".comment_reply_textarea").remove();
-                $(".reply_button_{{ comment_id }}").parent().append(reply_html);
+                $(".reply_button_{{ comment_id }}").closest('ul').append(reply_html);
             }
             new OwO({
                 logo: 'OωO表情',
