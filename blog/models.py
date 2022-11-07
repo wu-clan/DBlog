@@ -461,9 +461,6 @@ class ArticleExtend(models.Model):
         related_name='user_article_extend'
     )
 
-    def __str__(self):
-        return self.article
-
 
 class CommentExtend(models.Model):
     """
@@ -483,6 +480,3 @@ class CommentExtend(models.Model):
         verbose_name='关联用户',
         related_name='user_comment_extend'
     )
-
-    def __str__(self):
-        return self.comment

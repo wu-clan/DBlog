@@ -1308,6 +1308,11 @@ body .tip-off .layui-layer-title {
     font-size: 1.2em;
 }
 
+.no-comments {
+    padding: 99px 0 0;
+    text-align: center;
+}
+
 .comments-reply {
     padding-left: 66px;
 }

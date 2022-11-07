@@ -97,8 +97,8 @@
 
         {# 评论内容 #}
         {% if not comments %}
-            <div style="padding: 99px 0; color: rgb(114 55 55); text-align: center;">
-                这篇文章还没有评论哟，快来写下第一条评论吧...
+            <div class="no-comments">
+                <span>这篇文章还没有评论哟，快来写下第一条评论吧...</span>
             </div>
         {% endif %}
 
@@ -108,8 +108,8 @@
             {% with comment=node %}
                 <div class="{% if comment.reply %} comments-reply {% else %} comments {% endif %}"
                      id="comment-tree-{{ comment.id }}">
-                    <ul class="comment-list">
-                        <li class="comment-item">
+                    <div class="comment-list">
+                        <div class="comment-item">
                             <ul class="praise_tread_num_show">
                                 {% if comment.id|comment_tread_num %}
                                     <li class="tread_for_{{ comment.id }}">
@@ -313,8 +313,8 @@
                                     </a>
                                 </button>
                             {% endif %}
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                     {% if not comment.is_leaf_node %}
                         <div class="children">
                             {{ children }}
