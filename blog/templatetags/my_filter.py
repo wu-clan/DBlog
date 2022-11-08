@@ -5,9 +5,18 @@ import math
 from django import template
 from django.utils import timezone
 
-from blog.models import CommentExtend
+from blog.models import CommentExtend, ArticleExtend
 
 register = template.Library()
+
+
+@register.filter(name='article_praise_num')
+def article_praise_num(article_id):
+    """
+    文章点赞数
+    """
+    ae = ArticleExtend.objects.filter(article_id=article_id)
+    return ae.all().filter(praise=1).count() if ae else 0
 
 
 @register.filter(name='comment_praise_num')
@@ -16,11 +25,7 @@ def comment_praise_num(comment_id):
     评论点赞数
     """
     ce = CommentExtend.objects.filter(comment_id=comment_id)
-    if ce:
-        n = ce.all().filter(praise=1).count()
-    else:
-        n = 0
-    return n
+    return ce.all().filter(praise=1).count() if ce else 0
 
 
 @register.filter(name='comment_tread_num')
@@ -29,11 +34,7 @@ def comment_tread_num(comment_id):
     评论踩数
     """
     te = CommentExtend.objects.filter(comment_id=comment_id)
-    if te:
-        n = te.all().filter(tread=1).count()
-    else:
-        n = 0
-    return n
+    return te.all().filter(tread=1).count() if te else 0
 
 
 @register.filter(name='is_user_praise')
@@ -55,7 +56,7 @@ def is_user_tread(comment_id, user):
 
 
 @register.filter(name='timesince_zh')
-def time_since_zh(value):
+def timesince_zh(value):
     now = timezone.now()
     diff = now - value
 
