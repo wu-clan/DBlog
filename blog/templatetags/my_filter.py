@@ -16,7 +16,7 @@ def article_praise_num(article_id):
     文章点赞数
     """
     ae = ArticleExtend.objects.filter(article_id=article_id)
-    return ae.all().filter(praise=1).count() if ae else 0
+    return ae.filter(praise=1).count() if ae else 0
 
 
 @register.filter(name='comment_praise_num')
@@ -25,7 +25,7 @@ def comment_praise_num(comment_id):
     评论点赞数
     """
     ce = CommentExtend.objects.filter(comment_id=comment_id)
-    return ce.all().filter(praise=1).count() if ce else 0
+    return ce.filter(praise=1).count() if ce else 0
 
 
 @register.filter(name='comment_tread_num')
@@ -34,7 +34,7 @@ def comment_tread_num(comment_id):
     评论踩数
     """
     te = CommentExtend.objects.filter(comment_id=comment_id)
-    return te.all().filter(tread=1).count() if te else 0
+    return te.filter(tread=1).count() if te else 0
 
 
 @register.filter(name='is_user_praise')

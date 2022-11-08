@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="/static/css/OwO.min.css">
 {% endblock %}
 
+
+{% load my_filter %}
 {% block content %}
     <div class="mysection content">
         <article>
@@ -68,7 +70,53 @@
                 <a href="#" class="social-share-icon icon-qq"></a>
                 <a href="#" class="social-share-icon icon-wechat"></a>
                 <a href="#" class="social-share-icon icon-qzone"></a>
+                {% if user.is_authenticated %}
+                    <a href="javascript:;" class="social-share-icon icon-like article-like-button">
+                        <span class="like_num" id="like_num">
+                            {% if blog.id|article_praise_num > 0 %}
+                                {{ blog.id|article_praise_num }}
+                            {% endif %}
+                        </span>
+                    </a>
+                {% else %}
+                    <a href="{% url 'blog:login' %}?next={{ request.path }}#like_num"
+                       class="social-share-icon icon-like">
+                        <span class="like_num">
+                            {% if blog.id|article_praise_num > 0 %}
+                                {{ blog.id|article_praise_num }}
+                            {% endif %}
+                        </span>
+                    </a>
+                {% endif %}
             </div>
+            <script>
+                $(document).ready(function () {
+                    $('.article-like-button').click(function (obj) {
+                        $.ajax({
+                            type: "post",
+                            url: '{% url 'blog:praise_article' blog.id %}',
+                            dataType: "json",
+                            data: JSON.stringify({
+                                'info': obj.target.innerText,
+                            }),
+                            success: function (data) {
+                                if (data['praise_num'] !== 0) {
+                                    $('.like_num').show();
+                                    $('#like_num').text(parseInt(data['praise_num']));
+                                } else {
+                                    $('.like_num').hide();
+                                }
+                            },
+                            error: function (data) {
+                                layer.msg(data.statusText, {
+                                    offset: 't',
+                                    icon: 2
+                                });
+                            },
+                        });
+                    });
+                });
+            </script>
             <hr>
 
             <!--标签-->
@@ -103,7 +151,6 @@
         {% endif %}
 
         {% load mptt_tags %}
-        {% load mytags %}
         {% recursetree comments %}
             {% with comment=node %}
                 <div class="{% if comment.reply %} comments-reply {% else %} comments {% endif %}"

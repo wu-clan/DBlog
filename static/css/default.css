@@ -504,6 +504,19 @@ article h3 {
     font-size: 12px;
 }
 
+.like_num {
+    top: 0;
+    left: 75%;
+    position: absolute;
+    line-height: 17px;
+    padding: 0 5px;
+    border-radius: 9px;
+    font-size: 14px;
+    text-align: center;
+    white-space: nowrap;
+    background-color: rgb(233 213 250);
+}
+
 /*文章正文底部标签*/
 .article_tag {
     width: 100%;

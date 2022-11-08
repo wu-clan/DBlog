@@ -654,8 +654,8 @@ def praise(request, pk):
     if request.method == 'POST':
         data = json.loads(request.body)
         comment_id = data.get('comment')
-        old_praise_num = CommentExtend.objects.all().filter(praise=1).count()
         if comment_id:
+            old_comment_praise_num = CommentExtend.objects.filter(praise=1).count()
             ce = CommentExtend.objects.filter(comment_id=comment_id).filter(user_id=request.user)
             if ce:
                 if ce.first().praise:
@@ -663,14 +663,14 @@ def praise(request, pk):
                     return JsonResponse({
                         'code': 200,
                         'msg': '取消赞成功',
-                        'tread_num': old_praise_num - 1
+                        'tread_num': old_comment_praise_num - 1
                     })
                 else:
                     ce.update(praise=1)
                     return JsonResponse({
                         'code': 200,
                         'msg': '赞成功',
-                        'tread_num': old_praise_num + 1
+                        'tread_num': old_comment_praise_num + 1
                     })
             else:
                 CommentExtend.objects.create(**{
@@ -681,9 +681,10 @@ def praise(request, pk):
                 return JsonResponse({
                     'code': 200,
                     'msg': '赞成功',
-                    'praise_num': old_praise_num + 1
+                    'praise_num': old_comment_praise_num + 1
                 })
         else:
+            old_article_praise_num = ArticleExtend.objects.filter(article_id=pk).filter(praise=1).count()
             ae = ArticleExtend.objects.filter(article_id=pk).filter(user_id=request.user)
             if ae:
                 if ae.first().praise:
@@ -691,25 +692,25 @@ def praise(request, pk):
                     return JsonResponse({
                         'code': 200,
                         'msg': '取消赞成功',
-                        'praise_num': old_praise_num - 1
+                        'praise_num': old_article_praise_num - 1
                     })
                 else:
                     ae.update(praise=1)
                     return JsonResponse({
                         'code': 200,
                         'msg': '赞成功',
-                        'praise_num': old_praise_num + 1
+                        'praise_num': old_article_praise_num + 1
                     })
             else:
-                ArticleExtend.objects.count(**{
+                ArticleExtend.objects.create(**{
                     'praise': 1,
-                    'article': Article.objects.get(pk=comment_id),
+                    'article': Article.objects.get(pk=pk),
                     'user': request.user
                 })
                 return JsonResponse({
                     'code': 200,
-                    'msg': '踩成功',
-                    'praise_num': old_praise_num + 1
+                    'msg': '赞成功',
+                    'praise_num': old_article_praise_num + 1
                 })
 
 
@@ -722,8 +723,8 @@ def tread(request, pk):
     if request.method == 'POST':
         data = json.loads(request.body)
         comment_id = data.get('comment')
-        old_tread_num = CommentExtend.objects.all().filter(tread=1).count()
         if comment_id:
+            old_comment_tread_num = CommentExtend.objects.filter(tread=1).count()
             ce = CommentExtend.objects.filter(comment_id=comment_id).filter(user_id=request.user)
             if ce:
                 if ce.first().tread:
@@ -731,14 +732,14 @@ def tread(request, pk):
                     return JsonResponse({
                         'code': 200,
                         'msg': '取消踩成功',
-                        'tread_num': old_tread_num - 1
+                        'tread_num': old_comment_tread_num - 1
                     })
                 else:
                     ce.update(tread=1)
                     return JsonResponse({
                         'code': 200,
                         'msg': '踩成功',
-                        'tread_num': old_tread_num + 1
+                        'tread_num': old_comment_tread_num + 1
                     })
             else:
                 CommentExtend.objects.create(**{
@@ -749,9 +750,10 @@ def tread(request, pk):
                 return JsonResponse({
                     'code': 200,
                     'msg': '踩成功',
-                    'tread_num': old_tread_num + 1
+                    'tread_num': old_comment_tread_num + 1
                 })
         else:
+            old_article_tread_num = CommentExtend.objects.filter(article_id=pk).filter(tread=1).count()
             ae = ArticleExtend.objects.filter(article_id=pk).filter(user_id=request.user)
             if ae:
                 if ae.first().tread:
@@ -759,25 +761,25 @@ def tread(request, pk):
                     return JsonResponse({
                         'code': 200,
                         'msg': '取消踩成功',
-                        'tread_num': old_tread_num - 1
+                        'tread_num': old_article_tread_num - 1
                     })
                 else:
                     ae.update(tread=1)
                     return JsonResponse({
                         'code': 200,
                         'msg': '踩成功',
-                        'tread_num': old_tread_num + 1
+                        'tread_num': old_article_tread_num + 1
                     })
             else:
                 ArticleExtend.objects.create(**{
                     'tread': 1,
-                    'article': Article.objects.get(pk=comment_id),
+                    'article': Article.objects.get(pk=pk),
                     'user': request.user
                 })
                 return JsonResponse({
                     'code': 200,
                     'msg': '踩成功',
-                    'tread_num': old_tread_num + 1
+                    'tread_num': old_article_tread_num + 1
                 })
 
 
