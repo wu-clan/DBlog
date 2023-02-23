@@ -1,30 +1,14 @@
-###### 📢❗❗❗ 2022.2.22 ❗❗❗
-
-```text
-📢 小幅升级维护
-``` 
-
-###### 👨‍💻👩‍💻旧版本更新到最新 master 请先点这里 [升级事宜](https://www.xwboy.top/blog/detail/10/)
-
-###### 👀 如果你未正在使用旧版本的话，直接按照安装使用说明部署即可
-
 # Django博客系统
-
-项目基本完成，处于试运行阶段，示例网站为当前分支最新代码，
-如果您想查看旧版本，可以到标签中选择对应的版本进行下载
-
-ps: 个人博客在一些逻辑和限制上面考虑还欠周全，存在bug，不影响正常使用，
-后续开发已暂缓，欢迎 pull request，我将在审阅并测试后第一时间通知您
 
 [![python3](https://img.shields.io/badge/Python-3.8-red.svg)](https://www.python.org/downloads)
 [![Django3.2](https://img.shields.io/badge/Django-3.2-green.svg)](https://docs.djangoproject.com/zh-hans/3.2)
 [![simpleui](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui)
 
-🙈🙈🙈 使用Django快速搭建博客系统，采用Django框架最基础结构（仅一个app）
+🙈🙈🙈 使用Django快速搭建博客系统，采用Django框架基础结构（仅一个app）
 
 优点：减少逻辑性，便于入门学习...
 
-缺点：内容沉余，不够灵活...
+缺点：内容冗余，不够灵活...
 
 ### 技术栈
 
@@ -51,7 +35,7 @@ ps: 个人博客在一些逻辑和限制上面考虑还欠周全，存在bug，�
 * Rss / Atom 订阅
 * Simpleui 后台管理
 
-###### ps: 访问网站期间，使用墙代理网络或广告拦截插件，会失去一些网页功能
+###### ps: 访问网站期间，使用墙代理网络或广告拦截插件，可能会丢失一些网站功能
 
 ## ⬇ 源码下载
 
@@ -75,7 +59,7 @@ git clone https://gitee.com/wu_cl/DBlog.git
     pip install -r requirements.txt
     ```
 
-2. 创建数据库 blog，选择 UTF8MB4 编码
+2. 创建数据库 blog，选择 utf8mb4 编码
 3. 检查并修改 djangoProject/settings.py mysql 数据库配置
 4. 数据库迁移
    ```shell
