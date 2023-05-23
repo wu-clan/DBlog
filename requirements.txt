@@ -1,4 +1,4 @@
-Django==3.2.18
+Django==3.2.19
 django-import-export==2.5.0
 django-mdeditor==0.1.18
 Markdown==3.3.6
