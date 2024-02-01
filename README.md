@@ -4,11 +4,13 @@
 [![Django3.2](https://img.shields.io/badge/Django-3.2-green.svg)](https://docs.djangoproject.com/zh-hans/3.2)
 [![simpleui](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui)
 
+⚠️ 此项目已不再进行积极维护 ⚠️
+
 🙈🙈🙈 使用Django快速搭建博客系统，采用Django框架基础结构（仅一个app）
 
 优点：减少逻辑性，便于入门学习...
 
-缺点：内容冗余，不够灵活...
+缺点：内容冗余，不够清晰...
 
 ### 技术栈
 
@@ -19,7 +21,11 @@
 * Docker
 * ......
 
-### 示例博客：[点我🤩](http://www.xwboy.top/)
+### 示例博客：[点🤩我](http://www.xwboy.top/)
+
+网站服务将于 2024-07-02 到期，届时网站将无法正常访问
+
+<img src="static/images/show.png" alt="DBlog 首页">
 
 ### 功能点
 
@@ -50,7 +56,8 @@ git clone https://gitee.com/wu_cl/DBlog.git
 
 ## 使用
 
-> ⚠️: 此过程请格外注意端口占用情况, 特别是 8000, 3306, 6379...
+> [!WARNING]
+> 此过程请格外注意端口占用情况, 特别是 8000, 3306, 6379...
 
 ### 1. 传统
 
@@ -84,7 +91,6 @@ git clone https://gitee.com/wu_cl/DBlog.git
 
 创建管理员用户： `python manage.py createsuperuser`
 
-
 后台：http://127.0.0.1:8000/admin
 
 主页：http://127.0.0.1:8000
@@ -93,12 +99,16 @@ git clone https://gitee.com/wu_cl/DBlog.git
 
 ### 1. 传统
 
-请移步 [wikis](https://gitee.com/wu_cl/DBlog/wikis/pages) 查看
+请移步 [wiki](https://gitee.com/wu_cl/DBlog/wikis/pages) 查看
 
 ### 2. docker
 
-与使用方式相同
+与 docker 使用方式相同
 
-## ❓ 问题相关
+## 📨 互动
 
-欢迎提交问题到 [Issues](https://gitee.com/wu_cl/DBlog/issues) 或直接在下方评论, 我将在看到问题后第一时间回复 
+[WeChat / QQ](https://github.com/wu-clan)
+
+## ❤️ 赞助
+
+如果此项目能够帮助到你，你可以赞助作者一些咖啡豆表示鼓励：[:coffee: Sponsor :coffee:](https://wu-clan.github.io/sponsor/)
