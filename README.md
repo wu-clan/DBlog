@@ -25,7 +25,7 @@
 
 网站服务将于 2024-07-02 到期，届时网站将无法正常访问
 
-<img src="static/images/show.png" alt="DBlog 首页">
+<img src="https://github.com/wu-clan/image/blob/master/DBlog_page.png?raw=true" alt="DBlog 首页">
 
 ### 功能点
 
@@ -46,9 +46,7 @@
 ## ⬇ 源码下载
 
 ```shell
-wget https://gitee.com/wu_cl/DBlog.git/master.zip
-# or
-git clone https://gitee.com/wu_cl/DBlog.git
+git clone https://gitee.com/wu_clan/DBlog.git
 ```
 
 敏感词文件内容 static/sensitive_words/sensitive_words_lines.txt,
