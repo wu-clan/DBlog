@@ -10,7 +10,7 @@
 
 优点：减少逻辑性，便于入门学习...
 
-缺点：内容冗余，不够清晰...
+缺点：内容冗余，结构不够清晰...
 
 ### 技术栈
 
@@ -25,7 +25,7 @@
 
 网站服务将于 2024-07-02 到期，届时网站将无法正常访问
 
-<img src="static/images/show.png" alt="DBlog 首页">
+![](https://wu-clan.github.io/picx-images-hosting/DBlog_page.png)
 
 ### 功能点
 
@@ -95,7 +95,7 @@ git clone https://gitee.com/wu_cl/DBlog.git
 
 主页：http://127.0.0.1:8000
 
-## 🙏 搭建Linux服务端
+## 🙏 部署
 
 ### 1. 传统
 
@@ -107,7 +107,7 @@ git clone https://gitee.com/wu_cl/DBlog.git
 
 ## 📨 互动
 
-[WeChat / QQ](https://github.com/wu-clan)
+[TG / Discord](https://wu-clan.github.io/homepage/)
 
 ## ❤️ 赞助
 
